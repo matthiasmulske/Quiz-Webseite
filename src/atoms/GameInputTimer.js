@@ -1,16 +1,20 @@
 import React from "react";
-import { LuTimer } from "react-icons/lu";
 
 const GameTimer = ({ value, onChange }) => {
   return (
     <div className="container d-flex justify-content-center align-items-center">
       <div className="text-center col-md-6">
-        <label htmlFor="timeInput" className="form-label">
-          Zeitlimit
-        </label>
+
         <div className="input-group mb-3">
           <span className="input-group-text" id="basic-addon1">
-            <LuTimer />
+            <span class="material-icons">
+              more_time
+            </span>
+          </span>
+          <span className="input-group-text" id="basic-addon1">
+            <label htmlFor="timeInput" className="form-label">
+              Zeitlimit
+            </label>
           </span>
           <input
             id="timeInput"
@@ -23,7 +27,7 @@ const GameTimer = ({ value, onChange }) => {
             step="1"
           />
           <span className="input-group-text" id="basic-addon1">
-            s
+            sec
           </span>
         </div>
       </div>

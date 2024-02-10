@@ -8,27 +8,32 @@ const GameCategoryDropdown = ({
   name,
 }) => {
   return (
-    <div className="container d-flex justify-content-center align-items-center">
+    <div className="container d-flex justify-content-center align-items-center mb-3">
       <div className="col-md-6">
-        <div className="mb-2">
-          <label htmlFor="categoryDropdown" className="form-label">
+        <div className="input-group">
+          <span className="input-group-text" id="basic-addon1">
+            <span class="material-icons">
+              category
+            </span>
+          </span>
+          <span className="input-group-text" id="basic-addon1">
+            <label htmlFor="timeInput" className="form-label">
             {label}
-          </label>
-          <div className="input-group">
-            <select
-              id="categoryDropdown"
-              className="form-select text-center"
-              value={selectedOption}
-              onChange={onChange}
-              name={name}
-            >
-              {options.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </select>
-          </div>
+            </label>
+          </span>
+          <select
+            id="categoryDropdown"
+            className="form-select text-center"
+            value={selectedOption}
+            onChange={onChange}
+            name={name}
+          >
+            {options.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
         </div>
       </div>
     </div>

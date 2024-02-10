@@ -1,35 +1,47 @@
 import React, { useState } from "react";
-import GameStartButton from "../atoms/GameStartButton";
-import { IoHourglassOutline } from "react-icons/io5";
+import GameButtonStart from "../atoms/GameButtonStart";
+import { ClockLoader } from "react-spinners";
 
 function GameIntro() {
   // eslint-disable-next-line
   const [round, setRound] = useState("1");
   // eslint-disable-next-line
   const [category, setCategory] = useState("Seekabelkunde");
+  // eslint-disable-next-line
+  const [timeLeft, setTimeLeft] = useState("3d 12h 54min");
+  // eslint-disable-next-line
+  const [yourTurn, setYourTurn] = useState();
 
   return (
     <div className="container d-flex justify-content-center align-items-center">
       <div className="col-md-6 text-center">
         <h1 className="h1">Runde {round}</h1>
         <h2 className="h2">{category}</h2>
-        <div className="mb-2">
-          <GameStartButton
-            label="Starte Runde"
-            //onClick={}
-          />
-        </div>
-        <p>oder</p>
-        <div className="">
-          <div className="fs-1 text">
-            <IoHourglassOutline />
+        {yourTurn ?
+          <div className="mb-2">
+            <GameButtonStart
+              label="Starte Runde"
+            />
           </div>
-          <h3 className="text-warning"> Dein Mitspieler ist am Zug! </h3>
-        </div>
-        <p>
-          Du gewinnst, falls ihr Mitspieler seine Runde nicht innerhalb von 3d
-          12h 15min abschließt!
-        </p>
+          : null
+        }
+        {!yourTurn ?
+          <div className="position-relative m-4">
+            <div className="d-flex justify-content-center align-items-center ">
+              <ClockLoader
+                size={75} // Adjust the size if needed
+                color="#ffc107"
+                loading={true}
+                speedMultiplier={0.05} // Adjust the speed multiplier to slow down
+              />
+            </div>
+            <h2 className="text-warning"> Dein Mitspieler ist am Zug! </h2>
+            <p>
+              Du gewinnst, falls dein Mitspieler seine Runde nicht innerhalb von {timeLeft} abschließt!
+            </p>
+          </div>
+          : null
+        }
       </div>
     </div>
   );

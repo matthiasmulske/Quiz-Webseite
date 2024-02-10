@@ -1,52 +1,68 @@
 import React from "react";
 import GameQuestionAnswerButton from "../atoms/GameQuestionAnswerButton";
+import GameMiniButton from "../atoms/GameMiniButton";
 
-const GameQuestionView = (
-  question,
-  answer1,
-  answer2,
-  answer3,
-  correctAnswer,
-) => {
+const GameQuestionView = ({ question, answer1, answer2, answer3, correctAnswer }) => {
+  const answers = [answer1, answer2, answer3, correctAnswer];
+  // Shuffle function to randomly rearrange the answers
+  const shuffleAnswers = (array) => {
+    let currentIndex = array.length;
+    let temporaryValue, randomIndex;
+
+    // While there remain elements to shuffle...
+    while (currentIndex !== 0) {
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+
+      // And swap it with the current element.
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+
+    return array;
+  };
+
+  // Shuffle the answers
+  const shuffledAnswers = shuffleAnswers([...answers]);
+
+  // Split shuffled answers into chunks of two
+  const chunkedAnswers = [];
+  while (shuffledAnswers.length) {
+    chunkedAnswers.push(shuffledAnswers.splice(0, 2));
+  }
+
   return (
     <div>
-      <div className=" mb-4">
-        <h3>Wann wurde das Arpanet Seekabel verlegt?</h3>
-      </div>
-      <div className=" mb-4">
-        <div className="row">
-          <div className="col-md-6 mb-4">
-            <GameQuestionAnswerButton
-              //onclick=""
-              label="Morgen"
-              addClass="btn-primary"
-            />
-          </div>
-          <div className="col-md-6 mb-4">
-            <GameQuestionAnswerButton
-              //onclick=""
-              label="42"
-              addClass="btn-danger"
-            />
-          </div>
-          <div className="col-md-6 mb-4">
-            <GameQuestionAnswerButton
-              //onclick=""
-              label="Gestern"
-              addClass="btn-secondary"
-            />
-          </div>
-          <div className="col-md-6 mb-4">
-            <GameQuestionAnswerButton
-              //onclick=""
-              label="753 v. Chr."
-              addClass="btn-success"
-            />
-          </div>
-        </div>
+    <div className="row justify-content-end">
+      <div className="col text-end">
+        <GameMiniButton
+          label={<span className="material-icons">report_problem</span>}
+          addClass="p-2 text-end "
+          color="text-danger"
+        />
       </div>
     </div>
-  );
+    <div className="mb-4">
+      <h3>{question}</h3>
+    </div>
+    <div className="mb-4">
+      {chunkedAnswers.map((chunk, rowIndex) => (
+        <div className="row" key={rowIndex}>
+          {chunk.map((answer, colIndex) => (
+            <div className="col mb-4" key={colIndex}>
+              <GameQuestionAnswerButton
+                label={answer}
+                addClass={"btn-secondary"}
+              />
+            </div>
+          ))}
+        </div>
+      ))}
+    </div>
+  </div>
+);
 };
 
 export default GameQuestionView;
