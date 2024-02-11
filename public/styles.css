@@ -1,0 +1,76 @@
+/* Stil für den Button Container */
+.button-container {
+    display: flex;
+    flex-direction: column; /* Anordnung der Elemente in einer Spalte */
+    justify-content: center; /* Zentrieren horizontal */
+    align-items: center; /* Zentrieren vertikal */
+    min-height: 100vh; /* Mindesthöhe des Viewports */
+}
+
+/* Stil für den Button */
+.button {
+    padding: 10px 20px;
+    background-color: #0e140e;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-bottom: 20px; /* Hier können Sie den Abstand ändern */
+    width: 200px; /* Breite des Buttons */
+    height: 50px; /* Höhe des Buttons */
+    font-size: 16px; /* Schriftgröße des Buttons */
+}
+
+/* Stil für den Button beim Hovern */
+.button:hover {
+    background-color: #070807;
+}
+
+/* Stil für den Button-Container am unteren Rand */
+.footer-buttons {
+    display: flex;
+    justify-content: center; /* Zentrieren horizontal */
+    position: fixed; /* Fest positionieren */
+    bottom: 20px; /* Abstand vom unteren Rand */
+    width: 100%; /* Volle Breite des Viewports */
+}
+
+/* Stil für die Footer-Buttons */
+.footer-button {
+    padding: 10px 20px;
+    background-color: transparent;
+    color: rgb(0, 0, 0);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 0 10px; /* Abstand zwischen den Buttons */
+    width: 150px; /* Breite der Buttons */
+    font-size: 14px; /* Schriftgröße der Buttons */
+}
+
+/* Stil für den Button beim Hovern */
+.footer-button:hover {
+    background-color: transparent;
+}
+/* Stil für den Login-Button-Container oben rechts */
+.login-button-container {
+    position: fixed; /* Fest positionieren */
+    top: 20px; /* Abstand vom oberen Rand */
+    right: 20px; /* Abstand vom rechten Rand */
+}
+
+/* Stil für den Login-Button */
+.login-button {
+    padding: 10px 20px;
+    background-color: transparent;
+    color: rgb(0, 0, 0);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px; /* Schriftgröße des Buttons */
+}
+
+/* Stil für den Button beim Hovern */
+.login-button:hover {
+    background-color: transparent;
+}
