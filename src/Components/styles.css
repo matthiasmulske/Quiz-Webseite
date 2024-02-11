@@ -1,5 +1,5 @@
 /* Stil für den Button Container */
-.button-container {
+.buttons Container{
     display: flex;
     flex-direction: column; /* Anordnung der Elemente in einer Spalte */
     justify-content: center; /* Zentrieren horizontal */

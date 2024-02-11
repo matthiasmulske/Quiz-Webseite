@@ -40,8 +40,6 @@ function createButtons() {
     document.body.appendChild(imprintButton);
     document.body.appendChild(agbButton);
     document.body.appendChild(loginButton);
-    document.body.appendChild(newQuestionButton);
-    document.body.appendChild(answerQuestionButton);
   }
   
   // Funktion zum Erstellen eines Buttons
