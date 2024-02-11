@@ -17,15 +17,12 @@ function GameIntro() {
       <div className="col-md-6 text-center">
         <h1 className="h1">Runde {round}</h1>
         <h2 className="h2">{category}</h2>
-        {yourTurn ?
+        {yourTurn ? (
           <div className="mb-2">
-            <GameButtonStart
-              label="Starte Runde"
-            />
+            <GameButtonStart label="Starte Runde" />
           </div>
-          : null
-        }
-        {!yourTurn ?
+        ) : null}
+        {!yourTurn ? (
           <div className="position-relative m-4">
             <div className="d-flex justify-content-center align-items-center ">
               <ClockLoader
@@ -37,11 +34,11 @@ function GameIntro() {
             </div>
             <h2 className="text-warning"> Dein Mitspieler ist am Zug! </h2>
             <p>
-              Du gewinnst, falls dein Mitspieler seine Runde nicht innerhalb von {timeLeft} abschließt!
+              Du gewinnst, falls dein Mitspieler seine Runde nicht innerhalb von{" "}
+              {timeLeft} abschließt!
             </p>
           </div>
-          : null
-        }
+        ) : null}
       </div>
     </div>
   );

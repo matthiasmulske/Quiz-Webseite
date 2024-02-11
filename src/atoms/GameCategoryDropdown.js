@@ -12,13 +12,11 @@ const GameCategoryDropdown = ({
       <div className="col-md-6">
         <div className="input-group">
           <span className="input-group-text" id="basic-addon1">
-            <span class="material-icons">
-              category
-            </span>
+            <span class="material-icons">category</span>
           </span>
           <span className="input-group-text" id="basic-addon1">
             <label htmlFor="timeInput" className="form-label">
-            {label}
+              {label}
             </label>
           </span>
           <select

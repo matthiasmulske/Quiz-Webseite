@@ -6,9 +6,7 @@ const GameInputRounds = ({ value, onChange }) => {
       <div className="text-center col-md-6">
         <div className="input-group mb-3">
           <span className="input-group-text" id="basic-addon1">
-            <span class="material-icons">
-              loop
-            </span>
+            <span class="material-icons">loop</span>
           </span>
           <span className="input-group-text" id="basic-addon1">
             <label htmlFor="timeInput" className="form-label">
