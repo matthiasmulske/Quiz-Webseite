@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Button Beispiel</title>
+    <style>
+        /* Stil für den Button Container */
+        .button-container {
+            display: flex;
+            flex-direction: column; /* Anordnung der Elemente in einer Spalte */
+            justify-content: center; /* Zentrieren horizontal */
+            align-items: center; /* Zentrieren vertikal */
+            height: 100vh; /* Vollständige Höhe des Viewports */
+        }
+
+        /* Stil für den Button */
+        .button {
+            padding: 10px 20px;
+            background-color: #0e140e;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-bottom: 20px; /* Hier können Sie den Abstand ändern */
+            width: 200px; /* Breite des Buttons */
+            height: 50px; /* Höhe des Buttons */
+            font-size: 16px; /* Schriftgröße des Buttons */
+        }
+
+        /* Stil für den Button beim Hovern */
+        .button:hover {
+            background-color: #070807;
+        }
+    </style>
+</head>
+<body>
+    <!-- Button Container um die Buttons herum -->
+    <div class="button-container">
+        <!-- Erster Button -->
+        <button class="button" onclick="window.location.href='seite1.html';">Einzelspieler</button>
+        <!-- Zweiter Button -->
+        <button class="button" onclick="window.location.href='seite1.html';" >Mehrspieler</button>
+        <!-- Dritter Button -->
+        <button class="button" onclick="window.location.href='seite1.html';" >Neue Quizfrage</button>
+        <!-- Vierter Button -->
+        <button class="button" onclick="window.location.href='seite1.html';" >Quizfrage bearbeiten</button>
+    </div>
+</body>
+</html>
