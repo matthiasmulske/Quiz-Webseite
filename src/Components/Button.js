@@ -41,7 +41,7 @@ loginButton.style.right = '10px'; // Passen Sie den Abstand zum rechten Rand an
 loginButton.style.zIndex = '1000'; // Stellen Sie sicher, dass der Button über anderen Inhalten liegt
 
 // Ändern Sie die Hintergrundfarbe des Buttons
-loginButton.style.backgroundColor = 'white'; // Ändern Sie 'blue' zu Ihrer gewünschten Farbe
+loginButton.style.backgroundColor = 'blue'; // Ändern Sie 'blue' zu Ihrer gewünschten Farbe
 
 document.body.appendChild(loginButton);
 
