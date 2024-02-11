@@ -1,0 +1,12 @@
+/* Stil für den Button-Container */
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Die Höhe des Viewports */
+}
+
+/* Stil für jeden Button */
+.button {
+    margin: 0 10px; /* Abstand zwischen den Buttons anpassen */
+}
