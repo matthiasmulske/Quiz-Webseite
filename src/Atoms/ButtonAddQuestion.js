@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 function ButtonAddQuestion() {
     return (
         <>
-            <Button variant="contained">test</Button>;
+            <Button variant="contained">Frage vorschlagen</Button>
         </>
     )
 
