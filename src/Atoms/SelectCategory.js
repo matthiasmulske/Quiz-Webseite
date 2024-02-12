@@ -1,10 +1,6 @@
 import {FormControl, InputLabel, MenuItem, Select, TextField} from "@mui/material";
 import React from "react";
 
-const categories = {
-}
-
-
 function SelectCategory() {
     function handleChange() {
     }
@@ -42,7 +38,6 @@ const style = {
     },
 
     dropDown: {
-        //marginBottom: '100rem',
     }
 
 };

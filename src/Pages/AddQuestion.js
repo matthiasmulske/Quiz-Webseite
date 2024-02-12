@@ -2,7 +2,6 @@ import * as React from "react";
 import ButtonAddQuestion from "../Atoms/ButtonAddQuestion";
 import InputAddQuestion from "../Atoms/InputAddQuestion";
 import SelectCategory from "../Atoms/SelectCategory";
-import {Slider} from "@mui/material";
 
 function AddQuestion() {
     return (
@@ -25,9 +24,6 @@ const style = {
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'center'
-    },
-
-    addQuestion: {
     },
 
     button: {
