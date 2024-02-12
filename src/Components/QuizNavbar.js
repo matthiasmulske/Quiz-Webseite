@@ -1,35 +1,37 @@
 import {AiFillPicture, AiFillQuestionCircle, AiOutlineLogout, AiOutlineMessage} from "react-icons/ai"; // Import Bootstrap components
 
-import { Navbar, Container } from 'react-bootstrap';
-import React from "react"; // Import Bootstrap components
+import React from "react";
+import imageLogo from "../Assets/logo.png";
 
 
 function QuizNavbar() {
     return (
-        <div style={style.container_navbar}>
-            <ul style={style.icon_group}>
-                <a href={"#profile"}>
-                    <AiFillPicture style={style.icon}/>
-                </a>
-                <a href={"#messages"}>
-                    <AiOutlineMessage style={style.icon}/>
-                </a>
-                <a href={"#help"}>
-                    <AiFillQuestionCircle style={style.icon}/>
-                </a>
-                <a href={"#logout"}>
-                    <AiOutlineLogout style={style.icon}/>
-                </a>
-            </ul>
-            <div>
-                <a href={"#logout"}>
-                    <AiOutlineLogout style={style.logo}/>
-                </a>
+        <>
+            <div style={style.container_navbar}>
+                <ul style={style.icon_group}>
+                    <a href={"#profile"}>
+                        <AiFillPicture style={style.icon}/>
+                    </a>
+                    <a href={"#messages"}>
+                        <AiOutlineMessage style={style.icon}/>
+                    </a>
+                    <a href={"#help"}>
+                        <AiFillQuestionCircle style={style.icon}/>
+                    </a>
+                        <a>
+                            <img src={imageLogo} style={style.logo}/>
+                        </a>
+                </ul>
             </div>
-        </div>
+
+        </>
+
 
     );
 }
+
+//import logo from "src/Components/logo.svg";
+
 
 const style = {
     container_navbar: {
@@ -45,10 +47,19 @@ const style = {
         color: 'rgb(0, 0, 0.8)',
     },
 
-    logo: {
-        float: 'right',
-        paddingTop: '10px',
+    /* CSS */
+    logoContainer: {
+    width: '100%', /* Set the width of the container */
+    height: '100%', /* Set the height of the container */
+    overflow: 'hidden', /* Hide any overflow */
     },
+
+    logo: {
+        float: '',
+        height: '8%',
+        width: '8%'
+
+}
 
 
 };
