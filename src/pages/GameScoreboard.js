@@ -164,13 +164,13 @@ const GameScoreboard = () => {
     ],
   };
 
-  const [openModal, setOpenModal] = useState(false);
+  const [openQuestionModal, setOpenQuestionModal] = useState(false);
   const [modalData, setModalData] = useState(null);
   const [modalPlayer, setModalPlayer] = useState(null);
 
   const handleButtonClick = (question, player) => {
     setModalData(question);
-    setOpenModal(true);
+    setOpenQuestionModal(true);
     setModalPlayer(player);
   };
 
@@ -238,8 +238,8 @@ const GameScoreboard = () => {
       {/* Modal */}
       <GameScoreboardModal
         modalData={modalData}
-        openModal={openModal}
-        setOpenModal={setOpenModal}
+        openModal={openQuestionModal}
+        setOpenModal={setOpenQuestionModal}
         player={modalPlayer}
       ></GameScoreboardModal>
     </div>

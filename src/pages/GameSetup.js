@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import GameButtonStart from "../atoms/GameButtonStart";
+import GameButton from "../atoms/GameButton";
 import GameCategoryDropdown from "../atoms/GameCategoryDropdown";
-import GameInputTimer from "../atoms/GameInputTimer";
-import GameInputRounds from "../atoms/GameInputRounds";
+import GameInput from "../atoms/GameInput";
 import GameLinkContainer from "../components/GameLinkContainer";
 
 function GameSetup() {
@@ -32,7 +31,17 @@ function GameSetup() {
   return (
     <div className="container d-flex justify-content-center align-items-center">
       <div className="col text-center">
-        <GameInputTimer value={time} onChange={handleTimeChange} />
+        <GameInput
+          value={time}
+          onChange={handleTimeChange}
+          label="Zeitlimit"
+          min="5"
+          max="60"
+          step="1"
+          type="number"
+          icon="more_time"
+          unit="sec"
+        />
 
         <GameCategoryDropdown
           label="Kategorie"
@@ -45,19 +54,30 @@ function GameSetup() {
           name="Kategorie wählen"
         />
 
-        <GameInputRounds
+        <GameInput
           value={NumberOfRounds}
           onChange={handleNumberOfRoundsChange}
+          label="Runden"
+          min="1"
+          max="10"
+          step="1"
+          type="number"
+          icon="loop"
         />
-
-        <GameButtonStart
-          label="Singleplayer"
-          //onClick={}
-        />
-        <GameButtonStart
-          label="Multiplayer"
-          //onClick={}
-        />
+        <div className="d-flex justify-content-center align-items-center text-center">
+          <div className="m-3">
+            <GameButton
+              label="Singleplayer"
+              //onClick={}
+            />
+          </div>
+          <div className="m-3">
+            <GameButton
+              label="Multiplayer"
+              //onClick={}
+            />
+          </div>
+        </div>
 
         <GameLinkContainer
           player="Spieler 1"

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import GameMiniButton from "../atoms/GameMiniButton";
 import { Modal, Button } from "react-bootstrap";
+import GameQuestionReportModal from "./GameQuestionReportModal";
 
 const GameScoreboardModal = ({
   modalData,
@@ -9,6 +10,13 @@ const GameScoreboardModal = ({
   player,
 }) => {
   const [showModal, setShowModal] = useState(openModal);
+  const [openReportModal, setOpenReportModal] = useState(false);
+  const [reportData, setReportData] = useState();
+  const handleOpenReportModal = () => {
+    console.log(modalData);
+    setReportData(modalData);
+    setOpenReportModal(true);
+  };
 
   useEffect(() => {
     setShowModal(openModal);
@@ -28,7 +36,7 @@ const GameScoreboardModal = ({
   return (
     <Modal show={showModal} onHide={handleCloseModal}>
       <Modal.Header closeButton>
-        <Modal.Title>Question {modalData?.question_number}</Modal.Title>
+        <Modal.Title>Question {modalData?.question_text}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <p>{modalData?.question_text}</p>
@@ -57,6 +65,12 @@ const GameScoreboardModal = ({
               label={<span className="material-icons">report_problem</span>}
               addClass="p-2 text-end "
               color="text-danger"
+              onClick={handleOpenReportModal}
+            />
+            <GameQuestionReportModal
+              modalData={reportData}
+              openModal={openReportModal}
+              setOpenModal={setOpenReportModal}
             />
           </div>
         </div>

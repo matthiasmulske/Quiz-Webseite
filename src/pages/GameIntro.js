@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import GameButtonStart from "../atoms/GameButtonStart";
+import GameButton from "../atoms/GameButton";
 import { ClockLoader } from "react-spinners";
 
 function GameIntro() {
@@ -19,7 +19,7 @@ function GameIntro() {
         <h2 className="h2">{category}</h2>
         {yourTurn ? (
           <div className="mb-2">
-            <GameButtonStart label="Starte Runde" />
+            <GameButton label="Starte Runde" />
           </div>
         ) : null}
         {!yourTurn ? (

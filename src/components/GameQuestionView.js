@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import GameQuestionAnswerButton from "../atoms/GameQuestionAnswerButton";
 import GameMiniButton from "../atoms/GameMiniButton";
 import GameQuestionReportModal from "./GameQuestionReportModal";
@@ -13,6 +13,8 @@ const GameQuestionView = ({
   const answers = [answer1, answer2, answer3, correctAnswer];
   const [openModal, setOpenModal] = useState(false);
   const [modalData, setModalData] = useState(null);
+  const [shuffledAnswers, setShuffledAnswers] = useState([]);
+
   // Shuffle function to randomly rearrange the answers
   const shuffleAnswers = (array) => {
     let currentIndex = array.length;
@@ -33,14 +35,11 @@ const GameQuestionView = ({
     return array;
   };
 
-  // Shuffle the answers
-  const shuffledAnswers = shuffleAnswers([...answers]);
-
-  // Split shuffled answers into chunks of two
-  const chunkedAnswers = [];
-  while (shuffledAnswers.length) {
-    chunkedAnswers.push(shuffledAnswers.splice(0, 2));
-  }
+  // Shuffle the answers only once when component mounts
+  useEffect(() => {
+    setShuffledAnswers(shuffleAnswers([...answers]));
+    // eslint-disable-next-line
+  }, []);
 
   const handleOpenReportModal = () => {
     setModalData(question);
@@ -68,16 +67,12 @@ const GameQuestionView = ({
         <h3>{question}</h3>
       </div>
       <div className="mb-4">
-        {chunkedAnswers.map((chunk, rowIndex) => (
-          <div className="row" key={rowIndex}>
-            {chunk.map((answer, colIndex) => (
-              <div className="col mb-4" key={colIndex}>
-                <GameQuestionAnswerButton
-                  label={answer}
-                  addClass={"btn-secondary"}
-                />
-              </div>
-            ))}
+        {shuffledAnswers.map((answer, index) => (
+          <div className="col mb-4" key={index}>
+            <GameQuestionAnswerButton
+              label={answer}
+              addClass={"btn-secondary"}
+            />
           </div>
         ))}
       </div>
