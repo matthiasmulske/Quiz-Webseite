@@ -1,6 +1,7 @@
 import * as React from "react";
 import ButtonAddQuestion from "../Atoms/ButtonAddQuestion";
 import {TextField} from "@mui/material";
+import SelectCategory from "../Atoms/SelectCategory";
 
 function AddQuestion() {
     return (
@@ -11,7 +12,7 @@ function AddQuestion() {
                 multiline
                 rows={4}
             />
-            <text>DropDown</text>
+            <SelectCategory/>
             <ButtonAddQuestion/>
         </>
     )
