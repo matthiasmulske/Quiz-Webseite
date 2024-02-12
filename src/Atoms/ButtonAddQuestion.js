@@ -1,6 +1,7 @@
 import * as React from "react";
+import Button from '@mui/material/Button';
 
-function Button() {
+function ButtonAddQuestion() {
     return (
         <>
             <Button variant="contained">test</Button>;
@@ -9,4 +10,4 @@ function Button() {
 
 }
 
-export default Button;
+export default ButtonAddQuestion;
