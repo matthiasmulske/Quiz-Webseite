@@ -14,10 +14,10 @@ function GameQuestion() {
           clearInterval(intervalId);
           return 0;
         } else {
-          return prevTimeLeft - 1;
+          return prevTimeLeft - 0.05;
         }
       });
-    }, 1000);
+    }, 50);
 
     return () => clearInterval(intervalId);
   }, [timer]);
