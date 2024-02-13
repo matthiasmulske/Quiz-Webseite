@@ -2,15 +2,15 @@ import React, { useState } from "react";
 import GameButton from "../atoms/GameButton";
 import { ClockLoader } from "react-spinners";
 
-function GameIntro() {
+function GameIntro({ currentRound, currentCategory, turn, lastPlayed }) {
   // eslint-disable-next-line
-  const [round, setRound] = useState("1");
+  const [round, setRound] = useState(currentRound);
   // eslint-disable-next-line
-  const [category, setCategory] = useState("Seekabelkunde");
+  const [category, setCategory] = useState(currentCategory);
   // eslint-disable-next-line
   const [timeLeft, setTimeLeft] = useState("3d 12h 54min");
   // eslint-disable-next-line
-  const [yourTurn, setYourTurn] = useState();
+  const [yourTurn, setYourTurn] = useState(turn);
 
   return (
     <div className="container d-flex justify-content-center align-items-center">
@@ -18,8 +18,8 @@ function GameIntro() {
         <h1 className="h1">Runde {round}</h1>
         <h2 className="h2">{category}</h2>
         {yourTurn ? (
-          <div className="mb-2">
-            <GameButton label="Starte Runde" />
+          <div className="m-3">
+            <GameButton label="Starte Runde" addClass=" btn-primary" />
           </div>
         ) : null}
         {!yourTurn ? (

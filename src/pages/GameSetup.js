@@ -68,14 +68,12 @@ function GameSetup() {
           <div className="m-3">
             <GameButton
               label="Singleplayer"
+              addClass={"btn-primary"}
               //onClick={}
             />
           </div>
           <div className="m-3">
-            <GameButton
-              label="Multiplayer"
-              //onClick={}
-            />
+            <GameButton label="Multiplayer" addClass={"btn-primary"} />
           </div>
         </div>
 

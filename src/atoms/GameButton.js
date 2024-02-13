@@ -1,8 +1,8 @@
 import React from "react";
 
-const GameButton = ({ onClick, label }) => {
+const GameButton = ({ onClick, label, addClass }) => {
   return (
-    <button className="btn bg-gradient btn-primary p-2" onClick={onClick}>
+    <button className={"btn bg-gradient p-2 " + addClass} onClick={onClick}>
       {label}
     </button>
   );

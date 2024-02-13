@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import GameMiniButton from "../atoms/GameMiniButton";
+import GameMiniButton from "../atoms/GameIconButton";
 
-const GameLinkContainer = ({ player, label, linkText, id }) => {
+const GameLinkContainer = ({ player, linkText, id }) => {
   const [copied, setCopied] = useState(false); // State to track if link is copied
 
   const handleCopyLink = () => {

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import GameScoreboardModal from "../components/GameScoreboardModal";
-import GameScoreboardButton from "../atoms/GameScoreboardButton";
+import GameScoreboardModal from "./GameScoreboardModal";
+import GameButton from "../atoms/GameButton";
 
 const GameScoreboard = () => {
   const data = {
@@ -209,8 +209,8 @@ const GameScoreboard = () => {
               <div className="row">
                 {chunk.map((question) => (
                   <div key={question.question_number} className="mb-3 col">
-                    <GameScoreboardButton
-                      addClass={` ${getButtonColor(question.player1_answer, question.correct_answer)}`}
+                    <GameButton
+                      addClass={` ${getButtonColor(question.player1_answer, question.correct_answer)} w-50`}
                       onClick={() => handleButtonClick(question, "player1")}
                       label={question.question_number}
                     />
@@ -222,8 +222,8 @@ const GameScoreboard = () => {
               <div className="row">
                 {chunk.map((question) => (
                   <div key={question.question_number} className="mb-3 col">
-                    <GameScoreboardButton
-                      addClass={` ${getButtonColor(question.player2_answer, question.correct_answer)}`}
+                    <GameButton
+                      addClass={` ${getButtonColor(question.player2_answer, question.correct_answer)} w-50`}
                       onClick={() => handleButtonClick(question, "player2")}
                       label={question.question_number}
                     />

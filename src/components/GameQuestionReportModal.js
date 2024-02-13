@@ -59,7 +59,7 @@ const GameQuestionReportModal = ({ modalData, openModal, setOpenModal }) => {
             icon="notes"
             required={true}
           />
-          <GameButton label="Senden" />
+          <GameButton label="Senden" addClass=" btn-primary" />
         </div>
       </Modal.Body>
       <Modal.Footer></Modal.Footer>

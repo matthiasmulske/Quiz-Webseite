@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import GameQuestionAnswerButton from "../atoms/GameQuestionAnswerButton";
-import GameQuestionView from "../components/GameQuestionView";
+import GameButton from "../atoms/GameButton";
+import GameQuestionView from "./GameQuestionView";
 
 function GameQuestion() {
   // eslint-disable-next-line
@@ -41,10 +41,10 @@ function GameQuestion() {
         />
 
         <div className="mb-2">
-          <GameQuestionAnswerButton
+          <GameButton
             //onclick=""
             label="Nächste Frage"
-            addClass="btn-primary"
+            addClass="btn-primary w-100"
           />
         </div>
       </div>

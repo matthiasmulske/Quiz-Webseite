@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import GameMiniButton from "../atoms/GameMiniButton";
+import GameMiniButton from "../atoms/GameIconButton";
 import { Modal, Button } from "react-bootstrap";
 import GameQuestionReportModal from "./GameQuestionReportModal";
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import GameQuestionAnswerButton from "../atoms/GameQuestionAnswerButton";
-import GameMiniButton from "../atoms/GameMiniButton";
+import GameButton from "../atoms/GameButton";
+import GameMiniButton from "../atoms/GameIconButton";
 import GameQuestionReportModal from "./GameQuestionReportModal";
 
 const GameQuestionView = ({
@@ -69,10 +69,7 @@ const GameQuestionView = ({
       <div className="mb-4">
         {shuffledAnswers.map((answer, index) => (
           <div className="col mb-4" key={index}>
-            <GameQuestionAnswerButton
-              label={answer}
-              addClass={"btn-secondary"}
-            />
+            <GameButton label={answer} addClass={"btn-secondary w-100"} />
           </div>
         ))}
       </div>
