@@ -11,27 +11,21 @@ const GameQuestionView = ({
   correctAnswer,
 }) => {
   const answers = [answer1, answer2, answer3, correctAnswer];
-  const [openModal, setOpenModal] = useState(false);
-  const [modalData, setModalData] = useState(null);
-  const [shuffledAnswers, setShuffledAnswers] = useState([]);
+  const [openModal, setOpenModal] = useState(false); //decides if reportModal is opened
+  const [modalData, setModalData] = useState(null); //stores necessary data for the reportModal
+  const [shuffledAnswers, setShuffledAnswers] = useState([]); //shuffels answers in order to display the correct answer not always on the same position
 
   // Shuffle function to randomly rearrange the answers
   const shuffleAnswers = (array) => {
     let currentIndex = array.length;
     let temporaryValue, randomIndex;
-
-    // While there remain elements to shuffle...
     while (currentIndex !== 0) {
-      // Pick a remaining element...
       randomIndex = Math.floor(Math.random() * currentIndex);
       currentIndex--;
-
-      // And swap it with the current element.
       temporaryValue = array[currentIndex];
       array[currentIndex] = array[randomIndex];
       array[randomIndex] = temporaryValue;
     }
-
     return array;
   };
 

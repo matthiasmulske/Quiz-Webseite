@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import GameMiniButton from "../atoms/GameIconButton";
-import { Modal, Button } from "react-bootstrap";
+import { Modal } from "react-bootstrap";
 import GameQuestionReportModal from "./GameQuestionReportModal";
 
 const GameScoreboardModal = ({
@@ -9,7 +9,6 @@ const GameScoreboardModal = ({
   setOpenModal,
   player,
 }) => {
-  const [showModal, setShowModal] = useState(openModal);
   const [openReportModal, setOpenReportModal] = useState(false);
   const [reportData, setReportData] = useState();
   const handleOpenReportModal = () => {
@@ -17,10 +16,6 @@ const GameScoreboardModal = ({
     setReportData(modalData);
     setOpenReportModal(true);
   };
-
-  useEffect(() => {
-    setShowModal(openModal);
-  }, [openModal, player]); // Update showModal whenever openModal changes
 
   const handleCloseModal = () => {
     setOpenModal(false); // Update openModal in the parent component
@@ -34,7 +29,7 @@ const GameScoreboardModal = ({
   }
 
   return (
-    <Modal show={showModal} onHide={handleCloseModal}>
+    <Modal show={openModal} onHide={handleCloseModal}>
       <Modal.Header closeButton>
         <Modal.Title>Question {modalData?.question_text}</Modal.Title>
       </Modal.Header>
@@ -76,11 +71,7 @@ const GameScoreboardModal = ({
         </div>
       </Modal.Body>
 
-      <Modal.Footer>
-        <Button variant="secondary" onClick={handleCloseModal}>
-          Close
-        </Button>
-      </Modal.Footer>
+      <Modal.Footer></Modal.Footer>
     </Modal>
   );
 };

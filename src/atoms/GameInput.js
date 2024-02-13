@@ -1,5 +1,3 @@
-import React from "react";
-
 const GameInput = ({
   value,
   onChange,
@@ -12,6 +10,7 @@ const GameInput = ({
   unit,
   required,
 }) => {
+  
   return (
     <div className="container d-flex justify-content-center align-items-center mb-3">
       <div className="text-center col-md-6">

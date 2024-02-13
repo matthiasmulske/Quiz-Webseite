@@ -2,15 +2,15 @@ import React, { useState } from "react";
 import GameButton from "../atoms/GameButton";
 import { ClockLoader } from "react-spinners";
 
-function GameIntro({ currentRound, currentCategory, turn, lastPlayed }) {
+function GameIntro(data) {
   // eslint-disable-next-line
-  const [round, setRound] = useState(currentRound);
+  const [round, setRound] = useState("2");
   // eslint-disable-next-line
-  const [category, setCategory] = useState(currentCategory);
+  const [category, setCategory] = useState("Seekabelkunde");
   // eslint-disable-next-line
-  const [timeLeft, setTimeLeft] = useState("3d 12h 54min");
+  const [timeLeft, setTimeLeft] = useState("3d 12h 54min"); // Stores the amount of time the opposing player has left to play
   // eslint-disable-next-line
-  const [yourTurn, setYourTurn] = useState(turn);
+  const [yourTurn, setYourTurn] = useState(false); //Stores if it is the players turn
 
   return (
     <div className="container d-flex justify-content-center align-items-center">
@@ -26,13 +26,13 @@ function GameIntro({ currentRound, currentCategory, turn, lastPlayed }) {
           <div className="position-relative m-4">
             <div className="d-flex justify-content-center align-items-center ">
               <ClockLoader
-                size={75} // Adjust the size if needed
+                size={75}
                 color="#ffc107"
                 loading={true}
-                speedMultiplier={0.05} // Adjust the speed multiplier to slow down
+                speedMultiplier={0.05} // Speed multiplier to slow down the clock
               />
             </div>
-            <h2 className="text-warning"> Dein Mitspieler ist am Zug! </h2>
+            <h2 className="text-warning"> Dein Mitspieler ist am Zug!</h2>
             <p>
               Du gewinnst, falls dein Mitspieler seine Runde nicht innerhalb von{" "}
               {timeLeft} abschließt!

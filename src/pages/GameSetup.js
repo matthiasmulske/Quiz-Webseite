@@ -18,12 +18,17 @@ function GameSetup() {
     "https://isefquiz01.de/quiz?player2=accesstoken2",
   ); // Timelimit to answer a question
 
+  //handles Input of the Timelimit
   const handleTimeChange = (event) => {
     setTime(event.target.value);
   };
+
+  //Handles Input of the Rounds to be played
   const handleNumberOfRoundsChange = (event) => {
     setNumberOfRounds(event.target.value);
   };
+
+  //handles Input of the first Round to be played
   const handleCategoryChange = (event) => {
     setCategory(event.target.value);
   };
@@ -64,6 +69,7 @@ function GameSetup() {
           type="number"
           icon="loop"
         />
+
         <div className="d-flex justify-content-center align-items-center text-center">
           <div className="m-3">
             <GameButton
@@ -82,6 +88,7 @@ function GameSetup() {
           linkText={linkOne}
           id="linkText1"
         />
+
         <GameLinkContainer
           player="Spieler 2"
           linkText={linkTwo}

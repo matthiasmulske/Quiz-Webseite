@@ -7,6 +7,7 @@ function GameQuestion() {
   const [timer, setTimer] = useState(30);
   const [timeLeft, setTimeLeft] = useState(timer);
 
+  //start Timer when site loads
   useEffect(() => {
     const intervalId = setInterval(() => {
       setTimeLeft((prevTimeLeft) => {

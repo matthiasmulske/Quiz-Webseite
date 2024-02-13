@@ -1,5 +1,3 @@
-import React from "react";
-
 const GameMiniButton = ({ onClick, label, size, color }) => {
   return (
     <button

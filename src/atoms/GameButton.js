@@ -1,5 +1,3 @@
-import React from "react";
-
 const GameButton = ({ onClick, label, addClass }) => {
   return (
     <button className={"btn bg-gradient p-2 " + addClass} onClick={onClick}>

@@ -1,26 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Modal } from "react-bootstrap";
 import GameCategoryDropdown from "../atoms/GameCategoryDropdown";
 import GameInput from "../atoms/GameInput";
 import GameButton from "../atoms/GameButton";
 
 const GameQuestionReportModal = ({ modalData, openModal, setOpenModal }) => {
-  const [showModal, setShowModal] = useState(openModal);
   const categories = [
     "Frage falsch",
     "Frage unangemessen",
     "Rechtsschreibung",
     "Sonstiges",
-  ];
-  const [category, setCategory] = useState("Seekabelkunde");
-  const [commentText, setCommentText] = useState("");
-
-  useEffect(() => {
-    setShowModal(openModal);
-  }, [openModal]); // Update showModal whenever openModal changes
+  ]; //Stores CommentCategories for Dropdown-Input
+  const [category, setCategory] = useState("Frage falsch"); //stores choosen CommentCategory
+  const [commentText, setCommentText] = useState(""); //stores comment of the user
 
   const handleCloseModal = () => {
-    setOpenModal(false); // Update openModal in the parent component
+    setOpenModal(false); // Update openModal in the parent component so it closes correctly
   };
   const handleCategoryChange = (event) => {
     setCategory(event.target.value);
@@ -31,7 +26,7 @@ const GameQuestionReportModal = ({ modalData, openModal, setOpenModal }) => {
 
   return (
     <Modal
-      show={showModal}
+      show={openModal}
       onHide={handleCloseModal}
       dialogClassName="modal-xl"
     >

@@ -2,17 +2,18 @@ import React, { useState } from "react";
 import GameMiniButton from "../atoms/GameIconButton";
 
 const GameLinkContainer = ({ player, linkText, id }) => {
-  const [copied, setCopied] = useState(false); // State to track if link is copied
+  const [copied, setCopied] = useState(false); // State to track if link is copied in order to change icon
 
+  //Copy Link to clipboard
   const handleCopyLink = () => {
     const linkText = document.querySelector("#" + id).innerText;
     navigator.clipboard
       .writeText(linkText)
       .then(() => {
-        setCopied(true); // Set copied to true after successful copy
+        setCopied(true);
         setTimeout(() => {
-          setCopied(false); // Reset copied state after a short delay
-        }, 1000); // Reset after 2 seconds
+          setCopied(false);
+        }, 1000);
       })
       .catch((err) => {
         console.error("Failed to copy link: ", err);
