@@ -1,4 +1,5 @@
 import AddQuestion from "./Pages/AddQuestion";
+import EditQuestion from "./Pages/EditQuestion";
 
 function App() {
   return (
