@@ -1,43 +1,61 @@
-// Erstelle einen Container für die Buttons
-const buttonsContainer = document.createElement('div');
-buttonsContainer.style.position = 'fixed';
-buttonsContainer.style.bottom = '10px';
-buttonsContainer.style.left = '50%';
-buttonsContainer.style.transform = 'translateX(-50%)';
-buttonsContainer.style.zIndex = '1000';
+import React from 'react';
 
-// Funktion zum Erstellen eines Buttons
-function createButton(text) {
-    const button = document.createElement('button');
-    button.textContent = text;
-    button.className = 'button'; // Füge die Klasse 'button' hinzu
-    button.style.marginRight = '50px'; // Setze den rechten Abstand zwischen den Buttons
-    button.style.backgroundColor = 'transparent'; // Setze die Hintergrundfarbe auf transparent
-    button.style.color = 'blacke'; // Setze die Textfarbe auf weiß
-    button.style.border = '1px solid white'; // Setze einen weißen Rand um den Button
-    return button;
+class ButtonContainer extends React.Component {
+  render() {
+    return (
+      <div
+        style={{
+          position: 'fixed',
+          bottom: '10px',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          zIndex: '1000'
+        }}
+      >
+        <button
+          className="button"
+          style={{
+            marginRight: '50px',
+            backgroundColor: 'transparent',
+            color: 'black',
+            border: '1px solid white',
+            padding: '10px 20px',
+            borderRadius: '5px'
+          }}
+          onClick={() => window.location.href = 'datenschutz.html'}
+        >
+          Datenschutz
+        </button>
+        <button
+          className="button"
+          style={{
+            marginRight: '50px',
+            backgroundColor: 'transparent',
+            color: 'black',
+            border: '1px solid white',
+            padding: '10px 20px',
+            borderRadius: '5px'
+          }}
+          onClick={() => window.location.href = 'impressum.html'}
+        >
+          Impressum
+        </button>
+        <button
+          className="button"
+          style={{
+            backgroundColor: 'transparent',
+            color: 'black',
+            border: '1px solid white',
+            padding: '10px 20px',
+            borderRadius: '5px'
+          }}
+          onClick={() => window.location.href = 'agb.html'}
+        >
+          AGBs
+        </button>
+      </div>
+    );
+  }
 }
 
-// Erstelle den Datenschutz-Button
-const privacyButton = createButton('Datenschutz');
-privacyButton.addEventListener('click', function() {
-    window.location.href = 'datenschutz.html'; // Navigiere zu Datenschutzseite
-});
-buttonsContainer.appendChild(privacyButton);
-
-// Erstelle den Impressum-Button
-const imprintButton = createButton('Impressum');
-imprintButton.addEventListener('click', function() {
-    window.location.href = 'impressum.html'; // Navigiere zu Impressumseite
-});
-buttonsContainer.appendChild(imprintButton);
-
-// Erstelle den AGBs-Button
-const agbButton = createButton('AGBs');
-agbButton.addEventListener('click', function() {
-    window.location.href = 'agb.html'; // Navigiere zu AGBs-Seite
-});
-buttonsContainer.appendChild(agbButton);
-
-// Füge den Container dem Dokument hinzu
-document.body.appendChild(buttonsContainer);
+export default ButtonContainer;
