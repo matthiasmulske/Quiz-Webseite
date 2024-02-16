@@ -1,25 +1,29 @@
 import * as React from "react";
 import Button from '@mui/material/Button';
 
-function ButtonAddQuestion() {
+function ButtonAddQuestion({ buttonLabel }) {
     function handleClick() {
         alert("Frage wurde hinzugefügt.")
     }
 
     return (
-        <>
-            <Button
-                sx={{width: 500,}}
-                variant="contained"
-                onClick={handleClick}
-            >
-                Frage vorschlagen
-            </Button>
-        </>
+        <div style={style.button}>
+            <Button variant="contained">{buttonLabel}</Button>
+        </div>
     )
 
 }
 
 export default ButtonAddQuestion;
+
+
+const style = {
+    button: {
+        margin: 4,
+        maxWidth: 'body',
+    },
+
+
+};
 
 

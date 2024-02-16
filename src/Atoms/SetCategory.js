@@ -1,25 +1,29 @@
 import {FormControl, InputLabel, MenuItem, Select, TextField} from "@mui/material";
 import React from "react";
 
-function SelectCategory() {
+var exampleCategories = {
+    categories: ["test", "test2"]
+}
+
+function SetCategory() {
     function handleChange() {
     }
 
     return (
         <>
-            <FormControl style={style.container}>
+            <FormControl style={style.formControlContainer}>
                 <InputLabel id="demo-simple-select-label" style={style.dropDown}>Age</InputLabel>
-                <Select
+                <Select style={style.selectCategory}
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
                     value={10}
-                    label="Age"
+                    label="Kategorien"
                     onChange={handleChange}>
-                    <MenuItem value={10}>Ten</MenuItem>
+                    <MenuItem value={10}>Test2</MenuItem>
                     <MenuItem value={20}>Twenty</MenuItem>
                     <MenuItem value={30}>Thirty</MenuItem>
                 </Select>
-                <TextField
+                <TextField style={style.enterCategory}
                     id="outlined-basic" label="Kategorie hinzufügen" variant="outlined" />
             </FormControl>
         </>
@@ -27,18 +31,23 @@ function SelectCategory() {
 
 }
 
-export default SelectCategory;
+export default SetCategory;
 
 const style = {
-    container: {
-        maxHeight: 10,
-        display: 'grid',
-        gridTemplateRows: '1fr 1fr',
-        gridRowGap: '10px',
+    formControlContainer: {
+        display: "flex",
+        alignContent: "space-between",
     },
 
-    dropDown: {
+    selectCategory: {
+        margin: 4,
+    },
+
+    enterCategory: {
+        margin: 4,
+        color: 'success.main',
     }
+
 
 };
 

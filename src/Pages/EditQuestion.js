@@ -1,7 +1,7 @@
 import * as React from "react";
 import ButtonAddQuestion from "../Atoms/ButtonAddQuestion";
 import InputAddQuestion from "../Atoms/InputAddQuestion";
-import SelectCategory from "../Atoms/SelectCategory";
+import SetCategory from "../Atoms/SetCategory";
 import QuestionTable from  "../Atoms/QuestionTable"
 
 function AddQuestion() {
@@ -12,7 +12,7 @@ function AddQuestion() {
             </div>
             <div style={style.container}>
                 <InputAddQuestion/>
-                <SelectCategory/>
+                <SetCategory/>
             </div >
             <div style={style.button}>
                 <ButtonAddQuestion/>
@@ -26,14 +26,14 @@ export default AddQuestion;
 const style = {
     container: {
         display: 'flex',
-        flexDirection: 'row',
+        // flexDirection: 'row',
         justifyContent: 'center'
     },
 
     button: {
         display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'center'
+        // flexDirection: 'row',
+        // justifyContent: 'center'
     }
 
 };

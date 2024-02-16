@@ -1,35 +1,27 @@
 import * as React from "react";
 import ButtonAddQuestion from "../Atoms/ButtonAddQuestion";
 import InputAddQuestion from "../Atoms/InputAddQuestion";
-import SelectCategory from "../Atoms/SelectCategory";
+import SetCategory from "../Atoms/SetCategory";
 
 function AddQuestion() {
     return (
         <>
-            <div style={style.container}>
+            <div>
                 <InputAddQuestion/>
-                <SelectCategory/>
+                <SetCategory/>
+                <ButtonAddQuestion buttonLabel="Frage vorschlagen"></ButtonAddQuestion>
             </div >
-            <div style={style.button}>
-                <ButtonAddQuestion/>
-            </div>
         </>
     )
 }
 
 export default AddQuestion;
 
+
 const style = {
-    container: {
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'center'
+    componentContainer: {
+        paddingLeft: 4,
     },
 
-    button: {
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'center'
-    }
 
-};
+}
