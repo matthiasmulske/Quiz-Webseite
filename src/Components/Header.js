@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-class ButtonComponent extends React.Component {
+class Header extends React.Component {
   handleLoginClick = () => {
     <Link to="/neue_quizfrage">
         <button
@@ -46,4 +46,4 @@ class ButtonComponent extends React.Component {
   }
 }
 
-export default ButtonComponent;
+export default Header;
