@@ -1,14 +1,13 @@
 import * as React from "react";
 import ButtonAddQuestion from "../Atoms/ButtonAddQuestion";
-import InputAddQuestion from "../Atoms/InputAddQuestion";
+import FormAddQuestion from "../Atoms/InputAddQuestion";
 import SetCategory from "../Atoms/SetCategory";
 
 function AddQuestion() {
     return (
         <>
-            <div>
-                <InputAddQuestion/>
-                <SetCategory/>
+            <div style={style.componentContainer}>
+                <FormAddQuestion/>
                 <ButtonAddQuestion buttonLabel="Frage vorschlagen"></ButtonAddQuestion>
             </div >
         </>
@@ -20,7 +19,8 @@ export default AddQuestion;
 
 const style = {
     componentContainer: {
-        paddingLeft: 4,
+        width: "100%",
+        margin: 1,
     },
 
 
