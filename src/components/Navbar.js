@@ -32,7 +32,6 @@ const Navbar = () => {
                                 </span>
                                 }
                             />
-
                         </li>
                     </ul>
                     <ul className="navbar-nav ms-auto">
