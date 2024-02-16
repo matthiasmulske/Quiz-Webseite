@@ -1,11 +1,10 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import QuizNavbar from "./Components/QuizNavbar";
+import QuizNavbar from "./components/QuizNavbar";
 
 
 
 function App() {
   return (
-
       <QuizNavbar/>
   );
 }

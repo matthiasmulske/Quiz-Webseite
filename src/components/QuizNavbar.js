@@ -1,7 +1,7 @@
 import {AiFillPicture, AiFillQuestionCircle, AiOutlineLogout, AiOutlineMessage} from "react-icons/ai"; // Import Bootstrap components
 
 import React from "react";
-import imageLogo from "../Assets/logo.png";
+import imageLogo from "../assets/logo.png";
 
 
 function QuizNavbar() {
