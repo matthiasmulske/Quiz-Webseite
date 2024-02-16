@@ -1,19 +1,13 @@
 import * as React from "react";
-import ButtonQuiz from "../atoms/ButtonQuiz";
 import FormAddQuestion from "../components/FormAddQuestion";
 import QuestionTable from  "../atoms/QuestionTable"
 
 function AddQuestion() {
     return (
         <>
-            <div>
-                <QuestionTable/>
-            </div>
             <div style={style.container}>
-                <FormAddQuestion/>
-            </div >
-            <div style={style.button}>
-                <ButtonQuiz/>
+                <QuestionTable/>
+                <FormAddQuestion buttonLabel={"Senden"} questionLabel={"Frage bearbeiten"}/>
             </div>
         </>
     )
@@ -22,16 +16,9 @@ function AddQuestion() {
 export default AddQuestion;
 
 const style = {
-    container: {
-        display: 'flex',
-        // flexDirection: 'row',
-        justifyContent: 'center'
+    componentContainer: {
+
+        width: "100%",
+        margin: 4,
     },
-
-    button: {
-        display: 'flex',
-        // flexDirection: 'row',
-        // justifyContent: 'center'
-    }
-
 };

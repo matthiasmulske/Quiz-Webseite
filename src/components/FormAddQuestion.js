@@ -2,15 +2,16 @@ import * as React from "react";
 import {FormControl, InputLabel } from "@mui/material";
 import QuizTextField from "../atoms/QuizTextField";
 import DropDown from "../atoms/DropDown";
+import ButtonQuiz from "../atoms/ButtonQuiz";
 
 
-function FormAddQuestion() {
+function FormAddQuestion({buttonLabel, questionLabel}) {
     function handleChange() {
     }
 
     return (
         <div>
-            <QuizTextField label={"Frage einreichen"} rows={8}/>
+            <QuizTextField label={questionLabel} rows={8}/>
             <div style={style.gridContainer}>
                 <QuizTextField label={"Antwort A"} rows={4}/>
                 <QuizTextField label={"Antwort B"} rows={4}/>
@@ -22,6 +23,7 @@ function FormAddQuestion() {
                 <DropDown/>
                 <QuizTextField label={"Kategorie eingeben"}/>
             </FormControl>
+            <ButtonQuiz buttonLabel={buttonLabel} />
         </div>
     )
 

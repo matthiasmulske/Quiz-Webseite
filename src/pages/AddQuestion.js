@@ -6,8 +6,7 @@ function AddQuestion() {
     return (
         <>
             <div style={style.componentContainer}>
-                <FormAddQuestion/>
-                <QuizButton buttonLabel="Frage vorschlagen"></QuizButton>
+                <FormAddQuestion buttonLabel={"Frage einreichen"}/>
             </div >
         </>
     )

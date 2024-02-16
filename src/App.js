@@ -1,4 +1,3 @@
-import AddQuestion from "./pages/AddQuestion";
 import EditQuestion from "./pages/EditQuestion";
 
 function App() {
@@ -7,7 +6,9 @@ function App() {
       <header className="App-header">
         <h1 style={style.navbar}>NAVBAR PLACEHOLDER</h1>
       </header>
-        <EditQuestion/>
+        <div style={style.page}>
+            <EditQuestion/>
+        </div>
     </div>
   )
 }
@@ -17,5 +18,10 @@ export default App;
 
 const style = {
     navbar: {
+    },
+
+    page: {
+        margin: 8,
+
     }
 }
