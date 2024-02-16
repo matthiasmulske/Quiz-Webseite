@@ -1,6 +1,6 @@
 import React from 'react';
 
-class ButtonContainer extends React.Component {
+class Footer extends React.Component {
   render() {
     return (
       <div
@@ -58,4 +58,4 @@ class ButtonContainer extends React.Component {
   }
 }
 
-export default ButtonContainer;
+export default Footer;

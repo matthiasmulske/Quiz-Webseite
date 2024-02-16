@@ -1,6 +1,6 @@
 import React from 'react';
 
-class ButtonComponent extends React.Component {
+class StartLoginComponent extends React.Component {
   handleNewQuestion = () => {
     console.log('Neue Quizfrage wurde angeklickt');
   };
@@ -48,4 +48,4 @@ class ButtonComponent extends React.Component {
   }
 }
 
-export default ButtonComponent;
+export default StartLoginComponent;

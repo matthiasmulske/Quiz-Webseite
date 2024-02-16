@@ -1,6 +1,6 @@
 import React from 'react';
 
-class ButtonComponent extends React.Component {
+class StartComponent extends React.Component {
   render() {
     return (
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
@@ -39,4 +39,4 @@ class ButtonComponent extends React.Component {
   }
 }
 
-export default ButtonComponent;
+export default StartComponent;
