@@ -1,5 +1,5 @@
-import AddQuestion from "./Pages/AddQuestion";
-import EditQuestion from "./Pages/EditQuestion";
+import AddQuestion from "./pages/AddQuestion";
+import EditQuestion from "./pages/EditQuestion";
 
 function App() {
   return (
@@ -7,7 +7,7 @@ function App() {
       <header className="App-header">
         <h1 style={style.navbar}>NAVBAR PLACEHOLDER</h1>
       </header>
-        <AddQuestion/>
+        <EditQuestion/>
     </div>
   )
 }

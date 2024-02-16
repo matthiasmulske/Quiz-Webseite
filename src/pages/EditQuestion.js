@@ -1,8 +1,7 @@
 import * as React from "react";
-import ButtonAddQuestion from "../Atoms/ButtonAddQuestion";
-import InputAddQuestion from "../Atoms/InputAddQuestion";
-import SetCategory from "../Atoms/SetCategory";
-import QuestionTable from  "../Atoms/QuestionTable"
+import ButtonQuiz from "../atoms/ButtonQuiz";
+import FormAddQuestion from "../components/FormAddQuestion";
+import QuestionTable from  "../atoms/QuestionTable"
 
 function AddQuestion() {
     return (
@@ -11,11 +10,10 @@ function AddQuestion() {
                 <QuestionTable/>
             </div>
             <div style={style.container}>
-                <InputAddQuestion/>
-                <SetCategory/>
+                <FormAddQuestion/>
             </div >
             <div style={style.button}>
-                <ButtonAddQuestion/>
+                <ButtonQuiz/>
             </div>
         </>
     )

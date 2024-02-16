@@ -1,14 +1,13 @@
 import * as React from "react";
-import ButtonAddQuestion from "../Atoms/ButtonAddQuestion";
-import FormAddQuestion from "../Atoms/InputAddQuestion";
-import SetCategory from "../Atoms/SetCategory";
+import QuizButton from "../atoms/ButtonQuiz";
+import FormAddQuestion from "../components/FormAddQuestion";
 
 function AddQuestion() {
     return (
         <>
             <div style={style.componentContainer}>
                 <FormAddQuestion/>
-                <ButtonAddQuestion buttonLabel="Frage vorschlagen"></ButtonAddQuestion>
+                <QuizButton buttonLabel="Frage vorschlagen"></QuizButton>
             </div >
         </>
     )
