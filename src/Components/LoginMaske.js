@@ -5,7 +5,9 @@ class Login extends React.Component {
     super(props);
     this.state = {
       username: '',
-      password: ''
+      password: '',
+      errorMessage: '',
+      isLoggedIn: false
     };
   }
 
@@ -19,56 +21,82 @@ class Login extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
+    const { username, password } = this.state;
+
     
+    const validUsername = 'user123';
+    const validPassword = 'password123';
+
+    
+    if (username === validUsername && password === validPassword) {
+      
+      console.log('Anmeldung erfolgreich');
+      this.setState({ isLoggedIn: true });
+    } else {
+      
+      console.log('Anmeldung fehlgeschlagen');
+      this.setState({ errorMessage: 'Benutzername oder Passwort ungültig' });
+    }
+  };
+
+  handleRegister = (event) => {
+    event.preventDefault();
+    const { username, password } = this.state;
+
+    // Hier könnte die Registrierungslogik implementiert werden
+    console.log('Registrierung für:', username, password);
   };
 
   render() {
+    if (this.state.isLoggedIn) {
+      return <div>Eingeloggt als {this.state.username}</div>;
+    }
+
     return (
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', marginTop: '40vh' }}>
-      {}
+      <div className="d-flex flex-column align-items-center justify-content-center mt-5">
         <input
           type="text"
           placeholder="Benutzername"
           value={this.state.username}
           onChange={this.handleUsernameChange}
-          style={{
-            marginBottom: '10px',
-            width: '300px',
-            height: '40px',
-            border: '1px solid #ccc'
-          }}
+          className="form-control mb-3"
+          style={{ width: '300px' }}
         />
 
-        {}
         <input
           type="password"
           placeholder="Passwort"
           value={this.state.password}
           onChange={this.handlePasswordChange}
-          style={{
-            marginBottom: '10px',
-            width: '300px',
-            height: '40px',
-            border: '1px solid #ccc'
-          }}
+          className="form-control mb-3"
+          style={{ width: '300px' }}
         />
 
-        {}
-        <button
-          type="submit"
-          onClick={this.handleSubmit}
-          style={{
-            width: '200px',
-            height: '50px',
-            backgroundColor: '#3498db',
-            color: 'white',
-            border: 'none',
-            borderRadius: '5px',
-            marginBottom: '20px'
-          }}
-        >
-          Anmelden
-        </button>
+        <div className="d-flex justify-content-between" style={{ width: '300px' }}>
+          <button
+            type="submit"
+            onClick={this.handleSubmit}
+            className="btn btn-primary btn-lg"
+            style={{ width: '140px' }}
+          >
+            Anmelden
+          </button>
+
+          <button
+            type="submit"
+            onClick={this.handleRegister}
+            className="btn btn-success btn-lg"
+            style={{ width: '140px' }}
+          >
+            Registrieren
+          </button>
+        </div>
+
+        {this.state.errorMessage && (
+          <div className="alert alert-danger mt-3" role="alert">
+            {this.state.errorMessage}
+          </div>
+        )}
       </div>
     );
   }

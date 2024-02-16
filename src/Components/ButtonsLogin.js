@@ -1,51 +1,38 @@
 import React from 'react';
 
-class StartLoginComponent extends React.Component {
-  handleNewQuestion = () => {
-    console.log('Neue Quizfrage wurde angeklickt');
-  };
-
-  handleAnswerQuestion = () => {
-    console.log('Quizfrage beantworten wurde angeklickt');
-  };
-
+class ButtonsLogin extends React.Component {
   render() {
     return (
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', marginTop: '-40vh' }}>
-        {}
-        <button
-          style={{
-            width: '200px',
-            height: '50px',
-            backgroundColor: '#2ecc71',
-            color: 'white',
-            border: 'none',
-            borderRadius: '20px',
-            marginBottom: '20px'
-          }}
-          onClick={this.handleNewQuestion}
-        >
-          Neue Quizfrage
-        </button>
-
-        {}
-        <button
-          style={{
-            width: '200px',
-            height: '50px',
-            backgroundColor: '#2ecc71',
-            color: 'white',
-            border: 'none',
-            borderRadius: '20px',
-            marginBottom: '10px'
-          }}
-          onClick={this.handleAnswerQuestion}
-        >
-          Quizfrage beantworten
-        </button>
+      <div className="d-flex justify-content-center align-items-center" style={{ height: '100vh' }}>
+        <div className="d-flex flex-column align-items-center">
+          <button
+            className="btn btn-primary btn-lg mb-3"
+            onClick={() => window.location.href = 'einzelspieler.html'}
+          >
+            Einzelspieler
+          </button>
+          <button
+            className="btn btn-primary btn-lg mb-3"
+            onClick={() => window.location.href = 'mehrspieler.html'}
+          >
+            Mehrspieler
+          </button>
+          <button
+            className="btn btn-primary btn-lg mb-3"
+            onClick={() => window.location.href = 'Neue quizfrage.html'}
+          >
+            Neue quizfrage
+          </button>
+          <button
+            className="btn btn-primary btn-lg mb-3"
+            onClick={() => window.location.href = 'Quizfrage bearbeiten.html'}
+          >
+            Quizfrage bearbeiten
+          </button>
+        </div>
       </div>
     );
   }
 }
 
-export default StartLoginComponent;
+export default ButtonsLogin;

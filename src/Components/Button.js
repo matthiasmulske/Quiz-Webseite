@@ -3,32 +3,16 @@ import React from 'react';
 class StartComponent extends React.Component {
   render() {
     return (
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      <div className="d-flex justify-content-center align-items-center" style={{ height: '100vh' }}>
+        <div className="d-flex flex-column align-items-center">
           <button
-            style={{
-              width: '200px',
-              height: '50px',
-              backgroundColor: '#3498db',
-              color: 'white',
-              border: 'none',
-              borderRadius: '5px',
-              marginBottom: '20px'
-            }}
+            className="btn btn-primary btn-lg mb-3"
             onClick={() => window.location.href = 'einzelspieler.html'}
           >
             Einzelspieler
           </button>
           <button
-            style={{
-              width: '200px',
-              height: '50px',
-              backgroundColor: '#3498db',
-              color: 'white',
-              border: 'none',
-              borderRadius: '5px',
-              marginBottom: '20px'
-            }}
+            className="btn btn-primary btn-lg mb-3"
             onClick={() => window.location.href = 'mehrspieler.html'}
           >
             Mehrspieler

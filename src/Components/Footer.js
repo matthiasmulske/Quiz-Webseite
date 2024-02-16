@@ -3,52 +3,21 @@ import React from 'react';
 class Footer extends React.Component {
   render() {
     return (
-      <div
-        style={{
-          position: 'fixed',
-          bottom: '10px',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          zIndex: '1000'
-        }}
-      >
+      <div className="fixed-bottom d-flex justify-content-center" style={{ zIndex: '1000' }}>
         <button
-          className="button"
-          style={{
-            marginRight: '50px',
-            backgroundColor: 'transparent',
-            color: 'black',
-            border: '1px solid white',
-            padding: '10px 20px',
-            borderRadius: '5px'
-          }}
+          className="btn btn-outline-dark mr-2 mb-3"
           onClick={() => window.location.href = 'datenschutz.html'}
         >
           Datenschutz
         </button>
         <button
-          className="button"
-          style={{
-            marginRight: '50px',
-            backgroundColor: 'transparent',
-            color: 'black',
-            border: '1px solid white',
-            padding: '10px 20px',
-            borderRadius: '5px'
-          }}
+          className="btn btn-outline-dark mr-2 mb-3"
           onClick={() => window.location.href = 'impressum.html'}
         >
           Impressum
         </button>
         <button
-          className="button"
-          style={{
-            backgroundColor: 'transparent',
-            color: 'black',
-            border: '1px solid white',
-            padding: '10px 20px',
-            borderRadius: '5px'
-          }}
+          className="btn btn-outline-dark mb-3"
           onClick={() => window.location.href = 'agb.html'}
         >
           AGBs
