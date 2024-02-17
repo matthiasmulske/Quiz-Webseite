@@ -1,11 +1,15 @@
 import React, { useState } from "react";
+
 import GameButton from "../atoms/GameButton";
 import GameCategoryDropdown from "../atoms/GameCategoryDropdown";
 import GameInput from "../atoms/GameInput";
 import GameLinkContainer from "../components/GameLinkContainer";
 
 function GameSetup() {
-  const categories = ["Seekabelkunde", "BWL", "VWL"]; //stores all possible categories
+
+  // TODO: Use props inhere
+  const categories = ["Seekabelkunde", "BWL", "VWL"];
+  
   const [time, setTime] = useState(20); // Timelimit to answer a question
   const [NumberOfRounds, setNumberOfRounds] = useState(5); // Amount of rounds of a single game. One Round contains three questions
   const [category, setCategory] = useState("Seekabelkunde"); //Category the player has choosen in the Dropdown

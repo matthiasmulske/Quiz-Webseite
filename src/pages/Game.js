@@ -6,14 +6,17 @@ import GameSumUp from "../components/GameSumUp";
 
 function Game() {
   return (
+
     <div className="">
+
       <div className="mb-3">
         <GameIntro
           currentRound="2"
           currentCategory="Seekabelkunde"
           turn={true}
         />
-      </div>
+  </div>
+
       <div className="mb-3">
         <GameQuestion></GameQuestion>
       </div>
