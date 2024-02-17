@@ -37,3 +37,7 @@ const GameCategoryDropdown = ({
 };
 
 export default GameCategoryDropdown;
+
+const style = {
+
+}
