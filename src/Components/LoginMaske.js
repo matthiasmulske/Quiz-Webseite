@@ -1,5 +1,7 @@
 import React from 'react';
 
+
+// TODO: Benutze Funktionen, keine Klassen
 class Login extends React.Component {
   constructor(props) {
     super(props);
@@ -11,6 +13,8 @@ class Login extends React.Component {
     };
   }
 
+
+  // TODO:
   handleUsernameChange = (event) => {
     this.setState({ username: event.target.value });
   };
@@ -23,17 +27,17 @@ class Login extends React.Component {
     event.preventDefault();
     const { username, password } = this.state;
 
-    
+
     const validUsername = 'user123';
     const validPassword = 'password123';
 
-    
+
     if (username === validUsername && password === validPassword) {
-      
+
       console.log('Anmeldung erfolgreich');
       this.setState({ isLoggedIn: true });
     } else {
-      
+
       console.log('Anmeldung fehlgeschlagen');
       this.setState({ errorMessage: 'Benutzername oder Passwort ungültig' });
     }
@@ -52,8 +56,12 @@ class Login extends React.Component {
       return <div>Eingeloggt als {this.state.username}</div>;
     }
 
+
+    // TODO: Styling gesondert
     return (
       <div className="d-flex flex-column align-items-center justify-content-center mt-5">
+
+        // TODO: Für InputField eigene Komponenten festlegen
         <input
           type="text"
           placeholder="Benutzername"

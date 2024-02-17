@@ -1,5 +1,7 @@
 import React from 'react';
 
+
+// TODO: Benutze Funktionen, keine Klassen
 class Footer extends React.Component {
   render() {
     return (
