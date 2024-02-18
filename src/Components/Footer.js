@@ -13,7 +13,7 @@ function addImpressum() {
   alert("Starte Impressum Seite");
 }
 
-function LoginButton() {
+function Footer() {
   return (
     <div style={{ position: 'fixed', bottom: '20px', left: '50%', transform: 'translateX(-50%)', display: 'flex', justifyContent: 'center' }}>
       <Button label="Datenschutz" onClick={startDatenschutz} style={{ marginRight: '10px' }} />
@@ -23,4 +23,4 @@ function LoginButton() {
   );
 }
 
-export default LoginButton;
+export default Footer;
