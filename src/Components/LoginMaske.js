@@ -1,18 +1,14 @@
 import React, { useState } from 'react';
+import InputLogin from '../Atoms/InputLogin';
+import LoginButton from '../Atoms/LoginButton';
 
-function Login() {
+
+function LoginMaske() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const handleUsernameChange = (event) => {
-    setUsername(event.target.value);
-  };
-
-  const handlePasswordChange = (event) => {
-    setPassword(event.target.value);
-  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -40,42 +36,12 @@ function Login() {
 
   return (
     <div className="d-flex flex-column align-items-center justify-content-center mt-5">
-      <input
-        type="text"
-        placeholder="Benutzername"
-        value={username}
-        onChange={handleUsernameChange}
-        className="form-control mb-3"
-        style={{ width: '300px' }}
-      />
-
-      <input
-        type="password"
-        placeholder="Passwort"
-        value={password}
-        onChange={handlePasswordChange}
-        className="form-control mb-3"
-        style={{ width: '300px' }}
-      />
+      <InputLogin inputPlaceholer={"Benutzername"}/>
+      <InputLogin inputPlaceholer={"Passwort"}/>
 
       <div className="d-flex justify-content-between" style={{ width: '300px' }}>
-        <button
-          type="submit"
-          onClick={handleSubmit}
-          className="btn btn-primary btn-lg"
-          style={{ width: '140px' }}
-        >
-          Anmelden
-        </button>
-
-        <button
-          type="submit"
-          onClick={handleRegister}
-          className="btn btn-success btn-lg"
-          style={{ width: '140px' }}
-        >
-          Registrieren
-        </button>
+        <LoginButton buttonLabel={"Anmelden"}/>
+        <LoginButton buttonLabel={"Registrieren"}/>
       </div>
 
       {errorMessage && (
@@ -87,4 +53,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default LoginMaske;
