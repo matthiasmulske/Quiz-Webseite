@@ -3,17 +3,17 @@ import React from 'react';
 function StartComponent() {
   return (
     <div>
-      <div>
+      <div style={{ marginBottom: '10px' }}>
         <button>
           Datenschutz
         </button>
       </div>
-      <div>
+      <div style={{ marginBottom: '10px' }}>
         <button>
           AGBs
         </button>
       </div>
-      <div>
+      <div style={{ marginBottom: '10px' }}>
         <button>
           Impressum
         </button>
