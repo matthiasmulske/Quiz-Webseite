@@ -1,5 +1,5 @@
 import React from 'react';
-import Button from "../Atoms/Button";
+
 
 function startSinglePlayerGame() {
   alert("Starte Einzelspieler-Spiel");

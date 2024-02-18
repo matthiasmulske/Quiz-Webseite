@@ -2,16 +2,15 @@ import React, { useState } from 'react';
 import InputLogin from '../Atoms/InputLogin';
 import LoginButton from '../Atoms/LoginButton';
 
-
+// TODO: Styling aus src exkludieren
 function LoginMaske() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  function handleSubmit() {
+    //event.preventDefault();
     const validUsername = 'user123';
     const validPassword = 'password123';
 
@@ -24,9 +23,7 @@ function LoginMaske() {
     }
   };
 
-  const handleRegister = (event) => {
-    event.preventDefault();
-    // Hier könnte die Registrierungslogik implementiert werden
+  function handleRegister() {
     console.log('Registrierung für:', username, password);
   };
 
@@ -40,8 +37,8 @@ function LoginMaske() {
       <InputLogin inputPlaceholer={"Passwort"}/>
 
       <div className="d-flex justify-content-between" style={{ width: '300px' }}>
-        <LoginButton buttonLabel={"Anmelden"}/>
-        <LoginButton buttonLabel={"Registrieren"}/>
+        <LoginButton buttonLabel={"Anmelden"} onClick={handleSubmit}/>
+        <LoginButton buttonLabel={"Registrieren"} onClick={handleRegister}/>
       </div>
 
       {errorMessage && (
