@@ -1,24 +1,21 @@
 import React from 'react';
+import Button from "../Atoms/Button";
 
 function startSinglePlayerGame() {
-  alert("Starte Einzelspieler-Spiel");
+  alert("Starte Einzelspiel");
 }
 
 function startMultiPlayerGame() {
-  alert("Starte Mehrspieler-Spiel");
+  alert("Starte Mehrspieler Spiel");
 }
 
-function StartComponent() {
+function StartButton() {
   return (
     <div>
-      <button onClick={startSinglePlayerGame}>
-        Einzelspieler
-      </button>
-      <button onClick={startMultiPlayerGame}>
-        Mehrspieler
-      </button>
+      <Button label="Einzelspieler" onClick={startSinglePlayerGame} />
+      <Button label="Mehrspieler" onClick={startMultiPlayerGame} />
     </div>
   );
 }
 
-export default StartComponent;
+export default StartButton;

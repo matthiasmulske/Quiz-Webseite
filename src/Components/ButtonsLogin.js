@@ -1,4 +1,5 @@
 import React from 'react';
+import Button from "../Atoms/Button";
 
 function startSinglePlayerGame() {
   alert("Starte Einzelspieler-Spiel");
@@ -16,23 +17,15 @@ function editQuestion() {
   alert("Bearbeite eine Quizfrage");
 }
 
-function StartComponent() {
+function LoginButton() {
   return (
     <div>
-      <button onClick={startSinglePlayerGame}>
-        Einzelspieler
-      </button>
-      <button onClick={startMultiPlayerGame}>
-        Mehrspieler
-      </button>
-      <button onClick={addNewQuestion}>
-        Neue Quizfrage
-      </button>
-      <button onClick={editQuestion}>
-        Quizfrage bearbeiten
-      </button>
+      <Button label="Einzelspieler" onClick={startSinglePlayerGame} />
+      <Button label="Mehrspieler" onClick={startMultiPlayerGame} />
+      <Button label="Neue Quizfrage" onClick={addNewQuestion} />
+      <Button label="Quizfrage bearbeiten" onClick={editQuestion} />
     </div>
   );
 }
 
-export default StartComponent;
+export default LoginButton;
