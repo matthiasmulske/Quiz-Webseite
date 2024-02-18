@@ -14,7 +14,7 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <App/>
-      <LoginMaske/>
+      <Footer/>
     </BrowserRouter>
 </React.StrictMode>,
 );
