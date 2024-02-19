@@ -17,7 +17,6 @@ function GameIntro() {
           ? <ContainerYourTurn />
           : <NotYourTurn timeLeft={timeLeft} />
       }
-
     </div>
   );
 }

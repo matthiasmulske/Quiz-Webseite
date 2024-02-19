@@ -53,7 +53,6 @@ const style = {
   pageContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    margin: 80,
     padding: 40,
     position: 'relative',
   },

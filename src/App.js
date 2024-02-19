@@ -9,16 +9,22 @@ function App() {
       <Link className="nav-link" aria-current="page" to="/GameSetup">
         Game Setup
       </Link>
-      <Link className="nav-link" aria-current="page" to="/Game">
-        Game
-      </Link>
-      <Routes>
-        <Route path="/" element={<Welcome />} />
-        <Route path="/GameSetup" element={<GameSetup />} />
-        <Route path="/Game" element={<Game />} />
-      </Routes>
+        <Link className="nav-link" aria-current="page" to="/Game">
+            Game
+        </Link>
+        <div style={style}>
+            <Routes>
+                <Route path="/" element={<Welcome />} />
+                <Route path="/GameSetup" element={<GameSetup />} />
+                <Route path="/Game" element={<Game />} />
+            </Routes>
+        </div>
     </div>
   );
 }
 
 export default App;
+
+const style = {
+    margin: 90,
+}

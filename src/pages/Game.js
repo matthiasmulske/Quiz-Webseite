@@ -4,6 +4,11 @@ import GameQuestion from "../components/GameQuestion";
 import GameScoreboard from "../components/GameScoreboard";
 import GameSumUp from "../components/GameSumUp";
 
+
+
+//TODO: single or multiplayer as prop
+//TODO: what is the purpose of "turn"?; rename
+
 function Game() {
   return (
       <>

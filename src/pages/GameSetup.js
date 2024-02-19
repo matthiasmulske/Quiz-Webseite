@@ -5,20 +5,17 @@ import GameCategoryDropdown from "../atoms/GameCategoryDropdown";
 import GameInput from "../atoms/GameInput";
 import GameLinkContainer from "../components/GameLinkContainer";
 
-function GameSetup() {
 
-  // TODO: Use props inhere
+//TODO: Conditional rendering only when player selected Multiplayer, otherwise redirect to Game.js
+function GameSetup() {
   const categories = ["Seekabelkunde", "BWL", "VWL"];
 
   const [time, setTime] = useState(20); // Timelimit to answer a question
   const [NumberOfRounds, setNumberOfRounds] = useState(5); // Amount of rounds of a single game. One Round contains three questions
-  const [category, setCategory] = useState("Seekabelkunde"); //Category the player has choosen in the Dropdown
-  const [linkOne, setLinkOne] = useState(
-    "https://isefquiz01.de/quiz?player1=accesstoken1",
-  ); // Timelimit to answer a question
-  const [linkTwo, setLinkTwo] = useState(
-    "https://isefquiz01.de/quiz?player2=accesstoken2",
-  ); // Timelimit to answer a question
+  const [category, setCategory] = useState(categories[0]); //Category the player has choosen in the Dropdown
+
+  const [linkOne, setLinkOne] = useState('https://isefquiz01.de/quiz?player2=accesstoken2');
+  const [linkTwo, setLinkTwo] = useState('https://isefquiz01.de/quiz?player2=accesstoken2');
 
   // handles Input of the Timelimit
   const handleTimeChange = (event) => {
@@ -95,7 +92,6 @@ export default GameSetup;
 
 const style = {
   formContainer: {
-    margin: 50,
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
@@ -103,15 +99,13 @@ const style = {
     textAlign: 'center'
   },
 
-
-  //TODO: Increase margin between button components
   buttonContainer: {
-    display: 'flex',
-    flexDirection: 'row',
-    marginBottom: '10px',
+    display: 'grid',
+    height: 50,
+    gridTemplateColumns: 'repeat(2, 1fr)', // 2 columns, each with equal width
+    gridColumnGap: '20px',
   },
-  button: {
-    marginRight: '10px'
-  }
+
+
 
 }

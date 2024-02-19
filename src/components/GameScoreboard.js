@@ -1,169 +1,9 @@
 import React, { useState } from "react";
 import GameScoreboardModal from "./GameScoreboardModal";
 import GameButton from "../atoms/GameButton";
+import questions from "../data/questions.json";
 
 function GameScoreboard() {
-  const data = {
-    questions: [
-      {
-        question_number: 1,
-        question_text: "What is the capital of France?",
-        answers: {
-          1: "Berlin",
-          2: "Madrid",
-          3: "Paris",
-          4: "London",
-        },
-        correct_answer: 3,
-        player1_answer: 1,
-        player2_answer: 2,
-      },
-      {
-        question_number: 2,
-        question_text: "Who wrote 'Romeo and Juliet'?",
-        answers: {
-          1: "William Shakespeare",
-          2: "Charles Dickens",
-          3: "Jane Austen",
-          4: "Mark Twain",
-        },
-        correct_answer: 1,
-        player1_answer: 1,
-        player2_answer: 2,
-      },
-      {
-        question_number: 3,
-        question_text: "What is the chemical symbol for water?",
-        answers: {
-          1: "H2O",
-          2: "CO2",
-          3: "NaCl",
-          4: "O2",
-        },
-        correct_answer: 1,
-        player1_answer: 1,
-        player2_answer: 2,
-      },
-      {
-        question_number: 4,
-        question_text: "Who painted the Mona Lisa?",
-        answers: {
-          1: "Vincent van Gogh",
-          2: "Leonardo da Vinci",
-          3: "Pablo Picasso",
-          4: "Michelangelo",
-        },
-        correct_answer: 2,
-        player1_answer: 1,
-        player2_answer: 2,
-      },
-      {
-        question_number: 5,
-        question_text: "What is the tallest mammal?",
-        answers: {
-          1: "Elephant",
-          2: "Giraffe",
-          3: "Kangaroo",
-          4: "Horse",
-        },
-        correct_answer: 2,
-        player1_answer: 1,
-        player2_answer: 2,
-      },
-      {
-        question_number: 6,
-        question_text: "Which planet is known as the Red Planet?",
-        answers: {
-          1: "Mars",
-          2: "Venus",
-          3: "Mercury",
-          4: "Saturn",
-        },
-        correct_answer: 1,
-        player1_answer: 1,
-        player2_answer: 2,
-      },
-      {
-        question_number: 7,
-        question_text: "Who is the author of 'To Kill a Mockingbird'?",
-        answers: {
-          1: "J.K. Rowling",
-          2: "Harper Lee",
-          3: "Ernest Hemingway",
-          4: "Stephen King",
-        },
-        correct_answer: 2,
-        player1_answer: 1,
-        player2_answer: 2,
-      },
-      {
-        question_number: 8,
-        question_text: "What is the largest mammal in the world?",
-        answers: {
-          1: "Blue whale",
-          2: "African elephant",
-          3: "Giraffe",
-          4: "Polar bear",
-        },
-        correct_answer: 1,
-        player1_answer: 1,
-        player2_answer: 2,
-      },
-      {
-        question_number: 9,
-        question_text: "What is the capital of Japan?",
-        answers: {
-          1: "Tokyo",
-          2: "Beijing",
-          3: "Seoul",
-          4: "Osaka",
-        },
-        correct_answer: 1,
-        player1_answer: 1,
-        player2_answer: 2,
-      },
-      {
-        question_number: 10,
-        question_text: "Who invented the telephone?",
-        answers: {
-          1: "Thomas Edison",
-          2: "Nikola Tesla",
-          3: "Alexander Graham Bell",
-          4: "Galileo Galilei",
-        },
-        correct_answer: 3,
-        player1_answer: 1,
-        player2_answer: 2,
-      },
-      {
-        question_number: 11,
-        question_text: "What is the chemical symbol for gold?",
-        answers: {
-          1: "Au",
-          2: "Ag",
-          3: "Pt",
-          4: "Cu",
-        },
-        correct_answer: 1,
-        player1_answer: 1,
-        player2_answer: 2,
-      },
-      {
-        question_number: 12,
-        question_text: "Which year did the Titanic sink?",
-        answers: {
-          1: "1912",
-          2: "1920",
-          3: "1906",
-          4: "1898",
-        },
-        correct_answer: 1,
-        player1_answer: 1,
-        player2_answer: 2,
-      },
-    ],
-  };
-
   const [openQuestionModal, setOpenQuestionModal] = useState(false);
   const [modalData, setModalData] = useState(null);
   const [modalPlayer, setModalPlayer] = useState(null);
@@ -189,7 +29,7 @@ function GameScoreboard() {
     }
     return chunkedArr;
   };
-  const questionsChunks = chunkArray(data.questions, 3);
+  const questionsChunks = chunkArray(questions.questions, 3);
 
   return (
     <div className="scoreboard container text-center">
