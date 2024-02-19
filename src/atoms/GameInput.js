@@ -1,31 +1,17 @@
-const GameInput = ({
-  value,
-  onChange,
-  label,
-  type,
-  min,
-  max,
-  step,
-  icon,
-  unit,
-  required,
-}) => {
-  
+function GameInput({value, onChange, label, type, min, max, step, icon, unit, required, }) {
   return (
-    <div className="container d-flex justify-content-center align-items-center mb-3">
-      <div className="text-center col-md-6">
-        <div className="input-group mb-3">
-          <span className="input-group-text" id="basic-addon1">
+        <div className="input-group" style={style.inputField}>
+          <span className="input-group-text">
             <span class="material-icons">{icon}</span>
           </span>
-          <span className="input-group-text" id="basic-addon1">
-            <label htmlFor="timeInput" className="form-label">
+
+          <span className="input-group-text">
               {label}
-            </label>
           </span>
+
           <input
-            type={type}
             className="form-control text-center"
+            type={type}
             value={value}
             onChange={onChange}
             min={min}
@@ -33,13 +19,19 @@ const GameInput = ({
             step={step}
             required={required}
           />
-          <span className="input-group-text" id="basic-addon1">
+
+          <span className="input-group-text">
             {unit}
           </span>
         </div>
-      </div>
-    </div>
   );
 };
 
 export default GameInput;
+
+const style = {
+  inputField: {
+    marginBottom: 12,
+  },
+
+}

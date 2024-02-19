@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import GameScoreboardModal from "./GameScoreboardModal";
 import GameButton from "../atoms/GameButton";
 
-const GameScoreboard = () => {
+function GameScoreboard() {
   const data = {
     questions: [
       {

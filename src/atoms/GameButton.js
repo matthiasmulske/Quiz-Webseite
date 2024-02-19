@@ -1,14 +1,17 @@
-const GameButton = ({ onClick, label, addClass }) => {
+import * as React from 'react';
+import Button from '@mui/material/Button';
 
+function GameButton ({ onClick, label }) {
   const onButtonClick = () => {
     alert("Congratulations! You successfully hit an unarmed button -.-");
   };
 
   return (
-    <button className={"btn bg-gradient p-2 " + addClass} onClick={onClick ? onClick : onButtonClick}>
-      {label}
-    </button>
+      <Button variant="contained" onClick={onClick ? onClick : onButtonClick}>
+        {label}
+      </Button>
   );
 };
 
 export default GameButton;
+

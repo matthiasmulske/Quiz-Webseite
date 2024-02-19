@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import GameButton from "../atoms/GameButton";
 import GameQuestionView from "./GameQuestionView";
+import Button from "@mui/material/Button";
 
 const answers = ["Morgen", "42", "Gestern", "753 v. Chr."]
+const question = ["Wann wurde das Arpanet Seekabel verlegt?"]
 
 function GameQuestion() {
   const [timer, setTimer] = useState(30);
@@ -34,18 +36,13 @@ function GameQuestion() {
           ></div>
         </div>
 
-        <GameQuestionView
-            question="Wann wurde das Arpanet Seekabel verlegt?"
-            answers={answers}
-        />
+      <div style={style.answerButton}>
+        <GameQuestionView question={question} answers={answers}/>
+      </div>
 
-        <div className="mb-2">
-          <GameButton
-            //onclick=""
-            label="Nächste Frage"
-            addClass="btn-primary w-100"
-          />
-        </div>
+      <div style={style.buttonNextQuestion}>
+        <Button variant="outlined">Nächste Frage</Button>
+      </div>
     </div>
   );
 }
@@ -56,9 +53,16 @@ const style = {
   pageContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    margin: 20,
+    margin: 80,
+    padding: 40,
     position: 'relative',
   },
 
-
+  answerButton: {
+    marginBottom: 50,
+  },
+  buttonNextQuestion: {
+    display: 'flex',
+    justifyContent: 'center'
+  }
 }
