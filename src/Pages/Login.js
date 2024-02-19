@@ -1,8 +1,8 @@
 
 import  LoginButton from "./../Atoms/LoginButton.js";
 import Footer from "./../Components/Footer.js";
-// TODO: Aufüllen. Hier ist sowas wie "LoginMask", "Button" etc.
 
+// TODO: Aufüllen. Hier ist sowas wie "LoginMask", "Button" etc.
 function Login() {
     function startSinglePlayerGame() {
         alert("Starte Einzelspiel");
