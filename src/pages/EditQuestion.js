@@ -17,7 +17,6 @@ export default AddQuestion;
 
 const style = {
     componentContainer: {
-
         width: "100%",
         margin: 4,
     },

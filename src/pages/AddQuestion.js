@@ -1,5 +1,4 @@
 import * as React from "react";
-import QuizButton from "../atoms/ButtonQuiz";
 import FormAddQuestion from "../components/FormAddQuestion";
 
 function AddQuestion() {
