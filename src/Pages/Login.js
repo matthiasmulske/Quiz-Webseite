@@ -1,31 +1,18 @@
-
-import  LoginButton from "./../Atoms/LoginButton.js";
+import  LoginMaske from "./../Components/LoginMaske";
 import Footer from "./../Components/Footer.js";
 
-// TODO: Aufüllen. Hier ist sowas wie "LoginMask", "Button" etc.
-function Login() {
-    function startSinglePlayerGame() {
-        alert("Starte Einzelspiel");
-    }
-
-    function startMultiPlayerGame() {
-        alert("Starte Mehrspieler Spiel");
-    }
-
+function Startseite() {
     return(
         <>
-            <LoginButton buttonLabel={"Einzelspieler"} onClick={startSinglePlayerGame}/>
-            <LoginButton buttonLabel={"Mehrspieler"} onClick={startMultiPlayerGame}/>
+            <LoginMaske/>
             <Footer/>
         </>
     )
 
 }
-
-export default Login;
-
-const style = {
-    loginButtonContainer: {
-        
-    }
+const styles = {
+    
 }
+
+
+export default Startseite;

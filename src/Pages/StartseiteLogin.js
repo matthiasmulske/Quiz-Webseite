@@ -10,13 +10,24 @@ function Login() {
     function startMultiPlayerGame() {
         alert("Starte Mehrspieler Spiel");
     }
+    function addNewQuestion() {
+        alert("Füge eine neue Quizfrage hinzu");
+    }
+    
+    function editQuestion() {
+        alert("Bearbeite eine Quizfrage");
+    }
 
     return (
         <div style={styles.container}>
             <div style={styles.buttonContainer}>
-                <LoginButton buttonLabel={"Einzelspieler"} onClick={startSinglePlayerGame} style={styles.button} />
+                <LoginButton buttonLabel={"Einzelspieler"} onClick={startSinglePlayerGame} />
                 <div style={styles.buttonSpace}></div> 
-                <LoginButton buttonLabel={"Mehrspieler"} onClick={startMultiPlayerGame} style={styles.button} />
+                <LoginButton buttonLabel={"Mehrspieler"} onClick={startMultiPlayerGame} />
+                <div style={styles.buttonSpace}></div> 
+                <LoginButton buttonLabel={"Neue Quizfrage"} onClick={addNewQuestion} />
+                <div style={styles.buttonSpace}></div> 
+                <LoginButton buttonLabel={"Quizfrage bearbeiten"} onClick={editQuestion} />
             </div>
             <Footer />
         </div>
@@ -38,12 +49,13 @@ const styles = {
         alignItems: 'center', 
     },
     button: {
-        width: '500px', 
-        height: '120px', 
-        fontSize: '30px', 
+        width: '100%', 
+        minWidth: '200px', 
+        height: '80px', 
+        fontSize: '24px', 
     },
     buttonSpace: {
-        marginTop: '20px', 
+        marginTop: '10px', 
     }
 };
 

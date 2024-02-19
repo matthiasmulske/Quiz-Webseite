@@ -1,17 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-function LoginButton( {buttonLabel, onClick} ) {    
+function LoginButton({ buttonLabel, onClick }) {
     return (
-        <>
-            <button
-            label="test"
-            type="submit"
+        <button
+            type="button"
             onClick={onClick}
             className="btn btn-primary btn-lg"
-            style={{ width: '140px' }}>{buttonLabel}
-            </button>
-        </>
-    )
+        >
+            {buttonLabel}
+        </button>
+    );
 }
 
 export default LoginButton;

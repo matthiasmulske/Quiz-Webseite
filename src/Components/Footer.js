@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom'; 
+
 
 function startDatenschutz() {
   alert("Starte Datenschutz Seite");
@@ -12,17 +14,15 @@ function addImpressum() {
   alert("Starte Impressum Seite");
 }
 
-// TODO: Buttons in Links verwandeln
+
 function Footer() {
-  /*
   return (
     <div style={{ position: 'fixed', bottom: '20px', left: '50%', transform: 'translateX(-50%)', display: 'flex', justifyContent: 'center' }}>
-      <Button label="Datenschutz" onClick={startDatenschutz} style={{ marginRight: '10px' }} />
-      <Button label="AGBs" onClick={starteAgbs} style={{ marginRight: '10px' }} />
-      <Button label="Impressum" onClick={addImpressum} />
+      <Link to="#" onClick={startDatenschutz} style={{ marginRight: '10px' }}>Datenschutz</Link>
+      <Link to="#" onClick={starteAgbs} style={{ marginRight: '10px' }}>AGBs</Link>
+      <Link to="#" onClick={addImpressum}>Impressum</Link>
     </div>
-    );
-  */
+  );
 }
 
 export default Footer;
