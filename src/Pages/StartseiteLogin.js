@@ -3,13 +3,10 @@ import LoginButton from "./../Atoms/LoginButton.js";
 import Footer from "./../Components/Footer.js";
 
 function Login() {
-    function startSinglePlayerGame() {
-        alert("Starte Einzelspiel");
+    function startSpielStarten() {
+        alert("Starte das Spiel");
     }
 
-    function startMultiPlayerGame() {
-        alert("Starte Mehrspieler Spiel");
-    }
     function addNewQuestion() {
         alert("Füge eine neue Quizfrage hinzu");
     }
@@ -21,9 +18,7 @@ function Login() {
     return (
         <div style={styles.container}>
             <div style={styles.buttonContainer}>
-                <LoginButton buttonLabel={"Einzelspieler"} onClick={startSinglePlayerGame} />
-                <div style={styles.buttonSpace}></div> 
-                <LoginButton buttonLabel={"Mehrspieler"} onClick={startMultiPlayerGame} />
+                <LoginButton buttonLabel={"Spiel Starten"} onClick={startSpielStarten} />
                 <div style={styles.buttonSpace}></div> 
                 <LoginButton buttonLabel={"Neue Quizfrage"} onClick={addNewQuestion} />
                 <div style={styles.buttonSpace}></div> 
