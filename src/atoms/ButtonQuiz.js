@@ -8,7 +8,7 @@ function ButtonQuiz({ buttonLabel }) {
     }
 
     return (
-        <div style={style.button}>
+        <div>
             <Button variant="contained">{buttonLabel}</Button>
         </div>
     )
@@ -16,13 +16,4 @@ function ButtonQuiz({ buttonLabel }) {
 }
 
 export default ButtonQuiz;
-
-
-const style = {
-    button: {
-
-    },
-
-};
-
 

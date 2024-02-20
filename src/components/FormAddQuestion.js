@@ -1,62 +1,49 @@
 import * as React from "react";
-import {FormControl, InputLabel } from "@mui/material";
+import { FormControl, InputLabel } from "@mui/material";
 import QuizTextField from "../atoms/QuizTextField";
 import DropDown from "../atoms/DropDown";
 import ButtonQuiz from "../atoms/ButtonQuiz";
 
+function FormAddQuestion({ buttonLabel, questionLabel }) {
+  function handleChange() {}
 
-function FormAddQuestion({buttonLabel, questionLabel}) {
-    function handleChange() {
-    }
-
-    return (
+  return (
+    <div style={style.container}>
+      <QuizTextField label={"Frage"} rows={5} />
+      <div style={style.gridContainer}>
+        <QuizTextField label={"Antwort A"} rows={3} />
+        <QuizTextField label={"Antwort B"} rows={3} />
+        <QuizTextField label={"Antwort C"} rows={3} />
+        <QuizTextField label={"Antwort D"} rows={3} />
+      </div>
+      <FormControl style={style.gridContainer}>
         <div>
-            <QuizTextField label={questionLabel} rows={8}/>
-            <div style={style.gridContainer}>
-                <QuizTextField label={"Antwort A"} rows={4}/>
-                <QuizTextField label={"Antwort B"} rows={4}/>
-                <QuizTextField label={"Antwort C"} rows={4}/>
-                <QuizTextField label={"Antwort D"} rows={4}/>
-            </div>
-            <FormControl style={style.formControlContainer}>
-                <InputLabel id="demo-simple-select-label" style={style.dropDown}>Kategorie</InputLabel>
-                <DropDown/>
-                <QuizTextField label={"Kategorie eingeben"}/>
-            </FormControl>
-            <ButtonQuiz buttonLabel={buttonLabel} />
+          <InputLabel id="demo-simple-select-label">Kategorie</InputLabel>
+          <DropDown />
         </div>
-    )
-
+        <QuizTextField label={"neue Kategorie eingeben"} />
+      </FormControl>
+      <ButtonQuiz buttonLabel={buttonLabel} />
+    </div>
+  );
 }
 
 export default FormAddQuestion;
 
 const style = {
-    inputQuestion: {
-        display: "flex",
-        padding: 0.75,
-        paddingBottom: 2,
-    },
+  container: {
+    margin: "10%",
+  },
 
-    gridContainer: {
-        display: "flex",
-        justifyContent: "space-between"
-
-    },
-    answerField: {
-        padding: 0.75,
-        paddingBottom: 4,
-        color: 'success.main',
-    },
-
-    formControlContainer: {
-        display: "flex",
-        alignContent: "space-between",
-    },
-
-}
-
-
-
-
-
+  gridContainer: {
+    display: "grid",
+    gridAutoFlow: "row",
+    gridTemplateColumns: "repeat(2, 1fr)",
+    gridColumnGap: "20px",
+  },
+ 
+  formControlContainer: {
+    display: "flex",
+    alignContent: "space-between",
+  },
+};

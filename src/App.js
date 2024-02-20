@@ -18,9 +18,6 @@ export default App;
 
 
 const style = {
-    navbar: {
-    },
-
     page: {
         margin: 8,
 

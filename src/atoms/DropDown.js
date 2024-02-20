@@ -7,8 +7,7 @@ function DropDown() {
     }
 
     return (
-        <Select style={style.selectCategory}
-                labelId="demo-simple-select-label"
+        <Select labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 value={10}
                 label="Kategorien"
@@ -22,29 +21,3 @@ function DropDown() {
 }
 
 export default DropDown;
-
-const style = {
-    inputQuestion: {
-        display: "flex",
-        padding: 0.75,
-        paddingBottom: 2,
-    },
-
-    gridContainer: {
-        display: "flex",
-        justifyContent: "space-between"
-
-    },
-    answerField: {
-        padding: 0.75,
-        paddingBottom: 4,
-        color: 'success.main',
-    },
-
-    formControlContainer: {
-        display: "flex",
-        alignContent: "space-between",
-    },
-
-}
-
