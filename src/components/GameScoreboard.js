@@ -25,15 +25,12 @@ function GameScoreboard() {
 
   return (
     <div className="text-center">
+      <div >
       <h2 >Scoreboard</h2>
-      <div style={style.GridContainer}>
-      <h2>Spieler 1</h2>
-      <h2>Spieler 2</h2>
-      <h3>Score 1</h3>
-      <h3>Score 2</h3>
+      <h2 > scoreplayer1 : scorePlayer2 </h2>
         {questionsChunks.map((chunk, index) => (
-          <div key={index} >
-            
+          <div key={index} style={style.GridContainer}>
+           
               <div style={style.ChunkContainer}>
                 {chunk.map((question) => (
                   <div key={question.question_number}>
