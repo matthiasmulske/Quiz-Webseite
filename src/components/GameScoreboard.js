@@ -14,14 +14,6 @@ function GameScoreboard() {
     setModalPlayer(player);
   };
 
-  const getButtonColor = (answer, correctAnswer) => {
-    if (answer === correctAnswer) {
-      return "btn-success";
-    } else {
-      return "btn-danger";
-    }
-  };
-
   const chunkArray = (arr, size) => {
     const chunkedArr = [];
     for (let i = 0; i < arr.length; i += size) {
@@ -32,40 +24,34 @@ function GameScoreboard() {
   const questionsChunks = chunkArray(questions.questions, 3);
 
   return (
-    <div className="scoreboard container text-center">
-      <h2 className="text-center mb-5">Scoreboard</h2>
-      <div className="row">
-        <div className="col border-end border-3 border-black">
-          <h2 className="text-center mb-5">Spieler 1</h2>
-        </div>
-        <div className="col">
-          <h2 className="text-center mb-5">Spieler 2</h2>
-        </div>
-      </div>
-      <div className="">
+    <div className="text-center">
+      <div >
+      <h2 >Scoreboard</h2>
+      <h2 > scoreplayer1 : scorePlayer2 </h2>
         {questionsChunks.map((chunk, index) => (
-          <div key={index} className="row">
-            <div className="col border-end border-3 border-black">
-              <div className="row">
+          <div key={index} style={style.GridContainer}>
+           
+              <div style={style.ChunkContainer}>
                 {chunk.map((question) => (
-                  <div key={question.question_number} className="mb-3 col">
+                  <div key={question.question_number}>
                     <GameButton
-                      addClass={` ${getButtonColor(question.player1_answer, question.correct_answer)} w-50`}
-                      onClick={() => handleButtonClick(question, "player1")}
-                      label={question.question_number}
+                     color={(question.player1_answer===question.correct_answer) ? "success" : "error"}                     
+                     onClick={() => handleButtonClick(question, "player1")}
+                     label={question.question_number}
+                     size="large"
                     />
                   </div>
                 ))}
               </div>
-            </div>
-            <div className="col">
-              <div className="row">
+              <div>
+              <div style={style.ChunkContainer}>
                 {chunk.map((question) => (
-                  <div key={question.question_number} className="mb-3 col">
+                  <div key={question.question_number}>
                     <GameButton
-                      addClass={` ${getButtonColor(question.player2_answer, question.correct_answer)} w-50`}
+                      color={(question.player2_answer===question.correct_answer) ? "success" : "error"}
                       onClick={() => handleButtonClick(question, "player2")}
                       label={question.question_number}
+                      size="large"
                     />
                   </div>
                 ))}
@@ -87,3 +73,19 @@ function GameScoreboard() {
 };
 
 export default GameScoreboard;
+
+const style = {
+  GridContainer: {
+    display: 'grid',
+    gridAutoFlow: 'row',
+    gridTemplateColumns: 'auto auto' ,
+    gridColumnGap: '10%',
+  },
+  ChunkContainer: {
+    display: 'grid',
+    gridAutoFlow: 'column',
+    gridTemplateColumns: 'auto, auto, auto',
+    margin: "15px"
+    
+  },
+}
