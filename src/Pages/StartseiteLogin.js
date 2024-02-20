@@ -3,8 +3,8 @@ import LoginButton from "./../Atoms/LoginButton.js";
 import Footer from "./../Components/Footer.js";
 
 function Login() {
-    function startSpielStarten() {
-        alert("Starte das Spiel");
+    function startSpiel() {
+        alert("Starte das Quiz");
     }
 
     function addNewQuestion() {
@@ -18,7 +18,7 @@ function Login() {
     return (
         <div style={styles.container}>
             <div style={styles.buttonContainer}>
-                <LoginButton buttonLabel={"Spiel Starten"} onClick={startSpielStarten} />
+                <LoginButton buttonLabel={"Spiel Starten"} onClick={startSpiel} />
                 <div style={styles.buttonSpace}></div> 
                 <LoginButton buttonLabel={"Neue Quizfrage"} onClick={addNewQuestion} />
                 <div style={styles.buttonSpace}></div> 

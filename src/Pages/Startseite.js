@@ -3,15 +3,15 @@ import LoginButton from "./../Atoms/LoginButton.js";
 import Footer from "./../Components/Footer.js";
 
 function Login() {
-    function startSpielStarten() {
-        alert("Starte das Spiel");
+    function starteDasQuiz() {
+        alert("Starte das Quiz");
     }
 
 
     return (
         <div style={styles.container}>
             <div style={styles.buttonContainer}>
-                <LoginButton buttonLabel={"Spiel Starten"} onClick={startSpielStarten} style={styles.button} />
+                <LoginButton buttonLabel={"Starte Quiz"} onClick={starteDasQuiz} style={styles.button} />
             </div>
             <Footer />
         </div>
