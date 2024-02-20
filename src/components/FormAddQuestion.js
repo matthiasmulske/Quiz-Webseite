@@ -33,6 +33,7 @@ export default FormAddQuestion;
 const style = {
   container: {
     margin: "10%",
+    
   },
 
   gridContainer: {
@@ -46,4 +47,6 @@ const style = {
     display: "flex",
     alignContent: "space-between",
   },
+  
+  
 };

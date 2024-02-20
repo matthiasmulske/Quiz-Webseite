@@ -8,7 +8,7 @@ function App() {
         <h1 style={style.navbar}>NAVBAR PLACEHOLDER</h1>
       </header>
         <div style={style.page}>
-            <AddQuestion/>
+            <EditQuestion/>
         </div>
     </div>
   )
