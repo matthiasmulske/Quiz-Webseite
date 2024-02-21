@@ -2,7 +2,7 @@ import { Route, Routes, Link } from "react-router-dom";
 import Welcome from "./pages/Welcome";
 import GameSetup from "./pages/GameSetup";
 import Game from "./pages/Game";
-import TestModal from "./atoms/TestModal";
+import TestModal from "./atoms/QuestionPopper";
 
 function App() {
   return (

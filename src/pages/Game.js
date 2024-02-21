@@ -5,8 +5,7 @@ import NotYourTurn from "../atoms/NotYourTurn";
 import GameProgressBar from "../atoms/GameProgressBar";
 import GameQuestionView from "../components/GameQuestionView";
 import Button from "@mui/material/Button";
-import ChunkContainer from "../atoms/ChunkContainer";
-import GameScoreboardModal from "../components/GameScoreboardModal";
+import GameChunkContainer from "../components/GameChunkContainer";
 
 const answers = ["Morgen", "42", "Gestern", "753 v. Chr."]
 const question = ["Wann wurde das Arpanet Seekabel verlegt?"]
@@ -40,8 +39,8 @@ function Game() {
           <h2>Scoreboard</h2>
           <h2> scoreplayer1 : scorePlayer2 </h2>
           <div style={style.ChunkContainer}>
-              <ChunkContainer/>
-              <ChunkContainer/>
+              <GameChunkContainer/>
+              <GameChunkContainer/>
           </div>
           <GameSumUp/>
       </>
