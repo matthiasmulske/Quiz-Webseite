@@ -1,38 +1,26 @@
-function GameCategoryDropdown( {label, options, selectedOption, onChange, name} ) {
-
+import { Autocomplete, TextField } from "@mui/material";
+function GameCategoryDropdown({
+  label,
+  options,
+  selectedOption,
+  onChange,
+  name,
+}) {
   return (
-        <div className="input-group" style={style.inputField}>
-
-          <span className="input-group-text">
-            <span class="material-icons">category</span>
-          </span>
-
-          <span className="input-group-text">
-              {label}
-          </span>
-
-          <select
-            id="categoryDropdown"
-            className="form-select text-center"
-            value={selectedOption}
-            onChange={onChange}
-            name={name}
-          >
-            {options.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </select>
-        </div>
+      <Autocomplete
+        variant="standard"
+        disablePortal
+        size="small"
+        margin="normal"
+        id={name}
+        options={options}
+        sx={{ width: 300 }}
+        onChange={onChange}
+        value={selectedOption}
+        renderInput={(params) => <TextField {...params} label={label} variant="standard"/>}
+      />
   );
-};
+}
 
 export default GameCategoryDropdown;
 
-const style = {
-  inputField: {
-    marginBottom: 12,
-  },
-
-}

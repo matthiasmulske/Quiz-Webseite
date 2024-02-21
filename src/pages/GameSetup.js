@@ -1,9 +1,12 @@
 import React, { useState } from "react";
+import AccessAlarmIcon from '@mui/icons-material/AccessAlarm';
+import LoopIcon from '@mui/icons-material/Loop';
 
 import GameButton from "../atoms/GameButton";
 import GameCategoryDropdown from "../atoms/GameCategoryDropdown";
 import GameInput from "../atoms/GameInput";
 import GameLinkContainer from "../components/GameLinkContainer";
+import Loop from "@mui/icons-material/Loop";
 
 
 //TODO: Conditional rendering only when player selected Multiplayer, otherwise redirect to Game.js
@@ -44,7 +47,8 @@ function GameSetup() {
           type="number"
           icon="more_time"
           unit="sec"
-
+          helperText="in sec"
+          icon={<AccessAlarmIcon/>}
         />
 
         <GameCategoryDropdown
@@ -65,7 +69,7 @@ function GameSetup() {
           max="10"
           step="1"
           type="number"
-          icon="loop"
+          icon={<LoopIcon/>}
         />
 
       <div style={style.buttonContainer}>
