@@ -1,63 +1,58 @@
-import { GoogleLogin } from '@react-oauth/google';
-import NavbarElement from '../atoms/NavbarElement';
+import * as React from 'react';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import Badge from '@mui/material/Badge';
+import AccountCircle from '@mui/icons-material/AccountCircle';
+import MailIcon from '@mui/icons-material/Mail';
 import logo from './../assets/logo-removebg-preview.png';
+import LogoutIcon from '@mui/icons-material/Logout';
 
-const Navbar = () => {
-
+export default function PrimarySearchAppBar(loggedIn) {
     return (
-        <nav className="navbar sticky-top navbar-expand-lg bg-body-secondary">
-            <div className="container-fluid">
-                <a className="navbar-brand" href="/">
-                    <img src={logo} alt="Logo" height="50" />
-                    ISEF01 QUIZ
-                </a>
-                <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span className="navbar-toggler-icon"></span>
-                </button>
-                <div className="collapse navbar-collapse" id="navbarNav">
-                    <ul className="navbar-nav">
-                        <li className="nav-item me-3">
-                            <NavbarElement
-                                label={<span className="material-icons fs-2">
-                                    account_circle
-                                </span>
-                                }
-                                notificationCount={1}
-                            />
-                        </li>
-                        <li className="nav-item me-3">
-                            <NavbarElement
-                                label={<span className="material-icons fs-2">
-                                    help
-                                </span>
-                                }
-                            />
-                        </li>
-                    </ul>
-                    <ul className="navbar-nav ms-auto">
-                        <li className="nav-item me-3 mb-3">
-                            <NavbarElement
-                                label="Login"
-                                addClass={"btn-secondary"}
-                            //onClick={handleTestLogin}
-                            />
-                        </li>
-                        <li className="nav-item me-3">
-                            <GoogleLogin
-                                onSuccess={credentialResponse => {
-                                    console.log(credentialResponse);
-                                }}
-                                onError={() => {
-                                    console.log('Login Failed');
-                                }}
-                                type="icon"
-                            />
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+        <Box sx={{ flexGrow: 1 }}>
+            <AppBar position="static">
+                <Toolbar>
+                    <img src={logo} alt="logo" height="50px"></img>
+                    <Typography
+                        variant="h6"
+                        noWrap
+                        component="div"
+                    >
+                        ISEF QUIZ
+                    </Typography>
+                    <Box sx={{ flexGrow: 1 }} />
+                    <Box >
+                        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+                            <Badge badgeContent={4} color="error">
+                                <MailIcon />
+                            </Badge>
+                        </IconButton>
+                        <IconButton
+                            size="large"
+                            edge="end"
+                            aria-label="account of current user"
+                            aria-haspopup="true"
+                            //   onClick={}
+                            color="inherit"
+                        >
+                            <Badge badgeContent="user" color="secondary">
+                                <AccountCircle />
+                            </Badge>
+                        </IconButton>
+                        <IconButton
+                            size="large"
+                            edge="end"
+                            //   onClick={}
+                            color="inherit"
+                        >
+                            <LogoutIcon />
+                        </IconButton>
+                    </Box>
+                </Toolbar>
+            </AppBar>
+        </Box>
     );
-};
-
-export default Navbar;
+}
