@@ -5,15 +5,16 @@ function GameInput({value, onChange, label, type, min, max, step, helperText, re
 
   return (
     <TextField
-      variant="standard"
+      variant="outlined"
       required={required}
       label={label}
       type={isNumeric ? "number" : type}
       inputProps={isNumeric ? { min, max, step } : undefined}
       value={value}
       onChange={onChange}
-      size="small"
+      size="large"
       margin="normal"
+      fullWidth
       helperText={helperText}
       InputProps={{
         startAdornment: (

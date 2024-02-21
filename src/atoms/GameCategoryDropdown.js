@@ -8,16 +8,14 @@ function GameCategoryDropdown({
 }) {
   return (
       <Autocomplete
-        variant="standard"
         disablePortal
-        size="small"
-        margin="normal"
+        size="large"
         id={name}
         options={options}
-        sx={{ width: 300 }}
         onChange={onChange}
         value={selectedOption}
-        renderInput={(params) => <TextField {...params} label={label} variant="standard"/>}
+        fullWidth
+        renderInput={(params) => <TextField {...params} label={label} variant="outlined" margin="normal" fullWidth/>}
       />
   );
 }

@@ -6,7 +6,7 @@ import GameButton from "../atoms/GameButton";
 import GameCategoryDropdown from "../atoms/GameCategoryDropdown";
 import GameInput from "../atoms/GameInput";
 import GameLinkContainer from "../components/GameLinkContainer";
-import Loop from "@mui/icons-material/Loop";
+import Box from '@mui/material/Box';
 
 
 //TODO: Conditional rendering only when player selected Multiplayer, otherwise redirect to Game.js
@@ -17,7 +17,7 @@ function GameSetup() {
   const [NumberOfRounds, setNumberOfRounds] = useState(5); // Amount of rounds of a single game. One Round contains three questions
   const [category, setCategory] = useState(categories[0]); //Category the player has choosen in the Dropdown
 
-  const [linkOne, setLinkOne] = useState('https://isefquiz01.de/quiz?player2=accesstoken2');
+  const [linkOne, setLinkOne] = useState('https://isefquiz01.de/quiz?player1=accesstoken1');
   const [linkTwo, setLinkTwo] = useState('https://isefquiz01.de/quiz?player2=accesstoken2');
 
   // handles Input of the Timelimit
@@ -37,6 +37,12 @@ function GameSetup() {
 
   return (
     <div style={style.formContainer}>
+      <Box
+        sx={{
+          width: 700,
+          maxWidth: '100%',
+        }}
+      >
         <GameInput
           value={time}
           onChange={handleTimeChange}
@@ -45,10 +51,9 @@ function GameSetup() {
           max="60"
           step="1"
           type="number"
-          icon="more_time"
           unit="sec"
           helperText="in sec"
-          icon={<AccessAlarmIcon/>}
+          icon={<AccessAlarmIcon />}
         />
 
         <GameCategoryDropdown
@@ -69,15 +74,13 @@ function GameSetup() {
           max="10"
           step="1"
           type="number"
-          icon={<LoopIcon/>}
+          icon={<LoopIcon />}
         />
-
-      <div style={style.buttonContainer}>
-        <GameButton label="Singleplayer"/>
-        <GameButton style={style.button} label="Multiplayer"/>
-      </div>
-
-      <GameLinkContainer
+        <div style={style.buttonContainer}>
+          <GameButton label="Singleplayer" />
+          <GameButton label="Multiplayer" />
+        </div>
+        <GameLinkContainer
           player="Spieler 1"
           linkText={linkOne}
           id="linkText1"
@@ -88,6 +91,9 @@ function GameSetup() {
           linkText={linkTwo}
           id="linkText2"
         />
+      </Box>
+
+
     </div>
   );
 }
