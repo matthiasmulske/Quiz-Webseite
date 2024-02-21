@@ -1,18 +1,14 @@
-import  LoginMaske from "./../Components/LoginMaske";
+import LoginMaske from "./../Components/LoginMaske";
 import Footer from "./../Components/Footer.js";
 
 function Startseite() {
-    return(
-        <>
-            <LoginMaske/>
-            <Footer/>
-        </>
-    )
-
+  return (
+    <>
+      <LoginMaske />
+      <Footer />
+    </>
+  );
 }
-const styles = {
-    
-}
-
+const styles = {};
 
 export default Startseite;

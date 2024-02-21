@@ -1,5 +1,5 @@
 function AgbsText() {
-    return `
+  return `
     <!DOCTYPE html>
     <html lang="de">
     <head>
@@ -50,6 +50,5 @@ function AgbsText() {
     </html>
     `;
 }
-
 
 module.exports = { getAGBText: AgbsText };
