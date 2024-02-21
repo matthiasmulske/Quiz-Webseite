@@ -6,7 +6,6 @@ import GameInput from "../atoms/GameInput";
 import GameLinkContainer from "../components/GameLinkContainer";
 
 
-//TODO: Conditional rendering only when player selected Multiplayer, otherwise redirect to Game.js
 function GameSetup() {
   const categories = ["Seekabelkunde", "BWL", "VWL"];
 
@@ -102,7 +101,7 @@ const style = {
   buttonContainer: {
     display: 'grid',
     height: 50,
-    gridTemplateColumns: 'repeat(2, 1fr)', // 2 columns, each with equal width
+    gridTemplateColumns: 'repeat(2, 1fr)',
     gridColumnGap: '20px',
   },
 
