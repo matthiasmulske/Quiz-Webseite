@@ -18,7 +18,7 @@ function App() {
         </Link>
         <div style={style}>
             <Routes>
-                <Route path="/Welcome" element={<TestModal />} />
+                <Route path="/TestModal" element={<TestModal />} />
                 <Route path="/GameSetup" element={<GameSetup />} />
                 <Route path="/Game" element={<Game />} />
             </Routes>

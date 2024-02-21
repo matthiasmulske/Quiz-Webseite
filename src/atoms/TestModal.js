@@ -34,6 +34,7 @@ function TestModal() {
 
     return (
         <div>
+            <h1>Hi</h1>
             <button onClick={openModal}>Open Modal</button>
             <Modal
                 isOpen={modalIsOpen}
