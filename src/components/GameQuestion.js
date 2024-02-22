@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react";
 import GameButton from "../atoms/GameButton";
 import GameQuestionView from "./GameQuestionView";
+import Button from "@mui/material/Button";
+
+const answers = ["Morgen", "42", "Gestern", "753 v. Chr."]
+const question = ["Wann wurde das Arpanet Seekabel verlegt?"]
 
 function GameQuestion() {
-  // eslint-disable-next-line
   const [timer, setTimer] = useState(30);
   const [timeLeft, setTimeLeft] = useState(timer);
 
-  //start Timer when site loads
+  // start Timer when site loads
   useEffect(() => {
     const intervalId = setInterval(() => {
       setTimeLeft((prevTimeLeft) => {
@@ -24,8 +27,7 @@ function GameQuestion() {
   }, [timer]);
 
   return (
-    <div className="container d-flex justify-content-center align-items-center">
-      <div className="col text-center position-relative">
+    <div style={style.pageContainer}>
         <div className="progress mb-4">
           <div
             className="progress-bar"
@@ -33,24 +35,33 @@ function GameQuestion() {
             style={{ width: `${(timeLeft / timer) * 100}%` }}
           ></div>
         </div>
-        <GameQuestionView
-          question="Wann wurde das Arpanet Seekabel verlegt?"
-          answer1="Morgen"
-          answer2="42"
-          answer3="Gestern"
-          correctAnswer="753 v. Chr."
-        />
 
-        <div className="mb-2">
-          <GameButton
-            //onclick=""
-            label="Nächste Frage"
-            addClass="btn-primary w-100"
-          />
-        </div>
+      <div style={style.answerButton}>
+        <GameQuestionView question={question} answers={answers}/>
+      </div>
+
+      <div style={style.buttonNextQuestion}>
+        <Button variant="outlined">Nächste Frage</Button>
       </div>
     </div>
   );
 }
 
 export default GameQuestion;
+
+const style = {
+  pageContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 40,
+    position: 'relative',
+  },
+
+  answerButton: {
+    marginBottom: 50,
+  },
+  buttonNextQuestion: {
+    display: 'flex',
+    justifyContent: 'center'
+  }
+}

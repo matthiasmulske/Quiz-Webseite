@@ -1,38 +1,27 @@
 import React, { useState, useEffect } from "react";
 import GameButton from "../atoms/GameButton";
-import GameMiniButton from "../atoms/GameIconButton";
+import ErrorIcon from '@mui/icons-material/Error';
 import GameQuestionReportModal from "./GameQuestionReportModal";
 
-const GameQuestionView = ({
-  question,
-  answer1,
-  answer2,
-  answer3,
-  correctAnswer,
-}) => {
-  const answers = [answer1, answer2, answer3, correctAnswer];
+function GameQuestionView({question, answers}) {
   const [openModal, setOpenModal] = useState(false); //decides if reportModal is opened
   const [modalData, setModalData] = useState(null); //stores necessary data for the reportModal
   const [shuffledAnswers, setShuffledAnswers] = useState([]); //shuffels answers in order to display the correct answer not always on the same position
 
-  // Shuffle function to randomly rearrange the answers
-  const shuffleAnswers = (array) => {
-    let currentIndex = array.length;
-    let temporaryValue, randomIndex;
-    while (currentIndex !== 0) {
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex--;
-      temporaryValue = array[currentIndex];
-      array[currentIndex] = array[randomIndex];
-      array[randomIndex] = temporaryValue;
-    }
+  // Shuffle answers
+  function shuffleAnswers(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        const temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+      }
     return array;
-  };
+  }
 
-  // Shuffle the answers only once when component mounts
+  // Shuffle the answers only once the component mounts
   useEffect(() => {
     setShuffledAnswers(shuffleAnswers([...answers]));
-    // eslint-disable-next-line
   }, []);
 
   const handleOpenReportModal = () => {
@@ -41,34 +30,56 @@ const GameQuestionView = ({
   };
 
   return (
-    <div>
-      <div className="row justify-content-end">
-        <div className="col text-end">
-          <GameMiniButton
-            label={<span className="material-icons">report_problem</span>}
-            addClass="p-2 text-end "
-            color="text-danger"
-            onClick={handleOpenReportModal}
-          />
-          <GameQuestionReportModal
-            modalData={modalData}
-            openModal={openModal}
-            setOpenModal={setOpenModal}
-          />
-        </div>
-      </div>
-      <div className="mb-4">
-        <h3>{question}</h3>
-      </div>
-      <div className="mb-4">
-        {shuffledAnswers.map((answer, index) => (
-          <div className="col mb-4" key={index}>
-            <GameButton label={answer} addClass={"btn-secondary w-100"} />
+      <>
+          <div style={style.warning}>
+              <GameButton
+                  label={<ErrorIcon/>}
+                  addClass="p-2 text-end "
+                  color="error"
+                  variante="text"
+                  onClick={handleOpenReportModal}/>
           </div>
-        ))}
-      </div>
-    </div>
+
+          <GameQuestionReportModal
+              modalData={modalData}
+              openModal={openModal}
+              setOpenModal={setOpenModal}
+          />
+
+          <h3 style={style.question}>{question}</h3>
+          <div style={style.answerGrid}>
+              {shuffledAnswers.map((answer, index) => (
+                  <div style={style.answer} key={index}>
+                      <GameButton label={answer}/>
+                  </div>
+              ))}
+          </div>
+
+      </>
   );
-};
+}
 
 export default GameQuestionView;
+
+const style = {
+    question: {
+        fontSize: 40,
+        textAlign: 'center',
+        marginBottom: 50,
+    },
+    warning: {
+    display: 'grid',
+    justifyContent: 'end'
+  },
+    answer: {
+        display: 'grid',
+    },
+
+    answerGrid: {
+        display: 'grid',
+        height: 150,
+        gridTemplateColumns: 'repeat(2, 1fr)', // 2 columns, each with equal width
+        gridRowGap: '20px',
+        gridColumnGap: '20px',
+    }
+}

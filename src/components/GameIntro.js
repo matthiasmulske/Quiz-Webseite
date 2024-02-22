@@ -1,47 +1,43 @@
 import React, { useState } from "react";
-import GameButton from "../atoms/GameButton";
-import { ClockLoader } from "react-spinners";
+import ContainerYourTurn from "../atoms/ContainerYourTurn";
+import NotYourTurn from "../atoms/NotYourTurn";
 
-function GameIntro(data) {
-  // eslint-disable-next-line
-  const [round, setRound] = useState("2");
-  // eslint-disable-next-line
+function GameIntro() {
+  const [round, setRound] = useState(2);
   const [category, setCategory] = useState("Seekabelkunde");
-  // eslint-disable-next-line
-  const [timeLeft, setTimeLeft] = useState("3d 12h 54min"); // Stores the amount of time the opposing player has left to play
-  // eslint-disable-next-line
-  const [yourTurn, setYourTurn] = useState(false); //Stores if it is the players turn
+  const [timeLeft, setTimeLeft] = useState("3d 12h 54min");
+  const [yourTurn, setYourTurn] = useState(false);
 
   return (
-    <div className="container d-flex justify-content-center align-items-center">
-      <div className="col-md-6 text-center">
-        <h1 className="h1">Runde {round}</h1>
-        <h2 className="h2">{category}</h2>
-        {yourTurn ? (
-          <div className="m-3">
-            <GameButton label="Starte Runde" addClass=" btn-primary" />
-          </div>
-        ) : null}
-        {!yourTurn ? (
-          <div className="position-relative m-4">
-            <div className="d-flex justify-content-center align-items-center ">
-              <ClockLoader
-                size={75}
-                color="#ffc107"
-                loading={true}
-                speedMultiplier={0.05} // Speed multiplier to slow down the clock
-              />
-            </div>
-            <h2 className="text-warning"> Dein Mitspieler ist am Zug!</h2>
-            <p>
-              Du gewinnst, falls dein Mitspieler seine Runde nicht innerhalb von{" "}
-              {timeLeft} abschließt!
-            </p>
-          </div>
-        ) : null}
-      </div>
+    <div style={style.introContainer}>
+        <h1 style={style.headerRound}>Runde {round}</h1>
+        <h2 style={style.headerCategory}>{category}</h2>
+
+      {yourTurn
+          ? <ContainerYourTurn />
+          : <NotYourTurn timeLeft={timeLeft} />
+      }
     </div>
   );
 }
 
 export default GameIntro;
+
+const style = {
+  introContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  headerRound: {
+    fontSize: 50,
+    marginBottom: '15px',
+
+  },
+  headerCategory: {
+    marginBottom: '15px',
+
+  }
+}

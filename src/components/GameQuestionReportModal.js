@@ -3,6 +3,7 @@ import { Modal } from "react-bootstrap";
 import GameCategoryDropdown from "../atoms/GameCategoryDropdown";
 import GameInput from "../atoms/GameInput";
 import GameButton from "../atoms/GameButton";
+import CommentIcon from '@mui/icons-material/Comment';
 
 const GameQuestionReportModal = ({ modalData, openModal, setOpenModal }) => {
   const categories = [
@@ -51,7 +52,7 @@ const GameQuestionReportModal = ({ modalData, openModal, setOpenModal }) => {
             onChange={handleCommentTextChange}
             label="Kommentar"
             type="text"
-            icon="notes"
+            icon={<CommentIcon/>}
             required={true}
           />
           <GameButton label="Senden" addClass=" btn-primary" />

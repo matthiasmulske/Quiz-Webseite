@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import GameMiniButton from "../atoms/GameIconButton";
+import Link from '@mui/material/Link';
+import GameButton from "../atoms/GameButton";
 
 const GameLinkContainer = ({ player, linkText, id }) => {
   const [copied, setCopied] = useState(false); // State to track if link is copied in order to change icon
 
   //Copy Link to clipboard
   const handleCopyLink = () => {
-    const linkText = document.querySelector("#" + id).innerText;
     navigator.clipboard
       .writeText(linkText)
       .then(() => {
@@ -23,15 +23,10 @@ const GameLinkContainer = ({ player, linkText, id }) => {
   return (
     <div className="m-3">
       <label className="m-2">Link für {player}:</label>
-      <a
-        className="link-primary link-underline-opacity-0 border bg-info bg-opacity-10 border-info p-2 rounded"
-        href={linkText}
-        id={id}
-      >
+      <Link href={linkText} underline="hover">
         {linkText}
-      </a>
-
-      <GameMiniButton
+      </Link>
+      <GameButton
         label={
           copied ? (
             <span className="material-icons">done</span>
@@ -40,8 +35,9 @@ const GameLinkContainer = ({ player, linkText, id }) => {
           )
         }
         onClick={handleCopyLink}
-        color={copied ? "text-success" : ""}
-        size="fs-5"
+        color={copied ? "success" : "primary"}
+        size="small"
+        variante="text"
       />
     </div>
   );
