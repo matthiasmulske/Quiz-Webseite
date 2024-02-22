@@ -1,3 +1,6 @@
+import EditQuestion from "./pages/EditQuestion";
+import AddQuestion from "./pages/AddQuestion";
+
 import { Routes, Route, Link } from "react-router-dom";
 import Datenschutzseite from "./pages/Datenschutzseite";
 import Login from "./pages/Login";
@@ -11,6 +14,12 @@ import Navbar from "./components/Navbar";
 function App() {
   return (
     <div className="App">
+      <header className="App-header">
+        <h1 style={style.navbar}>NAVBAR PLACEHOLDER</h1>
+      </header>
+        <div style={style.page}>
+            <EditQuestion/>
+        </div>
       <Navbar>
 
       </Navbar>
@@ -27,7 +36,15 @@ function App() {
         <Route path="/Datenschutzseite" element={<Datenschutzseite />} />
       </Routes>
     </div>
-  );
+  )
 }
 
 export default App;
+
+
+const style = {
+    page: {
+        margin: 8,
+
+    }
+}
