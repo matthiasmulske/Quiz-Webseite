@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import GameButton from "../atoms/GameButton";
-import GameMiniButton from "../atoms/GameIconButton";
+import ErrorIcon from '@mui/icons-material/Error';
 import GameQuestionReportModal from "./GameQuestionReportModal";
 
 function GameQuestionView({question, answers}) {
@@ -32,11 +32,12 @@ function GameQuestionView({question, answers}) {
   return (
       <>
           <div style={style.warning}>
-              <GameMiniButton
-                  label={<span className="material-icons">report_problem</span>}
+              <GameButton
+                  label={<ErrorIcon/>}
                   addClass="p-2 text-end "
-                  color="text-danger"
-                  A onClick={handleOpenReportModal}/>
+                  color="error"
+                  variante="text"
+                  onClick={handleOpenReportModal}/>
           </div>
 
           <GameQuestionReportModal

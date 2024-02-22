@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import GameMiniButton from "../atoms/GameIconButton";
+import GameButton from "../atoms/GameButton";
 import { Modal } from "react-bootstrap";
 import GameQuestionReportModal from "./GameQuestionReportModal";
+import ErrorIcon from '@mui/icons-material/Error';
 
 const GameScoreboardModal = ({
   modalData,
@@ -56,12 +57,11 @@ const GameScoreboardModal = ({
         </ul>
         <div className="row justify-content-end">
           <div className="col text-end">
-            <GameMiniButton
-              label={<span className="material-icons">report_problem</span>}
-              addClass="p-2 text-end "
-              color="text-danger"
-              onClick={handleOpenReportModal}
-            />
+          <GameButton
+                  label={<ErrorIcon/>}
+                  color="error"
+                  variante="text"
+                  onClick={handleOpenReportModal}/>
             <GameQuestionReportModal
               modalData={reportData}
               openModal={openReportModal}

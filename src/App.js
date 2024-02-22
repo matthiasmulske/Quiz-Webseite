@@ -15,29 +15,16 @@ import Navbar from "./components/Navbar";
 function App() {
   return (
     <div className="App">
-
       <Navbar>
-
       </Navbar>
       <Link className="nav-link" aria-current="page" to="/GameSetup">
         Game Setup
       </Link>
-        <Link className="nav-link" aria-current="page" to="/TestModal">
-            TestModal
-        </Link>
         <Link className="nav-link" aria-current="page" to="/Game">
             Game
         </Link>
         <div style={style}>
-            <Routes>
-                <Route path="/TestModal" element={<TestModal />} />
-                <Route path="/GameSetup" element={<GameSetup />} />
-                <Route path="/Game" element={<Game />} />
-            </Routes>
         </div>
-      <Link className="nav-link" aria-current="page" to="/Game">
-        Game
-      </Link>
       <Link className="nav-link" aria-current="page" to="/EditQuestion">
         EditQuestion
       </Link>
@@ -58,5 +45,5 @@ const style = {
   page: {
     margin: 8,
 
-  }
+    }
 }

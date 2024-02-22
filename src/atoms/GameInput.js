@@ -1,37 +1,31 @@
-function GameInput({value, onChange, label, type, min, max, step, icon, unit, required, }) {
+import { TextField, InputAdornment } from "@mui/material";
+
+function GameInput({value, onChange, label, type, min, max, step, helperText, required, icon }) {
+  const isNumeric = type === "number";
+
   return (
-        <div className="input-group" style={style.inputField}>
-          <span className="input-group-text">
-            <span class="material-icons">{icon}</span>
-          </span>
-
-          <span className="input-group-text">
-              {label}
-          </span>
-
-          <input
-            className="form-control text-center"
-            type={type}
-            value={value}
-            onChange={onChange}
-            min={min}
-            max={max}
-            step={step}
-            required={required}
-          />
-
-          <span className="input-group-text">
-            {unit}
-          </span>
-        </div>
+    <TextField
+      variant="outlined"
+      required={required}
+      label={label}
+      type={isNumeric ? "number" : type}
+      inputProps={isNumeric ? { min, max, step } : undefined}
+      value={value}
+      onChange={onChange}
+      size="large"
+      margin="normal"
+      fullWidth
+      helperText={helperText}
+      InputProps={{
+        startAdornment: (
+          <InputAdornment position="start">
+            {icon}
+          </InputAdornment>
+        ),
+      }}
+    />
   );
 };
 
 export default GameInput;
 
-const style = {
-  inputField: {
-    marginBottom: 12,
-  },
-
-}
