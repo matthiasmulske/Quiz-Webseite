@@ -35,7 +35,6 @@ function App() {
                 <Route path="/Game" element={<Game />} />
             </Routes>
         </div>
-      </Link>
       <Link className="nav-link" aria-current="page" to="/Game">
         Game
       </Link>
@@ -56,12 +55,8 @@ function App() {
 export default App;
 
 const style = {
-}
+  page: {
+    margin: 8,
 
-
-const style = {
-    page: {
-        margin: 8,
-
-    }
+  }
 }
