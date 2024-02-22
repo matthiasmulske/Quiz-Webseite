@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import InputLogin from "../Atoms/InputLogin";
-import LoginButton from "../Atoms/LoginButton";
+import InputLogin from "../atoms/InputLogin";
+import LoginButton from "../atoms/LoginButton";
 
 function LoginMaske() {
   const [username, setUsername] = useState("");

@@ -1,10 +1,8 @@
 import { Routes, Route, Link } from "react-router-dom";
-import Datenschutzseite from "./Pages/Datenschutzseite";
-import Login from "./Pages/Login";
-import Startseite from "./Pages/Startseite";
-import StartseiteLogin from "./Pages/StartseiteLogin";
-
-import { Route, Routes, Link } from "react-router-dom";
+import Datenschutzseite from "./pages/Datenschutzseite";
+import Login from "./pages/Login";
+import Startseite from "./pages/Startseite";
+import StartseiteLogin from "./pages/StartseiteLogin";
 import Welcome from "./pages/Welcome";
 import GameSetup from "./pages/GameSetup";
 import Game from "./pages/Game";
@@ -13,10 +11,6 @@ import Navbar from "./components/Navbar";
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>Quizapp ISEF01</h1>
-        <StartseiteLogin />
-      </header>
       <Navbar>
 
       </Navbar>
@@ -27,7 +21,7 @@ function App() {
         Game
       </Link>
       <Routes>
-        <Route path="/" element={<Welcome />} />
+        <Route path="/" element={<StartseiteLogin />} />
         <Route path="/GameSetup" element={<GameSetup />} />
         <Route path="/Game" element={<Game />} />
         <Route path="/Datenschutzseite" element={<Datenschutzseite />} />

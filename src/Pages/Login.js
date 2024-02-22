@@ -1,5 +1,5 @@
-import LoginMaske from "./../Components/LoginMaske";
-import Footer from "./../Components/Footer.js";
+import LoginMaske from "./../components/LoginMaske";
+import Footer from "./../components/Footer.js";
 
 function Startseite() {
   return (

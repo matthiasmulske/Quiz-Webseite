@@ -1,6 +1,6 @@
 import React from "react";
-import LoginButton from "./../Atoms/LoginButton.js";
-import Footer from "./../Components/Footer.js";
+import LoginButton from "./../atoms/LoginButton.js";
+import Footer from "./../components/Footer.js";
 
 function Login() {
   function starteDasQuiz() {
