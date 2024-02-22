@@ -14,9 +14,7 @@ import Navbar from "./components/Navbar";
 function App() {
   return (
     <div className="App">
-
       <Navbar>
-
       </Navbar>
       <Link className="nav-link" aria-current="page" to="/GameSetup">
         Game Setup
@@ -25,15 +23,7 @@ function App() {
             Game
         </Link>
         <div style={style}>
-            <Routes>
-                <Route path="/" element={<Welcome />} />
-                <Route path="/GameSetup" element={<GameSetup />} />
-                <Route path="/Game" element={<Game />} />
-            </Routes>
         </div>
-      <Link className="nav-link" aria-current="page" to="/Game">
-        Game
-      </Link>
       <Link className="nav-link" aria-current="page" to="/EditQuestion">
         EditQuestion
       </Link>
@@ -49,11 +39,6 @@ function App() {
 }
 
 export default App;
-
-const style = {
-    margin: 90,
-}
-
 
 const style = {
     page: {
