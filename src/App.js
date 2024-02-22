@@ -14,12 +14,7 @@ import Navbar from "./components/Navbar";
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <h1 style={style.navbar}>NAVBAR PLACEHOLDER</h1>
-      </header>
-        <div style={style.page}>
-            <EditQuestion/>
-        </div>
+
       <Navbar>
 
       </Navbar>
@@ -29,7 +24,11 @@ function App() {
       <Link className="nav-link" aria-current="page" to="/Game">
         Game
       </Link>
+      <Link className="nav-link" aria-current="page" to="/EditQuestion">
+        EditQuestion
+      </Link>
       <Routes>
+        <Route path="/EditQuestion" element={<EditQuestion />} />
         <Route path="/" element={<StartseiteLogin />} />
         <Route path="/GameSetup" element={<GameSetup />} />
         <Route path="/Game" element={<Game />} />

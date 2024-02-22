@@ -1,6 +1,6 @@
 import React from "react";
-import LoginButton from "./../atoms/LoginButton.js";
-import Footer from "./../components/Footer.js";
+import LoginButton from "../atoms/LoginButton.js";
+import Footer from "../components/Footer.js";
 
 function Login() {
   function startSpiel() {
