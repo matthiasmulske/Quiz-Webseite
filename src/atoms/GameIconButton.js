@@ -1,11 +1,13 @@
+import Button from "@mui/material/Button";
+
 const GameMiniButton = ({ onClick, label, size, color }) => {
   return (
-    <button
+    <Button
       className={"btn bg-gradient text text-center " + size + " " + color}
       onClick={onClick}
     >
       <span>{label}</span>
-    </button>
+    </Button>
   );
 };
 

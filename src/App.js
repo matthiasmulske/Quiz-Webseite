@@ -9,6 +9,7 @@ import StartseiteLogin from "./pages/StartseiteLogin";
 import Welcome from "./pages/Welcome";
 import GameSetup from "./pages/GameSetup";
 import Game from "./pages/Game";
+import TestModal from "./atoms/QuestionPopper";
 import Navbar from "./components/Navbar";
 
 function App() {
@@ -20,6 +21,20 @@ function App() {
       </Navbar>
       <Link className="nav-link" aria-current="page" to="/GameSetup">
         Game Setup
+      </Link>
+        <Link className="nav-link" aria-current="page" to="/TestModal">
+            TestModal
+        </Link>
+        <Link className="nav-link" aria-current="page" to="/Game">
+            Game
+        </Link>
+        <div style={style}>
+            <Routes>
+                <Route path="/TestModal" element={<TestModal />} />
+                <Route path="/GameSetup" element={<GameSetup />} />
+                <Route path="/Game" element={<Game />} />
+            </Routes>
+        </div>
       </Link>
       <Link className="nav-link" aria-current="page" to="/Game">
         Game
@@ -39,6 +54,9 @@ function App() {
 }
 
 export default App;
+
+const style = {
+}
 
 
 const style = {

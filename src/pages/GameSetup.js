@@ -1,41 +1,38 @@
 import React, { useState } from "react";
+
 import GameButton from "../atoms/GameButton";
 import GameCategoryDropdown from "../atoms/GameCategoryDropdown";
 import GameInput from "../atoms/GameInput";
 import GameLinkContainer from "../components/GameLinkContainer";
 
+
 function GameSetup() {
-  const categories = ["Seekabelkunde", "BWL", "VWL"]; //stores all possible categories
+  const categories = ["Seekabelkunde", "BWL", "VWL"];
+
   const [time, setTime] = useState(20); // Timelimit to answer a question
   const [NumberOfRounds, setNumberOfRounds] = useState(5); // Amount of rounds of a single game. One Round contains three questions
-  const [category, setCategory] = useState("Seekabelkunde"); //Category the player has choosen in the Dropdown
-  // eslint-disable-next-line
-  const [linkOne, setLinkOne] = useState(
-    "https://isefquiz01.de/quiz?player1=accesstoken1",
-  ); // Timelimit to answer a question
-  // eslint-disable-next-line
-  const [linkTwo, setLinkTwo] = useState(
-    "https://isefquiz01.de/quiz?player2=accesstoken2",
-  ); // Timelimit to answer a question
+  const [category, setCategory] = useState(categories[0]); //Category the player has choosen in the Dropdown
 
-  //handles Input of the Timelimit
+  const [linkOne, setLinkOne] = useState('https://isefquiz01.de/quiz?player2=accesstoken2');
+  const [linkTwo, setLinkTwo] = useState('https://isefquiz01.de/quiz?player2=accesstoken2');
+
+  // handles Input of the Timelimit
   const handleTimeChange = (event) => {
     setTime(event.target.value);
   };
 
-  //Handles Input of the Rounds to be played
+  // Handles Input of the Rounds to be played
   const handleNumberOfRoundsChange = (event) => {
     setNumberOfRounds(event.target.value);
   };
 
-  //handles Input of the first Round to be played
+  // handles Input of the first Round to be played
   const handleCategoryChange = (event) => {
     setCategory(event.target.value);
   };
 
   return (
-    <div className="container d-flex justify-content-center align-items-center">
-      <div className="col text-center">
+    <div style={style.formContainer}>
         <GameInput
           value={time}
           onChange={handleTimeChange}
@@ -46,13 +43,13 @@ function GameSetup() {
           type="number"
           icon="more_time"
           unit="sec"
+
         />
 
         <GameCategoryDropdown
           label="Kategorie"
           options={categories.map((category) => ({
-            value: category,
-            label: category,
+            value: category, label: category,
           }))}
           selectedOption={category}
           onChange={handleCategoryChange}
@@ -70,20 +67,12 @@ function GameSetup() {
           icon="loop"
         />
 
-        <div className="d-flex justify-content-center align-items-center text-center">
-          <div className="m-3">
-            <GameButton
-              label="Singleplayer"
-              addClass={"btn-primary"}
-              //onClick={}
-            />
-          </div>
-          <div className="m-3">
-            <GameButton label="Multiplayer" addClass={"btn-primary"} />
-          </div>
-        </div>
+      <div style={style.buttonContainer}>
+        <GameButton label="Singleplayer"/>
+        <GameButton style={style.button} label="Multiplayer"/>
+      </div>
 
-        <GameLinkContainer
+      <GameLinkContainer
           player="Spieler 1"
           linkText={linkOne}
           id="linkText1"
@@ -94,9 +83,28 @@ function GameSetup() {
           linkText={linkTwo}
           id="linkText2"
         />
-      </div>
     </div>
   );
 }
 
 export default GameSetup;
+
+const style = {
+  formContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    textAlign: 'center'
+  },
+
+  buttonContainer: {
+    display: 'grid',
+    height: 50,
+    gridTemplateColumns: 'repeat(2, 1fr)',
+    gridColumnGap: '20px',
+  },
+
+
+
+}
