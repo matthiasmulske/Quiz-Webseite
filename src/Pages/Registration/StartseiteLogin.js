@@ -21,7 +21,7 @@ function Login() {
       <div style={styles.buttonContainer}>
       <Link to="/GameSetup">
         <LoginButton 
-          buttonLabel={"Spiel Starten"} 
+          buttonLabel={"Starte Quiz"} 
           onClick={startSpiel} 
           style={styles.button} />
         </Link>
