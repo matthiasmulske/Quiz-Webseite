@@ -25,8 +25,18 @@ function Login() {
           onClick={startSpiel} 
           style={styles.button} />
         </Link>
-        <LoginButton buttonLabel={"Neue Quizfrage"} onClick={addNewQuestion} style={styles.button} />
-        <LoginButton buttonLabel={"Quizfrage bearbeiten"} onClick={editQuestion} style={styles.button} />
+        <Link to="/AddQuestion">
+        <LoginButton 
+          buttonLabel={"Neue Quizfrage"} 
+          onClick={addNewQuestion} 
+          style={styles.button} />
+        </Link>
+        <Link to="/EditQuestion">
+        <LoginButton 
+          buttonLabel={"Quizfrage bearbeiten"} 
+          onClick={editQuestion} 
+          style={styles.button} />
+        </Link>
       </div>
       <Footer />
     </div>

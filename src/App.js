@@ -19,11 +19,9 @@ function App() {
       </Navbar>
         <div style={style}>
         </div>
-      <Link className="nav-link" aria-current="page" to="/EditQuestion">
-        EditQuestion
-      </Link>
       <Routes>
         <Route path="/EditQuestion" element={<EditQuestion />} />
+        <Route path="/AddQuestion" element={<AddQuestion/>} />
         <Route path="/" element={<StartseiteLogin />} />
         <Route path="/GameSetup" element={<GameSetup />} />
         <Route path="/Game" element={<Game />} />
