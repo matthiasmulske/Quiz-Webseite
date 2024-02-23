@@ -1,21 +1,19 @@
-import React, { useState } from "react";
-import ContainerYourTurn from "../../atoms/ContainerYourTurn";
-import NotYourTurn from "../../atoms/NotYourTurn";
+import React, { useState, useEffect } from "react";
+import ContainerYourTurn from "../atoms/ContainerYourTurn";
+import NotYourTurn from "../atoms/NotYourTurn";
 
-function GameIntro() {
-  const [round, setRound] = useState(2);
-  const [category, setCategory] = useState("Seekabelkunde");
+function GameIntro({currentRound, currentCategory, turn}) {
   const [timeLeft, setTimeLeft] = useState("3d 12h 54min");
-  const [yourTurn, setYourTurn] = useState(false);
 
   return (
     <div style={style.introContainer}>
-        <h1 style={style.headerRound}>Runde {round}</h1>
-        <h2 style={style.headerCategory}>{category}</h2>
+        <h1 style={style.headerRound}>Runde {currentRound}</h1>
+        <h2 style={style.headerCategory}>{currentCategory}</h2>
 
-      {yourTurn
+      {turn===true
           ? <ContainerYourTurn />
-          : <NotYourTurn timeLeft={timeLeft} />
+          : <NotYourTurn 
+          timeLeft={timeLeft} />
       }
     </div>
   );

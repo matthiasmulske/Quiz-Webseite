@@ -28,11 +28,11 @@ function App() {
         EditQuestion
       </Link>
       <Routes>
-        <Route path="/EditQuestion" element={<EditQuestion />} />
         <Route path="/" element={<StartseiteLogin />} />
         <Route path="/GameSetup" element={<GameSetup />} />
         <Route path="/Game" element={<Game />} />
         <Route path="/Datenschutzseite" element={<Datenschutzseite />} />
+        <Route path="/EditQuestion" element={<EditQuestion />} />
       </Routes>
     </div>
   )
