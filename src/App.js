@@ -17,12 +17,6 @@ function App() {
     <div className="App">
       <Navbar>
       </Navbar>
-      <Link className="nav-link" aria-current="page" to="/GameSetup">
-        Game Setup
-      </Link>
-        <Link className="nav-link" aria-current="page" to="/Game">
-            Game
-        </Link>
         <div style={style}>
         </div>
       <Link className="nav-link" aria-current="page" to="/EditQuestion">
@@ -36,6 +30,7 @@ function App() {
         <Route path="/Datenschutzseite" element={<Datenschutzseite />} />
         <Route path="/Agbs" element={<Agbs />} />
         <Route path="/Rechtliches" element={<Rechtliches />} />
+        <Route path="/Game" element={<Game />} />
       </Routes>
     </div>
   )

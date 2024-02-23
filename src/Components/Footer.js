@@ -1,17 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-//function startDatenschutz() {
-  //alert("Starte Datenschutz Seite");
-//}
-
-function starteAgbs() {
-  alert("Starte AGBs Seite");
-}
-
-function addRechtliches() {
-  alert("Starte Rechtliiche Seite");
-}
 
 function Footer() {
   return (

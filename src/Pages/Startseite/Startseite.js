@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import LoginButton from "../../atoms/LoginButton.js";
 import Footer from "../../components/Footer.js";
 
@@ -10,11 +11,13 @@ function Login() {
   return (
     <div style={styles.container}>
       <div style={styles.buttonContainer}>
-        <LoginButton
-          buttonLabel={"Starte Quiz"}
-          onClick={starteDasQuiz}
-          style={styles.button}
-        />
+        <Link to="/Game">
+          <LoginButton
+            buttonLabel={"Starte Quiz"}
+            onClick={starteDasQuiz}
+            style={styles.button}
+          />
+        </Link>
       </div>
       <Footer />
     </div>
@@ -27,13 +30,14 @@ const styles = {
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-    height: "100vh",
+    height: "500px",
   },
   buttonContainer: {
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
+    marginTop: "250px",
   },
   
   buttonSpace: {

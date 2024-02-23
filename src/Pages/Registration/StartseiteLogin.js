@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import LoginButton from "../../atoms/LoginButton.js";
 import Footer from "../../components/Footer.js";
 
@@ -18,7 +19,12 @@ function Login() {
   return (
     <div style={styles.container}>
       <div style={styles.buttonContainer}>
-        <LoginButton buttonLabel={"Spiel Starten"} onClick={startSpiel} style={styles.button} />
+      <Link to="/GameSetup">
+        <LoginButton 
+          buttonLabel={"Spiel Starten"} 
+          onClick={startSpiel} 
+          style={styles.button} />
+        </Link>
         <LoginButton buttonLabel={"Neue Quizfrage"} onClick={addNewQuestion} style={styles.button} />
         <LoginButton buttonLabel={"Quizfrage bearbeiten"} onClick={editQuestion} style={styles.button} />
       </div>
@@ -31,7 +37,7 @@ const styles = {
   container: {
     display: "grid",
     placeItems: "center",
-    height: "100vh",
+    height: "80vh",
   },
   buttonContainer: {
     display: "grid",

@@ -12,6 +12,7 @@ function LoginButton({ buttonLabel, onClick }) {
     </button>
   );
 }
+
 const buttonStyles = {
   fontSize: "24px",
   padding: "15px 30px", // Erhöhte Innenpolsterung für größeren Button
@@ -20,6 +21,7 @@ const buttonStyles = {
   height: "80px", // Höhe des Buttons erhöht
   margin: "auto", // Zentrieren des Buttons
   display: "block", // Block-Element für margin: auto
+  
 };
 
 export default LoginButton;
