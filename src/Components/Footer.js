@@ -1,16 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function startDatenschutz() {
-  alert("Starte Datenschutz Seite");
-}
+//function startDatenschutz() {
+  //alert("Starte Datenschutz Seite");
+//}
 
 function starteAgbs() {
   alert("Starte AGBs Seite");
 }
 
-function addImpressum() {
-  alert("Starte Impressum Seite");
+function addRechtliches() {
+  alert("Starte Rechtliiche Seite");
 }
 
 function Footer() {
@@ -31,8 +31,8 @@ function Footer() {
       <Link to="#" onClick={starteAgbs} style={{ marginRight: "10px" }}>
         AGBs
       </Link>
-      <Link to="#" onClick={addImpressum}>
-        Impressum
+      <Link to="#" onClick={addRechtliches}>
+        Rechtliches
       </Link>
     </div>
   );

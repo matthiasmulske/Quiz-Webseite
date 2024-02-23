@@ -1,14 +1,13 @@
-import EditQuestion from "./pages/EditQuestion";
-import AddQuestion from "./pages/AddQuestion";
-
+import EditQuestion from "./pages/Question/EditQuestion";
+import AddQuestion from "./pages/Question/AddQuestion";
 import { Routes, Route, Link } from "react-router-dom";
-import Datenschutzseite from "./pages/Datenschutzseite";
-import Login from "./pages/Login";
-import Startseite from "./pages/Startseite";
-import StartseiteLogin from "./pages/StartseiteLogin";
+import Datenschutzseite from "./pages/Startseite/Datenschutzseite";
+import Login from "./pages/Registration/Login";
+import Startseite from "./pages/Startseite/Startseite";
+import StartseiteLogin from "./pages/Registration/StartseiteLogin";
 import Welcome from "./pages/Welcome";
-import GameSetup from "./pages/GameSetup";
-import Game from "./pages/Game";
+import GameSetup from "./pages/Game/GameSetup";
+import Game from "./pages/Game/Game";
 import Navbar from "./components/Navbar";
 
 function App() {

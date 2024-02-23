@@ -1,5 +1,5 @@
 import * as React from "react";
-import FormAddQuestion from "../components/FormAddQuestion";
+import FormAddQuestion from "../../components/FormAddQuestion";
 
 function AddQuestion() {
     return (

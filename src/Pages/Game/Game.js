@@ -1,8 +1,8 @@
 import React from "react";
-import GameIntro from "../components/GameIntro";
-import GameQuestion from "../components/GameQuestion";
-import GameScoreboard from "../components/GameScoreboard";
-import GameSumUp from "../components/GameSumUp";
+import GameIntro from "../../components/GameIntro";
+import GameQuestion from "../../components/GameQuestion";
+import GameScoreboard from "../../components/GameScoreboard";
+import GameSumUp from "../../components/GameSumUp";
 
 
 
