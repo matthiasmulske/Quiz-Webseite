@@ -77,10 +77,7 @@ function GameSetup() {
           icon={<LoopIcon />}
         />
         <div style={style.buttonContainer}>
-        <Link to="/Game">
-          <GameButton 
-          label="Singleplayer" />
-         </Link>
+          <GameButton label="Singleplayer" />
           <GameButton label="Multiplayer" />
         </div>
         <GameLinkContainer
