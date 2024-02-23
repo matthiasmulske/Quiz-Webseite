@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import ContainerYourTurn from "../atoms/ContainerYourTurn";
-import NotYourTurn from "../atoms/NotYourTurn";
+import ContainerYourTurn from "../../atoms/ContainerYourTurn";
+import NotYourTurn from "../../atoms/NotYourTurn";
 
 function GameIntro() {
   const [round, setRound] = useState(2);

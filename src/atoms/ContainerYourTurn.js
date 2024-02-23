@@ -1,4 +1,4 @@
-import GameButton from "./GameButton";
+import GameButton from "../Game/atoms/GameButton";
 import React from "react";
 
 function ContainerYourTurn() {
