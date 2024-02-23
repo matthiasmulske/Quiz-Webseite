@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import AccessAlarmIcon from '@mui/icons-material/AccessAlarm';
 import LoopIcon from '@mui/icons-material/Loop';
 import GameButton from "../../atoms/GameButton";
@@ -76,7 +77,10 @@ function GameSetup() {
           icon={<LoopIcon />}
         />
         <div style={style.buttonContainer}>
-          <GameButton label="Singleplayer" />
+        <Link to="/Game">
+          <GameButton 
+          label="Singleplayer" />
+         </Link>
           <GameButton label="Multiplayer" />
         </div>
         <GameLinkContainer
