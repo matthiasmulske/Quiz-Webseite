@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import AccessAlarmIcon from '@mui/icons-material/AccessAlarm';
 import LoopIcon from '@mui/icons-material/Loop';
-
 import GameButton from "../../atoms/GameButton";
 import GameCategoryDropdown from "../../atoms/GameCategoryDropdown";
 import GameInput from "../../atoms/GameInput";

@@ -35,11 +35,7 @@ const styles = {
     justifyContent: "center",
     alignItems: "center",
   },
-  button: {
-    width: "500px",
-    height: "120px",
-    fontSize: "30px",
-  },
+  
   buttonSpace: {
     marginTop: "20px",
   },

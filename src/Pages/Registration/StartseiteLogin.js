@@ -18,14 +18,9 @@ function Login() {
   return (
     <div style={styles.container}>
       <div style={styles.buttonContainer}>
-        <LoginButton buttonLabel={"Spiel Starten"} onClick={startSpiel} />
-        <div style={styles.buttonSpace}></div>
-        <LoginButton buttonLabel={"Neue Quizfrage"} onClick={addNewQuestion} />
-        <div style={styles.buttonSpace}></div>
-        <LoginButton
-          buttonLabel={"Quizfrage bearbeiten"}
-          onClick={editQuestion}
-        />
+        <LoginButton buttonLabel={"Spiel Starten"} onClick={startSpiel} style={styles.button} />
+        <LoginButton buttonLabel={"Neue Quizfrage"} onClick={addNewQuestion} style={styles.button} />
+        <LoginButton buttonLabel={"Quizfrage bearbeiten"} onClick={editQuestion} style={styles.button} />
       </div>
       <Footer />
     </div>
@@ -34,26 +29,19 @@ function Login() {
 
 const styles = {
   container: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
+    display: "grid",
+    placeItems: "center",
     height: "100vh",
   },
   buttonContainer: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
+    display: "grid",
+    gridGap: "10px", 
   },
   button: {
     width: "100%",
     minWidth: "200px",
-    height: "80px",
+    height: "100px",
     fontSize: "24px",
-  },
-  buttonSpace: {
-    marginTop: "10px",
   },
 };
 

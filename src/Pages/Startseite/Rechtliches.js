@@ -12,6 +12,9 @@ function Rechtliches() {
         Lucas Wankerl:
         Matthias Mulske:
       </p>
+      <p>
+        Hierbei handelt es sich um ein nicht-kommerzielles Projekt
+      </p>
     </div>
     );
   }
