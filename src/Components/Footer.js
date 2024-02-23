@@ -28,10 +28,10 @@ function Footer() {
       <Link to="/Datenschutzseite" style={{ marginRight: "10px" }}>
         Datenschutz
       </Link>
-      <Link to="#" onClick={starteAgbs} style={{ marginRight: "10px" }}>
+      <Link to="/Agbs" style={{ marginRight: "10px" }}>
         AGBs
       </Link>
-      <Link to="#" onClick={addRechtliches}>
+      <Link to="Rechtliches" style={{ marginRight: "10px" }}>
         Rechtliches
       </Link>
     </div>
