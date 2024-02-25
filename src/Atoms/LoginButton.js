@@ -21,7 +21,7 @@ const buttonStyles = {
   height: "80px", // Höhe des Buttons erhöht
   margin: "auto", // Zentrieren des Buttons
   display: "block", // Block-Element für margin: auto
-  
+  textDecoration: "none",
 };
 
 export default LoginButton;
