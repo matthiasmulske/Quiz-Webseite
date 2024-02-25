@@ -17,9 +17,11 @@ function QuizTextField({ label, rows }) {
 
 const style = {
     answerField: {
-        padding: '0.75rem',
-        paddingBottom: '35px', 
+        padding: '0.8rem',
+        paddingBottom: '30px', 
         color: 'success.main',
+        
+        
 
     },
 }
