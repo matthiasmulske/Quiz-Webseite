@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Link } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -15,7 +16,11 @@ export default function PrimarySearchAppBar() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-            <img src={logo} alt="logo" height="50px"></img>
+          <Link to="/">
+            <IconButton size="large" edge="start" color="inherit" aria-label="home">
+              <img src={logo} alt="logo" height="50px"></img>
+            </IconButton>
+          </Link>
           <Typography
             variant="h6"
             noWrap
@@ -39,9 +44,9 @@ export default function PrimarySearchAppBar() {
             //   onClick={}
               color="inherit"
             >
-                <Badge badgeContent="user" color="secondary">
-              <AccountCircle />
-                </Badge>
+              <Badge badgeContent="user" color="secondary">
+                <AccountCircle />
+              </Badge>
             </IconButton>
             <IconButton
               size="large"

@@ -4,37 +4,23 @@ import LoginButton from "../../atoms/LoginButton.js";
 import Footer from "../../components/Footer.js";
 
 function Login() {
-  function startSpiel() {
-    alert("Starte das Quiz");
-  }
-
-  function addNewQuestion() {
-    alert("Füge eine neue Quizfrage hinzu");
-  }
-
-  function editQuestion() {
-    alert("Bearbeite eine Quizfrage");
-  }
-
+  
   return (
     <div style={styles.container}>
       <div style={styles.buttonContainer}>
       <Link to="/GameSetup">
         <LoginButton 
-          buttonLabel={"Starte Quiz"} 
-          onClick={startSpiel} 
+          buttonLabel={"Starte Quiz"}  
           style={styles.button} />
         </Link>
         <Link to="/AddQuestion">
         <LoginButton 
           buttonLabel={"Neue Quizfrage"} 
-          onClick={addNewQuestion} 
           style={styles.button} />
         </Link>
         <Link to="/EditQuestion">
         <LoginButton 
           buttonLabel={"Quizfrage bearbeiten"} 
-          onClick={editQuestion} 
           style={styles.button} />
         </Link>
       </div>
