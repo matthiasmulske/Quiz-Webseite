@@ -34,6 +34,7 @@ const styles = {
     display: "grid",
     placeItems: "center",
     height: "80vh",
+    
   },
   buttonContainer: {
     display: "grid",

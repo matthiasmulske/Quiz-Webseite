@@ -39,6 +39,7 @@ export default App;
 const style = {
     page: {
         margin: 8,
+        
 
     }
 }
