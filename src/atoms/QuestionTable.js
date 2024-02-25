@@ -7,6 +7,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
+
 function createData(question, A, B, C, D) {
     return { question, A, B, C, D };
 }
@@ -17,7 +18,6 @@ const rows = [
     createData('Wann wurda das Arpanet Seekabel gezogen?', "Ja", "gestern", "41", "42"),
     createData('Wann wurda das Arpanet Seekabel ertränkt?', "Ja", "gestern", "41", "42"),
     createData('Wann wurda das Arpanet Seekabel umsorgt?', "Ja", "gestern", "41", "42"),
-
 ];
 
 function QuestionTable() {
@@ -26,11 +26,11 @@ function QuestionTable() {
             <Table aria-label="simple table">
                 <TableHead>
                     <TableRow>
-                        <TableCell>Frage</TableCell>
-                        <TableCell align="left">A</TableCell>
-                        <TableCell align="left">B</TableCell>
-                        <TableCell align="left">C</TableCell>
-                        <TableCell align="left">D</TableCell>
+                        <TableCell style={boldCellStyle}>Frage</TableCell>
+                        <TableCell style={boldCellStyle} align="left">A</TableCell>
+                        <TableCell style={boldCellStyle} align="left">B</TableCell>
+                        <TableCell style={boldCellStyle} align="left">C</TableCell>
+                        <TableCell style={boldCellStyle} align="left">D</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -52,5 +52,10 @@ function QuestionTable() {
         </TableContainer>
     );
 }
+
+const boldCellStyle = {
+    fontWeight: 'bold',
+    fontSize: '20px',
+  };
 
 export default QuestionTable;
