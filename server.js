@@ -28,23 +28,6 @@ connection.connect(err => {
   console.log('Connected to database.');
 });
 
-
-// Define a route to fetch categories
-app.get('/categories', (req, res) => {
-  // Query to select all categories from the Questioncategories table
-  const query = 'SELECT * FROM QuestionCategory';
-  // Execute the query
-  connection.query(query, (err, results) => {
-    if (err) {
-      console.error('Error executing query: ', err);
-      res.status(500).json({ error: 'Error retrieving categories' });
-      return;
-    }
-    // Send the retrieved categories as JSON response
-    res.json(results);
-  });
-});
-
 // Define a route to fetch gameData
 app.post('/gameData', (req, res) => {
   const { accessToken } = req.body;
@@ -58,6 +41,19 @@ app.post('/gameData', (req, res) => {
     if (err) {
       console.error('Error executing query: ', err);
       res.status(500).json({ error: 'Error retrieving game data' });
+      return;
+    }
+    res.json(results);
+  });
+});
+
+// Define a route to fetch categories
+app.post('/categories', (req, res) => {
+  const query = `SELECT * FROM QuestionCategory`;
+  connection.query(query, (err, results) => {
+    if (err) {
+      console.error('Error executing query: ', err);
+      res.status(500).json({ error: 'Error retrieving categories' });
       return;
     }
     res.json(results);

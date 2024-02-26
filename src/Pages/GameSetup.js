@@ -7,15 +7,17 @@ import GameCategoryDropdown from "../atoms/GameCategoryDropdown";
 import GameInput from "../atoms/GameInput";
 import GameLinkContainer from "../components/GameLinkContainer";
 import Box from '@mui/material/Box';
-import { fetchData } from './../api';
+import { fetchData } from './../api.js';
 
 
 //TODO: Conditional rendering only when player selected Multiplayer, otherwise redirect to Game.js
 function GameSetup() {
   const [categories, setCategories] = useState([]);
-  useEffect(() => {
+  const [dataFetched, setDataFetched] = useState(false);
+  const data = [];
+    useEffect(() => {
     // Call the function to fetch categories when the component mounts
-    fetchData('http://localhost:5000/categories', setCategories);
+    fetchData('http://localhost:5000/categories', setCategories,"", setDataFetched);
     return () => {
     };
   }, []); 

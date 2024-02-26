@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import GameScoreboardModal from "./GameScoreboardModal";
 import GameButton from "../atoms/GameButton";
-import questions from "../../data/questions.json";
+import questions from "./../data/questions.json";
 
 function GameScoreboard() {
   const [openQuestionModal, setOpenQuestionModal] = useState(false);

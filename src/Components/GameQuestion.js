@@ -3,12 +3,13 @@ import GameButton from "../atoms/GameButton";
 import GameQuestionView from "./GameQuestionView";
 import Button from "@mui/material/Button";
 
-const answers = ["Morgen", "42", "Gestern", "753 v. Chr."]
-const question = ["Wann wurde das Arpanet Seekabel verlegt?"]
+//const answers = ["Morgen", "42", "Gestern", "753 v. Chr."]
+//const question = ["Wann wurde das Arpanet Seekabel verlegt?"]
 
-function GameQuestion() {
+function GameQuestion({question, answers}) {
   const [timer, setTimer] = useState(30);
   const [timeLeft, setTimeLeft] = useState(timer);
+
 
   // start Timer when site loads
   useEffect(() => {

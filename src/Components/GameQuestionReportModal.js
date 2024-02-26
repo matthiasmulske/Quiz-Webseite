@@ -37,7 +37,7 @@ const GameQuestionReportModal = ({ modalData, openModal, setOpenModal }) => {
       <Modal.Body>
         <div className="text-center container justify-content-center align-items-center mb-3">
           <div className="mb-3">{modalData?.question_text}</div>
-          <GameCategoryDropdown
+          {/* <GameCategoryDropdown
             label="Kategorie"
             options={categories.map((category) => ({
               value: category,
@@ -46,7 +46,7 @@ const GameQuestionReportModal = ({ modalData, openModal, setOpenModal }) => {
             selectedOption={category}
             onChange={handleCategoryChange}
             name="Kategorie wählen"
-          />
+          /> */}
           <GameInput
             value={commentText}
             onChange={handleCommentTextChange}
@@ -55,7 +55,7 @@ const GameQuestionReportModal = ({ modalData, openModal, setOpenModal }) => {
             icon={<CommentIcon/>}
             required={true}
           />
-          <GameButton label="Senden" addClass=" btn-primary" />
+          <GameButton label="Senden"/>
         </div>
       </Modal.Body>
       <Modal.Footer></Modal.Footer>

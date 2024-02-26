@@ -1,14 +1,13 @@
 import EditQuestion from "./pages/EditQuestion";
 import AddQuestion from "./pages/AddQuestion";
-
 import { Routes, Route, Link } from "react-router-dom";
 import Datenschutzseite from "./pages/Datenschutzseite";
 import Login from "./pages/Login";
 import Startseite from "./pages/Startseite";
 import StartseiteLogin from "./pages/StartseiteLogin";
 import Welcome from "./pages/Welcome";
-import GameSetup from "./Game/pages/GameSetup";
-import Game from "./Game/pages/Game";
+import GameSetup from "./pages/GameSetup";
+import Game from "./pages/Game";
 import Navbar from "./components/Navbar";
 
 function App() {
