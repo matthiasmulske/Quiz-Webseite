@@ -1,6 +1,6 @@
 import * as React from "react";
 import FormAddQuestion from "../../components/FormAddQuestion";
-import QuestionTable from  "../../atoms/QuestionTable"
+import QuestionTable from "../../atoms/QuestionTable"
 
 function AddQuestion() {
     return (
