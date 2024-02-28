@@ -1,8 +1,8 @@
 import * as React from "react";
 import { TextField } from "@mui/material";
 
+function QuizTextField({ label, rows, onChange }) {
 
-function QuizTextField({ label, rows }) {
     return (
         <TextField
             sx={style.answerField}
@@ -11,18 +11,15 @@ function QuizTextField({ label, rows }) {
             fullWidth={true}
             multiline
             rows={rows}
+            onChange={onChange}
         />
     );
 }
 
 const style = {
     answerField: {
-        padding: '0.8rem',
-        paddingBottom: '30px', 
+        paddingBottom: '30px',
         color: 'success.main',
-        
-        
-
     },
 }
 

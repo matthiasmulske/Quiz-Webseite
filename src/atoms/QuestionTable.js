@@ -6,6 +6,9 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import GameButton from "./GameButton";
+import {useState} from "react";
+import EditQuestionContainer from "../components/EditQuestionContainer";
 
 
 function createData(question, A, B, C, D) {
@@ -21,6 +24,13 @@ const rows = [
 ];
 
 function QuestionTable() {
+    const [openModal, setOpenModal] = useState(false); //decides if reportModal is opened
+    const [modalData, setModalData] = useState(null); //stores necessary data for the reportModal
+
+    const handleOpenReportModal = () => {
+        setOpenModal(true);
+    };
+
     return (
         <TableContainer component={Paper}>
             <Table aria-label="simple table">
@@ -39,7 +49,15 @@ function QuestionTable() {
                             key={row.question}
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                             <TableCell component="th" scope="row">
-                                {row.question}
+                                <GameButton
+                                        label={row.question}
+                                        variante="text"
+                                        onClick={handleOpenReportModal}/>
+                                <EditQuestionContainer
+                                    modalData={modalData}
+                                    openModal={openModal}
+                                    setOpenModal={setOpenModal}
+                                />
                             </TableCell>
                             <TableCell align="left">{row.A}</TableCell>
                             <TableCell align="left">{row.B}</TableCell>

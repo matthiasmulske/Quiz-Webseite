@@ -1,5 +1,4 @@
 import * as React from "react";
-import FormAddQuestion from "../../components/FormAddQuestion";
 import QuestionTable from "../../atoms/QuestionTable"
 
 function AddQuestion() {
@@ -7,7 +6,6 @@ function AddQuestion() {
         <>
             <div style={style.container}>
                 <QuestionTable/>
-                <FormAddQuestion buttonLabel={"Senden"} questionLabel={"Frage bearbeiten"}/>
             </div>
         </>
     )
