@@ -14,7 +14,6 @@ function Login() {
         <Link to="/Game" style={styles.link}>
           <LoginButton
             buttonLabel={"Starte Quiz"}
-            onClick={starteDasQuiz}
             style={styles.button}
           />
         </Link>

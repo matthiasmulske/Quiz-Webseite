@@ -9,6 +9,6 @@ function Startseite() {
     </>
   );
 }
-const styles = {};
+
 
 export default Startseite;

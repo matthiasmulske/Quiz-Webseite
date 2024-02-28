@@ -1,6 +1,6 @@
 import React from "react";
 
-function Rechtliches() {
+function Legal() {
   return (
     <div style={styles.container}> 
       <h1 style={styles.heading1}>Rechtliches</h1>
@@ -25,8 +25,8 @@ function Rechtliches() {
 
 const styles = {
   container: {
-    width: '100%', // Beispiel: Containerbreite 80%
-    margin: '0 auto', // Zentriert den Container und verteilt die Seitenränder gleichmäßig
+    width: '100%', 
+    margin: '0 auto', 
     fontFamily: 'Arial, sans-serif',
     lineHeight: '2',
     padding: '20px'
@@ -50,4 +50,4 @@ const styles = {
 };
 
 
-export default Rechtliches;
+export default Legal;

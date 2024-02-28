@@ -15,13 +15,13 @@ function Footer() {
          
       }}
     >
-      <Link to="/Datenschutzseite" style={{ marginRight: "10px" }}>
+      <Link to="/PrivacyPolicyPage" style={{ marginRight: "10px" }}>
         Datenschutz
       </Link>
       <Link to="/Agbs" style={{ marginRight: "10px" }}>
         AGBs
       </Link>
-      <Link to="Rechtliches" style={{ marginRight: "10px" }}>
+      <Link to="/Legal" style={{ marginRight: "10px" }}>
         Rechtliches
       </Link>
     </div>

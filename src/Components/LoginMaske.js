@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import InputLogin from "../atoms/InputLogin";
 import LoginButton from "../atoms/LoginButton";
 
@@ -36,22 +37,23 @@ function LoginMaske() {
       className="d-flex flex-column align-items-center justify-content-center mt-5"
     >
       <InputLogin
-        inputPlaceholer={"Benutzername"}
+        inputPlaceholder="Benutzername"
         value={username}
         onChange={(e) => setUsername(e.target.value)}
       />
       <InputLogin
-        inputPlaceholer={"Passwort"}
+        inputPlaceholder="Passwort"
         type="password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
-      <div
-        className="d-flex justify-content-between"
-        style={{ width: "300px" }}
-      >
-        <LoginButton buttonLabel={"Anmelden"} type="submit" />
-        <LoginButton buttonLabel={"Registrieren"} onClick={handleRegister} />
+      <div style={{ marginTop: "10px", display: "flex", gap: "10px" }}>
+        <Link to="/HomepageLogin">
+          <LoginButton buttonLabel={"Anmelden"} type="submit" />
+        </Link>
+        <Link to="/">
+          <LoginButton buttonLabel={"Registrieren"} type="button" onClick={handleRegister} />
+        </Link>
       </div>
 
       {errorMessage && (

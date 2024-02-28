@@ -23,6 +23,7 @@ export default function PrimarySearchAppBar() {
   const [mailDialogOpen, setMailDialogOpen] = useState(false);
   const [logoutDialogOpen, setLogoutDialogOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const handleMailDialogOpen = () => {
     setMailDialogOpen(true);
@@ -41,9 +42,8 @@ export default function PrimarySearchAppBar() {
   };
 
   const handleLogout = () => {
-    console.log();
+    setIsLoggedIn(false);
     handleLogoutDialogClose();
-    
   };
 
   const handleMenu = (event) => {
@@ -54,11 +54,16 @@ export default function PrimarySearchAppBar() {
     setAnchorEl(null);
   };
 
+  const handleLogin = () => {
+    
+    setIsLoggedIn(true);
+  };
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-          <Link to="StartseiteLogin" style={{ textDecoration: 'none', color: 'inherit' }}>
+          <Link to="/HomepageLogin" style={{ textDecoration: 'none', color: 'inherit' }}>
             <IconButton size="large" edge="start" color="inherit" aria-label="home">
               <img src={logo} alt="logo" height="50px" />
             </IconButton>
@@ -72,40 +77,51 @@ export default function PrimarySearchAppBar() {
             ISEF QUIZ
           </Typography>
           <Box sx={{ flexGrow: 1 }} />
-          <IconButton size="large" aria-label="show 4 new mails" color="inherit" onClick={handleMailDialogOpen}>
-            <Badge badgeContent={4} color="error">
-              <MailIcon />
-            </Badge>
-          </IconButton>
-          <IconButton
-            size="large"
-            edge="end"
-            aria-label="account of current user"
-            aria-haspopup="true"
-            color="inherit"
-            onClick={handleMenu}
-          >
-            <AccountCircle />
-          </IconButton>
-          <Menu
-            anchorEl={anchorEl}
-            open={Boolean(anchorEl)}
-            onClose={handleCloseMenu}
-          >
-            <MenuItem onClick={handleCloseMenu}>Profil</MenuItem>
-            <MenuItem onClick={handleCloseMenu}>Benutzername ändern</MenuItem>
-            <MenuItem onClick={handleCloseMenu}>Passwort ändern</MenuItem>
-          </Menu>
-          <Link to="Startseite" style={{ textDecoration: 'none', color: 'inherit' }}>
-            <IconButton
-              size="large"
-              edge="end"
-              onClick={handleLogoutDialogOpen}
-              color="inherit"
-            >
-              <LogoutIcon />
-            </IconButton>
-          </Link>
+          {isLoggedIn && (
+            <>
+              <IconButton size="large" aria-label="show 4 new mails" color="inherit" onClick={handleMailDialogOpen}>
+                <Badge badgeContent={1} color="error">
+                  <MailIcon />
+                </Badge>
+              </IconButton>
+              <IconButton
+                size="large"
+                edge="end"
+                aria-label="account of current user"
+                aria-haspopup="true"
+                color="inherit"
+                onClick={handleMenu}
+              >
+                <AccountCircle />
+              </IconButton>
+              <Menu
+                anchorEl={anchorEl}
+                open={Boolean(anchorEl)}
+                onClose={handleCloseMenu}
+              >
+                <MenuItem onClick={handleCloseMenu}>Profil</MenuItem>
+                <MenuItem onClick={handleCloseMenu}>Benutzername ändern</MenuItem>
+                <MenuItem onClick={handleCloseMenu}>Passwort ändern</MenuItem>
+              </Menu>
+              <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
+                <IconButton
+                  size="large"
+                  edge="end"
+                  onClick={handleLogoutDialogOpen}
+                  color="inherit"
+                >
+                  <LogoutIcon />
+                </IconButton>
+              </Link>
+            </>
+          )}
+          {!isLoggedIn && (
+            <Link to="/Login" style={{ textDecoration: 'none', color: 'inherit' }}>
+              <Button color="inherit" onClick={handleLogin}>
+                Login
+              </Button>
+            </Link>
+          )}
         </Toolbar>
       </AppBar>
       <Dialog
@@ -117,7 +133,7 @@ export default function PrimarySearchAppBar() {
         <DialogTitle id="mail-dialog-title">{"Neue Nachrichten"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="mail-dialog-description">
-            Sie haben keine neuen Nachrichten
+            Sie haben eine neuen Nachrichten
           </DialogContentText>
         </DialogContent>
         <DialogActions>

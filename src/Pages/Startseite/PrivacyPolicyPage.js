@@ -1,6 +1,6 @@
 import React from "react";
 
-function Datenschutzseite() {
+function PrivacyPolicyPage() {
   return (
     <div style={styles.container}>
       <h1 style={styles.heading1}>Datenschutzerklärung</h1>
@@ -875,4 +875,4 @@ const styles = {
   }
 };
 
-export default Datenschutzseite;
+export default PrivacyPolicyPage;
