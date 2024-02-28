@@ -1,16 +1,10 @@
 import React, { useState, useEffect } from "react";
 import GameButton from "../atoms/GameButton";
 import GameQuestionView from "./GameQuestionView";
-import Button from "@mui/material/Button";
 
-//const answers = ["Morgen", "42", "Gestern", "753 v. Chr."]
-//const question = ["Wann wurde das Arpanet Seekabel verlegt?"]
-
-function GameQuestion({question, answers}) {
-  const [timer, setTimer] = useState(30);
+function GameQuestion({ question, answers, timer, setTimer, setAnswerGiven, handleNextQuestion, answerGiven }) {
   const [timeLeft, setTimeLeft] = useState(timer);
-
-
+  const [selectedAnswer, setSelectedAnswer]=useState();
   // start Timer when site loads
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -23,27 +17,48 @@ function GameQuestion({question, answers}) {
         }
       });
     }, 50);
-
     return () => clearInterval(intervalId);
-  }, [timer]);
+  }, [timer, timeLeft]);
+
+  function handleButton(){
+    setSelectedAnswer(null);
+    setTimer(timer)
+    setTimeLeft(timer);
+    setAnswerGiven(null);
+    handleNextQuestion();
+  }
 
   return (
     <div style={style.pageContainer}>
-        <div className="progress mb-4">
-          <div
-            className="progress-bar"
-            role="progressbar"
-            style={{ width: `${(timeLeft / timer) * 100}%` }}
-          ></div>
-        </div>
+      <div className="progress mb-4">
+        <div
+          className="progress-bar"
+          role="progressbar"
+          style={{ minWidth: `${(timeLeft / timer) * 100}%` }}
+        ></div>
+        <p>{timeLeft/timer*100}</p>
+      </div>
 
       <div style={style.answerButton}>
-        <GameQuestionView question={question} answers={answers}/>
+        <GameQuestionView
+          question={question}
+          answers={answers}
+          setTimer={setTimer}
+          timeLeft={timeLeft}
+          setTimeLeft={setTimeLeft}
+          answerGiven={answerGiven}
+          setAnswerGiven={setAnswerGiven}
+          selectedAnswer={selectedAnswer}
+          setSelectedAnswer={setSelectedAnswer}
+        />
       </div>
-
-      <div style={style.buttonNextQuestion}>
-        <Button variant="outlined">Nächste Frage</Button>
-      </div>
+      {timeLeft <= 0 ? (
+        <div style={style.buttonNextQuestion}>
+          <GameButton variant="outlined" label="Nächste Frage" color="warning" onClick={handleButton}></GameButton>
+        </div>
+      ) : (
+        ""
+      )}
     </div>
   );
 }
@@ -52,17 +67,17 @@ export default GameQuestion;
 
 const style = {
   pageContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     padding: 40,
-    position: 'relative',
+    position: "relative",
   },
 
   answerButton: {
     marginBottom: 50,
   },
   buttonNextQuestion: {
-    display: 'flex',
-    justifyContent: 'center'
-  }
-}
+    display: "flex",
+    justifyContent: "center",
+  },
+};
