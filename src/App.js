@@ -22,7 +22,8 @@ function App() {
       <Routes>
         <Route path="/EditQuestion" element={<EditQuestion />} />
         <Route path="/AddQuestion" element={<AddQuestion/>} />
-        <Route path="/" element={<StartseiteLogin />} />
+        <Route path="StartseiteLogin" element={<StartseiteLogin />} />
+        <Route path="Startseite" element={<Startseite />} />
         <Route path="/GameSetup" element={<GameSetup />} />
         <Route path="/Game" element={<Game />} />
         <Route path="/Datenschutzseite" element={<Datenschutzseite />} />

@@ -5,7 +5,7 @@ function Agbs() {
     <div style={styles.container}>
         <h1 style={styles.heading1}>Allgemeine Geschäftsbedingungen (AGBs)</h1>
         <h2 style={styles.heading2}>
-            <strong>TL; DR</strong>
+            <strong>Allgemeine Geschäftsbedingungen</strong>
         </h2>
         <ul style={styles.list}>
             <li>Lassen Sie sich nicht beim Spielen helfen</li>

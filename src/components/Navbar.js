@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -10,15 +10,57 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
 import logo from './../assets/logo-removebg-preview.png';
 import LogoutIcon from '@mui/icons-material/Logout';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import Button from '@mui/material/Button';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
 
 export default function PrimarySearchAppBar() {
+  const [mailDialogOpen, setMailDialogOpen] = useState(false);
+  const [logoutDialogOpen, setLogoutDialogOpen] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const handleMailDialogOpen = () => {
+    setMailDialogOpen(true);
+  };
+
+  const handleMailDialogClose = () => {
+    setMailDialogOpen(false);
+  };
+
+  const handleLogoutDialogOpen = () => {
+    setLogoutDialogOpen(true);
+  };
+
+  const handleLogoutDialogClose = () => {
+    setLogoutDialogOpen(false);
+  };
+
+  const handleLogout = () => {
+    console.log();
+    handleLogoutDialogClose();
+    
+  };
+
+  const handleMenu = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleCloseMenu = () => {
+    setAnchorEl(null);
+  };
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-          <Link to="/">
+          <Link to="StartseiteLogin" style={{ textDecoration: 'none', color: 'inherit' }}>
             <IconButton size="large" edge="start" color="inherit" aria-label="home">
-              <img src={logo} alt="logo" height="50px"></img>
+              <img src={logo} alt="logo" height="50px" />
             </IconButton>
           </Link>
           <Typography
@@ -30,35 +72,81 @@ export default function PrimarySearchAppBar() {
             ISEF QUIZ
           </Typography>
           <Box sx={{ flexGrow: 1 }} />
-          <Box >
-            <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={4} color="error">
-                <MailIcon />
-              </Badge>
-            </IconButton>
+          <IconButton size="large" aria-label="show 4 new mails" color="inherit" onClick={handleMailDialogOpen}>
+            <Badge badgeContent={4} color="error">
+              <MailIcon />
+            </Badge>
+          </IconButton>
+          <IconButton
+            size="large"
+            edge="end"
+            aria-label="account of current user"
+            aria-haspopup="true"
+            color="inherit"
+            onClick={handleMenu}
+          >
+            <AccountCircle />
+          </IconButton>
+          <Menu
+            anchorEl={anchorEl}
+            open={Boolean(anchorEl)}
+            onClose={handleCloseMenu}
+          >
+            <MenuItem onClick={handleCloseMenu}>Profil</MenuItem>
+            <MenuItem onClick={handleCloseMenu}>Benutzername ändern</MenuItem>
+            <MenuItem onClick={handleCloseMenu}>Passwort ändern</MenuItem>
+          </Menu>
+          <Link to="Startseite" style={{ textDecoration: 'none', color: 'inherit' }}>
             <IconButton
               size="large"
               edge="end"
-              aria-label="account of current user"
-              aria-haspopup="true"
-            //   onClick={}
-              color="inherit"
-            >
-              <Badge badgeContent="user" color="secondary">
-                <AccountCircle />
-              </Badge>
-            </IconButton>
-            <IconButton
-              size="large"
-              edge="end"
-            //   onClick={}
+              onClick={handleLogoutDialogOpen}
               color="inherit"
             >
               <LogoutIcon />
             </IconButton>
-          </Box>
+          </Link>
         </Toolbar>
       </AppBar>
+      <Dialog
+        open={mailDialogOpen}
+        onClose={handleMailDialogClose}
+        aria-labelledby="mail-dialog-title"
+        aria-describedby="mail-dialog-description"
+      >
+        <DialogTitle id="mail-dialog-title">{"Neue Nachrichten"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="mail-dialog-description">
+            Sie haben keine neuen Nachrichten
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleMailDialogClose} color="primary">
+            Schließen
+          </Button>
+        </DialogActions>
+      </Dialog>
+      <Dialog
+        open={logoutDialogOpen}
+        onClose={handleLogoutDialogClose}
+        aria-labelledby="logout-dialog-title"
+        aria-describedby="logout-dialog-description"
+      >
+        <DialogTitle id="logout-dialog-title">{"Logout bestätigen"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="logout-dialog-description">
+            Möchten Sie sich wirklich ausloggen?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleLogoutDialogClose} color="primary">
+            Abbrechen
+          </Button>
+          <Button onClick={handleLogout} color="primary" autoFocus>
+            Ausloggen
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Box>
   );
 }
