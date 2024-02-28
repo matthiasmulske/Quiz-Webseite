@@ -51,7 +51,7 @@ function LoginMaske() {
         <Link to="/HomepageLogin">
           <LoginButton buttonLabel={"Anmelden"} type="submit" />
         </Link>
-        <Link to="/">
+        <Link to="/HomepageLogin">
           <LoginButton buttonLabel={"Registrieren"} type="button" onClick={handleRegister} />
         </Link>
       </div>
