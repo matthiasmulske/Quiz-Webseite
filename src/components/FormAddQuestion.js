@@ -5,7 +5,7 @@ import DropDown from "../atoms/DropDown";
 import ButtonQuiz from "../atoms/ButtonQuiz";
 import {useState} from "react";
 
-function FormAddQuestion({ buttonLabel, data }) {
+function FormAddQuestion({ buttonLabel }) {
   const [data, setData] = useState({
       question: "",
       answerA: "",
