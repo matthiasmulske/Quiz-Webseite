@@ -24,7 +24,6 @@ function Login() {
             style={styles.button} />
         </Link>
       </div>
-      <Footer />
     </div>
   );
 }

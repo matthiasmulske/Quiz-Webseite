@@ -24,6 +24,7 @@ export default function PrimarySearchAppBar() {
   const [logoutDialogOpen, setLogoutDialogOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [clickedLogin, setClickedLogin] = useState(false);
 
   useEffect(() => {
     const loggedInStatus = localStorage.getItem('isLoggedIn');
@@ -65,14 +66,16 @@ export default function PrimarySearchAppBar() {
   const handleLogin = () => {
     setIsLoggedIn(true);
     localStorage.setItem('isLoggedIn', 'true');
+    setClickedLogin(true);
   };
+
   const homePage = isLoggedIn ? "/HomepageLogin" : "/";
 
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-          <Link to={homePage}style={{ textDecoration: 'none', color: 'inherit' }}>
+          <Link to={homePage} style={{ textDecoration: 'none', color: 'inherit' }}>
             <IconButton size="large" edge="start" color="inherit" aria-label="home">
               <img src={logo} alt="logo" height="50px" />
             </IconButton>
@@ -87,7 +90,7 @@ export default function PrimarySearchAppBar() {
           </Typography>
           
           <Box sx={{ flexGrow: 1 }} />
-          {isLoggedIn && (
+          {isLoggedIn && !clickedLogin && (
             <>
               <IconButton size="large" aria-label="show 4 new mails" color="inherit" onClick={handleMailDialogOpen}>
                 <Badge badgeContent={0} color="error">
@@ -125,7 +128,7 @@ export default function PrimarySearchAppBar() {
               </Link>
             </>
           )}
-          {!isLoggedIn && (
+          {!isLoggedIn && !clickedLogin && (
             <Link to="/Login" style={{ textDecoration: 'none', color: 'inherit' }}>
               <Button color="inherit" onClick={handleLogin}>
                 Login

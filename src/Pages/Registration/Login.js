@@ -5,7 +5,6 @@ function Startseite() {
   return (
     <>
       <LoginMaske />
-      <Footer />
     </>
   );
 }

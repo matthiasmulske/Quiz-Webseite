@@ -1,13 +1,13 @@
 import EditQuestion from "./pages/Question/EditQuestion";
 import AddQuestion from "./pages/Question/AddQuestion";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route,} from "react-router-dom";
 import PrivacyPolicyPage from "./pages/Startseite/PrivacyPolicyPage";
 import Agbs from "./pages/Startseite/Agbs";
 import Legal from "./pages/Startseite/Legal";
 import Login from "./pages/Registration/Login";
 import Homepage from "./pages/Startseite/Homepage";
 import HomepageLogin from "./pages/Registration/HomepageLogin";
-import Welcome from "./pages/Welcome";
+//import Welcome from "./pages/Welcome";
 import GameSetup from "./pages/Game/GameSetup";
 import Game from "./pages/Game/Game";
 import Navbar from "./components/Navbar";
