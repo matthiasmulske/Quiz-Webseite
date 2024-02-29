@@ -2,7 +2,7 @@
   "questions": [
     {
       "question_number": 1,
-      "question_text": "What is the capital of France?",
+      "question_text": "What is the capital of Franz?",
       "answers": {
         "1": "Berlin",
         "2": "Madrid",

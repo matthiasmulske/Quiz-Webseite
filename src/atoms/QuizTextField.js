@@ -1,7 +1,7 @@
 import * as React from "react";
 import { TextField } from "@mui/material";
 
-function QuizTextField({ name, label, rows, onChange }) {
+function QuizTextField({ name, label, rows, onChange, children }) {
 
     return (
         <TextField
@@ -13,6 +13,7 @@ function QuizTextField({ name, label, rows, onChange }) {
             multiline
             rows={rows}
             onChange={onChange}
+            defaultValue={children}
         />
     );
 }

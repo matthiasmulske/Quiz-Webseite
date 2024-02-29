@@ -5,13 +5,16 @@ import DropDown from "../atoms/DropDown";
 import ButtonQuiz from "../atoms/ButtonQuiz";
 import {useState} from "react";
 
-function FormAddQuestion({ buttonLabel }) {
+
+// TODO: Select Category
+function FormAddQuestion({ buttonLabel, children }) {
   const [data, setData] = useState({
       question: "",
       answerA: "",
       answerB: "",
       answerC: "",
       answerD: "",
+      category: ""
   });
 
   function handleChange(e) {
@@ -22,17 +25,15 @@ function FormAddQuestion({ buttonLabel }) {
   }
 
   function handleSubmit() {
-    console.log(data)
+    alert("Du hast die Frage erfolgreich hinzugefügt bis Spätersilie <3")
   }
 
-  function validateInput(){
-  }
 
   return (
     <div style={style.container}>
       <QuizTextField name={'question'} value={data.question} label={"Frage"} onChange={handleChange} rows={5} />
       <div style={style.gridContainer}>
-        <QuizTextField name={"answerA"} label={"Antwort A"} onChange={handleChange} rows={3} />
+          <QuizTextField name={"answerA"} label={"Antwort A"} onChange={handleChange} rows={3}>{children}</QuizTextField>
         <QuizTextField name={"answerB"} label={"Antwort B"} onChange={handleChange} rows={3} />
         <QuizTextField name={"answerC"} label={"Antwort C"} onChange={handleChange} rows={3} />
         <QuizTextField name={"answerD"} label={"Antwort D"} onChange={handleChange} rows={3} />

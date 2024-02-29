@@ -9,19 +9,26 @@ import Paper from '@mui/material/Paper';
 import GameButton from "./GameButton";
 import {useState} from "react";
 import EditQuestionContainer from "../components/EditQuestionContainer";
+import data from "../data/questions.json"
+
+const rows = []
 
 
-function createData(question, A, B, C, D) {
-    return { question, A, B, C, D };
+function fillRows() {
+    for (let i = 0; i < data.questions.length; i++) {
+        rows.push({
+                question: data.questions[i].question_text,
+                answerA: data.questions[i].answers[0],
+                answerB: data.questions[i].answers[1],
+                answerC: data.questions[i].answers[2],
+                answerD: data.questions[i].answers[3],
+                category: ""
+        })
+    }
 }
 
-const rows = [
-    createData('Wann wurda das Arpanet Seekabel zerschnitten?', "Ja", "gestern", "41", "42"),
-    createData('Wann wurda das Arpanet Seekabel verlegt?', "Ja", "gestern", "41", "42"),
-    createData('Wann wurda das Arpanet Seekabel gezogen?', "Ja", "gestern", "41", "42"),
-    createData('Wann wurda das Arpanet Seekabel ertränkt?', "Ja", "gestern", "41", "42"),
-    createData('Wann wurda das Arpanet Seekabel umsorgt?', "Ja", "gestern", "41", "42"),
-];
+fillRows();
+
 
 function QuestionTable() {
     const [openModal, setOpenModal] = useState(false); //decides if reportModal is opened
@@ -46,9 +53,8 @@ function QuestionTable() {
                 <TableBody>
                     {rows.map((row) => (
                         <TableRow
-                            key={row.question}
-                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-                            <TableCell component="th" scope="row">
+                            key={row.question}>
+                            <TableCell>
                                 <GameButton
                                         label={row.question}
                                         variante="text"
@@ -59,10 +65,10 @@ function QuestionTable() {
                                     setOpenModal={setOpenModal}
                                 />
                             </TableCell>
-                            <TableCell align="left">{row.A}</TableCell>
-                            <TableCell align="left">{row.B}</TableCell>
-                            <TableCell align="left">{row.C}</TableCell>
-                            <TableCell align="left">{row.D}</TableCell>
+                            <TableCell align="left">{row.answerA}</TableCell>
+                            <TableCell align="left">{row.answerB}</TableCell>
+                            <TableCell align="left">{row.answerC}</TableCell>
+                            <TableCell align="left">{row.answerD}</TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
