@@ -5,7 +5,7 @@ import GameInput from "../atoms/GameInput";
 import GameButton from "../atoms/GameButton";
 import CommentIcon from '@mui/icons-material/Comment';
 
-const GameQuestionReportModal = ({ modalData, openModal, setOpenModal }) => {
+const GameQuestionReportModal = ({ question, questionID, openModal, setOpenModal }) => {
   const categories = [
     "Frage falsch",
     "Frage unangemessen",
@@ -24,7 +24,6 @@ const GameQuestionReportModal = ({ modalData, openModal, setOpenModal }) => {
   const handleCommentTextChange = (event) => {
     setCommentText(event.target.value);
   };
-
   return (
     <Modal
       show={openModal}
@@ -36,7 +35,8 @@ const GameQuestionReportModal = ({ modalData, openModal, setOpenModal }) => {
       </Modal.Header>
       <Modal.Body>
         <div className="text-center container justify-content-center align-items-center mb-3">
-          <div className="mb-3">{modalData?.question_text}</div>
+          <div className="mb-3">Question ID: {questionID}</div>
+          <div className="mb-3">{question}</div>
           {/* <GameCategoryDropdown
             label="Kategorie"
             options={categories.map((category) => ({
@@ -55,10 +55,12 @@ const GameQuestionReportModal = ({ modalData, openModal, setOpenModal }) => {
             icon={<CommentIcon/>}
             required={true}
           />
-          <GameButton label="Senden"/>
         </div>
       </Modal.Body>
-      <Modal.Footer></Modal.Footer>
+      <Modal.Footer>
+          <GameButton label="Senden"/>
+
+      </Modal.Footer>
     </Modal>
   );
 };

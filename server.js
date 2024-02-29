@@ -33,9 +33,9 @@ app.post("/gameData", (req, res) => {
   const { accessToken } = req.body;
   const query = `SELECT * 
                  FROM Quiz 
-                 JOIN QuizQuestions ON Quiz.quizid = QuizQuestions.quizid 
-                 JOIN Question ON QuizQuestions.questionid = Question.questionid
-                 JOIN QuestionCategory ON Question.CategoryID = QuestionCategory.QuestionCategoryID
+                 LEFT JOIN QuizQuestions ON Quiz.quizid = QuizQuestions.quizid 
+                 LEFT JOIN Question ON QuizQuestions.questionid = Question.questionid
+                 LEFT JOIN QuestionCategory ON Question.CategoryID = QuestionCategory.QuestionCategoryID
                  WHERE Quiz.AccessTokenOne = ? OR Quiz.AccessTokenTwo = ?`;
   connection.query(query, [accessToken, accessToken], (err, results) => {
     if (err) {
@@ -218,6 +218,68 @@ connection.beginTransaction(err => {
   );
 });
 
+});
+
+
+
+
+
+
+
+
+// Set Questions for new Round
+app.post("/createNewRound", (req, res) => {
+  const { quizID, questionNumber, q1, q2, q3 } = req.body;
+
+
+connection.beginTransaction(err => {
+  if (err) {
+    console.error("Error beginning transaction: ", err);
+    res.status(500).json({ error: "Error beginning transaction" });
+    return;
+  }
+
+      // Update QuizQuestions
+      const updateQueries = [
+        "UPDATE QuizQuestions SET QuestionID = ? WHERE QuizID = ? AND QuestionNumber = ?",
+        "UPDATE QuizQuestions SET QuestionID = ? WHERE QuizID = ? AND QuestionNumber = ?",
+        "UPDATE QuizQuestions SET QuestionID = ? WHERE QuizID = ? AND QuestionNumber = ?"
+      ];
+      const updateValues = [
+        [q1, quizID, questionNumber], // Values for the first query
+        [q2, quizID, questionNumber+1], // Values for the second query
+        [q3, quizID, questionNumber+2]  // Values for the third query
+      ];
+
+      // Execute each query separately
+      updateQueries.forEach((query, index) => {
+        connection.query(query, updateValues[index], (err, results) => {
+          if (err) {
+            console.error("Error updating quiz questions: ", err);
+            connection.rollback(() => {
+              res.status(500).json({ error: "Error updating quiz questions" });
+            });
+            return;
+          }
+          // Handle successful update if needed
+        });
+      });
+
+      // Commit the transaction
+      connection.commit(err => {
+        if (err) {
+          console.error("Error committing transaction: ", err);
+          connection.rollback(() => {
+            res.status(500).json({ error: "Error committing transaction" });
+          });
+          return;
+        }
+
+        // Transaction successfully committed
+        res.json({ message: "Quiz updated successfully" });
+      });
+    }
+  );
 });
 
 

@@ -4,9 +4,11 @@ import GameIntro from "../components/GameIntro.js";
 import GameQuestion from "../components/GameQuestion.js";
 import GameScoreboard from "../components/GameScoreboard.js";
 import GameSumUp from "../components/GameSumUp.js";
+import { CircularProgress } from "@mui/material";
 import {
   fetchData
 } from "./../api.js";
+import GameChooseCategory from "../components/GameChooseCategory.js";
 
 function Game() {
   //Use States to decide which Component is rendered
@@ -27,21 +29,37 @@ function Game() {
   const [currentRound, setCurrentRound] = useState();        //stores the ID of currentRound
   const [currentQuestionData, setCurrentQuestionData] = useState(); //stores questionText and answer texts //TODO: ADD ID NECESSARY FOR MODAL
   const [timer, setTimer] = useState(); //stores TimeLimit to answer a question
-  const [dataSet, setDataSet] = useState(false); //for loading animation
+  const [loading, setDataSet] = useState(false); //for loading animation
   const [answerGiven, setAnswerGiven] = useState();  //stores answer given by player --> 0-2 : false, 3 : correct, 5: timer run out
 
   async function calculateRelevantData() {
     setDataSet(false); //start loading animation
     const data = await fetchData(accessToken); //get all relevant data from Database. Note: Needs to be async, because takes some time
     //use non UseState-Variables for better performance. If direct use of UseStates they wouldnt be set in time for further calculations
+    console.log(data);
+    const isSinglePlayerC = decideQuizType(data);
     const currentPlayerC = getCurrentPlayer(data, accessToken);
     const currentQuestionC = getCurrentQuestion(data, currentPlayerC);
     const currentCategoryC = getCurrentCategory(data, currentPlayerC);
     const currentRoundC = Math.ceil(currentQuestionC / 3);
-    const yourTurnC = decideTurn(data, currentPlayerC, isSinglePlayer);
+    const yourTurnC = decideTurn(data, currentPlayerC, isSinglePlayerC);
     const currentQuestionDataC = getQuestionData(data, currentQuestionC);
     const timeToAnswer = data[1].TimeToAnswer;
-    const quizID = data[1].QuizID;
+    const quizIDC = data[1].QuizID;
+    let newRoundC = decideNewRound(data, currentQuestionC);
+    console.log({
+      isSinglePlayerC: decideQuizType(data),
+      currentPlayerC: getCurrentPlayer(data, accessToken),
+      currentQuestionC: getCurrentQuestion(data, currentPlayerC),
+      currentCategoryC: getCurrentCategory(data, currentPlayerC),
+      currentRoundC: Math.ceil(getCurrentQuestion(data, currentPlayerC) / 3),
+      yourTurnC: decideTurn(data, currentPlayerC, decideQuizType(data)),
+      currentQuestionDataC: getQuestionData(data, getCurrentQuestion(data, currentPlayerC)),
+      timeToAnswer: data[1].TimeToAnswer,
+      quizIDC: data[1].QuizID,
+      newRound: decideNewRound(data, getCurrentQuestion(data, currentPlayerC))
+    });
+    
     
     //after calculation is done, set UseStates for FrontEnd-Usage
     setPlayer(currentPlayerC);
@@ -52,10 +70,14 @@ function Game() {
     setRoundEnded(!yourTurnC);
     setTimer(timeToAnswer);
     setCurrentQuestionData(currentQuestionDataC);
-    setCurrentQuizID(quizID);
+    setCurrentQuizID(quizIDC);
+    setRoundEnded(newRoundC);
     setDataSet(true);
   }
 
+  useEffect(() => {
+    console.log("roundEnded:", roundEnded);
+  }, [roundEnded]);
   //fetches data from DB and extracts relevant data when site loads
   useEffect(() => {
     calculateRelevantData();
@@ -63,7 +85,6 @@ function Game() {
 
   //whenever a answer is clicked on by the player, it writes his answer to the DB
   useEffect(() => {
-    console.log(answerGiven);
     if(answerGiven){
       setAnswerPlayer(currentQuizID, currentQuestion, answerGiven, player);
     }
@@ -80,16 +101,24 @@ function Game() {
 
   //extract the Number of currentQuestion, that hasnt been played yet
   function getCurrentQuestion(data, player) {
-    let questionFound = false; // Flag to track if the condition has been met
-    for (let i = 0; i < data.length && !questionFound; i++) {
+    for (let i = 0; i < data.length; i++) {
       const question = data[i];
       if (question["AnswerPlayer" + player] === null) {
-        questionFound = true; // Set flag to true after first occurrence
         return question["QuestionNumber"];
       }
-      if(i===data.length-1 && question["AnswerPlayer" + player] !== null){
-        return 999; //codeNumber for Game finished
-      }
+      // if(i===data.length-1 && question["AnswerPlayer" + player] !== null){
+      //   return 999; //codeNumber for Game finished
+      // }
+    }
+  }
+
+  //extract the Number of currentQuestion, that hasnt been played yet
+  function decideNewRound(data, currentQuestion) {
+    if (data[currentQuestion-1].QuestionID===null){
+      return true;
+    }
+    else{
+      return false
     }
   }
 
@@ -137,6 +166,16 @@ function Game() {
     }
   }
 
+  //decides if Game is multiplayer or singleplayer by looking if AccesstokenTwo is existing in the data
+  function decideQuizType(data) {
+   if(data[1].AccessTokenTwo!==null){
+     return false
+   }
+   else {
+    return true
+   }
+  }
+
   //sets state of RoundStarted to true, in order to apply conditional rendering
   function startRound() {
     setRoundStarted(true);
@@ -148,6 +187,7 @@ function Game() {
     if (question) {
       return {
         questionText: question.QuestionText,
+        questionID: question.QuestionID,
         answers: [
           question.Answer1,
           question.Answer2,
@@ -163,6 +203,11 @@ function Game() {
   //triggered after continuing with the next question to get new Data
   function handleNextQuestion() {
     calculateRelevantData();
+    console.log(" hh"+currentQuestionData[1]===null);
+    if(currentQuestionData===null){
+      setRoundEnded(true);
+      console.log("done");
+    }
     //if questionID = null --> set round Ended --> trigger rendering of Choose a new Category --> Choose Catergory --> setRound Ended (false)
   }
 
@@ -225,10 +270,11 @@ function Game() {
     }
   }
 
+ console.log(roundEnded, roundStarted, gameEnded, yourTurn)
   return (
     <>
-      {dataSet ? <p></p> : <p>Get Data from Database</p>}
-      {(roundStarted === false && gameEnded === false) || roundEnded ? (
+     {!loading ? <CircularProgress/> : ""}
+      {(roundStarted === false && gameEnded === false && roundEnded=== false) || (roundEnded === true && gameEnded === false &&yourTurn===false) ? (
         <GameIntro
           currentRound={currentRound}
           currentCategory={currentCategory}
@@ -242,6 +288,7 @@ function Game() {
         <GameQuestion
           question={currentQuestionData.questionText}
           answers={currentQuestionData.answers}
+          questionID={currentQuestionData.questionID}
           timer={timer}
           setTimer={setTimer}
           answerGiven={answerGiven}
@@ -251,7 +298,18 @@ function Game() {
       ) : (
         ""
       )}
+      {roundEnded && yourTurn? 
+      <GameChooseCategory
+      currentRound={currentRound}
+      currentQuestion={currentQuestion}
+      currentQuizID={currentQuizID}
+      setRoundEnded={setRoundEnded}
+      setRoundStarted={setRoundStarted}
+      calculateRelevantData={calculateRelevantData}
+      ></GameChooseCategory>
+      : ""}
       {gameEnded === true ? <GameSumUp /> : ""}
+      <div style={{margin:"10rem"}}></div>
       <GameScoreboard />
     </>
   );

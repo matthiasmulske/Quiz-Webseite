@@ -4,9 +4,8 @@ import ErrorIcon from "@mui/icons-material/Error";
 import GameQuestionReportModal from "./GameQuestionReportModal";
 
 
-function GameQuestionView({ question, answers, setTimer, timeLeft, setAnswerGiven, setTimeLeft, answerGiven, selectedAnswer, setSelectedAnswer }) {
+function GameQuestionView({ question, answers, questionID, setTimer, timeLeft, setAnswerGiven, setTimeLeft, answerGiven, selectedAnswer, setSelectedAnswer }) {
   const [openModal, setOpenModal] = useState(false); //decides if reportModal is opened
-  const [modalData, setModalData] = useState(null); //stores necessary data for the reportModal
   const [shuffledAnswers, setShuffledAnswers] = useState([]); //shuffels answers in order to display the correct answer not always on the same position
   //const [selectedAnswer, setSelectedAnswer]=useState();
   // Shuffle answers
@@ -19,15 +18,12 @@ function GameQuestionView({ question, answers, setTimer, timeLeft, setAnswerGive
     }
     return array;
   }
-
   // Shuffle the answers and reset the selectedAnswer everytime a new question loads in
-  useEffect(() => {
-    //setSelectedAnswer();
-    setShuffledAnswers(shuffleAnswers([...answers]));
-  }, [question]);
+   useEffect(() => {
+     setShuffledAnswers(shuffleAnswers([...answers]));
+   }, [question]);
 
   const handleOpenReportModal = () => {
-    setModalData(question);
     setOpenModal(true);
   };
 
@@ -72,7 +68,8 @@ function GameQuestionView({ question, answers, setTimer, timeLeft, setAnswerGive
       </div>
 
       <GameQuestionReportModal
-        modalData={modalData}
+        question={question}
+        questionID={questionID}
         openModal={openModal}
         setOpenModal={setOpenModal}
       />

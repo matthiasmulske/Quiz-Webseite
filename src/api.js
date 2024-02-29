@@ -125,3 +125,26 @@ const fetchQuestionCategories = async (route, accessToken) => {
     }
   };
   export { fetchData };
+
+  const setNewRound = async (route, quizID, questionNumber, q1, q2, q3) => {
+    try {
+      const response = await fetch(route, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ quizID:quizID, questionNumber:questionNumber, q1:q1,q2:q2,q3:q3 }),
+      });
+  
+      if (!response.ok) {
+        throw new Error('Failed to update Quiz');
+      }
+  
+      const data = await response.json();
+      return data
+    } catch (error) {
+      console.error('Error fetching data: ', error);
+    }
+  };
+  
+  export { setNewRound };

@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import GameButton from "../atoms/GameButton";
 import GameQuestionView from "./GameQuestionView";
 
-function GameQuestion({ question, answers, timer, setTimer, setAnswerGiven, handleNextQuestion, answerGiven }) {
+function GameQuestion({ question, answers, questionID, timer, setTimer, setAnswerGiven, handleNextQuestion, answerGiven }) {
   const [timeLeft, setTimeLeft] = useState(timer);
   const [selectedAnswer, setSelectedAnswer]=useState();
-  // start Timer when site loads
+  // start Timer when site loads  --> TODO: PERFORMANCE
   useEffect(() => {
     const intervalId = setInterval(() => {
       setTimeLeft((prevTimeLeft) => {
@@ -19,7 +19,6 @@ function GameQuestion({ question, answers, timer, setTimer, setAnswerGiven, hand
     }, 50);
     return () => clearInterval(intervalId);
   }, [timer, timeLeft]);
-
   function handleButton(){
     setSelectedAnswer(null);
     setTimer(timer)
@@ -27,7 +26,6 @@ function GameQuestion({ question, answers, timer, setTimer, setAnswerGiven, hand
     setAnswerGiven(null);
     handleNextQuestion();
   }
-
   return (
     <div style={style.pageContainer}>
       <div className="progress mb-4">
@@ -43,6 +41,7 @@ function GameQuestion({ question, answers, timer, setTimer, setAnswerGiven, hand
         <GameQuestionView
           question={question}
           answers={answers}
+          questionID={questionID}
           setTimer={setTimer}
           timeLeft={timeLeft}
           setTimeLeft={setTimeLeft}
