@@ -4,56 +4,36 @@ import GameIntro from "../components/GameIntro.js";
 import GameQuestion from "../components/GameQuestion.js";
 import GameScoreboard from "../components/GameScoreboard.js";
 import GameSumUp from "../components/GameSumUp.js";
+import {
+  fetchData
+} from "./../api.js";
 
 function Game() {
   //Use States to decide which Component is rendered
-  const [yourTurn, setYourTurn] = useState();
-  const [roundStarted, setRoundStarted] = useState(false);
-  const [roundEnded, setRoundEnded] = useState(false);
-  const [gameEnded, setGameEnded] = useState(false);
-  const [isSinglePlayer, setIsSinglePlayer] = useState(false);
+  const [yourTurn, setYourTurn] = useState(); //decides if is your Turn of answering questions 
+  const [roundStarted, setRoundStarted] = useState(false);  //decides if round has started
+  const [roundEnded, setRoundEnded] = useState(false);      //decides if round has ended
+  const [gameEnded, setGameEnded] = useState(false);        //decides if game has ended  --> show GameSumUp View
+  const [isSinglePlayer, setIsSinglePlayer] = useState(false); //decides if game is a singleplayer or multiplayer quiz
 
-  //get the necessary data for the current game
-  const [gameData, setGameData] = useState([]);
+  //get the accessToken of the URL-Parameter
   const [accessToken, setAccessToken] = useState(new URLSearchParams(window.location.search).get('accesstoken'));
 
   //stores current game Data
-  const [player, setPlayer] = useState();
-  const [currentCategory, setCurrentCategory] = useState();
-  const [currentRound, setCurrentRound] = useState();
-  const [currentQuestion, setCurrentQuestion] = useState();
-  const [currentQuestionData, setCurrentQuestionData] = useState();
-  const [timer, setTimer] = useState();
-  const [currentQuizID, setCurrentQuizID] = useState();
-  const [dataSet, setDataSet] = useState(false);
-
-  //stores answer given by player 0-2 : false, 3 : correct, 5: timer run out
-  const [answerGiven, setAnswerGiven] = useState();
-  const fetchData = async (accessToken) => {
-    try {
-      const response = await fetch("http://localhost:5000/gameData", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ accessToken: accessToken }),
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to fetch data");
-      }
-
-      const data = await response.json();
-      return data;
-    } catch (error) {
-      console.error("Error fetching data: ", error);
-    }
-  };
+  const [player, setPlayer] = useState();   // player=1 for Player1 and player=2 for Player2
+  const [currentQuizID, setCurrentQuizID] = useState(); //stores ID of a the current Quiz
+  const [currentQuestion, setCurrentQuestion] = useState();  //stores the ID of current Question
+  const [currentCategory, setCurrentCategory] = useState();  //stores categoryName of current Round/Question
+  const [currentRound, setCurrentRound] = useState();        //stores the ID of currentRound
+  const [currentQuestionData, setCurrentQuestionData] = useState(); //stores questionText and answer texts //TODO: ADD ID NECESSARY FOR MODAL
+  const [timer, setTimer] = useState(); //stores TimeLimit to answer a question
+  const [dataSet, setDataSet] = useState(false); //for loading animation
+  const [answerGiven, setAnswerGiven] = useState();  //stores answer given by player --> 0-2 : false, 3 : correct, 5: timer run out
 
   async function calculateRelevantData() {
-    setDataSet(false);
-    const data = await fetchData(accessToken);
-    console.log(data);
+    setDataSet(false); //start loading animation
+    const data = await fetchData(accessToken); //get all relevant data from Database. Note: Needs to be async, because takes some time
+    //use non UseState-Variables for better performance. If direct use of UseStates they wouldnt be set in time for further calculations
     const currentPlayerC = getCurrentPlayer(data, accessToken);
     const currentQuestionC = getCurrentQuestion(data, currentPlayerC);
     const currentCategoryC = getCurrentCategory(data, currentPlayerC);
@@ -62,22 +42,8 @@ function Game() {
     const currentQuestionDataC = getQuestionData(data, currentQuestionC);
     const timeToAnswer = data[1].TimeToAnswer;
     const quizID = data[1].QuizID;
-    console.log(
-      "Player: " +
-        currentPlayerC +
-        " Runde: " +
-        currentRoundC +
-        " Frage: " +
-        currentQuestionC +
-        " Kategorie: " +
-        currentCategoryC +
-        " your Turn: " +
-        yourTurnC +
-        " timeToAnswer: " +
-        timeToAnswer +
-        " QuizID: " +
-        quizID
-    );
+    
+    //after calculation is done, set UseStates for FrontEnd-Usage
     setPlayer(currentPlayerC);
     setCurrentRound(currentRoundC);
     setCurrentQuestion(currentQuestionC);
@@ -86,12 +52,11 @@ function Game() {
     setRoundEnded(!yourTurnC);
     setTimer(timeToAnswer);
     setCurrentQuestionData(currentQuestionDataC);
-    setGameData(data);
     setCurrentQuizID(quizID);
     setDataSet(true);
   }
 
-  //fetches data from DB and extracts relevant data
+  //fetches data from DB and extracts relevant data when site loads
   useEffect(() => {
     calculateRelevantData();
   }, []);
@@ -101,12 +66,11 @@ function Game() {
     console.log(answerGiven);
     if(answerGiven){
       setAnswerPlayer(currentQuizID, currentQuestion, answerGiven, player);
-
     }
   }, [answerGiven]);
 
-  //extracts the current Player by looking at the accesstoken provided
-  function getCurrentPlayer(data, accessToken) {
+  //extracts the current Player from Data by looking at the accesstoken provided
+   function getCurrentPlayer(data, accessToken) {
     if (accessToken === data[1].AccessTokenOne) {
       return 1;
     } else if (accessToken === data[1].AccessTokenTwo) {
@@ -142,7 +106,7 @@ function Game() {
     return null;
   }
 
-  //decides if its the players turn
+  //decides if its the active players turn
   function decideTurn(data, player, isSinglePlayer) {
     const Player1Round = Math.ceil(getCurrentQuestion(data, 1) / 3);
     const Player2Round = Math.ceil(getCurrentQuestion(data, 2) / 3);
@@ -196,10 +160,13 @@ function Game() {
     }
   }
 
+  //triggered after continuing with the next question to get new Data
   function handleNextQuestion() {
     calculateRelevantData();
+    //if questionID = null --> set round Ended --> trigger rendering of Choose a new Category --> Choose Catergory --> setRound Ended (false)
   }
 
+  //write the givenAnswer to DB the Moment the Answer is clicked on to avoid cheating
   function setAnswerPlayer(quizID, questionNumber, givenAnswer, player) {
     //UPDATE QuizQuestions SET AnswerPlayer1 = 5 WHERE QuizID = 2 AND QuestionNumber = 4;
     const setPlayer1Answer = async (answerGiven, quizID, questionNumber) => {

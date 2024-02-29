@@ -1,35 +1,45 @@
 import React, { useState, useEffect } from "react";
 import AccessAlarmIcon from "@mui/icons-material/AccessAlarm";
 import LoopIcon from "@mui/icons-material/Loop";
-
 import GameButton from "../atoms/GameButton";
 import GameCategoryDropdown from "../atoms/GameCategoryDropdown";
 import GameInput from "../atoms/GameInput";
 import GameLinkContainer from "../components/GameLinkContainer";
 import Box from "@mui/material/Box";
-import { fetchData, checkAccessToken, getThreeQuestionsByCat, createQuizInDB } from "./../api.js";
+import { CircularProgress } from "@mui/material";
+import {
+  fetchQuestionCategories,
+  checkAccessToken,
+  getThreeQuestionsByCat,
+  createQuizInDB,
+} from "./../api.js";
 
-//TODO: Conditional rendering only when player selected Multiplayer, otherwise redirect to Game.js
 function GameSetup() {
-  const [categories, setCategories] = useState([]);
-  const [dataFetched, setDataFetched] = useState(false);
-  const data = [];
-  useEffect(() => {
-    // Call the function to fetch categories when the component mounts
-    fetchData(
-      "http://localhost:5000/categories",
-      setCategories,
-      "",
-      setDataFetched
-    );
-    return () => {};
-  }, []);
-
+  const [categories, setCategories] = useState([]); //stores QuestionCategories from DB
+  const [loading, setLoading] = useState(false); //if true renders a loading animation while quiz is created in DB
   const [time, setTime] = useState(20); // Timelimit to answer a question
   const [numberOfRounds, setNumberOfRounds] = useState(5); // Amount of rounds of a single game. One Round contains three questions
   const [category, setCategory] = useState(categories[0]); //Category the player has choosen in the Dropdown
-  const [linkOne, setLinkOne] = useState();
-  const [linkTwo, setLinkTwo] = useState();
+  const [linkOne, setLinkOne] = useState(); //generated Link for player1 to join a quiz
+  const [linkTwo, setLinkTwo] = useState(); //generated Link for player2 to join a quiz
+
+  //get categories from Database when component mounts
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        let options = await fetchQuestionCategories("http://localhost:5000/categories", "");
+        setCategories(options);
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+      }
+    };
+
+    fetchCategories();
+
+    return () => {
+      // Cleanup function if needed
+    };
+  }, []);
 
   // handles Input of the Timelimit
   const handleTimeChange = (event) => {
@@ -46,53 +56,65 @@ function GameSetup() {
     setCategory(newValue.value);
   };
 
+  // generates AccessTokens for a quiz. Output is not savely unique. Note Math.random is not crypto save, but for this purpose ok
   function generateAccessToken() {
-    // Generate a random number between 0 and 255
+    // Generate a large random number
     var randomNumber = Math.floor(Math.random() * 10000000000000000);
-    // Convert the random number to hexadecimal
+    // Convert the random number to a hexadecimal String
     var hexString = randomNumber.toString(16);
-    // If the hexadecimal string is only one character long, prepend a '0' to make it two characters
-    if (hexString.length === 1) {
-      hexString = "0" + hexString;
-    }
     return hexString;
   }
 
-  async function createQuiz() {
-    let IsUniqueAccesstoken = false;
+  //creates a new instance of quiz in DB
+  async function createQuiz(isSinglePlayer) {
+    setLoading(true); //starts loading animation
+    let IsUniqueAccesstoken = false; //boolean to check if generated Accesstoken already exists in DB
     let accessToken1 = null;
     let accessToken2 = null;
     do {
       //create a accesstokens
-      accessToken1 = generateAccessToken();
-      accessToken2 = generateAccessToken();
+      accessToken1 = generateAccessToken(); //generate AccessToken1
+      if (!isSinglePlayer) {
+        accessToken2 = generateAccessToken(); //generate AccessToken2
+      }
       //check if accesstokens already exist in db
       IsUniqueAccesstoken = await checkAccessToken(
         "http://localhost:5000/accessToken",
         accessToken1,
         accessToken2
       );
-    } while (IsUniqueAccesstoken === false);
+    } while (IsUniqueAccesstoken === false); //generate new Accesstoken if one of them already exists in DB
 
-    console.log("Zeitlimit: " +
-    time +
-    " KatergorieID: " +
-    category +
-    " Runden: " +
-    numberOfRounds +
-    " AccessTokens: " +
-    accessToken1 +
-    " " +
-    accessToken2);
-    //write quizdata to database
-    //generate questions for quiz
-    const questions = await getThreeQuestionsByCat("http://localhost:5000/getThreeQuestionsByCat", category);
-    const questionIds = [questions[0].QuestionID, questions[1].QuestionID, questions[2].QuestionID,]
-    console.log(questionIds);
-    await createQuizInDB("http://localhost:5000/createQuizInDB2", accessToken1, accessToken2, numberOfRounds, time, questionIds[0],questionIds[1],questionIds[2]);
+    //generate the first three questions for new quiz
+    const questions = await getThreeQuestionsByCat(
+      "http://localhost:5000/getThreeQuestionsByCat",
+      category
+    );
+    const questionIds = [
+      questions[0].QuestionID,
+      questions[1].QuestionID,
+      questions[2].QuestionID,
+    ];
+
+    //create a new quiz in DB by creating a quiz and saving space in QuizQuestions for rounds*3 questions
+    let res = await createQuizInDB(
+      "http://localhost:5000/createQuizInDB2",
+      accessToken1,
+      accessToken2,
+      numberOfRounds,
+      time,
+      questionIds[0],
+      questionIds[1],
+      questionIds[2]
+    );
+    console.log(res);
     //generate Links for quiz
-    setLinkOne('http://localhost:3000/Game?accesstoken=' + accessToken1);
-    setLinkTwo('http://localhost:3000/Game?accesstoken=' + accessToken2);
+    setLinkOne("http://localhost:3000/Game?accesstoken=" + accessToken1);
+    if (!isSinglePlayer) {
+      setLinkTwo("http://localhost:3000/Game?accesstoken=" + accessToken2);
+    }
+    //EndLoading Animation
+    setLoading(false);
   }
 
   return (
@@ -111,13 +133,12 @@ function GameSetup() {
           max="60"
           step="1"
           type="number"
-          unit="sec"
           helperText="in sec"
           icon={<AccessAlarmIcon />}
         />
 
         <GameCategoryDropdown
-          label="Kategorie"
+          label="Kategorie*"
           options={categories.map((category) => ({
             value: category.QuestionCategoryID,
             label: category.Name,
@@ -139,12 +160,14 @@ function GameSetup() {
         />
         {category ? (
           <div style={style.buttonContainer}>
-            <GameButton label="Singleplayer" onClick={createQuiz} />
-            <GameButton label="Multiplayer" onClick={generateAccessToken} />
+            <GameButton label="Singleplayer" onClick={() => createQuiz(true)} />
+            <GameButton label="Multiplayer" onClick={() => createQuiz(false)} />
           </div>
         ) : (
           ""
         )}
+        {loading ? <CircularProgress style={style.animation} /> : ""}
+
         {linkOne ? (
           <div>
             <GameLinkContainer
@@ -152,11 +175,15 @@ function GameSetup() {
               linkText={linkOne}
               id="linkText1"
             />
-            <GameLinkContainer
-              player="Spieler 2"
-              linkText={linkTwo}
-              id="linkText2"
-            />
+            {linkTwo ? (
+              <GameLinkContainer
+                player="Spieler 2"
+                linkText={linkTwo}
+                id="linkText2"
+              />
+            ) : (
+              ""
+            )}
           </div>
         ) : (
           ""
@@ -182,5 +209,9 @@ const style = {
     height: 50,
     gridTemplateColumns: "repeat(2, 1fr)", // 2 columns, each with equal width
     gridColumnGap: "20px",
+  },
+
+  animation: {
+    margin: "2rem",
   },
 };

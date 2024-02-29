@@ -1,6 +1,6 @@
 // api.js
 
-const fetchData = async (route, saveData, accessToken, updateState) => {
+const fetchQuestionCategories = async (route, accessToken) => {
     try {
       const response = await fetch(route, {
         method: 'POST',
@@ -15,14 +15,13 @@ const fetchData = async (route, saveData, accessToken, updateState) => {
       }
   
       const data = await response.json();
-      saveData(data);
-      updateState(true);
+      return data;
     } catch (error) {
       console.error('Error fetching data: ', error);
     }
   };
   
-  export { fetchData };
+  export { fetchQuestionCategories };
 
   const checkAccessToken = async (route, accessToken1, accessToken2) => {
     try {
@@ -44,8 +43,10 @@ const fetchData = async (route, saveData, accessToken, updateState) => {
         if (obj.AccessTokenOne === accessToken1 || obj.AccessTokenTwo === accessToken1) {
           return false; // token already in db
         }
-        if (obj.AccessTokenOne === accessToken2 || obj.AccessTokenTwo === accessToken2) {
-          return false; // token already in db
+        if(accessToken2!=null){
+          if (obj.AccessTokenOne === accessToken2 || obj.AccessTokenTwo === accessToken2) {
+            return false; // token already in db
+          }
         }
       }
       return true; //token not in db
@@ -101,3 +102,26 @@ const fetchData = async (route, saveData, accessToken, updateState) => {
   };
   
   export { createQuizInDB };
+
+  const fetchData = async (accessToken) => {
+    console.log(accessToken);
+    try {
+      const response = await fetch("http://localhost:5000/gameData", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ accessToken: accessToken }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch data");
+      }
+
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error("Error fetching data: ", error);
+    }
+  };
+  export { fetchData };
