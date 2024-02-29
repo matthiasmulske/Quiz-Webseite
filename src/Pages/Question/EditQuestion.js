@@ -2,6 +2,7 @@ import * as React from "react";
 import QuestionTable from "../../atoms/QuestionTable"
 
 function AddQuestion() {
+
     return (
         <>
             <div style={style.container}>
