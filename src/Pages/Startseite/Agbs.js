@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 
 function Agbs() {
   return (
@@ -321,6 +322,12 @@ function Agbs() {
             Solange die Website und die Informationen und Dienstleistungen auf dieser Website kostenlos 
             zur Verfügung gestellt werden, übernehmen wir keine Haftung für Verluste oder 
             Schäden jeglicher Art.</p>
+        <div style={styles.topLinkContainer}>
+            <Link to="/">Zurück zur Startseite</Link> 
+        </div>
+        <div style={styles.bottomLinkContainer}>
+            <Link to="/">Zurück zur Startseite</Link> 
+        </div>
     </div>
   );
 }
@@ -350,7 +357,17 @@ const styles = {
       listStyleType: 'disc',
       fontSize: '15px',
       marginLeft: '20px'
-    }
+    },
+    topLinkContainer: {
+        position: 'absolute',
+        top: '100px',
+        right: '20px',
+    },
+    bottomLinkContainer: {
+        position: 'absolute',
+        bottom: '-3550px',
+        right: '20px',
+      }
   };
 
 export default Agbs;

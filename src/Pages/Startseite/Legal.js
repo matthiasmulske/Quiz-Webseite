@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 
 function Legal() {
   return (
@@ -19,7 +20,11 @@ function Legal() {
       <p style={styles.paragraph}>
         Hierbei handelt es sich um ein nicht-kommerzielles Projekt
       </p>
+      <div style={styles.linkContainer}>
+        <Link to="/">Zurück zur Startseite</Link> 
+      </div>
     </div>
+    
   );
 }
 
@@ -46,8 +51,12 @@ const styles = {
     listStyleType: 'disc',
     marginLeft: '20px',
     margin: '0'
+  },
+  linkContainer: {
+    position: 'absolute',
+    top: '100px',
+    right: '20px',
   }
 };
-
 
 export default Legal;

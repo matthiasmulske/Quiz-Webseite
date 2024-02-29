@@ -56,7 +56,7 @@ export default function PrimarySearchAppBar() {
 
   const handleLogin = () => {
     
-    setIsLoggedIn(true);
+   setIsLoggedIn(true);
   };
 
   return (

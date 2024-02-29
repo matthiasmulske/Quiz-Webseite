@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 
 function PrivacyPolicyPage() {
   return (
@@ -844,6 +845,12 @@ function PrivacyPolicyPage() {
           Löschen.{" "}
         </li>
       </ul>
+      <div style={styles.topLinkContainer}>
+          <Link to="/">Zurück zur Startseite</Link> 
+      </div>
+      <div style={styles.bottomLinkContainer}>
+          <Link to="/">Zurück zur Startseite</Link> 
+      </div>
     </div>
   );
 }
@@ -872,7 +879,18 @@ const styles = {
     listStyleType: 'disc',
     fontSize: '15px',
     marginLeft: '20px'
+  },
+  topLinkContainer: {
+    position: 'absolute',
+    top: '100px',
+    right: '20px',
+},
+bottomLinkContainer: {
+    position: 'absolute',
+    bottom: '-7300px',
+    right: '20px',
   }
+  
 };
 
 export default PrivacyPolicyPage;
