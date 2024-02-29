@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -25,6 +25,13 @@ export default function PrimarySearchAppBar() {
   const [anchorEl, setAnchorEl] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  useEffect(() => {
+    const loggedInStatus = localStorage.getItem('isLoggedIn');
+    if (loggedInStatus === 'true') {
+      setIsLoggedIn(true);
+    }
+  }, []);
+
   const handleMailDialogOpen = () => {
     setMailDialogOpen(true);
   };
@@ -43,6 +50,7 @@ export default function PrimarySearchAppBar() {
 
   const handleLogout = () => {
     setIsLoggedIn(false);
+    localStorage.setItem('isLoggedIn', 'false');
     handleLogoutDialogClose();
   };
 
@@ -55,15 +63,16 @@ export default function PrimarySearchAppBar() {
   };
 
   const handleLogin = () => {
-    
-   setIsLoggedIn(true);
+    setIsLoggedIn(true);
+    localStorage.setItem('isLoggedIn', 'true');
   };
+  const homePage = isLoggedIn ? "/HomepageLogin" : "/";
 
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-          <Link to="/HomepageLogin" style={{ textDecoration: 'none', color: 'inherit' }}>
+          <Link to={homePage}style={{ textDecoration: 'none', color: 'inherit' }}>
             <IconButton size="large" edge="start" color="inherit" aria-label="home">
               <img src={logo} alt="logo" height="50px" />
             </IconButton>
@@ -76,11 +85,12 @@ export default function PrimarySearchAppBar() {
           >
             ISEF QUIZ
           </Typography>
+          
           <Box sx={{ flexGrow: 1 }} />
           {isLoggedIn && (
             <>
               <IconButton size="large" aria-label="show 4 new mails" color="inherit" onClick={handleMailDialogOpen}>
-                <Badge badgeContent={1} color="error">
+                <Badge badgeContent={0} color="error">
                   <MailIcon />
                 </Badge>
               </IconButton>
@@ -133,7 +143,7 @@ export default function PrimarySearchAppBar() {
         <DialogTitle id="mail-dialog-title">{"Neue Nachrichten"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="mail-dialog-description">
-            Sie haben eine neuen Nachrichten
+            Sie haben eine keine neuen Nachrichten
           </DialogContentText>
         </DialogContent>
         <DialogActions>
