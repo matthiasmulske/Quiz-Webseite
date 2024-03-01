@@ -19,6 +19,7 @@ function GameQuestion({ question, answers, questionID, timer, setTimer, setAnswe
     }, 50);
     return () => clearInterval(intervalId);
   }, [timer, timeLeft]);
+
   function handleButton(){
     setSelectedAnswer(null);
     setTimer(timer)
@@ -26,6 +27,8 @@ function GameQuestion({ question, answers, questionID, timer, setTimer, setAnswe
     setAnswerGiven(null);
     handleNextQuestion();
   }
+
+  
   return (
     <div style={style.pageContainer}>
       <div className="progress mb-4">

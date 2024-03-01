@@ -47,6 +47,7 @@ function Game() {
     const timeToAnswer = data[1].TimeToAnswer;
     const quizIDC = data[1].QuizID;
     let newRoundC = decideNewRound(data, currentQuestionC);
+    let gameEndedC = decideGameEnded(data, currentQuestionC);
     console.log({
       isSinglePlayerC: decideQuizType(data),
       currentPlayerC: getCurrentPlayer(data, accessToken),
@@ -66,6 +67,7 @@ function Game() {
     setCurrentCategory(currentCategoryC);
     setYourTurn(yourTurnC);
     setRoundEnded(!yourTurnC);
+    setGameEnded(gameEndedC);
     setTimer(timeToAnswer);
     setCurrentQuestionData(currentQuestionDataC);
     setCurrentQuizID(quizIDC);
@@ -83,7 +85,7 @@ function Game() {
 
   //whenever a answer is clicked on by the player, it writes his answer to the DB
   useEffect(() => {
-    if(answerGiven){
+    if(answerGiven!==null){
       setAnswerPlayer(currentQuizID, currentQuestion, answerGiven, player);
     }
   }, [answerGiven]);
@@ -100,25 +102,38 @@ function Game() {
   //extract the Number of currentQuestion, that hasnt been played yet
   function getCurrentQuestion(data, player) {
     for (let i = 0; i < data.length; i++) {
-      const question = data[i];
-      if (question["AnswerPlayer" + player] === null) {
-        return question["QuestionNumber"];
+      if (data[i]["AnswerPlayer" + player] === null) {
+        return data[i]["QuestionNumber"];
       }
-      // if(i===data.length-1 && question["AnswerPlayer" + player] !== null){
-      //   return 999; //codeNumber for Game finished
-      // }
+       if(i===data.length-1 && data[i]["AnswerPlayer" + player] !== null){
+         return 999; //codeNumber for Game finished
+       }
     }
   }
 
   //extract the Number of currentQuestion, that hasnt been played yet
   function decideNewRound(data, currentQuestion) {
-    if (data[currentQuestion-1].QuestionID===null){
-      return true;
+    try {
+      if (data[currentQuestion-1].QuestionID===null){
+        return true;
+      }
+      else{
+        return false
+      }
     }
-    else{
-      return false
-    }
+    catch{}
   }
+
+  //extract the Number of currentQuestion, that hasnt been played yet
+  function decideGameEnded(data) {
+      if (getCurrentQuestion(data, 1) ===999 && getCurrentQuestion(data, 2) === 999){
+        return true;
+      }
+      else{
+        return false
+      }
+    }
+  
 
   //extracts the current Category by looking at the category of the current question
   function getCurrentCategory(data, player) {
@@ -210,7 +225,7 @@ function Game() {
   }
 
   //write the givenAnswer to DB the Moment the Answer is clicked on to avoid cheating
-  function setAnswerPlayer(quizID, questionNumber, givenAnswer, player) {
+  async function setAnswerPlayer(quizID, questionNumber, givenAnswer, player) {
     //UPDATE QuizQuestions SET AnswerPlayer1 = 5 WHERE QuizID = 2 AND QuestionNumber = 4;
     const setPlayer1Answer = async (answerGiven, quizID, questionNumber) => {
       try {

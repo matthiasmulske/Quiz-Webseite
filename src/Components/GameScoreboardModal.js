@@ -3,8 +3,15 @@ import GameButton from "../atoms/GameButton";
 import { Modal } from "react-bootstrap";
 import GameQuestionReportModal from "./GameQuestionReportModal";
 import ErrorIcon from "@mui/icons-material/Error";
-import { List, ListItemText, ListItemIcon, ListItemButton, ListItem, Typography } from "@mui/material";
-import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
+import {
+  List,
+  ListItemText,
+  ListItemIcon,
+  ListItemButton,
+  ListItem,
+  Typography,
+} from "@mui/material";
+import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 
 const GameScoreboardModal = ({
   modalData,
@@ -15,10 +22,10 @@ const GameScoreboardModal = ({
   const [openReportModal, setOpenReportModal] = useState(false);
   const [reportData, setReportData] = useState();
   const handleOpenReportModal = () => {
-    console.log(modalData);
     setReportData(modalData);
     setOpenReportModal(true);
   };
+
   console.log(modalData);
   const [answers, setAnswers] = useState([]);
   const [playerAnswer, setPlayerAnswer] = useState();
@@ -29,19 +36,11 @@ const GameScoreboardModal = ({
       modalData?.Answer3,
       modalData?.CorrectAnswer,
     ]);
-  }, []);
+  }, [modalData]);
 
   const handleCloseModal = () => {
     setOpenModal(false); // Update openModal in the parent component
   };
-
-  useEffect(() => {
-    if (player === "player1") {
-      setPlayerAnswer(modalData?.AnswerPlayer1.toString());
-    } else if (player === "player2") {
-      setPlayerAnswer(modalData?.AnswerPlayer2.toString());
-    }
-  }, [answers]);
 
   return (
     <Modal show={openModal} onHide={handleCloseModal}>
@@ -49,19 +48,30 @@ const GameScoreboardModal = ({
         <Modal.Title>{modalData?.QuestionText}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-       
-      <List>
-  {answers.map((answer, index) => (
-    <ListItem key={index}>
-      <ListItemIcon>
-        <ArrowRightAltIcon />
-      </ListItemIcon>
-      <ListItemText primary={<Typography style= {{ color: index === 3 ? 'green' : "blue" } }>{answer}</Typography>} />
-      </ListItem>
-  ))}
-</List>
+        <List>
+          {answers.map((answer, index) => (
+            <ListItem key={index}>
+              <ListItemIcon>
+                <ArrowRightAltIcon />
+              </ListItemIcon>
+              <ListItemText>
+                <Typography
+                  style={{
+                    color:
+                      index === 3
+                        ? "green"
+                        : player ===1 ? modalData?.AnswerPlayer1 - 1 : modalData?.AnswerPlayer2 - 1 === index
+                          ? "red"
+                          : "grey",
+                  }}
+                >
+                  {answer}
+                </Typography>
+              </ListItemText>
+            </ListItem>
+          ))}
+        </List>
 
-        
         <div className="row justify-content-end">
           <div className="col text-end">
             <GameButton
@@ -71,7 +81,8 @@ const GameScoreboardModal = ({
               onClick={handleOpenReportModal}
             />
             <GameQuestionReportModal
-              modalData={reportData}
+              question={modalData?.QuestionText}
+              questionID={modalData?.QuestionID}
               openModal={openReportModal}
               setOpenModal={setOpenReportModal}
             />

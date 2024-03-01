@@ -4,10 +4,9 @@ import ErrorIcon from "@mui/icons-material/Error";
 import GameQuestionReportModal from "./GameQuestionReportModal";
 
 
-function GameQuestionView({ question, answers, questionID, setTimer, timeLeft, setAnswerGiven, setTimeLeft, answerGiven, selectedAnswer, setSelectedAnswer }) {
+function GameQuestionView({ question, answers, questionID, timeLeft, setAnswerGiven, setTimeLeft, answerGiven, selectedAnswer, setSelectedAnswer }) {
   const [openModal, setOpenModal] = useState(false); //decides if reportModal is opened
   const [shuffledAnswers, setShuffledAnswers] = useState([]); //shuffels answers in order to display the correct answer not always on the same position
-  //const [selectedAnswer, setSelectedAnswer]=useState();
   // Shuffle answers
   function shuffleAnswers(array) {
     for (let i = array.length - 1; i > 0; i--) {
@@ -30,19 +29,11 @@ function GameQuestionView({ question, answers, questionID, setTimer, timeLeft, s
   const handleAnswerClick = (answer) => {
     if (!answerGiven && timeLeft>0) {
       setSelectedAnswer(answer);
-      //setTimer(0);  // Stop the timer
       setTimeLeft(0);
       for (let i = 0; i < answers.length; i++) {
         if (answer === answers[i]) {
           console.log("Clicked on Answer " + i);
           setAnswerGiven(i);
-        }
-        if (answer === answers[3]) {
-          console.log("Correct answer!");
-          //setIsCorrect(true);
-        } else {
-          console.log("Incorrect Answer!");
-          //setIsCorrect(false);
         }
       }
     }
