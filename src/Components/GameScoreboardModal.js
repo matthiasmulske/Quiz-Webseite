@@ -3,7 +3,7 @@ import GameButton from "../atoms/GameButton";
 import { Modal } from "react-bootstrap";
 import GameQuestionReportModal from "./GameQuestionReportModal";
 import ErrorIcon from "@mui/icons-material/Error";
-import { List, ListItemText, ListItemIcon, ListItemButton,ListItem, Typography } from "@mui/material";
+import { List, ListItemText, ListItemIcon, ListItemButton, ListItem, Typography } from "@mui/material";
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 
 const GameScoreboardModal = ({
@@ -56,7 +56,7 @@ const GameScoreboardModal = ({
       <ListItemIcon>
         <ArrowRightAltIcon />
       </ListItemIcon>
-      <ListItemText primary={<Typography style= {{ color: index === 3 ? 'green' : modalData?.PlayerAnswer1===index-1 ? 'red' : "blue" } }>{answer}</Typography>} />
+      <ListItemText primary={<Typography style= {{ color: index === 3 ? 'green' : "blue" } }>{answer}</Typography>} />
       </ListItem>
   ))}
 </List>

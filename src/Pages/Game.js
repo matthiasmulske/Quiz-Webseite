@@ -199,8 +199,8 @@ function Game() {
   }
 
   //triggered after continuing with the next question to get new Data
-  function handleNextQuestion() {
-    calculateRelevantData();
+  async function handleNextQuestion() {
+    await calculateRelevantData();
     console.log(" hh"+currentQuestionData[1]===null);
     if(currentQuestionData===null){
       setRoundEnded(true);
