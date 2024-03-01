@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import AccessAlarmIcon from "@mui/icons-material/AccessAlarm";
 import LoopIcon from "@mui/icons-material/Loop";
-import GameButton from "../atoms/GameButton";
-import GameCategoryDropdown from "../atoms/GameCategoryDropdown";
-import GameInput from "../atoms/GameInput";
-import GameLinkContainer from "../components/GameLinkContainer";
+import GameButton from "../atoms/GameButton.js";
+import GameCategoryDropdown from "../atoms/GameCategoryDropdown.js";
+import GameInput from "../atoms/GameInput.js";
+import GameLinkContainer from "../components/GameLinkContainer.js";
 import Box from "@mui/material/Box";
 import { CircularProgress } from "@mui/material";
 import {
@@ -12,7 +12,7 @@ import {
   checkAccessToken,
   getThreeQuestionsByCat,
   createQuizInDB,
-} from "./../api.js";
+} from "../api.js";
 
 function GameSetup() {
   const [categories, setCategories] = useState([]); //stores QuestionCategories from DB

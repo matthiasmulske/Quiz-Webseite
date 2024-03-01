@@ -7,7 +7,7 @@ import GameSumUp from "../components/GameSumUp.js";
 import { CircularProgress } from "@mui/material";
 import {
   fetchData
-} from "./../api.js";
+} from "../api.js";
 import GameChooseCategory from "../components/GameChooseCategory.js";
 
 function Game() {
