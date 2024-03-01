@@ -20,6 +20,7 @@ function Game() {
 
   //get the accessToken of the URL-Parameter
   const [accessToken, setAccessToken] = useState(new URLSearchParams(window.location.search).get('accesstoken'));
+  const [quizdata, setQuizdata]=useState();
 
   //stores current game Data
   const [player, setPlayer] = useState();   // player=1 for Player1 and player=2 for Player2
@@ -36,7 +37,6 @@ function Game() {
     setDataSet(false); //start loading animation
     const data = await fetchData(accessToken); //get all relevant data from Database. Note: Needs to be async, because takes some time
     //use non UseState-Variables for better performance. If direct use of UseStates they wouldnt be set in time for further calculations
-    console.log(data);
     const isSinglePlayerC = decideQuizType(data);
     const currentPlayerC = getCurrentPlayer(data, accessToken);
     const currentQuestionC = getCurrentQuestion(data, currentPlayerC);
@@ -59,8 +59,6 @@ function Game() {
       quizIDC: data[1].QuizID,
       newRound: decideNewRound(data, getCurrentQuestion(data, currentPlayerC))
     });
-    
-    
     //after calculation is done, set UseStates for FrontEnd-Usage
     setPlayer(currentPlayerC);
     setCurrentRound(currentRoundC);
@@ -72,12 +70,12 @@ function Game() {
     setCurrentQuestionData(currentQuestionDataC);
     setCurrentQuizID(quizIDC);
     setRoundEnded(newRoundC);
+    setIsSinglePlayer(isSinglePlayerC);
+    setQuizdata(data);
     setDataSet(true);
   }
 
-  useEffect(() => {
-    console.log("roundEnded:", roundEnded);
-  }, [roundEnded]);
+
   //fetches data from DB and extracts relevant data when site loads
   useEffect(() => {
     calculateRelevantData();
@@ -269,8 +267,6 @@ function Game() {
       setPlayer2Answer(givenAnswer, quizID, questionNumber);
     }
   }
-
- console.log(roundEnded, roundStarted, gameEnded, yourTurn)
   return (
     <>
      {!loading ? <CircularProgress/> : ""}
@@ -310,7 +306,13 @@ function Game() {
       : ""}
       {gameEnded === true ? <GameSumUp /> : ""}
       <div style={{margin:"10rem"}}></div>
-      <GameScoreboard />
+      {quizdata ? 
+      <GameScoreboard 
+      quizdata={quizdata}
+      isSinglePlayer={isSinglePlayer}/> 
+      : 
+      ""
+      }
     </>
   );
 }
