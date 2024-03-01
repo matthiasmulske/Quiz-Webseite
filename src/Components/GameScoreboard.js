@@ -55,7 +55,7 @@ function GameScoreboard({ quizdata, isSinglePlayer }) {
                   {chunk.map((question) => (
                     <div key={question.question_number}>
                       <GameButton
-                        color={ question.AnswerPlayer2 ?question.AnswerPlayer2 === 3
+                        color={ question.AnswerPlayer2 ? question.AnswerPlayer2 === 3
                           ? "success"
                           : "error" : "primary"
                         }
