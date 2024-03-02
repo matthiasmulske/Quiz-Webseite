@@ -1,10 +1,6 @@
 import React, { useState, useEffect } from "react";
-import AccessAlarmIcon from "@mui/icons-material/AccessAlarm";
-import LoopIcon from "@mui/icons-material/Loop";
 import GameButton from "../atoms/GameButton.js";
 import GameCategoryDropdown from "../atoms/GameCategoryDropdown.js";
-import GameInput from "../atoms/GameInput.js";
-import GameLinkContainer from "./GameLinkContainer.js";
 import Box from "@mui/material/Box";
 import { CircularProgress } from "@mui/material";
 import {
@@ -12,41 +8,49 @@ import {
   fetchQuestionCategories,
   getThreeQuestionsByCat
 } from "../api.js";
+import domain from "./../assets/domain.js"
 
-function GameChooseCategory({currentRound, currentQuestion, currentQuizID, setRoundEnded, setRoundStarted, calculateRelevantData}) {
+function GameChooseCategory({ currentRound, currentQuestion, currentQuizID, setRoundEnded, setRoundStarted, handleButton }) {
   const [categories, setCategories] = useState([]); //stores QuestionCategories from DB
   const [loading, setLoading] = useState(false); //if true renders a loading animation while quiz is created in DB
-  const [category, setCategory] = useState(categories[0]); //Category the player has choosen in the Dropdown
-  
+  const [category, setCategory] = useState(); //Category the player has choosen in the Dropdown
+
+
+  const fetchCategories = async () => {
+    try {
+      let options = await fetchQuestionCategories(domain.domain + ":5000/categories", "");
+      let optionsArray = options.map(category => ({
+        value: category.QuestionCategoryID,
+        label: category.Name
+      }));
+      return optionsArray
+    } catch (error) {
+      console.error("Error fetching categories:", error);
+    }
+  }
 
   //get categories from Database when component mounts
   useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        let options = await fetchQuestionCategories("http://localhost:5000/categories", "");
-        setCategories(options);
-      } catch (error) {
-        console.error("Error fetching categories:", error);
-      }
-    };
-
-    fetchCategories();
-
-    return () => {
-      // Cleanup function if needed
-    };
+    setLoading(true);
+    getData();
+    setLoading(false);
   }, []);
 
+  async function getData() {
+    let options = await fetchCategories();
+    setCategories(options);
+  }
+
   // handles Input of the first Round to be played
-  const handleCategoryChange = (event, newValue) => {
-    setCategory(newValue.value);
+  const handleCategoryChange = (event) => {
+    setCategory(event.target.value);
   };
 
   //
-  async function handleButtonNewRound(currentQuizID, currentQuestion){
-    console.log(currentQuestion, currentQuizID);
+  async function handleButtonNewRound(currentQuizID, currentQuestion) {
+    setLoading(true);
     const questions = await getThreeQuestionsByCat(
-      "http://localhost:5000/getThreeQuestionsByCat",
+      domain.domain + ":5000/getThreeQuestionsByCat",
       category
     );
     const questionIds = [
@@ -54,17 +58,16 @@ function GameChooseCategory({currentRound, currentQuestion, currentQuizID, setRo
       questions[1].QuestionID,
       questions[2].QuestionID,
     ];
-    console.log(questionIds);
-    setNewRound("http://localhost:5000/createNewRound", currentQuizID, currentQuestion, questionIds[0],questionIds[1],questionIds[2]);
-    setRoundEnded(false);
-    setRoundStarted(false);
-    calculateRelevantData();
+    await setNewRound(domain.domain + ":5000/createNewRound", currentQuizID, currentQuestion, questionIds[0], questionIds[1], questionIds[2]);
+    await handleButton();
+    setRoundStarted(true);
+    setLoading(false);
   }
 
   return (
     <div style={style.formContainer}>
-        <h1 style={style.headerRound}>Runde {currentRound}</h1>
-        <p>Bitte wähle eine Kategorie für die Fragen {currentQuestion} - {currentQuestion+2}</p>
+      <h1>Runde {currentRound}</h1>
+      <p>Bitte wähle eine Kategorie für die Fragen {currentQuestion} - {currentQuestion + 2}</p>
       <Box
         sx={{
           width: 700,
@@ -73,17 +76,21 @@ function GameChooseCategory({currentRound, currentQuestion, currentQuizID, setRo
       >
         <GameCategoryDropdown
           label="Kategorie*"
-          options={categories.map((category) => ({
-            value: category.QuestionCategoryID,
-            label: category.Name,
-          }))}
+          options={categories}
           selectedOption={category}
           onChange={handleCategoryChange}
-          name="Kategorie wählen"
         />
-        <GameButton label="Starte nächste Runde" onClick={() => handleButtonNewRound(currentQuizID, currentQuestion)}>
+        {loading ? <CircularProgress style={style.margin} /> : ""}
+        {category ?
 
-        </GameButton>
+          <div style={style.margin}>
+            <GameButton label="Starte nächste Runde" onClick={() => handleButtonNewRound(currentQuizID, currentQuestion)}>
+            </GameButton>
+          </div>
+          :
+          ""
+        }
+
       </Box>
     </div>
   );
@@ -100,14 +107,7 @@ const style = {
     textAlign: "center",
   },
 
-  buttonContainer: {
-    display: "grid",
-    height: 50,
-    gridTemplateColumns: "repeat(2, 1fr)", // 2 columns, each with equal width
-    gridColumnGap: "20px",
-  },
-
-  animation: {
+  margin: {
     margin: "2rem",
   },
 };

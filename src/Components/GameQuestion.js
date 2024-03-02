@@ -37,7 +37,6 @@ function GameQuestion({ question, answers, questionID, timer, setTimer, setAnswe
           role="progressbar"
           style={{ minWidth: `${(timeLeft / timer) * 100}%` }}
         ></div>
-        <p>{timeLeft/timer*100}</p>
       </div>
 
       <div style={style.answerButton}>
@@ -54,7 +53,7 @@ function GameQuestion({ question, answers, questionID, timer, setTimer, setAnswe
           setSelectedAnswer={setSelectedAnswer}
         />
       </div>
-      {timeLeft <= 0 ? (
+      {timeLeft <= 0 && answerGiven ? (
         <div style={style.buttonNextQuestion}>
           <GameButton variant="outlined" label="Nächste Frage" color="warning" onClick={handleButton}></GameButton>
         </div>

@@ -1,4 +1,4 @@
-const colors = {
+export const colors = {
     primary: "rgb(13, 110, 253)",
     secondary: "rgb(108, 117, 125)",
     success: "rgb(25, 135, 84)",

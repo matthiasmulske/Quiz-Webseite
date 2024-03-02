@@ -13,34 +13,42 @@ import {
   getThreeQuestionsByCat,
   createQuizInDB,
 } from "../api.js";
+import domain from "./../assets/domain.js"
 
 function GameSetup() {
-  const [categories, setCategories] = useState([]); //stores QuestionCategories from DB
+  const [categories, setCategories] = useState([]);//stores QuestionCategories from DB
   const [loading, setLoading] = useState(false); //if true renders a loading animation while quiz is created in DB
   const [time, setTime] = useState(20); // Timelimit to answer a question
   const [numberOfRounds, setNumberOfRounds] = useState(5); // Amount of rounds of a single game. One Round contains three questions
   const [category, setCategory] = useState(categories[0]); //Category the player has choosen in the Dropdown
   const [linkOne, setLinkOne] = useState(); //generated Link for player1 to join a quiz
   const [linkTwo, setLinkTwo] = useState(); //generated Link for player2 to join a quiz
-
-  //get categories from Database when component mounts
-  useEffect(() => {
-    const fetchCategories = async () => {
+    
+  const fetchCategories = async () => {
       try {
-        let options = await fetchQuestionCategories("http://localhost:5000/categories", "");
-        setCategories(options);
+        console.log(domain.domain);
+        let options = await fetchQuestionCategories(domain.domain +":5000/categories", "");
+        let optionsArray = options.map(category => ({
+          value: category.QuestionCategoryID,
+          label: category.Name
+      }));
+      return optionsArray
       } catch (error) {
         console.error("Error fetching categories:", error);
       }
-    };
+    }
 
-    fetchCategories();
-
-    return () => {
-      // Cleanup function if needed
-    };
+  //get categories from Database when component mounts
+  useEffect(() => {
+    getData();
   }, []);
 
+  async function getData(){
+    let options = await fetchCategories();
+    setCategories(options);
+  }
+  
+  
   // handles Input of the Timelimit
   const handleTimeChange = (event) => {
     setTime(event.target.value);
@@ -52,8 +60,8 @@ function GameSetup() {
   };
 
   // handles Input of the first Round to be played
-  const handleCategoryChange = (event, newValue) => {
-    setCategory(newValue.value);
+  const handleCategoryChange = (event) => {
+    setCategory(event.target.value);
   };
 
   // generates AccessTokens for a quiz. Output is not savely unique. Note Math.random is not crypto save, but for this purpose ok
@@ -79,7 +87,7 @@ function GameSetup() {
       }
       //check if accesstokens already exist in db
       IsUniqueAccesstoken = await checkAccessToken(
-        "http://localhost:5000/accessToken",
+        domain.domain + ":5000/accessToken",
         accessToken1,
         accessToken2
       );
@@ -87,7 +95,7 @@ function GameSetup() {
 
     //generate the first three questions for new quiz
     const questions = await getThreeQuestionsByCat(
-      "http://localhost:5000/getThreeQuestionsByCat",
+      domain.domain + ":5000/getThreeQuestionsByCat",
       category
     );
     const questionIds = [
@@ -98,7 +106,7 @@ function GameSetup() {
 
     //create a new quiz in DB by creating a quiz and saving space in QuizQuestions for rounds*3 questions
     let res = await createQuizInDB(
-      "http://localhost:5000/createQuizInDB2",
+      domain.domain + ":5000/createQuizInDB2",
       accessToken1,
       accessToken2,
       numberOfRounds,
@@ -109,9 +117,9 @@ function GameSetup() {
     );
     console.log(res);
     //generate Links for quiz
-    setLinkOne("http://localhost:3000/Game?accesstoken=" + accessToken1);
+    setLinkOne(domain.domain + ":3000/Game?accesstoken=" + accessToken1);
     if (!isSinglePlayer) {
-      setLinkTwo("http://localhost:3000/Game?accesstoken=" + accessToken2);
+      setLinkTwo(domain.domain + ":3000/Game?accesstoken=" + accessToken2);
     }
     //EndLoading Animation
     setLoading(false);
@@ -139,13 +147,9 @@ function GameSetup() {
 
         <GameCategoryDropdown
           label="Kategorie*"
-          options={categories.map((category) => ({
-            value: category.QuestionCategoryID,
-            label: category.Name,
-          }))}
+          options={categories}
           selectedOption={category}
           onChange={handleCategoryChange}
-          name="Kategorie wählen"
         />
 
         <GameInput

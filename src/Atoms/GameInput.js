@@ -9,7 +9,7 @@ function GameInput({value, onChange, label, type, min, max, step, helperText, re
       required={required}
       label={label}
       type={isNumeric ? "number" : type}
-      inputProps={isNumeric ? { min, max, step } : undefined}
+      inputProps={isNumeric ? { min, max, step, style: { textAlign: 'center' } } : { style: { textAlign: 'center' } }}
       value={value}
       onChange={onChange}
       size="large"

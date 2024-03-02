@@ -33,7 +33,7 @@ function GameQuestionView({ question, answers, questionID, timeLeft, setAnswerGi
       for (let i = 0; i < answers.length; i++) {
         if (answer === answers[i]) {
           console.log("Clicked on Answer " + i);
-          setAnswerGiven(i);
+          setAnswerGiven(i+1);
         }
       }
     }

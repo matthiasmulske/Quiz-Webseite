@@ -1,4 +1,5 @@
 // api.js
+import domain from "./assets/domain.js"
 
 const fetchQuestionCategories = async (route, accessToken) => {
     try {
@@ -106,7 +107,7 @@ const fetchQuestionCategories = async (route, accessToken) => {
   const fetchData = async (accessToken) => {
     console.log(accessToken);
     try {
-      const response = await fetch("http://localhost:5000/gameData", {
+      const response = await fetch(domain.domain + ":5000/gameData", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

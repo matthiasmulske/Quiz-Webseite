@@ -9,6 +9,7 @@ import Welcome from "./pages/Welcome";
 import GameSetup from "./pages/GameSetup";
 import Game from "./pages/Game";
 import Navbar from "./components/Navbar";
+import GameButton from "./atoms/GameButton";
 
 function App() {
   return (
@@ -16,18 +17,13 @@ function App() {
       <Navbar>
       </Navbar>
       <Link className="nav-link" aria-current="page" to="/GameSetup">
-        Game Setup
+        <GameButton
+        label={"GameSetUp"}></GameButton>
       </Link>
-        <Link className="nav-link" aria-current="page" to="/Game">
-            Game
-        </Link>
         <div style={style}>
         </div>
-      <Link className="nav-link" aria-current="page" to="/EditQuestion">
-        EditQuestion
-      </Link>
       <Routes>
-        <Route path="/" element={<StartseiteLogin />} />
+        <Route path="/" element={<GameSetup />} />
         <Route path="/GameSetup" element={<GameSetup />} />
         <Route path="/Game" element={<Game />} />
         <Route path="/Datenschutzseite" element={<Datenschutzseite />} />
