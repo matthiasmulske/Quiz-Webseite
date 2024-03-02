@@ -69,8 +69,9 @@ function GameQuestionView({ question, answers, questionID, timeLeft, setAnswerGi
       <div style={style.answerGrid}>
         {shuffledAnswers.map((answer, index) => (
           <div style={style.answer} key={index}>
-            <GameButton
+            <GameButton 
               label={answer}
+              size={"la"}
               color={
                 selectedAnswer ? (answer===selectedAnswer? (answer===answers[3] ? "success" : "error") : (answer===answers[3]? "success":"primary")):"primary"
               }
@@ -87,9 +88,9 @@ export default GameQuestionView;
 
 const style = {
   question: {
-    fontSize: 40,
+    fontSize: "2rem",
     textAlign: "center",
-    marginBottom: 50,
+    marginBottom: "2rem",
   },
   warning: {
     display: "grid",
@@ -101,9 +102,8 @@ const style = {
 
   answerGrid: {
     display: "grid",
-    height: 150,
     gridTemplateColumns: "repeat(2, 1fr)", // 2 columns, each with equal width
-    gridRowGap: "20px",
-    gridColumnGap: "20px",
+    gridRowGap: "1.5rem",
+    gridColumnGap: "1.5rem",
   },
 };

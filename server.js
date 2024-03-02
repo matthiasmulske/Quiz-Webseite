@@ -5,6 +5,7 @@ const axios = require("axios");
 
 const app = express();
 const port = 5000;
+const IP_ADDRESS = "192.168.178.66";
 app.use(bodyParser.json());
 
 // Create connection to the MySQL database
@@ -60,8 +61,20 @@ app.post("/categories", (req, res) => {
   });
 });
 
-// Define routes to set a player's answer
+// Define a route to fetch Commentcategories
+app.post("/Commentcategories", (req, res) => {
+  const query = `SELECT * FROM CommentCategory`;
+  connection.query(query, (err, results) => {
+    if (err) {
+      console.error("Error executing query: ", err);
+      res.status(500).json({ error: "Error retrieving categories" });
+      return;
+    }
+    res.json(results);
+  });
+});
 
+// Define routes to set a player's answer
 app.post("/updatePlayer1Answer", (req, res) => {
   const { answerGiven, quizID, questionNumber } = req.body;
   const query =
@@ -220,13 +233,6 @@ connection.beginTransaction(err => {
 
 });
 
-
-
-
-
-
-
-
 // Set Questions for new Round
 app.post("/createNewRound", (req, res) => {
   const { quizID, questionNumber, q1, q2, q3 } = req.body;
@@ -282,7 +288,24 @@ connection.beginTransaction(err => {
   );
 });
 
-
+// Define routes to post a comment
+app.post("/postComment", (req, res) => {
+  const {questionID, text, categoryID, userID} = req.body;
+  const query =
+  "INSERT INTO Comment (UserID, QuestionID, Text, CategoryID) VALUES (?, ?, ?, ?)";
+  connection.query(
+    query,
+    [userID, questionID, text, categoryID],
+    (err, results) => {
+      if (err) {
+        console.error("Error executing query: ", err);
+        res.status(500).json({ error: "Error posting comment" });
+        return;
+      }
+      res.json(results);
+    }
+  );
+});
 
 
 
@@ -294,6 +317,6 @@ connection.beginTransaction(err => {
 
 // Start the server
 const PORT = process.env.PORT || port;
-app.listen(PORT, () => {
-  console.log(`Server listening on port ${PORT}`);
+app.listen(PORT, IP_ADDRESS, () => {
+  console.log(`Server listening on ${IP_ADDRESS}:${PORT}`);
 });

@@ -75,7 +75,7 @@ const style = {
   },
 
   answerButton: {
-    marginBottom: 50,
+    marginBottom: "3rem",
   },
   buttonNextQuestion: {
     display: "flex",

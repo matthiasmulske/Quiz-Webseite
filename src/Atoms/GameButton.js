@@ -7,7 +7,7 @@ function GameButton ({ onClick, label, color, size, icon, variante, disabled }) 
   };
 
   return (
-      <Button variant={variante ? variante : "contained"} onClick={onClick ? onClick : onButtonClick} color={color} size={size} startIcon={icon} disabled={disabled}>
+      <Button variant={variante ? variante : "contained"} onClick={onClick ? onClick : onButtonClick} color={color} size={size} startIcon={icon} disabled={disabled}  sx={{ fontSize: "0.8rem"}}>
         {label}
       </Button>
   );

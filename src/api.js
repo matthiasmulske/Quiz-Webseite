@@ -24,6 +24,29 @@ const fetchQuestionCategories = async (route, accessToken) => {
   
   export { fetchQuestionCategories };
 
+  const fetchCommentCategories = async (route, accessToken) => {
+    try {
+      const response = await fetch(route, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ accessToken: accessToken }),
+      });
+  
+      if (!response.ok) {
+        throw new Error('Failed to fetch data');
+      }
+  
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error('Error fetching data: ', error);
+    }
+  };
+  
+  export { fetchCommentCategories };
+
   const checkAccessToken = async (route, accessToken1, accessToken2) => {
     try {
       const response = await fetch(route, {
@@ -149,3 +172,26 @@ const fetchQuestionCategories = async (route, accessToken) => {
   };
   
   export { setNewRound };
+
+  const postComment = async (route, questionID, text, categoryID, userID) => {
+    try {
+      const response = await fetch(route, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ questionID:questionID, text: text, categoryID: categoryID, userID: userID}),
+      });
+  
+      if (!response.ok) {
+        throw new Error('Failed to update Quiz');
+      }
+  
+      const data = await response.json();
+      return data
+    } catch (error) {
+      console.error('Error fetching data: ', error);
+    }
+  };
+  
+  export { postComment };
