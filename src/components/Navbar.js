@@ -92,8 +92,8 @@ export default function PrimarySearchAppBar() {
           <Box sx={{ flexGrow: 1 }} />
           {isLoggedIn && !clickedLogin && (
             <>
-              <IconButton size="large" aria-label="show 4 new mails" color="inherit" onClick={handleMailDialogOpen}>
-                <Badge badgeContent={0} color="error">
+              <IconButton size="large" aria-label="show 3 new mails" color="inherit" onClick={handleMailDialogOpen}>
+                <Badge badgeContent={3} color="error">
                   <MailIcon />
                 </Badge>
               </IconButton>
