@@ -5,7 +5,7 @@ const axios = require("axios");
 
 const app = express();
 const port = 5000;
-const IP_ADDRESS = "192.168.188.39";
+const IP_ADDRESS = "192.168.100.77";
 app.use(bodyParser.json());
 
 // Create connection to the MySQL database

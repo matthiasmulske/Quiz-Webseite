@@ -14,7 +14,8 @@ import UnentschiedenSVG from './../assets/Unentschieden.svg';
 export default function GameSumUp({ player, rounds, player1Score, player2Score, isSinglePlayer }) {
   const [won, setWon] = useState(false);
   const [isDraw, setIsDraw] = useState();
-  function decideWinner() {
+  function decideWinner(isSinglePlayer, player, player1Score, player2Score) {
+
     //Singleplayer Logic
     if (isSinglePlayer) {
       if (player1Score / (rounds * 3) >= 0.5) {
@@ -26,42 +27,46 @@ export default function GameSumUp({ player, rounds, player1Score, player2Score, 
     }
 
     if (!isSinglePlayer) {
-      if (player === 1 && player1Score > player2Score || player === 2 && player2Score > player1Score) {
+      if ((player === 1 && player1Score > player2Score) || (player === 2 && player2Score > player1Score)) {
         setWon(true);
-      }
-      if (player2Score === player1Score) {
-        setIsDraw(true);
+        console.log("You won")
       }
       else {
         setWon(false);
       }
+      if (player2Score === player1Score) {
+        setIsDraw(true);
+      }
     }
-
   }
 
    //decide Winner when site loads
    useEffect(() => {
-     decideWinner();
+     decideWinner(isSinglePlayer, player, player1Score, player2Score);
    }, []);
 
+   useEffect(() => {
+    console.log(won, isDraw)
+  }, [won]);
+  
   return (
     <div style={style.formContainer}>
-      <Card sx={{ maxWidth: 400 }}>
+      <Card sx={{ maxWidth: 600 }}>
 
         {isDraw ?
           <CardMedia
-            sx={{ height: 400 }}
+            sx={{ height: 300 }}
             image={UnentschiedenSVG}
           />
           :
           won ?
             <CardMedia
-              sx={{ height: 400 }}
+              sx={{ height: 300 }}
               image={SiegSVG}
             />
             :
             <CardMedia
-              sx={{ height: 400 }}
+              sx={{ height: 300 }}
               image={NiederlageSVG}
             />
         }
