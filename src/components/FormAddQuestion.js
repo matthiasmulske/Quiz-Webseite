@@ -28,11 +28,9 @@ function FormAddQuestion({ buttonLabel, children }) {
   }
 
   function handleSubmit() {
-      const hostname = "isef01-quiz.cxcheuy8ztxa.eu-north-1.rds.amazonaws.com"
-      const port = "3306"
-      const username = "admin"
-      const password = "#quizisef01"
+
       console.log(questions)
+
 
   }
 
