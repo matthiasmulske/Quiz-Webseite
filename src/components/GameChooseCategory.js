@@ -6,28 +6,37 @@ import { CircularProgress } from "@mui/material";
 import {
   setNewRound,
   fetchQuestionCategories,
-  getThreeQuestionsByCat
+  getThreeQuestionsByCat,
 } from "../api.js";
-import domain from "./../assets/domain.js"
+import domain from "./../assets/domain.js";
 
-function GameChooseCategory({ currentRound, currentQuestion, currentQuizID, setRoundEnded, setRoundStarted, handleButton }) {
+function GameChooseCategory({
+  currentRound,
+  currentQuestion,
+  currentQuizID,
+  setRoundEnded,
+  setRoundStarted,
+  handleButton,
+}) {
   const [categories, setCategories] = useState([]); //stores QuestionCategories from DB
   const [loading, setLoading] = useState(false); //if true renders a loading animation while quiz is created in DB
   const [category, setCategory] = useState(); //Category the player has choosen in the Dropdown
 
-
   const fetchCategories = async () => {
     try {
-      let options = await fetchQuestionCategories(domain.domain + ":5000/categories", "");
-      let optionsArray = options.map(category => ({
+      let options = await fetchQuestionCategories(
+        domain.domain + ":5000/categories",
+        "",
+      );
+      let optionsArray = options.map((category) => ({
         value: category.QuestionCategoryID,
-        label: category.Name
+        label: category.Name,
       }));
-      return optionsArray
+      return optionsArray;
     } catch (error) {
       console.error("Error fetching categories:", error);
     }
-  }
+  };
 
   //get categories from Database when component mounts
   useEffect(() => {
@@ -51,14 +60,21 @@ function GameChooseCategory({ currentRound, currentQuestion, currentQuizID, setR
     setLoading(true);
     const questions = await getThreeQuestionsByCat(
       domain.domain + ":5000/getThreeQuestionsByCat",
-      category
+      category,
     );
     const questionIds = [
       questions[0].QuestionID,
       questions[1].QuestionID,
       questions[2].QuestionID,
     ];
-    await setNewRound(domain.domain + ":5000/createNewRound", currentQuizID, currentQuestion, questionIds[0], questionIds[1], questionIds[2]);
+    await setNewRound(
+      domain.domain + ":5000/createNewRound",
+      currentQuizID,
+      currentQuestion,
+      questionIds[0],
+      questionIds[1],
+      questionIds[2],
+    );
     await handleButton();
     setRoundStarted(true);
     setLoading(false);
@@ -67,7 +83,10 @@ function GameChooseCategory({ currentRound, currentQuestion, currentQuizID, setR
   return (
     <div style={style.formContainer}>
       <h1>Runde {currentRound}</h1>
-      <p>Bitte wähle eine Kategorie für die Fragen {currentQuestion} - {currentQuestion + 2}</p>
+      <p>
+        Bitte wähle eine Kategorie für die Fragen {currentQuestion} -{" "}
+        {currentQuestion + 2}
+      </p>
       <Box
         sx={{
           width: 700,
@@ -81,16 +100,18 @@ function GameChooseCategory({ currentRound, currentQuestion, currentQuizID, setR
           onChange={handleCategoryChange}
         />
         {loading ? <CircularProgress style={style.margin} /> : ""}
-        {category ?
-
+        {category ? (
           <div style={style.margin}>
-            <GameButton label="Starte nächste Runde" onClick={() => handleButtonNewRound(currentQuizID, currentQuestion)}>
-            </GameButton>
+            <GameButton
+              label="Starte nächste Runde"
+              onClick={() =>
+                handleButtonNewRound(currentQuizID, currentQuestion)
+              }
+            ></GameButton>
           </div>
-          :
+        ) : (
           ""
-        }
-
+        )}
       </Box>
     </div>
   );

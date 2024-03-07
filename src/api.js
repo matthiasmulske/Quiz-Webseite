@@ -1,197 +1,102 @@
 // api.js
-import domain from "./assets/domain.js"
+import domain from "./assets/domain.js";
+
+const fetchData = async (route, body) => {
+  try {
+    const response = await fetch(route, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch data");
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error("Error fetching data: ", error);
+  }
+};
 
 const fetchQuestionCategories = async (route, accessToken) => {
-    try {
-      const response = await fetch(route, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ accessToken: accessToken }),
-      });
-  
-      if (!response.ok) {
-        throw new Error('Failed to fetch data');
+  return await fetchData(route, { accessToken });
+};
+
+const fetchCommentCategories = async (route, accessToken) => {
+  return await fetchData(route, { accessToken });
+};
+
+const checkAccessToken = async (route, accessToken1, accessToken2) => {
+  try {
+    const data = await fetchData(route);
+    for (const obj of data) {
+      if (
+        obj.AccessTokenOne === accessToken1 ||
+        obj.AccessTokenTwo === accessToken1
+      ) {
+        return false;
       }
-  
-      const data = await response.json();
-      return data;
-    } catch (error) {
-      console.error('Error fetching data: ', error);
+      if (
+        accessToken2 &&
+        (obj.AccessTokenOne === accessToken2 ||
+          obj.AccessTokenTwo === accessToken2)
+      ) {
+        return false;
+      }
     }
-  };
-  
-  export { fetchQuestionCategories };
+    return true;
+  } catch (error) {
+    console.error("Error fetching data: ", error);
+  }
+};
 
-  const fetchCommentCategories = async (route, accessToken) => {
-    try {
-      const response = await fetch(route, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ accessToken: accessToken }),
-      });
-  
-      if (!response.ok) {
-        throw new Error('Failed to fetch data');
-      }
-  
-      const data = await response.json();
-      return data;
-    } catch (error) {
-      console.error('Error fetching data: ', error);
-    }
-  };
-  
-  export { fetchCommentCategories };
+const getThreeQuestionsByCat = async (route, categoryID) => {
+  return await fetchData(route, { categoryID });
+};
 
-  const checkAccessToken = async (route, accessToken1, accessToken2) => {
-    try {
-      const response = await fetch(route, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-  
-      if (!response.ok) {
-        throw new Error('Failed to fetch data');
-      }
-  
-      const data = await response.json();
-      console.log(data);
-      for (const obj of data) {
-        // Check if the access token exists in the current object
-        if (obj.AccessTokenOne === accessToken1 || obj.AccessTokenTwo === accessToken1) {
-          return false; // token already in db
-        }
-        if(accessToken2!=null){
-          if (obj.AccessTokenOne === accessToken2 || obj.AccessTokenTwo === accessToken2) {
-            return false; // token already in db
-          }
-        }
-      }
-      return true; //token not in db
-    } catch (error) {
-      console.error('Error fetching data: ', error);
-    }
-  };
-  
-  export { checkAccessToken };
+const createQuizInDB = async (
+  route,
+  accessTokenOne,
+  accessTokenTwo,
+  rounds,
+  timeToAnswer,
+  q1,
+  q2,
+  q3,
+) => {
+  return await fetchData(route, {
+    accessTokenOne,
+    accessTokenTwo,
+    rounds,
+    timeToAnswer,
+    q1,
+    q2,
+    q3,
+  });
+};
 
-  const getThreeQuestionsByCat = async (route, categoryID) => {
-    try {
-      const response = await fetch(route, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ categoryID: categoryID }),
-      });
-  
-      if (!response.ok) {
-        throw new Error('Failed to fetch questions');
-      }
-  
-      const data = await response.json();
-      return data
-    } catch (error) {
-      console.error('Error fetching data: ', error);
-    }
-  };
-  
-  export { getThreeQuestionsByCat };
+const fetchGameInfo = async (accessToken) => {
+  return await fetchData(`${domain.domain}:5000/gameData`, { accessToken });
+};
 
-  const createQuizInDB = async (route, accessTokenOne, accessTokenTwo, rounds, timeToAnswer, q1,q2,q3) => {
-    try {
-      const response = await fetch(route, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ accessTokenOne: accessTokenOne, accessTokenTwo:accessTokenTwo, rounds:rounds, timeToAnswer:timeToAnswer, q1:q1,q2:q2,q3:q3 }),
-      });
-  
-      if (!response.ok) {
-        throw new Error('Failed to create Quiz');
-      }
-  
-      const data = await response.json();
-      return data
-    } catch (error) {
-      console.error('Error fetching data: ', error);
-    }
-  };
-  
-  export { createQuizInDB };
+const setNewRound = async (route, quizID, questionNumber, q1, q2, q3) => {
+  return await fetchData(route, { quizID, questionNumber, q1, q2, q3 });
+};
 
-  const fetchData = async (accessToken) => {
-    console.log(accessToken);
-    try {
-      const response = await fetch(domain.domain + ":5000/gameData", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ accessToken: accessToken }),
-      });
+const postComment = async (route, questionID, text, categoryID, userID) => {
+  return await fetchData(route, { questionID, text, categoryID, userID });
+};
 
-      if (!response.ok) {
-        throw new Error("Failed to fetch data");
-      }
-
-      const data = await response.json();
-      return data;
-    } catch (error) {
-      console.error("Error fetching data: ", error);
-    }
-  };
-  export { fetchData };
-
-  const setNewRound = async (route, quizID, questionNumber, q1, q2, q3) => {
-    try {
-      const response = await fetch(route, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ quizID:quizID, questionNumber:questionNumber, q1:q1,q2:q2,q3:q3 }),
-      });
-  
-      if (!response.ok) {
-        throw new Error('Failed to update Quiz');
-      }
-  
-      const data = await response.json();
-      return data
-    } catch (error) {
-      console.error('Error fetching data: ', error);
-    }
-  };
-  
-  export { setNewRound };
-
-  const postComment = async (route, questionID, text, categoryID, userID) => {
-    try {
-      const response = await fetch(route, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ questionID:questionID, text: text, categoryID: categoryID, userID: userID}),
-      });
-  
-      if (!response.ok) {
-        throw new Error('Failed to update Quiz');
-      }
-  
-      const data = await response.json();
-      return data
-    } catch (error) {
-      console.error('Error fetching data: ', error);
-    }
-  };
-  
-  export { postComment };
+export {
+  fetchQuestionCategories,
+  fetchCommentCategories,
+  checkAccessToken,
+  getThreeQuestionsByCat,
+  createQuizInDB,
+  fetchGameInfo,
+  setNewRound,
+  postComment,
+};

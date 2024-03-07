@@ -2,9 +2,18 @@ import React, { useState, useEffect } from "react";
 import GameButton from "../atoms/GameButton";
 import GameQuestionView from "./GameQuestionView";
 
-function GameQuestion({ question, answers, questionID, timer, setTimer, setAnswerGiven, handleNextQuestion, answerGiven }) {
+function GameQuestion({
+  question,
+  answers,
+  questionID,
+  timer,
+  setTimer,
+  setAnswerGiven,
+  handleNextQuestion,
+  answerGiven,
+}) {
   const [timeLeft, setTimeLeft] = useState(timer);
-  const [selectedAnswer, setSelectedAnswer]=useState();
+  const [selectedAnswer, setSelectedAnswer] = useState();
   // start Timer when site loads  --> TODO: PERFORMANCE
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -20,15 +29,14 @@ function GameQuestion({ question, answers, questionID, timer, setTimer, setAnswe
     return () => clearInterval(intervalId);
   }, [timer, timeLeft]);
 
-  function handleButton(){
+  function handleButton() {
     setSelectedAnswer(null);
-    setTimer(timer)
+    setTimer(timer);
     setTimeLeft(timer);
     setAnswerGiven(null);
     handleNextQuestion();
   }
 
-  
   return (
     <div style={style.pageContainer}>
       <div className="progress mb-4">
@@ -55,7 +63,12 @@ function GameQuestion({ question, answers, questionID, timer, setTimer, setAnswe
       </div>
       {timeLeft <= 0 && answerGiven ? (
         <div style={style.buttonNextQuestion}>
-          <GameButton variant="outlined" label="Nächste Frage" color="warning" onClick={handleButton}></GameButton>
+          <GameButton
+            variant="outlined"
+            label="Nächste Frage"
+            color="warning"
+            onClick={handleButton}
+          ></GameButton>
         </div>
       ) : (
         ""

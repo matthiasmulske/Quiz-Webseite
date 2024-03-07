@@ -41,7 +41,7 @@ const GameScoreboardModal = ({
   const handleCloseModal = () => {
     setOpenModal(false); // Update openModal in the parent component
   };
- 
+
   console.log(player);
   return (
     <Modal show={openModal} onHide={handleCloseModal}>
@@ -56,20 +56,20 @@ const GameScoreboardModal = ({
                 <ArrowRightAltIcon />
               </ListItemIcon>
               <ListItemText>
-                {player === "player1" ?
+                {player === "player1" ? (
                   <Typography
                     style={{
                       color:
                         index === 3
                           ? "green"
-                          :(modalData?.AnswerPlayer1-1 === index) 
+                          : modalData?.AnswerPlayer1 - 1 === index
                             ? "red"
                             : "grey",
                     }}
                   >
                     {answer}
                   </Typography>
-                  :
+                ) : (
                   <Typography
                     style={{
                       color:
@@ -80,10 +80,9 @@ const GameScoreboardModal = ({
                             : "grey",
                     }}
                   >
-                   {answer}
+                    {answer}
                   </Typography>
-                }
-
+                )}
               </ListItemText>
             </ListItem>
           ))}

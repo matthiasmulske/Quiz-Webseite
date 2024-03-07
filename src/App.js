@@ -14,14 +14,11 @@ import GameButton from "./atoms/GameButton";
 function App() {
   return (
     <div className="App">
-      <Navbar>
-      </Navbar>
+      <Navbar></Navbar>
       <Link className="nav-link" aria-current="page" to="/GameSetup">
-        <GameButton
-        label={"GameSetUp"}></GameButton>
+        <GameButton label={"GameSetUp"}></GameButton>
       </Link>
-        <div style={style}>
-        </div>
+      <div style={style}></div>
       <Routes>
         <Route path="/" element={<GameSetup />} />
         <Route path="/GameSetup" element={<GameSetup />} />
@@ -30,14 +27,13 @@ function App() {
         <Route path="/EditQuestion" element={<EditQuestion />} />
       </Routes>
     </div>
-  )
+  );
 }
 
 export default App;
 
 const style = {
-    page: {
-        margin: 8,
-
-    }
-}
+  page: {
+    margin: 8,
+  },
+};

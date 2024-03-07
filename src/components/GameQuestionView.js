@@ -3,8 +3,17 @@ import GameButton from "../atoms/GameButton";
 import ErrorIcon from "@mui/icons-material/Error";
 import GameQuestionReportModal from "./GameQuestionReportModal";
 
-
-function GameQuestionView({ question, answers, questionID, timeLeft, setAnswerGiven, setTimeLeft, answerGiven, selectedAnswer, setSelectedAnswer }) {
+function GameQuestionView({
+  question,
+  answers,
+  questionID,
+  timeLeft,
+  setAnswerGiven,
+  setTimeLeft,
+  answerGiven,
+  selectedAnswer,
+  setSelectedAnswer,
+}) {
   const [openModal, setOpenModal] = useState(false); //decides if reportModal is opened
   const [shuffledAnswers, setShuffledAnswers] = useState([]); //shuffels answers in order to display the correct answer not always on the same position
   // Shuffle answers
@@ -18,32 +27,31 @@ function GameQuestionView({ question, answers, questionID, timeLeft, setAnswerGi
     return array;
   }
   // Shuffle the answers and reset the selectedAnswer everytime a new question loads in
-   useEffect(() => {
-     setShuffledAnswers(shuffleAnswers([...answers]));
-   }, [question]);
+  useEffect(() => {
+    setShuffledAnswers(shuffleAnswers([...answers]));
+  }, [question]);
 
   const handleOpenReportModal = () => {
     setOpenModal(true);
   };
 
   const handleAnswerClick = (answer) => {
-    if (!answerGiven && timeLeft>0) {
+    if (!answerGiven && timeLeft > 0) {
       setSelectedAnswer(answer);
       setTimeLeft(0);
       for (let i = 0; i < answers.length; i++) {
         if (answer === answers[i]) {
           console.log("Clicked on Answer " + i);
-          setAnswerGiven(i+1);
+          setAnswerGiven(i + 1);
         }
       }
-    }
-    else {
-      console.log("timer run out")
-      if(!answerGiven){
-      setAnswerGiven(5);
+    } else {
+      console.log("timer run out");
+      if (!answerGiven) {
+        setAnswerGiven(5);
       }
     }
-    console.log("AG" +selectedAnswer);
+    console.log("AG" + selectedAnswer);
   };
 
   return (
@@ -69,11 +77,19 @@ function GameQuestionView({ question, answers, questionID, timeLeft, setAnswerGi
       <div style={style.answerGrid}>
         {shuffledAnswers.map((answer, index) => (
           <div style={style.answer} key={index}>
-            <GameButton 
+            <GameButton
               label={answer}
               size={"la"}
               color={
-                selectedAnswer ? (answer===selectedAnswer? (answer===answers[3] ? "success" : "error") : (answer===answers[3]? "success":"primary")):"primary"
+                selectedAnswer
+                  ? answer === selectedAnswer
+                    ? answer === answers[3]
+                      ? "success"
+                      : "error"
+                    : answer === answers[3]
+                      ? "success"
+                      : "primary"
+                  : "primary"
               }
               onClick={() => handleAnswerClick(answer)}
             />

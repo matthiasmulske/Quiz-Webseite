@@ -2,7 +2,13 @@ import React, { useState } from "react";
 import GameScoreboardModal from "./GameScoreboardModal";
 import GameButton from "../atoms/GameButton";
 
-function GameScoreboard({ quizdata, isSinglePlayer, player1Score, player2Score, currentQuestion }) {
+function GameScoreboard({
+  quizdata,
+  isSinglePlayer,
+  player1Score,
+  player2Score,
+  currentQuestion,
+}) {
   const [openQuestionModal, setOpenQuestionModal] = useState(false);
   const [modalData, setModalData] = useState(null);
   const [modalPlayer, setModalPlayer] = useState(null);
@@ -14,7 +20,7 @@ function GameScoreboard({ quizdata, isSinglePlayer, player1Score, player2Score, 
       setModalPlayer(player);
     }
   };
-  
+
   const chunkArray = (arr, size) => {
     const chunkedArr = [];
     for (let i = 0; i < arr.length; i += size) {
@@ -26,27 +32,38 @@ function GameScoreboard({ quizdata, isSinglePlayer, player1Score, player2Score, 
   console.log(questionsChunks);
   return (
     <div className="text-center m-3 p-3">
+      {isSinglePlayer ? (
+        <h2>Score: {player1Score}</h2>
+      ) : (
+        <h2>
+          {" "}
+          {player1Score} : {player2Score}{" "}
+        </h2>
+      )}
       <div>
-        {isSinglePlayer ? (
-          <h2>Score: {player1Score}</h2>
-        ) : (
-          <h2> {player1Score} : {player2Score} </h2>
-        )}
         {questionsChunks.map((chunk, index) => (
-
-          <div key={index} style={isSinglePlayer ? style.GridContainerSinglePlayer : style.GridContainer}>
-
+          <div
+            key={index}
+            style={
+              isSinglePlayer
+                ? style.GridContainerSinglePlayer
+                : style.GridContainer
+            }
+          >
             <div style={style.ChunkContainer}>
               {chunk.map((question) => (
                 <div key={question.QuestionNumber}>
                   <GameButton
-                    color={ question.AnswerPlayer1 ? question.AnswerPlayer1 === 4
-                      ? "success"
-                      : "error" : "primary"
+                    color={
+                      question.AnswerPlayer1
+                        ? question.AnswerPlayer1 === 4
+                          ? "success"
+                          : "error"
+                        : "primary"
                     }
                     onClick={() => handleButtonClick(question, "player1")}
                     label={question.QuestionNumber}
-                    size="large"
+                    size="small"
                   />
                 </div>
               ))}
@@ -57,13 +74,16 @@ function GameScoreboard({ quizdata, isSinglePlayer, player1Score, player2Score, 
                   {chunk.map((question) => (
                     <div key={question.question_number}>
                       <GameButton
-                        color={ question.AnswerPlayer2 ? question.AnswerPlayer2 === 4
-                          ? "success"
-                          : "error" : "primary"
+                        color={
+                          question.AnswerPlayer2
+                            ? question.AnswerPlayer2 === 4
+                              ? "success"
+                              : "error"
+                            : "primary"
                         }
                         onClick={() => handleButtonClick(question, "player2")}
                         label={question.QuestionNumber}
-                        size="large"
+                        size="small"
                       />
                     </div>
                   ))}
@@ -95,7 +115,6 @@ const style = {
     gridAutoFlow: "row",
     gridTemplateColumns: "auto auto",
     gridColumnGap: "10%",
-    
   },
 
   GridContainerSinglePlayer: {
@@ -110,6 +129,5 @@ const style = {
     gridAutoFlow: "column",
     gridTemplateColumns: "auto, auto, auto",
     margin: "15px",
-    
   },
 };

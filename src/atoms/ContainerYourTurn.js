@@ -1,7 +1,7 @@
 import GameButton from "./GameButton";
 import React from "react";
 
-function ContainerYourTurn({startRound}) {
+function ContainerYourTurn({ startRound }) {
   return (
     <>
       <GameButton label="Starte Runde" onClick={startRound} />

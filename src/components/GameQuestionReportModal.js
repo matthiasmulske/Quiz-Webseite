@@ -3,35 +3,40 @@ import { Modal } from "react-bootstrap";
 import GameCategoryDropdown from "../atoms/GameCategoryDropdown";
 import GameInput from "../atoms/GameInput";
 import GameButton from "../atoms/GameButton";
-import CommentIcon from '@mui/icons-material/Comment';
+import CommentIcon from "@mui/icons-material/Comment";
 import domain from "./../assets/domain.js";
 import { CircularProgress } from "@mui/material";
-import DoneAllIcon from '@mui/icons-material/DoneAll';
-import {
-  fetchCommentCategories, postComment
-} from "../api.js";
+import DoneAllIcon from "@mui/icons-material/DoneAll";
+import { fetchCommentCategories, postComment } from "../api.js";
 
-const GameQuestionReportModal = ({ question, questionID, openModal, setOpenModal }) => {
+const GameQuestionReportModal = ({
+  question,
+  questionID,
+  openModal,
+  setOpenModal,
+}) => {
   const [category, setCategory] = useState("Frage falsch"); //stores choosen CommentCategory
-  const [categories, setCategories] = useState([]);//Stores CommentCategories for Dropdown-Input
+  const [categories, setCategories] = useState([]); //Stores CommentCategories for Dropdown-Input
   const [commentText, setCommentText] = useState(""); //stores comment of the user
   const [sent, setSent] = useState(false);
   const [loading, setLoading] = useState(false);
 
-
   const fetchCategories = async () => {
     try {
       console.log(domain.domain);
-      let options = await fetchCommentCategories(domain.domain + ":5000/Commentcategories", "");
-      let optionsArray = options.map(category => ({
+      let options = await fetchCommentCategories(
+        domain.domain + ":5000/Commentcategories",
+        "",
+      );
+      let optionsArray = options.map((category) => ({
         value: category.CommentCategoryID,
-        label: category.CommentCategoryName
+        label: category.CommentCategoryName,
       }));
-      return optionsArray
+      return optionsArray;
     } catch (error) {
       console.error("Error fetching categories:", error);
     }
-  }
+  };
 
   //get categories from Database when component mounts
   useEffect(() => {
@@ -54,10 +59,16 @@ const GameQuestionReportModal = ({ question, questionID, openModal, setOpenModal
   };
   async function handleSendComment() {
     setLoading(true);
-    await postComment(domain.domain + ":5000/postComment", questionID, commentText, category, 1);
+    await postComment(
+      domain.domain + ":5000/postComment",
+      questionID,
+      commentText,
+      category,
+      1,
+    );
     setLoading(false);
     setSent(true);
-  };
+  }
 
   return (
     <Modal
@@ -89,16 +100,14 @@ const GameQuestionReportModal = ({ question, questionID, openModal, setOpenModal
         </div>
       </Modal.Body>
       <Modal.Footer>
-        {sent ?
+        {sent ? (
           <DoneAllIcon />
-          :
+        ) : (
           <>
-            <GameButton onClick={() => handleSendComment()}
-              label="Senden" />
+            <GameButton onClick={() => handleSendComment()} label="Senden" />
             {loading ? <CircularProgress style={style.animation} /> : ""}
           </>
-        }
-
+        )}
       </Modal.Footer>
     </Modal>
   );
@@ -110,4 +119,3 @@ const style = {
     margin: "2rem",
   },
 };
-

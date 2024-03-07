@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Link from '@mui/material/Link';
+import Link from "@mui/material/Link";
 import GameButton from "../atoms/GameButton";
 
 const GameLinkContainer = ({ player, linkText, id }) => {

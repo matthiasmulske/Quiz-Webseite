@@ -1,14 +1,17 @@
 const express = require("express");
 const mysql = require("mysql");
 const bodyParser = require("body-parser");
-const axios = require("axios");
+const cors = require("cors");
 
 const app = express();
-const port = 5000;
 const IP_ADDRESS = "192.168.100.77";
-app.use(bodyParser.json());
+const port = 5000;
 
-// Create connection to the MySQL database
+// Middleware
+app.use(bodyParser.json());
+app.use(cors());
+
+// Database configuration
 const connection = mysql.createConnection({
   host: "isef01-quiz.cxcheuy8ztxa.eu-north-1.rds.amazonaws.com",
   port: "3306",
@@ -16,9 +19,6 @@ const connection = mysql.createConnection({
   password: "#quizisef01",
   database: "quizapp",
 });
-
-const cors = require("cors");
-app.use(cors());
 
 // Connect to the database
 connection.connect((err) => {
@@ -29,291 +29,253 @@ connection.connect((err) => {
   console.log("Connected to database.");
 });
 
-// Define a route to fetch gameData
-app.post("/gameData", (req, res) => {
+// Routes
+app.post("/gameData", getGameData);
+app.post("/categories", getCategories);
+app.post("/commentCategories", getCommentCategories);
+app.post("/updatePlayer1Answer", updatePlayer1Answer);
+app.post("/updatePlayer2Answer", updatePlayer2Answer);
+app.post("/accessToken", getAccessTokens);
+app.post("/getThreeQuestionsByCat", getThreeQuestionsByCategory);
+app.post("/createQuizInDB2", createQuizInDB);
+app.post("/createNewRound", createNewRound);
+app.post("/postComment", postComment);
+
+// Route Handlers
+function getGameData(req, res) {
   const { accessToken } = req.body;
-  const query = `SELECT * 
-                 FROM Quiz 
+  const query = `SELECT * FROM Quiz 
                  LEFT JOIN QuizQuestions ON Quiz.quizid = QuizQuestions.quizid 
                  LEFT JOIN Question ON QuizQuestions.questionid = Question.questionid
                  LEFT JOIN QuestionCategory ON Question.CategoryID = QuestionCategory.QuestionCategoryID
                  WHERE Quiz.AccessTokenOne = ? OR Quiz.AccessTokenTwo = ?`;
-  connection.query(query, [accessToken, accessToken], (err, results) => {
-    if (err) {
-      console.error("Error executing query: ", err);
-      res.status(500).json({ error: "Error retrieving game data" });
-      return;
-    }
-    res.json(results);
-  });
-});
+  connection.query(query, [accessToken, accessToken], handleQueryResponse(res));
+}
 
-// Define a route to fetch categories
-app.post("/categories", (req, res) => {
+function getCategories(req, res) {
   const query = `SELECT * FROM QuestionCategory`;
-  connection.query(query, (err, results) => {
-    if (err) {
-      console.error("Error executing query: ", err);
-      res.status(500).json({ error: "Error retrieving categories" });
-      return;
-    }
-    res.json(results);
-  });
-});
+  connection.query(query, handleQueryResponse(res));
+}
 
-// Define a route to fetch Commentcategories
-app.post("/Commentcategories", (req, res) => {
+function getCommentCategories(req, res) {
   const query = `SELECT * FROM CommentCategory`;
-  connection.query(query, (err, results) => {
-    if (err) {
-      console.error("Error executing query: ", err);
-      res.status(500).json({ error: "Error retrieving categories" });
-      return;
-    }
-    res.json(results);
-  });
-});
+  connection.query(query, handleQueryResponse(res));
+}
 
-// Define routes to set a player's answer
-app.post("/updatePlayer1Answer", (req, res) => {
+function updatePlayer1Answer(req, res) {
   const { answerGiven, quizID, questionNumber } = req.body;
-  const query =
-    "UPDATE QuizQuestions SET  AnswerPlayer1 = ? WHERE QuizID = ? AND QuestionNumber = ?";
+  updatePlayerAnswer(res, answerGiven, quizID, questionNumber, "1");
+}
+
+function updatePlayer2Answer(req, res) {
+  const { answerGiven, quizID, questionNumber } = req.body;
+  updatePlayerAnswer(res, answerGiven, quizID, questionNumber, "2");
+}
+
+function updatePlayerAnswer(
+  res,
+  answerGiven,
+  quizID,
+  questionNumber,
+  playerNumber,
+) {
+  const query = `UPDATE QuizQuestions SET AnswerPlayer${playerNumber} = ? WHERE QuizID = ? AND QuestionNumber = ?`;
   connection.query(
     query,
     [answerGiven, quizID, questionNumber],
-    (err, results) => {
-      if (err) {
-        console.error("Error executing query: ", err);
-        res.status(500).json({ error: "Error updating player answer" });
-        return;
-      }
-      res.json(results);
-    }
+    handleQueryResponse(res),
   );
-});
+}
 
-app.post("/updatePlayer2Answer", (req, res) => {
-  const { answerGiven, quizID, questionNumber } = req.body;
-  const query =
-    "UPDATE QuizQuestions SET  AnswerPlayer2 = ? WHERE QuizID = ? AND QuestionNumber = ?";
-  connection.query(
-    query,
-    [answerGiven, quizID, questionNumber],
-    (err, results) => {
-      if (err) {
-        console.error("Error executing query: ", err);
-        res.status(500).json({ error: "Error updating player answer" });
-        return;
-      }
-      res.json(results);
-    }
-  );
-});
-
-//Define a Route to get all existing accesstokens
-app.post("/accessToken", (req, res) => {
+function getAccessTokens(req, res) {
   const query = `SELECT AccessTokenOne, AccessTokenTwo FROM Quiz`;
-  connection.query(query, (err, results) => {
-    if (err) {
-      console.error("Error executing query: ", err);
-      res.status(500).json({ error: "Error retrieving categories" });
-      return;
-    }
-    res.json(results);
-  });
-});
+  connection.query(query, handleQueryResponse(res));
+}
 
-//Define a Route to get 3 questions of a specific Category
-app.post("/getThreeQuestionsByCat", (req, res) => {
+function getThreeQuestionsByCategory(req, res) {
   const { categoryID } = req.body;
   const query = `SELECT QuestionID FROM Question
-  WHERE CategoryID = ${connection.escape(categoryID)}
-  ORDER BY RAND()
-  LIMIT 3`;
-  connection.query(query, (err, results) => {
+                 WHERE CategoryID = ${connection.escape(categoryID)}
+                 ORDER BY RAND()
+                 LIMIT 3`;
+  connection.query(query, handleQueryResponse(res));
+}
+
+function createQuizInDB(req, res) {
+  const { accessTokenOne, accessTokenTwo, rounds, timeToAnswer, q1, q2, q3 } =
+    req.body;
+  connection.beginTransaction((err) => {
     if (err) {
-      console.error("Error executing query: ", err);
-      res.status(500).json({ error: "Error retrieving questions" });
+      console.error("Error beginning transaction: ", err);
+      res.status(500).json({ error: "Error beginning transaction" });
       return;
     }
-    res.json(results);
-  });
-});
 
-app.post("/createQuizInDB2", (req, res) => {
-  const { accessTokenOne, accessTokenTwo, rounds, timeToAnswer, q1, q2, q3 } = req.body;
+    connection.query(
+      "INSERT INTO Quiz (AccessTokenOne, AccessTokenTwo, Rounds, TimeToAnswer) VALUES (?, ?, ?, ?)",
+      [accessTokenOne, accessTokenTwo, rounds, timeToAnswer],
+      (err, results) => {
+        if (err) {
+          handleRollbackAndError(res, connection, "Error inserting quiz", err);
+          return;
+        }
 
-  // Insert Quiz
-connection.beginTransaction(err => {
-  if (err) {
-    console.error("Error beginning transaction: ", err);
-    res.status(500).json({ error: "Error beginning transaction" });
-    return;
-  }
+        const quizId = results.insertId;
 
-  connection.query(
-    "INSERT INTO Quiz (AccessTokenOne, AccessTokenTwo, Rounds, TimeToAnswer) VALUES (?, ?, ?, ?)",
-    [accessTokenOne, accessTokenTwo, rounds, timeToAnswer],
-    (err, results) => {
-      if (err) {
-        console.error("Error inserting quiz: ", err);
-        connection.rollback(() => {
-          res.status(500).json({ error: "Error creating quiz" });
+        const questionQueries = [];
+        const questionsValues = [];
+        for (let i = 1; i <= rounds * 3; i++) {
+          questionQueries.push(
+            "INSERT INTO QuizQuestions (QuizID, QuestionNumber) VALUES (?, ?)",
+          );
+          questionsValues.push([quizId, i]);
+        }
+
+        batchQuery(questionQueries, questionsValues, res, connection, (err) => {
+          if (err) {
+            handleRollbackAndError(
+              res,
+              connection,
+              "Error adding quiz questions",
+              err,
+            );
+            return;
+          }
+
+          const updateQueries = [
+            "UPDATE QuizQuestions SET QuestionID = ? WHERE QuizID = ? AND QuestionNumber = 1",
+            "UPDATE QuizQuestions SET QuestionID = ? WHERE QuizID = ? AND QuestionNumber = 2",
+            "UPDATE QuizQuestions SET QuestionID = ? WHERE QuizID = ? AND QuestionNumber = 3",
+          ];
+
+          const updateValues = [
+            [q1, quizId],
+            [q2, quizId],
+            [q3, quizId],
+          ];
+
+          batchQuery(updateQueries, updateValues, res, connection, (err) => {
+            if (err) {
+              handleRollbackAndError(
+                res,
+                connection,
+                "Error updating quiz questions",
+                err,
+              );
+              return;
+            }
+
+            connection.commit((err) => {
+              if (err) {
+                handleRollbackAndError(
+                  res,
+                  connection,
+                  "Error committing transaction",
+                  err,
+                );
+                return;
+              }
+              res.json({ message: "Quiz created successfully" });
+            });
+          });
         });
+      },
+    );
+  });
+}
+
+function createNewRound(req, res) {
+  const { quizID, questionNumber, q1, q2, q3 } = req.body;
+
+  connection.beginTransaction((err) => {
+    if (err) {
+      console.error("Error beginning transaction: ", err);
+      res.status(500).json({ error: "Error beginning transaction" });
+      return;
+    }
+
+    const updateQueries = [
+      "UPDATE QuizQuestions SET QuestionID = ? WHERE QuizID = ? AND QuestionNumber = ?",
+      "UPDATE QuizQuestions SET QuestionID = ? WHERE QuizID = ? AND QuestionNumber = ?",
+      "UPDATE QuizQuestions SET QuestionID = ? WHERE QuizID = ? AND QuestionNumber = ?",
+    ];
+
+    const updateValues = [
+      [q1, quizID, questionNumber],
+      [q2, quizID, questionNumber + 1],
+      [q3, quizID, questionNumber + 2],
+    ];
+
+    batchQuery(updateQueries, updateValues, res, connection, (err) => {
+      if (err) {
+        handleRollbackAndError(
+          res,
+          connection,
+          "Error updating quiz questions",
+          err,
+        );
         return;
       }
 
-      const quizId = results.insertId;
-
-      // Insert QuizQuestions
-      const questionQueries = [];
-      const questionsValues = [];
-      for (let i = 1; i <= rounds * 3; i++) {
-        questionQueries.push("INSERT INTO QuizQuestions (QuizID, QuestionNumber) VALUES (?, ?)");
-        questionsValues.push([quizId, i]);
-      }
-
-      // Execute each query separately
-      questionQueries.forEach((query, index) => {
-        connection.query(query, questionsValues[index], (err, results) => {
-          if (err) {
-            console.error("Error adding quiz questions: ", err);
-            connection.rollback(() => {
-              res.status(500).json({ error: "Error adding quiz questions" });
-            });
-            return;
-          }
-          // Handle successful insert if needed
-        });
-      });
-
-      // Update QuizQuestions
-      const updateQueries = [
-        "UPDATE QuizQuestions SET QuestionID = ? WHERE QuizID = ? AND QuestionNumber = 1",
-        "UPDATE QuizQuestions SET QuestionID = ? WHERE QuizID = ? AND QuestionNumber = 2",
-        "UPDATE QuizQuestions SET QuestionID = ? WHERE QuizID = ? AND QuestionNumber = 3"
-      ];
-      const updateValues = [
-        [q1, quizId], // Values for the first query
-        [q2, quizId], // Values for the second query
-        [q3, quizId]  // Values for the third query
-      ];
-
-      // Execute each query separately
-      updateQueries.forEach((query, index) => {
-        connection.query(query, updateValues[index], (err, results) => {
-          if (err) {
-            console.error("Error updating quiz questions: ", err);
-            connection.rollback(() => {
-              res.status(500).json({ error: "Error updating quiz questions" });
-            });
-            return;
-          }
-          // Handle successful update if needed
-        });
-      });
-
-      // Commit the transaction
-      connection.commit(err => {
+      connection.commit((err) => {
         if (err) {
-          console.error("Error committing transaction: ", err);
-          connection.rollback(() => {
-            res.status(500).json({ error: "Error committing transaction" });
-          });
+          handleRollbackAndError(
+            res,
+            connection,
+            "Error committing transaction",
+            err,
+          );
           return;
         }
-
-        // Transaction successfully committed
-        res.json({ message: "Quiz created successfully" });
-      });
-    }
-  );
-});
-
-});
-
-// Set Questions for new Round
-app.post("/createNewRound", (req, res) => {
-  const { quizID, questionNumber, q1, q2, q3 } = req.body;
-
-
-connection.beginTransaction(err => {
-  if (err) {
-    console.error("Error beginning transaction: ", err);
-    res.status(500).json({ error: "Error beginning transaction" });
-    return;
-  }
-
-      // Update QuizQuestions
-      const updateQueries = [
-        "UPDATE QuizQuestions SET QuestionID = ? WHERE QuizID = ? AND QuestionNumber = ?",
-        "UPDATE QuizQuestions SET QuestionID = ? WHERE QuizID = ? AND QuestionNumber = ?",
-        "UPDATE QuizQuestions SET QuestionID = ? WHERE QuizID = ? AND QuestionNumber = ?"
-      ];
-      const updateValues = [
-        [q1, quizID, questionNumber], // Values for the first query
-        [q2, quizID, questionNumber+1], // Values for the second query
-        [q3, quizID, questionNumber+2]  // Values for the third query
-      ];
-
-      // Execute each query separately
-      updateQueries.forEach((query, index) => {
-        connection.query(query, updateValues[index], (err, results) => {
-          if (err) {
-            console.error("Error updating quiz questions: ", err);
-            connection.rollback(() => {
-              res.status(500).json({ error: "Error updating quiz questions" });
-            });
-            return;
-          }
-          // Handle successful update if needed
-        });
-      });
-
-      // Commit the transaction
-      connection.commit(err => {
-        if (err) {
-          console.error("Error committing transaction: ", err);
-          connection.rollback(() => {
-            res.status(500).json({ error: "Error committing transaction" });
-          });
-          return;
-        }
-
-        // Transaction successfully committed
         res.json({ message: "Quiz updated successfully" });
       });
-    }
-  );
-});
+    });
+  });
+}
 
-// Define routes to post a comment
-app.post("/postComment", (req, res) => {
-  const {questionID, text, categoryID, userID} = req.body;
+function postComment(req, res) {
+  const { questionID, text, categoryID, userID } = req.body;
   const query =
-  "INSERT INTO Comment (UserID, QuestionID, Text, CategoryID) VALUES (?, ?, ?, ?)";
+    "INSERT INTO Comment (UserID, QuestionID, Text, CategoryID) VALUES (?, ?, ?, ?)";
   connection.query(
     query,
     [userID, questionID, text, categoryID],
-    (err, results) => {
+    handleQueryResponse(res),
+  );
+}
+
+// Utility Functions
+function handleQueryResponse(res) {
+  return (err, results) => {
+    if (err) {
+      console.error("Error executing query: ", err);
+      res.status(500).json({ error: "Error executing query" });
+      return;
+    }
+    res.json(results);
+  };
+}
+
+function batchQuery(queries, values, res, connection, callback) {
+  queries.forEach((query, index) => {
+    connection.query(query, values[index], (err) => {
       if (err) {
-        console.error("Error executing query: ", err);
-        res.status(500).json({ error: "Error posting comment" });
+        callback(err);
         return;
       }
-      res.json(results);
-    }
-  );
-});
+      if (index === queries.length - 1) {
+        callback(null);
+      }
+    });
+  });
+}
 
-
-
-
-
-
-
-
+function handleRollbackAndError(res, connection, errorMessage, err) {
+  console.error(errorMessage, err);
+  connection.rollback(() => {
+    res.status(500).json({ error: errorMessage });
+  });
+}
 
 // Start the server
 const PORT = process.env.PORT || port;

@@ -13,42 +13,44 @@ import {
   getThreeQuestionsByCat,
   createQuizInDB,
 } from "../api.js";
-import domain from "./../assets/domain.js"
+import domain from "./../assets/domain.js";
 
 function GameSetup() {
-  const [categories, setCategories] = useState([]);//stores QuestionCategories from DB
+  const [categories, setCategories] = useState([]); //stores QuestionCategories from DB
   const [loading, setLoading] = useState(false); //if true renders a loading animation while quiz is created in DB
   const [time, setTime] = useState(20); // Timelimit to answer a question
   const [numberOfRounds, setNumberOfRounds] = useState(5); // Amount of rounds of a single game. One Round contains three questions
   const [category, setCategory] = useState(categories[0]); //Category the player has choosen in the Dropdown
   const [linkOne, setLinkOne] = useState(); //generated Link for player1 to join a quiz
   const [linkTwo, setLinkTwo] = useState(); //generated Link for player2 to join a quiz
-    
+
   const fetchCategories = async () => {
-      try {
-        console.log(domain.domain);
-        let options = await fetchQuestionCategories(domain.domain +":5000/categories", "");
-        let optionsArray = options.map(category => ({
-          value: category.QuestionCategoryID,
-          label: category.Name
+    try {
+      console.log(domain.domain);
+      let options = await fetchQuestionCategories(
+        domain.domain + ":5000/categories",
+        "",
+      );
+      let optionsArray = options.map((category) => ({
+        value: category.QuestionCategoryID,
+        label: category.Name,
       }));
-      return optionsArray
-      } catch (error) {
-        console.error("Error fetching categories:", error);
-      }
+      return optionsArray;
+    } catch (error) {
+      console.error("Error fetching categories:", error);
     }
+  };
 
   //get categories from Database when component mounts
   useEffect(() => {
     getData();
   }, []);
 
-  async function getData(){
+  async function getData() {
     let options = await fetchCategories();
     setCategories(options);
   }
-  
-  
+
   // handles Input of the Timelimit
   const handleTimeChange = (event) => {
     setTime(event.target.value);
@@ -89,14 +91,14 @@ function GameSetup() {
       IsUniqueAccesstoken = await checkAccessToken(
         domain.domain + ":5000/accessToken",
         accessToken1,
-        accessToken2
+        accessToken2,
       );
     } while (IsUniqueAccesstoken === false); //generate new Accesstoken if one of them already exists in DB
 
     //generate the first three questions for new quiz
     const questions = await getThreeQuestionsByCat(
       domain.domain + ":5000/getThreeQuestionsByCat",
-      category
+      category,
     );
     const questionIds = [
       questions[0].QuestionID,
@@ -113,7 +115,7 @@ function GameSetup() {
       time,
       questionIds[0],
       questionIds[1],
-      questionIds[2]
+      questionIds[2],
     );
     console.log(res);
     //generate Links for quiz
