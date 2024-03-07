@@ -1,7 +1,7 @@
 import * as React from "react";
 import QuestionTable from "../../atoms/QuestionTable"
 
-function AddQuestion() {
+function EditQuestion() {
 
     return (
         <>
@@ -12,7 +12,7 @@ function AddQuestion() {
     )
 }
 
-export default AddQuestion;
+export default EditQuestion;
 
 const style = {
     componentContainer: {

@@ -34,7 +34,4 @@ const style = {
     componentContainer: {
         width: "100%",
     },
-
-
-
 }

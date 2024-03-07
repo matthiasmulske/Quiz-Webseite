@@ -4,7 +4,10 @@ import QuizTextField from "../atoms/QuizTextField";
 import DropDown from "../atoms/DropDown";
 import ButtonQuiz from "../atoms/ButtonQuiz";
 import {useState} from "react";
+import questions from "../data/questions.json"
 
+
+const categories = ["ISEF", "IBPMN", "ITIL"]
 
 // TODO: Select Category
 function FormAddQuestion({ buttonLabel, children }) {
@@ -25,7 +28,12 @@ function FormAddQuestion({ buttonLabel, children }) {
   }
 
   function handleSubmit() {
-    alert("Du hast die Frage erfolgreich hinzugefügt bis Spätersilie <3")
+      const hostname = "isef01-quiz.cxcheuy8ztxa.eu-north-1.rds.amazonaws.com"
+      const port = "3306"
+      const username = "admin"
+      const password = "#quizisef01"
+      console.log(questions)
+
   }
 
 
@@ -41,7 +49,7 @@ function FormAddQuestion({ buttonLabel, children }) {
       <FormControl style={style.gridContainer}>
         <div>
           <InputLabel id="demo-simple-select-label">Kategorie</InputLabel>
-          <DropDown />
+          <DropDown categories={categories} />
         </div>
         <QuizTextField label={"neue Kategorie eingeben"} />
       </FormControl>

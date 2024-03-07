@@ -2,7 +2,7 @@ import * as React from "react";
 import {MenuItem, Select} from "@mui/material";
 
 
-function DropDown() {
+function DropDown( {categories} ) {
     function handleChange(){
     }
 
@@ -12,6 +12,7 @@ function DropDown() {
                 value={10}
                 label="Kategorien"
                 onChange={handleChange}>
+
             <MenuItem value={10}>Test2</MenuItem>
             <MenuItem value={20}>Twenty</MenuItem>
             <MenuItem value={30}>Thirty</MenuItem>
