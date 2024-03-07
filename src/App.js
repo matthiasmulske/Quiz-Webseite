@@ -5,6 +5,7 @@ import PrivacyPolicyPage from "./pages/Startseite/PrivacyPolicyPage";
 import Agbs from "./pages/Startseite/Agbs";
 import Legal from "./pages/Startseite/Legal";
 import Login from "./pages/Registration/Login";
+import LoginMaske from "./components/LoginMaske";
 import Homepage from "./pages/Startseite/Homepage";
 import HomepageLogin from "./pages/Registration/HomepageLogin";
 //import Welcome from "./pages/Welcome";
@@ -25,6 +26,7 @@ function App() {
         <Route path="/HomepageLogin" element={<HomepageLogin />} />
         <Route path="/" element={<Homepage/> } />
         <Route path="/Login" element={<Login />} />
+        <Route path="/LoginMaske" element={<LoginMaske />} />
         <Route path="/GameSetup" element={<GameSetup />} />
         <Route path="/Game" element={<Game />} />
         <Route path="/PrivacyPolicyPage" element={<PrivacyPolicyPage />} />

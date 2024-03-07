@@ -80,7 +80,6 @@ function LoginMaske() {
         )}
       </div>
       <div style={styles.linkContainer}>
-        <Link to="/">Zurück zur Startseite</Link> 
       </div>
     </div>
   );
