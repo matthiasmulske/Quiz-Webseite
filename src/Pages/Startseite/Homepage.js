@@ -11,7 +11,7 @@ function Login() {
   return (
     <div style={styles.container}>
       <div style={styles.buttonContainer}>
-        <Link to="/Game" style={styles.link}>
+        <Link to="/GameSetup" style={styles.link}>
           <LoginButton
             buttonLabel={"Starte Quiz"}
             style={styles.button}
