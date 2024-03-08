@@ -10,25 +10,13 @@ function EditQuestion() {
             </div>
         </>
     )
-function AddQuestion() {
-  return (
-    <>
-      <div style={style.container}>
-        <QuestionTable />
-        <FormAddQuestion
-          buttonLabel={"Senden"}
-          questionLabel={"Frage bearbeiten"}
-        />
-      </div>
-    </>
-  );
 }
 
 export default EditQuestion;
 
 const style = {
-  componentContainer: {
-    width: "100%",
-    margin: 4,
-  },
+    componentContainer: {
+        width: "100%",
+        margin: 4,
+    },
 };
