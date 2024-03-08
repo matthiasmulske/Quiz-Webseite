@@ -5,10 +5,10 @@ function Startseite() {
   return (
     <>
       <LoginMaske />
-      <Footer />
+      
     </>
   );
 }
-const styles = {};
+
 
 export default Startseite;

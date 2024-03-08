@@ -1,6 +1,7 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 
-function Rechtliches() {
+function Legal() {
   return (
     <div style={styles.container}> 
       <h1 style={styles.heading1}>Rechtliches</h1>
@@ -19,14 +20,18 @@ function Rechtliches() {
       <p style={styles.paragraph}>
         Hierbei handelt es sich um ein nicht-kommerzielles Projekt
       </p>
+      <div style={styles.linkContainer}>
+        <Link to="/">Zurück zur Startseite</Link> 
+      </div>
     </div>
+    
   );
 }
 
 const styles = {
   container: {
-    width: '100%', // Beispiel: Containerbreite 80%
-    margin: '0 auto', // Zentriert den Container und verteilt die Seitenränder gleichmäßig
+    width: '100%', 
+    margin: '0 auto', 
     fontFamily: 'Arial, sans-serif',
     lineHeight: '2',
     padding: '20px'
@@ -46,8 +51,12 @@ const styles = {
     listStyleType: 'disc',
     marginLeft: '20px',
     margin: '0'
+  },
+  linkContainer: {
+    position: 'absolute',
+    top: '100px',
+    right: '20px',
   }
 };
 
-
-export default Rechtliches;
+export default Legal;
