@@ -40,6 +40,7 @@ app.post("/getThreeQuestionsByCat", getThreeQuestionsByCategory);
 app.post("/createQuizInDB2", createQuizInDB);
 app.post("/createNewRound", createNewRound);
 app.post("/postComment", postComment);
+app.post("/addQuestion", addQuestion);
 
 // Route Handlers
 function getGameData(req, res) {
@@ -50,6 +51,12 @@ function getGameData(req, res) {
                  LEFT JOIN QuestionCategory ON Question.CategoryID = QuestionCategory.QuestionCategoryID
                  WHERE Quiz.AccessTokenOne = ? OR Quiz.AccessTokenTwo = ?`;
   connection.query(query, [accessToken, accessToken], handleQueryResponse(res));
+}
+
+function addQuestion(req, res) {
+  const { questionText, answerA, answerB, answerC, answerD, category } = req.body;
+  const query = `INSERT INTO Question (QuestionText, Answer1, Answer2, Answer3, CorrectAnswer, CategoryID) VALUES (?, ?, ?, ?, ?, ?)`;
+  connection.query(query, [questionText, answerA, , answerB, answerC, answerD, category], handleQueryResponse(res));
 }
 
 function getCategories(req, res) {

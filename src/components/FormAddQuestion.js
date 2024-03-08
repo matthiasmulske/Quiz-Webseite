@@ -5,6 +5,10 @@ import DropDown from "../atoms/DropDown";
 import ButtonQuiz from "../atoms/ButtonQuiz";
 import {useState} from "react";
 import questions from "../data/questions.json"
+import {
+  postAddQuestion
+} from "../api.js";
+import domain from "../assets/domain.js";
 
 
 const categories = ["ISEF", "IBPMN", "ITIL"]
@@ -28,10 +32,8 @@ function FormAddQuestion({ buttonLabel, children }) {
   }
 
   function handleSubmit() {
-
-      console.log(questions)
-
-
+      postAddQuestion(domain.domain + ":5000/addQuestion", data.question, data.answerA, data.answerB, data.answerC, data.answerD, data.category);
+      console.log(data)
   }
 
 

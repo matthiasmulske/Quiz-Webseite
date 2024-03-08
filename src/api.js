@@ -25,6 +25,10 @@ const fetchQuestionCategories = async (route, accessToken) => {
   return await fetchData(route, { accessToken });
 };
 
+const postAddQuestion = async (route,  questionText, answerA, answerB, answerC, answerD, category) => {
+  return await fetchData(route, {  questionText, answerA, answerB, answerC, answerD, category });
+};
+
 const fetchCommentCategories = async (route, accessToken) => {
   return await fetchData(route, { accessToken });
 };
@@ -99,4 +103,5 @@ export {
   fetchGameInfo,
   setNewRound,
   postComment,
+  postAddQuestion,
 };
