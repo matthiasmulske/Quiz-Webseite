@@ -1,28 +1,15 @@
 import { useState, useEffect } from "react";
 import React from "react";
-<<<<<<< HEAD:src/Pages/Game/Game.js
 import GameIntro from "../../components/GameIntro";
 import GameQuestion from "../../components/GameQuestion";
 import GameScoreboard from "../../components/GameScoreboard";
 import GameSumUp from "../../components/GameSumUp";
-
-
-
-
-//TODO: single or multiplayer as prop
-//TODO: what is the purpose of "turn"?; rename
-=======
-import GameIntro from "../components/GameIntro.js";
-import GameQuestion from "../components/GameQuestion.js";
-import GameScoreboard from "../components/GameScoreboard.js";
-import GameSumUp from "../components/GameSumUp.js";
 import { CircularProgress } from "@mui/material";
-import { fetchGameInfo } from "../api.js";
-import GameChooseCategory from "../components/GameChooseCategory.js";
+import { fetchGameInfo } from "../../api.js";
+import GameChooseCategory from "../../components/GameChooseCategory.js";
 import Divider from "@mui/material/Divider";
-import GameButton from "../atoms/GameButton.js";
-import domain from "./../assets/domain.js";
->>>>>>> gameBackend:src/pages/Game.js
+import GameButton from "../../atoms/GameButton.js";
+import domain from "../../assets/domain.js";
 
 function Game() {
   //Use States to decide which Component is rendered

@@ -20,12 +20,11 @@ const style = {
 
         
     },
+    componentContainer: {
+      width: "100%",
+      margin: 1,
+    },
     
 
 
 }
-  componentContainer: {
-    width: "100%",
-    margin: 1,
-  },
-};

@@ -1,16 +1,5 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Badge from '@mui/material/Badge';
-import AccountCircle from '@mui/icons-material/AccountCircle';
-import MailIcon from '@mui/icons-material/Mail';
-import logo from './../assets/logo-removebg-preview.png';
-import LogoutIcon from '@mui/icons-material/Logout';
-import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -32,7 +21,6 @@ export default function PrimarySearchAppBar() {
               <img src={logo} alt="logo" height="50px"></img>
             </IconButton>
           </Link>
-          <img src={logo} alt="logo" height="50px"></img>
           <Typography
             variant="h6"
             noWrap
@@ -60,9 +48,6 @@ export default function PrimarySearchAppBar() {
               //   onClick={}
               color="inherit"
             >
-              <Badge badgeContent="user" color="secondary">
-                <AccountCircle />
-              </Badge>
               <Badge badgeContent="user" color="secondary">
                 <AccountCircle />
               </Badge>

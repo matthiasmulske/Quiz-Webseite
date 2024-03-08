@@ -1,24 +1,10 @@
-<<<<<<< HEAD:src/Pages/Game/GameSetup.js
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import AccessAlarmIcon from '@mui/icons-material/AccessAlarm';
-import LoopIcon from '@mui/icons-material/Loop';
 import GameButton from "../../atoms/GameButton";
 import GameCategoryDropdown from "../../atoms/GameCategoryDropdown";
 import GameInput from "../../atoms/GameInput";
 import GameLinkContainer from "../../components/GameLinkContainer";
-import Box from '@mui/material/Box';
-
-
-//TODO: Conditional rendering only when player selected Multiplayer, otherwise redirect to Game.js
-=======
 import React, { useState, useEffect } from "react";
 import AccessAlarmIcon from "@mui/icons-material/AccessAlarm";
 import LoopIcon from "@mui/icons-material/Loop";
-import GameButton from "../atoms/GameButton.js";
-import GameCategoryDropdown from "../atoms/GameCategoryDropdown.js";
-import GameInput from "../atoms/GameInput.js";
-import GameLinkContainer from "../components/GameLinkContainer.js";
 import Box from "@mui/material/Box";
 import { CircularProgress } from "@mui/material";
 import {
@@ -26,10 +12,9 @@ import {
   checkAccessToken,
   getThreeQuestionsByCat,
   createQuizInDB,
-} from "../api.js";
-import domain from "./../assets/domain.js";
+} from "../../api.js";
+import domain from "../../assets/domain.js";
 
->>>>>>> gameBackend:src/pages/GameSetup.js
 function GameSetup() {
   const [categories, setCategories] = useState([]); //stores QuestionCategories from DB
   const [loading, setLoading] = useState(false); //if true renders a loading animation while quiz is created in DB
