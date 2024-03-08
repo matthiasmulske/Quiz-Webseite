@@ -1,5 +1,7 @@
 import EditQuestion from "./pages/Question/EditQuestion";
 import AddQuestion from "./pages/Question/AddQuestion";
+import EditQuestion from "./pages/EditQuestion";
+import AddQuestion from "./pages/AddQuestion";
 import { Routes, Route, Link } from "react-router-dom";
 import Datenschutzseite from "./pages/Startseite/Datenschutzseite";
 import Agbs from "./pages/Startseite/Agbs";
@@ -11,6 +13,7 @@ import Welcome from "./pages/Welcome";
 import GameSetup from "./pages/Game/GameSetup";
 import Game from "./pages/Game/Game";
 import Navbar from "./components/Navbar";
+import GameButton from "./atoms/GameButton";
 
 function App() {
   return (
@@ -19,26 +22,32 @@ function App() {
       </Navbar>
         <div style={style}>
         </div>
+      <Navbar></Navbar>
+      <Link className="nav-link" aria-current="page" to="/GameSetup">
+        <GameButton label={"GameSetUp"}></GameButton>
+      </Link>
+      <div style={style}></div>
       <Routes>
         <Route path="/EditQuestion" element={<EditQuestion />} />
         <Route path="/AddQuestion" element={<AddQuestion/>} />
         <Route path="/" element={<StartseiteLogin />} />
+        <Route path="/" element={<GameSetup />} />
         <Route path="/GameSetup" element={<GameSetup />} />
         <Route path="/Game" element={<Game />} />
         <Route path="/Datenschutzseite" element={<Datenschutzseite />} />
         <Route path="/Agbs" element={<Agbs />} />
         <Route path="/Rechtliches" element={<Rechtliches />} />
         <Route path="/Game" element={<Game />} />
+        <Route path="/EditQuestion" element={<EditQuestion />} />
       </Routes>
     </div>
-  )
+  );
 }
 
 export default App;
 
 const style = {
-    page: {
-        margin: 8,
-
-    }
-}
+  page: {
+    margin: 8,
+  },
+};

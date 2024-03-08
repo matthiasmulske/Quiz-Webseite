@@ -1,8 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import GameButton from "../atoms/GameButton";
 import { Modal } from "react-bootstrap";
 import GameQuestionReportModal from "./GameQuestionReportModal";
-import ErrorIcon from '@mui/icons-material/Error';
+import ErrorIcon from "@mui/icons-material/Error";
+import {
+  List,
+  ListItemText,
+  ListItemIcon,
+  ListItemButton,
+  ListItem,
+  Typography,
+} from "@mui/material";
+import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 
 const GameScoreboardModal = ({
   modalData,
@@ -13,57 +22,83 @@ const GameScoreboardModal = ({
   const [openReportModal, setOpenReportModal] = useState(false);
   const [reportData, setReportData] = useState();
   const handleOpenReportModal = () => {
-    console.log(modalData);
     setReportData(modalData);
     setOpenReportModal(true);
   };
+
+  console.log(modalData);
+  const [answers, setAnswers] = useState([]);
+  const [playerAnswer, setPlayerAnswer] = useState();
+  useEffect(() => {
+    setAnswers([
+      modalData?.Answer1,
+      modalData?.Answer2,
+      modalData?.Answer3,
+      modalData?.CorrectAnswer,
+    ]);
+  }, [modalData]);
 
   const handleCloseModal = () => {
     setOpenModal(false); // Update openModal in the parent component
   };
 
-  let playerAnswer;
-  if (player === "player1") {
-    playerAnswer = modalData?.player1_answer.toString();
-  } else if (player === "player2") {
-    playerAnswer = modalData?.player2_answer.toString();
-  }
-
+  console.log(player);
   return (
     <Modal show={openModal} onHide={handleCloseModal}>
       <Modal.Header closeButton>
-        <Modal.Title>Question {modalData?.question_text}</Modal.Title>
+        <Modal.Title>{modalData?.QuestionText}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <p>{modalData?.question_text}</p>
-        <ul className="list-unstyled">
-          {Object.keys(modalData?.answers || {}).map((key) => {
-            return (
-              <li
-                key={key}
-                className={`list-group-item 
-                        ${
-                          key === modalData?.correct_answer.toString()
-                            ? " text-success fw-bold "
-                            : key === playerAnswer
-                              ? "text-danger fw-bold "
-                              : "text-secondary"
-                        }`}
-              >
-                {modalData?.answers[key]}
-              </li>
-            );
-          })}
-        </ul>
+        <List>
+          {answers.map((answer, index) => (
+            <ListItem key={index}>
+              <ListItemIcon>
+                <ArrowRightAltIcon />
+              </ListItemIcon>
+              <ListItemText>
+                {player === "player1" ? (
+                  <Typography
+                    style={{
+                      color:
+                        index === 3
+                          ? "green"
+                          : modalData?.AnswerPlayer1 - 1 === index
+                            ? "red"
+                            : "grey",
+                    }}
+                  >
+                    {answer}
+                  </Typography>
+                ) : (
+                  <Typography
+                    style={{
+                      color:
+                        index === 3
+                          ? "green"
+                          : modalData?.AnswerPlayer2 - 1 === index
+                            ? "red"
+                            : "grey",
+                    }}
+                  >
+                    {answer}
+                  </Typography>
+                )}
+              </ListItemText>
+            </ListItem>
+          ))}
+        </List>
+
         <div className="row justify-content-end">
           <div className="col text-end">
-          <GameButton
-                  label={<ErrorIcon/>}
-                  color="error"
-                  variante="text"
-                  onClick={handleOpenReportModal}/>
+            <GameButton
+              label={<ErrorIcon />}
+              color="error"
+              variante="text"
+              onClick={handleOpenReportModal}
+            />
             <GameQuestionReportModal
-              modalData={reportData}
+              question={modalData?.QuestionText}
+              questionID={modalData?.QuestionID}
               openModal={openReportModal}
               setOpenModal={setOpenReportModal}
             />
