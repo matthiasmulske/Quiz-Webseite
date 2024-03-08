@@ -2,10 +2,10 @@ import React from "react";
 
 function Datenschutzseite() {
   return (
-    <div>
-      <h1>Datenschutzerklärung</h1>
-      <h2 id="m716">Präambel</h2>
-      <p>
+    <div style={styles.container}>
+      <h1 style={styles.heading1}>Datenschutzerklärung</h1>
+      <h2 id="m716" style={styles.heading2}>Präambel</h2>
+      <p style={styles.paragraph}>
         Mit der folgenden Datenschutzerklärung möchten wir Sie darüber
         aufklären, welche Arten Ihrer personenbezogenen Daten (nachfolgend auch
         kurz als "Daten" bezeichnet) wir zu welchen Zwecken und in welchem
@@ -16,9 +16,9 @@ function Datenschutzseite() {
         Onlinepräsenzen, wie z. B. unserer Social-Media-Profile (nachfolgend
         zusammenfassend bezeichnet als "Onlineangebot").
       </p>
-      <p>Die verwendeten Begriffe sind nicht geschlechtsspezifisch.</p>
-      <p>Stand: 7. Dezember 2023</p>
-      <h2>Inhaltsübersicht</h2>
+      <p style={styles.paragraph}>Die verwendeten Begriffe sind nicht geschlechtsspezifisch.</p>
+      <p style={styles.paragraph}>Stand: 7. Dezember 2023</p>
+      <h2 style={styles.heading2}>Inhaltsübersicht</h2>
       <ul class="index">
         <li>
           <a class="index-link" href="#m716">
@@ -101,33 +101,33 @@ function Datenschutzseite() {
           </a>
         </li>
       </ul>
-      <h2 id="m3">Verantwortlicher</h2>
-      <p>Matthias Mulske</p>
+      <h2 id="m3" style={styles.heading2}>Verantwortlicher</h2>
+      <p style={styles.paragraph}>Matthias Mulske</p>
       E-Mail-Adresse:
-      <p>
+      <p style={styles.paragraph}>
         <a href="mailto:matthias.mulske@web.de">matthias.mulske@web.de</a>
       </p>
-      <h2 id="mOverview">Übersicht der Verarbeitungen</h2>
-      <p>
+      <h2 id="mOverview" style={styles.heading2}>Übersicht der Verarbeitungen</h2>
+      <p style={styles.paragraph}>
         Die nachfolgende Übersicht fasst die Arten der verarbeiteten Daten und
         die Zwecke ihrer Verarbeitung zusammen und verweist auf die betroffenen
         Personen.
       </p>
-      <h3>Arten der verarbeiteten Daten</h3>
-      <ul>
+      <h3 style={styles.heading2}>Arten der verarbeiteten Daten</h3>
+      <ul style={styles.list}>
         <li>Bestandsdaten.</li>
         <li>Kontaktdaten.</li>
         <li>Inhaltsdaten.</li>
         <li>Nutzungsdaten.</li>
         <li>Meta-, Kommunikations- und Verfahrensdaten.</li>
       </ul>
-      <h3>Kategorien betroffener Personen</h3>
-      <ul>
+      <h3 style={styles.heading2}>Kategorien betroffener Personen</h3>
+      <ul style={styles.list}>
         <li>Kommunikationspartner.</li>
         <li>Nutzer.</li>
       </ul>
-      <h3>Zwecke der Verarbeitung</h3>
-      <ul>
+      <h3 style={styles.heading2}>Zwecke der Verarbeitung</h3>
+      <ul style={styles.list}>
         <li>
           Erbringung vertraglicher Leistungen und Erfüllung vertraglicher
           Pflichten.
@@ -142,8 +142,8 @@ function Datenschutzseite() {
         </li>
         <li>Informationstechnische Infrastruktur.</li>
       </ul>
-      <h2 id="m2427">Maßgebliche Rechtsgrundlagen</h2>
-      <p>
+      <h2 id="m2427" style={styles.heading2}>Maßgebliche Rechtsgrundlagen</h2>
+      <p style={styles.paragraph}>
         <strong>Maßgebliche Rechtsgrundlagen nach der DSGVO: </strong>Im
         Folgenden erhalten Sie eine Übersicht der Rechtsgrundlagen der DSGVO,
         auf deren Basis wir personenbezogene Daten verarbeiten. Bitte nehmen Sie
@@ -152,7 +152,7 @@ function Datenschutzseite() {
         können. Sollten ferner im Einzelfall speziellere Rechtsgrundlagen
         maßgeblich sein, teilen wir Ihnen diese in der Datenschutzerklärung mit.
       </p>
-      <ul>
+      <ul style={styles.list}>
         <li>
           <strong>Einwilligung (Art. 6 Abs. 1 S. 1 lit. a) DSGVO)</strong> - Die
           betroffene Person hat ihre Einwilligung in die Verarbeitung der sie
@@ -179,7 +179,7 @@ function Datenschutzseite() {
           Person, die den Schutz personenbezogener Daten erfordern, überwiegen.
         </li>
       </ul>
-      <p>
+      <p style={styles.paragraph}>
         <strong>Nationale Datenschutzregelungen in Deutschland: </strong>
         Zusätzlich zu den Datenschutzregelungen der DSGVO gelten nationale
         Regelungen zum Datenschutz in Deutschland. Hierzu gehört insbesondere
@@ -192,8 +192,8 @@ function Datenschutzseite() {
         einschließlich Profiling. Ferner können Landesdatenschutzgesetze der
         einzelnen Bundesländer zur Anwendung gelangen.
       </p>
-      <h2 id="m27">Sicherheitsmaßnahmen</h2>
-      <p>
+      <h2 id="m27" style={styles.heading2}>Sicherheitsmaßnahmen</h2>
+      <p style={styles.paragraph}>
         Wir treffen nach Maßgabe der gesetzlichen Vorgaben unter
         Berücksichtigung des Stands der Technik, der Implementierungskosten und
         der Art, des Umfangs, der Umstände und der Zwecke der Verarbeitung sowie
@@ -202,7 +202,7 @@ function Datenschutzseite() {
         technische und organisatorische Maßnahmen, um ein dem Risiko
         angemessenes Schutzniveau zu gewährleisten.
       </p>
-      <p>
+      <p style={styles.paragraph}>
         Zu den Maßnahmen gehören insbesondere die Sicherung der Vertraulichkeit,
         Integrität und Verfügbarkeit von Daten durch Kontrolle des physischen
         und elektronischen Zugangs zu den Daten als auch des sie betreffenden
@@ -215,7 +215,7 @@ function Datenschutzseite() {
         entsprechend dem Prinzip des Datenschutzes, durch Technikgestaltung und
         durch datenschutzfreundliche Voreinstellungen.
       </p>
-      <p>
+      <p style={styles.paragraph}>
         TLS/SSL-Verschlüsselung (https): Um die Daten der Benutzer, die über
         unsere Online-Dienste übertragen werden, zu schützen, verwenden wir
         TLS/SSL-Verschlüsselung. Secure Sockets Layer (SSL) ist die
@@ -226,8 +226,8 @@ function Datenschutzseite() {
         Hyper Text Transfer Protocol Secure (HTTPS) wird in der URL angezeigt,
         wenn eine Website durch ein SSL/TLS-Zertifikat gesichert ist.
       </p>
-      <h2 id="m25">Übermittlung von personenbezogenen Daten</h2>
-      <p>
+      <h2 id="m25" style={styles.heading2}>Übermittlung von personenbezogenen Daten</h2>
+      <p style={styles.paragraph}>
         Im Rahmen unserer Verarbeitung von personenbezogenen Daten kommt es vor,
         dass die Daten an andere Stellen, Unternehmen, rechtlich selbstständige
         Organisationseinheiten oder Personen übermittelt oder sie ihnen
@@ -238,8 +238,8 @@ function Datenschutzseite() {
         insbesondere entsprechende Verträge bzw. Vereinbarungen, die dem Schutz
         Ihrer Daten dienen, mit den Empfängern Ihrer Daten ab.
       </p>
-      <h2 id="m24">Internationale Datentransfers</h2>
-      <p>
+      <h2 id="m24" style={styles.heading2}>Internationale Datentransfers</h2>
+      <p style={styles.paragraph}>
         Datenverarbeitung in Drittländern: Sofern wir Daten in einem Drittland
         (d. h., außerhalb der Europäischen Union (EU), des Europäischen
         Wirtschaftsraums (EWR)) verarbeiten oder die Verarbeitung im Rahmen der
@@ -265,7 +265,7 @@ function Datenschutzseite() {
           https://ec.europa.eu/info/law/law-topic/data-protection/international-dimension-data-protection_de.
         </a>
       </p>
-      <p>
+      <p style={styles.paragraph}>
         EU-US Trans-Atlantic Data Privacy Framework: Im Rahmen des sogenannten
         „Data Privacy Framework" (DPF) hat die EU-Kommission das
         Datenschutzniveau ebenfalls für bestimmte Unternehmen aus den USA im
@@ -280,8 +280,8 @@ function Datenschutzseite() {
         Datenschutzhinweise, welche von uns eingesetzten Diensteanbieter unter
         dem Data Privacy Framework zertifiziert sind.
       </p>
-      <h2 id="m12">Löschung von Daten</h2>
-      <p>
+      <h2 id="m12" style={styles.heading2}>Löschung von Daten</h2>
+      <p style={styles.paragraph}>
         Die von uns verarbeiteten Daten werden nach Maßgabe der gesetzlichen
         Vorgaben gelöscht, sobald deren zur Verarbeitung erlaubten
         Einwilligungen widerrufen werden oder sonstige Erlaubnisse entfallen (z.
@@ -298,13 +298,13 @@ function Datenschutzseite() {
         Aufbewahrung und Löschung von Daten beinhalten, die für die jeweiligen
         Verarbeitungen vorrangig gelten.
       </p>
-      <h2 id="m10">Rechte der betroffenen Personen</h2>
-      <p>
+      <h2 id="m10" style={styles.heading2}>Rechte der betroffenen Personen</h2>
+      <p style={styles.paragraph}>
         Rechte der betroffenen Personen aus der DSGVO: Ihnen stehen als
         Betroffene nach der DSGVO verschiedene Rechte zu, die sich insbesondere
         aus Art. 15 bis 21 DSGVO ergeben:
       </p>
-      <ul>
+      <ul style={styles.list}>
         <li>
           <strong>Widerspruchsrecht:</strong> Sie haben das Recht, aus Gründen,
           die sich aus Ihrer besonderen Situation ergeben, jederzeit gegen die
@@ -361,8 +361,8 @@ function Datenschutzseite() {
           verstößt.
         </li>
       </ul>
-      <h2 id="m134">Einsatz von Cookies</h2>
-      <p>
+      <h2 id="m134" style={styles.heading2}>Einsatz von Cookies</h2>
+      <p style={styles.paragraph}>
         Cookies sind kleine Textdateien bzw. sonstige Speichervermerke, die
         Informationen auf Endgeräten speichern und Informationen aus den
         Endgeräten auslesen. Zum Beispiel, um den Login-Status in einem
@@ -373,7 +373,7 @@ function Datenschutzseite() {
         von Onlineangeboten sowie der Erstellung von Analysen der
         Besucherströme.
       </p>
-      <p>
+      <p style={styles.paragraph}>
         <strong>Hinweise zur Einwilligung: </strong>Wir setzen Cookies im
         Einklang mit den gesetzlichen Vorschriften ein. Daher holen wir von den
         Nutzern eine vorhergehende Einwilligung ein, außer wenn diese gesetzlich
@@ -391,7 +391,7 @@ function Datenschutzseite() {
         kommuniziert und enthält die Informationen zur jeweiligen
         Cookie-Nutzung.
       </p>
-      <p>
+      <p style={styles.paragraph}>
         <strong>Hinweise zu datenschutzrechtlichen Rechtsgrundlagen: </strong>
         Auf welcher datenschutzrechtlichen Rechtsgrundlage wir die
         personenbezogenen Daten der Nutzer mit Hilfe von Cookies verarbeiten,
@@ -407,11 +407,11 @@ function Datenschutzseite() {
         darüber klären wir im Laufe dieser Datenschutzerklärung oder im Rahmen
         von unseren Einwilligungs- und Verarbeitungsprozessen auf.
       </p>
-      <p>
+      <p style={styles.paragraph}>
         <strong>Speicherdauer: </strong>Im Hinblick auf die Speicherdauer werden
         die folgenden Arten von Cookies unterschieden:
       </p>
-      <ul>
+      <ul style={styles.list}>
         <li>
           <strong>
             Temporäre Cookies (auch: Session- oder Sitzungs-Cookies):
@@ -433,7 +433,7 @@ function Datenschutzseite() {
           zwei Jahre betragen kann.
         </li>
       </ul>
-      <p>
+      <p style={styles.paragraph}>
         <strong>
           Allgemeine Hinweise zum Widerruf und Widerspruch (sog. "Opt-Out"):{" "}
         </strong>
@@ -453,19 +453,19 @@ function Datenschutzseite() {
         </a>{" "}
         erklärt werden.
       </p>
-      <ul class="m-elements">
+      <ul class="m-elements" style={styles.list}>
         <li class="">
           <strong>Rechtsgrundlagen:</strong> Berechtigte Interessen (Art. 6 Abs.
           1 S. 1 lit. f) DSGVO). Einwilligung (Art. 6 Abs. 1 S. 1 lit. a)
           DSGVO).
         </li>
       </ul>
-      <p>
+      <p style={styles.paragraph}>
         <strong>
           Weitere Hinweise zu Verarbeitungsprozessen, Verfahren und Diensten:
         </strong>
       </p>
-      <ul class="m-elements">
+      <ul class="m-elements" style={styles.list}>
         <li>
           <strong>
             Verarbeitung von Cookie-Daten auf Grundlage einer Einwilligung:{" "}
@@ -494,15 +494,15 @@ function Datenschutzseite() {
           </span>
         </li>
       </ul>
-      <h2 id="m225">Bereitstellung des Onlineangebotes und Webhosting</h2>
-      <p>
+      <h2 id="m225" style={styles.heading2}>Bereitstellung des Onlineangebotes und Webhosting</h2>
+      <p style={styles.paragraph}>
         Wir verarbeiten die Daten der Nutzer, um ihnen unsere Online-Dienste zur
         Verfügung stellen zu können. Zu diesem Zweck verarbeiten wir die
         IP-Adresse des Nutzers, die notwendig ist, um die Inhalte und Funktionen
         unserer Online-Dienste an den Browser oder das Endgerät der Nutzer zu
         übermitteln.
       </p>
-      <ul class="m-elements">
+      <ul class="m-elements" style={styles.list}>
         <li>
           <strong>Verarbeitete Datenarten:</strong> Nutzungsdaten (z. B.
           besuchte Webseiten, Interesse an Inhalten, Zugriffszeiten); Meta-,
@@ -524,12 +524,12 @@ function Datenschutzseite() {
           1 S. 1 lit. f) DSGVO).
         </li>
       </ul>
-      <p>
+      <p style={styles.paragraph}>
         <strong>
           Weitere Hinweise zu Verarbeitungsprozessen, Verfahren und Diensten:
         </strong>
       </p>
-      <ul class="m-elements">
+      <ul class="m-elements" style={styles.list}>
         <li>
           <strong>
             Bereitstellung Onlineangebot auf gemietetem Speicherplatz:
@@ -568,8 +568,8 @@ function Datenschutzseite() {
           Vorfalls von der Löschung ausgenommen.
         </li>
       </ul>
-      <h2 id="m432">Community Funktionen</h2>
-      <p>
+      <h2 id="m432" style={styles.heading2}>Community Funktionen</h2>
+      <p style={styles.paragraph}>
         Die von uns bereitgestellten Community Funktionen erlauben es Nutzern
         miteinander in Konversationen oder sonst miteinander in einen Austausch
         zu treten. Hierbei bitten wir zu beachten, dass die Nutzung der
@@ -577,7 +577,7 @@ function Datenschutzseite() {
         unserer Bedingungen und Richtlinien sowie der Rechte anderer Nutzer und
         Dritter gestattet ist.
       </p>
-      <ul class="m-elements">
+      <ul class="m-elements" style={styles.list}>
         <li>
           <strong>Verarbeitete Datenarten:</strong> Nutzungsdaten (z. B.
           besuchte Webseiten, Interesse an Inhalten, Zugriffszeiten); Meta-,
@@ -598,12 +598,12 @@ function Datenschutzseite() {
           vorvertragliche Anfragen (Art. 6 Abs. 1 S. 1 lit. b) DSGVO).
         </li>
       </ul>
-      <p>
+      <p style={styles.paragraph}>
         <strong>
           Weitere Hinweise zu Verarbeitungsprozessen, Verfahren und Diensten:
         </strong>
       </p>
-      <ul class="m-elements">
+      <ul class="m-elements" style={styles.list}>
         <li>
           <strong>Schutz eigener Daten: </strong>Die Nutzer entscheiden selbst,
           welche Daten sie über sich innerhalb unseres Onlineangebotes
@@ -620,8 +620,8 @@ function Datenschutzseite() {
           </span>
         </li>
       </ul>
-      <h2 id="m451">Single-Sign-On-Anmeldung</h2>
-      <p>
+      <h2 id="m451" style={styles.heading2}>Single-Sign-On-Anmeldung</h2>
+      <p style={styles.paragraph}>
         Als "Single-Sign-On" oder "Single-Sign-On-Anmeldung bzw.
         "-Authentifizierung" werden Verfahren bezeichnet, die es Nutzern
         erlauben, sich mit Hilfe eines Nutzerkontos bei einem Anbieter von
@@ -633,7 +633,7 @@ function Datenschutzseite() {
         schon bei dem Single-Sign-On-Anbieter angemeldet sind und die
         Single-Sign-On-Anmeldung via Schaltfläche bestätigen.
       </p>
-      <p>
+      <p style={styles.paragraph}>
         Die Authentifizierung erfolgt direkt bei dem jeweiligen
         Single-Sign-On-Anbieter. Im Rahmen einer solchen Authentifizierung
         erhalten wir eine Nutzer-ID mit der Information, dass der Nutzer unter
@@ -650,14 +650,14 @@ function Datenschutzseite() {
         Passwort bei dem Single-Sign-On-Anbieter ist für uns weder einsehbar,
         noch wird es von uns gespeichert.
       </p>
-      <p>
+      <p style={styles.paragraph}>
         Die Nutzer werden gebeten, zu beachten, dass deren bei uns gespeicherte
         Angaben automatisch mit ihrem Nutzerkonto beim Single-Sign-On-Anbieter
         abgeglichen werden können, dies jedoch nicht immer möglich ist oder
         tatsächlich erfolgt. Ändern sich z. B. die E-Mail-Adressen der Nutzer,
         müssen sie diese manuell in ihrem Nutzerkonto bei uns ändern.
       </p>
-      <p>
+      <p style={styles.paragraph}>
         Die Single-Sign-On-Anmeldung können wir, sofern mit den Nutzern
         vereinbart, im Rahmen der oder vor der Vertragserfüllung einsetzen,
         soweit die Nutzer darum gebeten wurden, im Rahmen einer Einwilligung
@@ -665,7 +665,7 @@ function Datenschutzseite() {
         Interessen unsererseits und der Interessen der Nutzer an einem
         effektiven und sicheren Anmeldesystem ein.
       </p>
-      <p>
+      <p style={styles.paragraph}>
         Sollten Nutzer sich einmal entscheiden, die Verknüpfung ihres
         Nutzerkontos beim Single-Sign-On-Anbieter nicht mehr für das
         Single-Sign-On-Verfahren nutzen zu wollen, müssen sie diese Verbindung
@@ -673,7 +673,7 @@ function Datenschutzseite() {
         Möchten Nutzer deren Daten bei uns löschen, müssen sie ihre
         Registrierung bei uns kündigen.
       </p>
-      <ul class="m-elements">
+      <ul class="m-elements" style={styles.list}>
         <li>
           <strong>Verarbeitete Datenarten:</strong> Bestandsdaten (z. B. Namen,
           Adressen); Kontaktdaten (z. B. E-Mail, Telefonnummern); Nutzungsdaten
@@ -695,12 +695,12 @@ function Datenschutzseite() {
           1 S. 1 lit. f) DSGVO).
         </li>
       </ul>
-      <p>
+      <p style={styles.paragraph}>
         <strong>
           Weitere Hinweise zu Verarbeitungsprozessen, Verfahren und Diensten:
         </strong>
       </p>
-      <ul class="m-elements">
+      <ul class="m-elements" style={styles.list}>
         <li>
           <strong>Apple Single-Sign-On:</strong> Authentifizierungsdienst;{" "}
           <strong>Dienstanbieter:</strong> Apple Inc., Infinite Loop, Cupertino,
@@ -741,15 +741,15 @@ function Datenschutzseite() {
           .
         </li>
       </ul>
-      <h2 id="m182">Kontakt- und Anfragenverwaltung</h2>
-      <p>
+      <h2 id="m182" style={styles.heading2}>Kontakt- und Anfragenverwaltung</h2>
+      <p style={styles.paragraph}>
         Bei der Kontaktaufnahme mit uns (z. B. per Post, Kontaktformular,
         E-Mail, Telefon oder via soziale Medien) sowie im Rahmen bestehender
         Nutzer- und Geschäftsbeziehungen werden die Angaben der anfragenden
         Personen verarbeitet, soweit dies zur Beantwortung der Kontaktanfragen
         und etwaiger angefragter Maßnahmen erforderlich ist.
       </p>
-      <ul class="m-elements">
+      <ul style={styles.list}>
         <li>
           <strong>Verarbeitete Datenarten:</strong> Kontaktdaten (z. B. E-Mail,
           Telefonnummern); Inhaltsdaten (z. B. Eingaben in Onlineformularen);
@@ -773,12 +773,12 @@ function Datenschutzseite() {
           (Art. 6 Abs. 1 S. 1 lit. b) DSGVO).
         </li>
       </ul>
-      <p>
+      <p style={styles.paragraph}>
         <strong>
           Weitere Hinweise zu Verarbeitungsprozessen, Verfahren und Diensten:
         </strong>
       </p>
-      <ul class="m-elements">
+      <ul style={styles.list}>
         <li>
           <strong>Kontaktformular:</strong> Wenn Nutzer über unser
           Kontaktformular, E-Mail oder andere Kommunikationswege mit uns in
@@ -791,8 +791,8 @@ function Datenschutzseite() {
           </span>
         </li>
       </ul>
-      <h2 id="m15">Änderung und Aktualisierung der Datenschutzerklärung</h2>
-      <p>
+      <h2 id="m15" style={styles.heading2}>Änderung und Aktualisierung der Datenschutzerklärung</h2>
+      <p style={styles.paragraph}>
         Wir bitten Sie, sich regelmäßig über den Inhalt unserer
         Datenschutzerklärung zu informieren. Wir passen die Datenschutzerklärung
         an, sobald die Änderungen der von uns durchgeführten Datenverarbeitungen
@@ -800,21 +800,21 @@ function Datenschutzseite() {
         Änderungen eine Mitwirkungshandlung Ihrerseits (z. B. Einwilligung) oder
         eine sonstige individuelle Benachrichtigung erforderlich wird.
       </p>
-      <p>
+      <p style={styles.paragraph}>
         Sofern wir in dieser Datenschutzerklärung Adressen und
         Kontaktinformationen von Unternehmen und Organisationen angeben, bitten
         wir zu beachten, dass die Adressen sich über die Zeit ändern können und
         bitten die Angaben vor Kontaktaufnahme zu prüfen.
       </p>
-      <h2 id="m42">Begriffsdefinitionen</h2>
-      <p>
+      <h2 id="m42" style={styles.heading2}>Begriffsdefinitionen</h2>
+      <p style={styles.paragraph}>
         In diesem Abschnitt erhalten Sie eine Übersicht über die in dieser
         Datenschutzerklärung verwendeten Begrifflichkeiten. Soweit die
         Begrifflichkeiten gesetzlich definiert sind, gelten deren gesetzliche
         Definitionen. Die nachfolgenden Erläuterungen sollen dagegen vor allem
         dem Verständnis dienen.
       </p>
-      <ul class="glossary">
+      <ul class="glossary" style={styles.list}>
         <li>
           <strong>Personenbezogene Daten:</strong> "Personenbezogene Daten" sind
           alle Informationen, die sich auf eine identifizierte oder
@@ -847,5 +847,32 @@ function Datenschutzseite() {
     </div>
   );
 }
+const styles = {
+  container: {
+    fontFamily: 'Arial, sans-serif',
+    lineHeight: '1.5',
+    margin: '20px auto',
+    padding: '20px',
+    maxWidth: '1200px' 
+    
+  },
+  heading1: {
+    fontSize: '70px',
+    marginTop: '30px'
+  },
+  heading2: {
+    fontSize: '20px',
+    marginTop: '30px'
+  },
+  paragraph: {
+    fontSize: '15px',
+    marginTop: '25px'
+  },
+  list: {
+    listStyleType: 'disc',
+    fontSize: '15px',
+    marginLeft: '20px'
+  }
+};
 
 export default Datenschutzseite;

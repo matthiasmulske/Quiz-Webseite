@@ -4,38 +4,24 @@ import LoginButton from "../../atoms/LoginButton.js";
 import Footer from "../../components/Footer.js";
 
 function Login() {
-  function startSpiel() {
-    alert("Starte das Quiz");
-  }
-
-  function addNewQuestion() {
-    alert("Füge eine neue Quizfrage hinzu");
-  }
-
-  function editQuestion() {
-    alert("Bearbeite eine Quizfrage");
-  }
-
+  
   return (
     <div style={styles.container}>
       <div style={styles.buttonContainer}>
-      <Link to="/GameSetup">
-        <LoginButton 
-          buttonLabel={"Starte Quiz"} 
-          onClick={startSpiel} 
-          style={styles.button} />
+        <Link to="/GameSetup" style={styles.link}>
+          <LoginButton 
+            buttonLabel={"Starte Quiz"}  
+            style={styles.button} />
         </Link>
-        <Link to="/AddQuestion">
-        <LoginButton 
-          buttonLabel={"Neue Quizfrage"} 
-          onClick={addNewQuestion} 
-          style={styles.button} />
+        <Link to="/AddQuestion" style={styles.link}>
+          <LoginButton 
+            buttonLabel={"Neue Quizfrage"} 
+            style={styles.button} />
         </Link>
-        <Link to="/EditQuestion">
-        <LoginButton 
-          buttonLabel={"Quizfrage bearbeiten"} 
-          onClick={editQuestion} 
-          style={styles.button} />
+        <Link to="/EditQuestion" style={styles.link}>
+          <LoginButton 
+            buttonLabel={"Quizfrage bearbeiten"} 
+            style={styles.button} />
         </Link>
       </div>
       <Footer />
@@ -48,6 +34,7 @@ const styles = {
     display: "grid",
     placeItems: "center",
     height: "80vh",
+    
   },
   buttonContainer: {
     display: "grid",
@@ -58,6 +45,9 @@ const styles = {
     minWidth: "200px",
     height: "100px",
     fontSize: "24px",
+  },
+  link: {
+    textDecoration: "none", 
   },
 };
 

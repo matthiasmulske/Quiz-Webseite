@@ -1,6 +1,7 @@
 import * as React from "react";
 <<<<<<< HEAD:src/Pages/Question/EditQuestion.js
 import FormAddQuestion from "../../components/FormAddQuestion";
+import QuestionTable from "../../atoms/QuestionTable"
 import QuestionTable from  "../../atoms/QuestionTable"
 =======
 import FormAddQuestion from "../components/FormAddQuestion";

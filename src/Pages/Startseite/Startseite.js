@@ -11,7 +11,7 @@ function Login() {
   return (
     <div style={styles.container}>
       <div style={styles.buttonContainer}>
-        <Link to="/Game">
+        <Link to="/Game" style={styles.link}>
           <LoginButton
             buttonLabel={"Starte Quiz"}
             onClick={starteDasQuiz}
@@ -26,22 +26,22 @@ function Login() {
 
 const styles = {
   container: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    height: "500px",
+    display: "grid",
+    placeItems: "center",
+    height: "80vh",
   },
   buttonContainer: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: "250px",
+    display: "grid",
+    gridGap: "10px", 
   },
-  
-  buttonSpace: {
-    marginTop: "20px",
+  button: {
+    width: "100%",
+    minWidth: "200px",
+    height: "100px",
+    fontSize: "24px",
+  },
+  link: {
+    textDecoration: "none", // Unterstreichung entfernen
   },
 };
 

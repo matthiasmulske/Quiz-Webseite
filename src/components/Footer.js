@@ -12,6 +12,7 @@ function Footer() {
         transform: "translateX(-50%)",
         display: "flex",
         justifyContent: "center",
+         
       }}
     >
       <Link to="/Datenschutzseite" style={{ marginRight: "10px" }}>
