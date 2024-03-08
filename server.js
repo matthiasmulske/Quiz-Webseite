@@ -4,7 +4,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 
 const app = express();
-const IP_ADDRESS = "192.168.100.77";
+const IP_ADDRESS = "localhost";
 const port = 5000;
 
 // Middleware

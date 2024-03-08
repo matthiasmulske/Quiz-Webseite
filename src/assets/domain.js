@@ -1,3 +1,3 @@
-const ip = "192.168.100.77";
+const ip = "localhost";
 const domain = "http://" + ip;
 export default { domain, ip };
