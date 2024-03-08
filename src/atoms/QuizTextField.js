@@ -1,6 +1,21 @@
 import * as React from "react";
 import { TextField } from "@mui/material";
 
+function QuizTextField({ name, label, rows, onChange, children }) {
+
+    return (
+        <TextField
+            sx={style.answerField}
+            id="outlined-multiline-flexible"
+            label={label}
+            name={name}
+            fullWidth={true}
+            multiline
+            rows={rows}
+            onChange={onChange}
+            defaultValue={children}
+        />
+    );
 function QuizTextField({ label, rows }) {
   return (
     <>
@@ -21,8 +36,7 @@ export default QuizTextField;
 
 const style = {
     answerField: {
-        padding: '0.8rem',
-        paddingBottom: '30px', 
+        paddingBottom: '30px',
         color: 'success.main',
     },
     answerField: {

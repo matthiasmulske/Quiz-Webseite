@@ -1,7 +1,15 @@
 import * as React from "react";
-import FormAddQuestion from "../../components/FormAddQuestion";
 import QuestionTable from "../../atoms/QuestionTable"
 
+function EditQuestion() {
+
+    return (
+        <>
+            <div style={style.container}>
+                <QuestionTable/>
+            </div>
+        </>
+    )
 function AddQuestion() {
   return (
     <>
@@ -16,7 +24,7 @@ function AddQuestion() {
   );
 }
 
-export default AddQuestion;
+export default EditQuestion;
 
 const style = {
   componentContainer: {
