@@ -40,11 +40,8 @@ const style = {
     componentContainer: {
         width: "100%",
     },
-    componentContainer: {
-      width: "100%",
-      margin: 1,
-    },
-    
+
+
 
 
 }

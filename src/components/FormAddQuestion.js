@@ -3,13 +3,14 @@ import { FormControl, InputLabel } from "@mui/material";
 import QuizTextField from "../atoms/QuizTextField";
 import DropDown from "../atoms/DropDown";
 import ButtonQuiz from "../atoms/ButtonQuiz";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import questions from "../data/questions.json"
+import {fetchQuestionCategories} from "../api";
 
 
-const categories = ["ISEF", "IBPMN", "ITIL"]
+const ip = "localhost";
+const domain = "http://" + ip;
 
-// TODO: Select Category
 function FormAddQuestion({ buttonLabel, children }) {
   const [data, setData] = useState({
       question: "",
@@ -19,8 +20,61 @@ function FormAddQuestion({ buttonLabel, children }) {
       answerD: "",
       category: ""
   });
+  const [categories, setCategories] = useState()
 
-  function handleChange(e) {
+    const fetchCategories = async () => {
+        try {
+            console.log(domain);
+            let options = await fetchQuestionCategories(
+                domain + ":5000/categories",
+                "",
+            );
+            let optionsArray = options.map((category) => ({
+                value: category.QuestionCategoryID,
+                label: category.Name,
+            }));
+            return optionsArray;
+        } catch (error) {
+            console.error("Error fetching categories:", error);
+        }
+    };
+
+    const fetchQuestionCategories = async (route, accessToken) => {
+        return await fetchData(route, { accessToken });
+    };
+
+    const fetchData = async (route, body) => {
+        try {
+            const response = await fetch(route, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(body),
+            });
+
+            if (!response.ok) {
+                throw new Error("Failed to fetch data");
+            }
+
+            return await response.json();
+        } catch (error) {
+            console.error("Error fetching data: ", error);
+        }
+    };
+
+    //get categories from Database when component mounts
+    useEffect(() => {
+        getData();
+    }, []);
+
+    async function getData() {
+        let options = await fetchCategories();
+        setCategories(options);
+    }
+
+
+    function handleChange(e) {
     setData({
       ...data,
       [e.target.name]: e.target.value,
@@ -28,10 +82,7 @@ function FormAddQuestion({ buttonLabel, children }) {
   }
 
   function handleSubmit() {
-
-      console.log(questions)
-
-
+      console.log(categories)
   }
 
 
