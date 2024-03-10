@@ -1,19 +1,19 @@
 import * as React from "react";
-import { FormControl, InputLabel } from "@mui/material";
+import {FormControl, InputLabel, Select} from "@mui/material";
 import QuizTextField from "../atoms/QuizTextField";
-import DropDown from "../atoms/DropDown";
 import ButtonQuiz from "../atoms/ButtonQuiz";
 import {useEffect, useState} from "react";
+import MenuItem from "@mui/material/MenuItem";
 
 const domain = "http://localhost:5000";
 const route = domain + "/categories";
 
 
 function FormAddQuestion({ buttonLabel, children }) {
-
-    let [categories, setCategories] = useState([]);
+    let [categories, setCategories] = useState(null);
+    const [selectedCategory, setSelectedCategory] = useState("Betriebssysteme");
     const [data, setData] = useState({
-      question: "huan",
+      question: "",
       answerA: "",
       answerB: "",
       answerC: "",
@@ -31,6 +31,11 @@ function FormAddQuestion({ buttonLabel, children }) {
         fetchData().then(r => setCategories(categories));
     })
 
+    const handleDropdownChange = (event) => {
+        const {target: { value }, } = event;
+        setSelectedCategory(value)
+    };
+
 
     function handleChange(e) {
     setData({
@@ -40,8 +45,8 @@ function FormAddQuestion({ buttonLabel, children }) {
   }
 
   function handleSubmit() {
-      console.log(categories[0].Name)
-      categories.map((category) => {console.log(category.Name)})
+      console.log(selectedCategory)
+      console.log(data)
   }
 
 
@@ -55,19 +60,23 @@ function FormAddQuestion({ buttonLabel, children }) {
         <QuizTextField name={"answerD"} label={"Antwort D"} onChange={handleChange} rows={3} />
       </div>
       <FormControl style={style.gridContainer}>
-        <div>
-          <InputLabel id="demo-simple-select-label">Kategorie</InputLabel>
-            <DropDown categories={categories}/>
-        </div>
-          <p>
-              {categories.length > 0 ? (
-                  categories.map((category) =>
-                      <p>{category.Name}</p>
-                  )
-              ) : (
-                  <p>Loading categories...</p>
-              )}
-          </p>
+          <InputLabel>Kategorie</InputLabel>
+          <div>
+              {categories != null ? (
+                  <Select
+                      value={selectedCategory}
+                      label={selectedCategory}
+                      onChange={handleDropdownChange}
+                  >
+                      {categories.map((category) =>
+                          <MenuItem
+                              key={category.Name}
+                              value={category.Name}
+                          >{category.Name}</MenuItem>)}
+                  </Select>
+
+              ) : (console.log("Loading"))}
+          </div>
         <QuizTextField label={"neue Kategorie eingeben"} />
       </FormControl>
       <ButtonQuiz onButtonClick={handleSubmit} buttonLabel={buttonLabel}/>

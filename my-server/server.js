@@ -30,13 +30,15 @@ connection.connect((err) => {
 });
 
 // Routes
-app.post("/categories", getCategories);
 app.get("/categories", getCategories);
+app.post("/addQuestion", addQuestion);
 
 
 function getCategories(req, res) {
-    const query = `SELECT * FROM QuestionCategory`;
     connection.query('SELECT * FROM QuestionCategory', handleQueryResponse(res));
+}
+
+function addQuestion(){
 }
 
 

@@ -2,12 +2,7 @@ import * as React from "react";
 import FormAddQuestion from "../../components/FormAddQuestion";
 
 
-// TODO: Select Category
 function AddQuestion() {
-
-    function handleChange(event, setterFunction) {
-        setterFunction(event.target.value);
-    }
 
     function handleSubmit() {
         console.log("Submitted from parent")
