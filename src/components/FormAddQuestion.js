@@ -4,74 +4,32 @@ import QuizTextField from "../atoms/QuizTextField";
 import DropDown from "../atoms/DropDown";
 import ButtonQuiz from "../atoms/ButtonQuiz";
 import {useEffect, useState} from "react";
-import questions from "../data/questions.json"
-import {fetchQuestionCategories} from "../api";
 
+const domain = "http://localhost:5000";
+const route = domain + "/categories";
 
-const ip = "localhost";
-const domain = "http://" + ip;
 
 function FormAddQuestion({ buttonLabel, children }) {
-  const [data, setData] = useState({
-      question: "",
+
+    let [categories, setCategories] = useState([]);
+    const [data, setData] = useState({
+      question: "huan",
       answerA: "",
       answerB: "",
       answerC: "",
       answerD: "",
       category: ""
-  });
-  const [categories, setCategories] = useState()
+    });
 
-    const fetchCategories = async () => {
-        try {
-            console.log(domain);
-            let options = await fetchQuestionCategories(
-                domain + ":5000/categories",
-                "",
-            );
-            let optionsArray = options.map((category) => ({
-                value: category.QuestionCategoryID,
-                label: category.Name,
-            }));
-            return optionsArray;
-        } catch (error) {
-            console.error("Error fetching categories:", error);
-        }
-    };
 
-    const fetchQuestionCategories = async (route, accessToken) => {
-        return await fetchData(route, { accessToken });
-    };
-
-    const fetchData = async (route, body) => {
-        try {
-            const response = await fetch(route, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(body),
-            });
-
-            if (!response.ok) {
-                throw new Error("Failed to fetch data");
-            }
-
-            return await response.json();
-        } catch (error) {
-            console.error("Error fetching data: ", error);
-        }
-    };
-
-    //get categories from Database when component mounts
     useEffect(() => {
-        getData();
-    }, []);
-
-    async function getData() {
-        let options = await fetchCategories();
-        setCategories(options);
-    }
+        const fetchData = async () => {
+            categories = await fetch(route, {method: "GET", headers: {"Content-Type": "application/json"}})
+                .then(r => r.json())
+                .catch(error => { console.error('Error fetching categories:', error) });
+        }
+        fetchData().then(r => setCategories(categories));
+    })
 
 
     function handleChange(e) {
@@ -82,7 +40,8 @@ function FormAddQuestion({ buttonLabel, children }) {
   }
 
   function handleSubmit() {
-      console.log(categories)
+      console.log(categories[0].Name)
+      categories.map((category) => {console.log(category.Name)})
   }
 
 
@@ -90,7 +49,7 @@ function FormAddQuestion({ buttonLabel, children }) {
     <div style={style.container}>
       <QuizTextField name={'question'} value={data.question} label={"Frage"} onChange={handleChange} rows={5} />
       <div style={style.gridContainer}>
-          <QuizTextField name={"answerA"} label={"Antwort A"} onChange={handleChange} rows={3}>{children}</QuizTextField>
+        <QuizTextField name={"answerA"} label={"Antwort A"} onChange={handleChange} rows={3}>{children}</QuizTextField>
         <QuizTextField name={"answerB"} label={"Antwort B"} onChange={handleChange} rows={3} />
         <QuizTextField name={"answerC"} label={"Antwort C"} onChange={handleChange} rows={3} />
         <QuizTextField name={"answerD"} label={"Antwort D"} onChange={handleChange} rows={3} />
@@ -98,8 +57,17 @@ function FormAddQuestion({ buttonLabel, children }) {
       <FormControl style={style.gridContainer}>
         <div>
           <InputLabel id="demo-simple-select-label">Kategorie</InputLabel>
-          <DropDown categories={categories} />
+            <DropDown categories={categories}/>
         </div>
+          <p>
+              {categories.length > 0 ? (
+                  categories.map((category) =>
+                      <p>{category.Name}</p>
+                  )
+              ) : (
+                  <p>Loading categories...</p>
+              )}
+          </p>
         <QuizTextField label={"neue Kategorie eingeben"} />
       </FormControl>
       <ButtonQuiz onButtonClick={handleSubmit} buttonLabel={buttonLabel}/>
