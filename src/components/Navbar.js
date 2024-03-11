@@ -93,7 +93,7 @@ export default function PrimarySearchAppBar() {
           {isLoggedIn && !clickedLogin && (
             <>
               <IconButton size="large" aria-label="show 3 new mails" color="inherit" onClick={handleMailDialogOpen}>
-                <Badge badgeContent={0} color="error">
+                <Badge badgeContent={3} color="error">
                   <MailIcon />
                 </Badge>
               </IconButton>
