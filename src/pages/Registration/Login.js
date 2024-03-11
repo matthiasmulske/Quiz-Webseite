@@ -1,14 +1,13 @@
 import LoginMaske from "../../components/LoginMaske.js";
-import Footer from "../../components/Footer.js";
 
-function Startseite() {
+function Login({setUser}) {
   return (
     <>
-      <LoginMaske />
+      <LoginMaske setUser={setUser}/>
       
     </>
   );
 }
 
 
-export default Startseite;
+export default Login;

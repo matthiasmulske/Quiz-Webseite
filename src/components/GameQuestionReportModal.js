@@ -15,7 +15,7 @@ const GameQuestionReportModal = ({
   openModal,
   setOpenModal,
 }) => {
-  const [category, setCategory] = useState("Frage falsch"); //stores choosen CommentCategory
+  const [category, setCategory] = useState(); //stores choosen CommentCategory
   const [categories, setCategories] = useState([]); //Stores CommentCategories for Dropdown-Input
   const [commentText, setCommentText] = useState(""); //stores comment of the user
   const [sent, setSent] = useState(false);
@@ -84,10 +84,11 @@ const GameQuestionReportModal = ({
           <div className="mb-3">Question ID: {questionID}</div>
           <div className="mb-3">{question}</div>
           <GameCategoryDropdown
-            label="Kategorie*"
+            label="Kategorie"
             options={categories}
             selectedOption={category}
             onChange={handleCategoryChange}
+            isRequired={true}
           />
           <GameInput
             value={commentText}

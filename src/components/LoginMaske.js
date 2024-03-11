@@ -5,7 +5,7 @@ import AppleLogin from 'react-apple-login';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faApple } from '@fortawesome/free-brands-svg-icons';
 
-function LoginMaske() {
+function LoginMaske({setUser}) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
@@ -16,7 +16,8 @@ function LoginMaske() {
     event.preventDefault();
     if (username === 'test' && password === 'test123') {
       console.log('Anmeldung erfolgreich');
-      window.location.href = '/HomepageLogin'; 
+      setUser(3);
+      window.location.href = '/'; 
     } else {
       console.log('Anmeldung fehlgeschlagen');
       setErrorMessage('Benutzername oder Passwort ungültig');

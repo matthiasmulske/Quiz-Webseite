@@ -19,12 +19,10 @@ import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 
-export default function PrimarySearchAppBar() {
+export default function Navbar({isLoggedIn, setIsLoggedIn, user}) {
   const [mailDialogOpen, setMailDialogOpen] = useState(false);
   const [logoutDialogOpen, setLogoutDialogOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [clickedLogin, setClickedLogin] = useState(false);
 
   useEffect(() => {
     const loggedInStatus = localStorage.getItem('isLoggedIn');
@@ -51,7 +49,6 @@ export default function PrimarySearchAppBar() {
 
   const handleLogout = () => {
     setIsLoggedIn(false);
-    localStorage.setItem('isLoggedIn', 'false');
     handleLogoutDialogClose();
   };
 
@@ -65,17 +62,13 @@ export default function PrimarySearchAppBar() {
 
   const handleLogin = () => {
     setIsLoggedIn(true);
-    localStorage.setItem('isLoggedIn', 'true');
-    setClickedLogin(true);
   };
-
-  const homePage = isLoggedIn ? "/HomepageLogin" : "/";
 
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-          <Link to={homePage} style={{ textDecoration: 'none', color: 'inherit' }}>
+          <Link to={"/"} style={{ textDecoration: 'none', color: 'inherit' }}>
             <IconButton size="large" edge="start" color="inherit" aria-label="home">
               <img src={logo} alt="logo" height="50px" />
             </IconButton>
@@ -90,7 +83,7 @@ export default function PrimarySearchAppBar() {
           </Typography>
           
           <Box sx={{ flexGrow: 1 }} />
-          {isLoggedIn && !clickedLogin && (
+          {isLoggedIn && (
             <>
               <IconButton size="large" aria-label="show 3 new mails" color="inherit" onClick={handleMailDialogOpen}>
                 <Badge badgeContent={0} color="error">
@@ -112,6 +105,7 @@ export default function PrimarySearchAppBar() {
                 open={Boolean(anchorEl)}
                 onClose={handleCloseMenu}
               >
+                <MenuItem onClick={handleCloseMenu}>NutzerID: {user}</MenuItem>
                 <MenuItem onClick={handleCloseMenu}>Profil</MenuItem>
                 <MenuItem onClick={handleCloseMenu}>Benutzername ändern</MenuItem>
                 <MenuItem onClick={handleCloseMenu}>Passwort ändern</MenuItem>
@@ -128,9 +122,9 @@ export default function PrimarySearchAppBar() {
               </Link>
             </>
           )}
-          {!isLoggedIn && !clickedLogin && (
+          {!isLoggedIn && (
             <Link to="/Login" style={{ textDecoration: 'none', color: 'inherit' }}>
-              <Button color="inherit" onClick={handleLogin}>
+              <Button color="inherit" >
                 Login
               </Button>
             </Link>

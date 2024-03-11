@@ -5,10 +5,10 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import NativeSelect from "@mui/material/Select";
 
-function GameCategoryDropdown({ label, options, selectedOption, onChange }) {
+function GameCategoryDropdown({ label, options, selectedOption, onChange, isRequired }) {
   return (
     <Box sx={{ minWidth: 120 }}>
-      <FormControl fullWidth>
+      <FormControl fullWidth required={isRequired} error={!selectedOption}>
         <InputLabel>{label}</InputLabel>
         <NativeSelect value={selectedOption} onChange={onChange} label={label}>
           {options.map((option) => (
