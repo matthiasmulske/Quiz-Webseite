@@ -3,16 +3,15 @@ import FormAddQuestion from "../../components/FormAddQuestion";
 import {useEffect, useState} from "react";
 
 const domain = "http://localhost:5000";
-const route = domain + "/categories";
 
-
-// TODO: rename to data[correctAnswer]
 // TODO: add selectedCategory to data
 // TODO: handler "if undefined"
+// TODO: handleDropDownChange should return the categoryID
 
 function AddQuestion() {
     let [categories, setCategories] = useState(null);
-    const [selectedCategory, setSelectedCategory] = useState("Betriebssysteme");
+    let [selectedCategory, setSelectedCategory] = useState(null);
+
     const [data, setData] = useState();
 
     useEffect(() => {
@@ -35,15 +34,21 @@ function AddQuestion() {
         };
 
         fetchData()
-            .then((categories) => setCategories(categories))
+            .then((categories) => {
+                setCategories(categories);
+                return categories;
+            })
+            .then((categories) => {
+                setSelectedCategory(categories[0])
+            })
             .catch((error) => {
-                alert("Server Down")
+                alert(error)
             });
     }, []);
 
     const handleDropdownChange = (event) => {
         const {target: { value }, } = event;
-        setSelectedCategory(value)
+        setSelectedCategory(event.target)
     };
 
     function handleTextChange(e) {
@@ -51,6 +56,10 @@ function AddQuestion() {
             ...data,
             [e.target.name]: e.target.value,
         })
+    }
+
+    function testCategory() {
+        console.log(selectedCategory)
     }
 
     async function handleSubmit() {
@@ -64,7 +73,7 @@ function AddQuestion() {
             });
 
             if (!request.ok) {
-                throw new Error('Failed to fetch categories');
+                throw new Error('Failed to post question');
             }
 
             return request.json();
@@ -81,7 +90,7 @@ function AddQuestion() {
                 <FormAddQuestion
                     onTextChange={handleTextChange}
                     buttonLabel={"Frage einreichen"}
-                    onClick={handleSubmit}
+                    onClick={testCategory}
                     categories={categories}
                     selectedCategory={selectedCategory}
                     onDropDownChange={handleDropdownChange}

@@ -45,26 +45,11 @@ function getData(req, res) {
 }
 
 function addQuestion(req, res) {
-    var questionText = req.body.data.question;
-    var answerA = req.body.data.answerA;
-    var answerB = req.body.data.answerB;
-    var answerC = req.body.data.answerC;
-    var correctAnswer = req.body.data.correctAnswer; // Corrected variable name
-    var selectedCategory = 1
+    const { question, answerA, answerB, answerC, answerD: correctAnswer, category: selectedCategory } = req.body.data;
+    const query = `INSERT INTO Question(QuestionText, Answer1, Answer2, Answer3, CorrectAnswer, CategoryID) VALUES ('${question}', '${answerA}', '${answerB}', '${answerC}', '${correctAnswer}', ${selectedCategory});`;
 
-    let query = `INSERT INTO Question(QuestionText, Answer1, Answer2, Answer3, CorrectAnswer, CategoryID) VALUES ('${questionText}', '${answerA}', '${answerB}', '${answerC}', '${correctAnswer}', ${selectedCategory});`;
-    console.log(query)
-    connection.query(query, handleQueryResponse(res));
+    //connection.query(query, handleQueryResponse(res));
 }
-
-function addQuestion2(req, res) {
-    const { question, answerA, answerB, answerC, answerD: correctAnswer } = req.body.data;
-    const query = `INSERT INTO Question(QuestionText, Answer1, Answer2, Answer3, CorrectAnswer, CategoryID) VALUES ('${question}', '${answerA}', '${answerB}', '${answerC}', '${correctAnswer}', 1);`;
-
-    connection.query(query, handleQueryResponse(res));
-}
-
-
 
 
 // Utility Functions
