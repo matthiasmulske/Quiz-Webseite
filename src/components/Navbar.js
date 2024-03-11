@@ -71,8 +71,6 @@ export default function Navbar({isLoggedIn, setIsLoggedIn, user}) {
           <Link to={"/"} style={{ textDecoration: 'none', color: 'inherit' }}>
             <IconButton size="large" edge="start" color="inherit" aria-label="home">
               <img src={logo} alt="logo" height="50px" />
-            </IconButton>
-          </Link>
           <Typography
             variant="h6"
             noWrap
@@ -81,6 +79,8 @@ export default function Navbar({isLoggedIn, setIsLoggedIn, user}) {
           >
             ISEF QUIZ
           </Typography>
+            </IconButton>
+          </Link>
           
           <Box sx={{ flexGrow: 1 }} />
           {isLoggedIn && (
