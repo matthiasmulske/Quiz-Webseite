@@ -10,7 +10,7 @@ const domain = "http://localhost:5000";
 
 function AddQuestion() {
     let [categories, setCategories] = useState(null);
-    let [selectedCategory, setSelectedCategory] = useState(null);
+    let [selectedCategory, setSelectedCategory] = useState('');
 
     const [data, setData] = useState();
 
@@ -46,9 +46,8 @@ function AddQuestion() {
             });
     }, []);
 
-    const handleDropdownChange = (event) => {
-        const {target: { value }, } = event;
-        setSelectedCategory(event.target)
+    function handleDropdownChange(event) {
+        setSelectedCategory(event.target.value)
     };
 
     function handleTextChange(e) {
@@ -58,9 +57,6 @@ function AddQuestion() {
         })
     }
 
-    function testCategory() {
-        console.log(selectedCategory)
-    }
 
     async function handleSubmit() {
         try {
@@ -90,7 +86,7 @@ function AddQuestion() {
                 <FormAddQuestion
                     onTextChange={handleTextChange}
                     buttonLabel={"Frage einreichen"}
-                    onClick={testCategory}
+                    onClick={handleSubmit}
                     categories={categories}
                     selectedCategory={selectedCategory}
                     onDropDownChange={handleDropdownChange}

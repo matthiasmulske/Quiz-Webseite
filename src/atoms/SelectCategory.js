@@ -18,8 +18,8 @@ function SelectCategory({categories, selectedCategory, onDropDownChange}) {
                             onChange={onDropDownChange}>
                             {categories.map((category) =>
                                 <MenuItem
-                                    key={category.Name}
-                                    value={category.Name}>
+                                    key={category.QuestionCategoryID}
+                                    value={category.QuestionCategoryID}>
                                     {category.Name}
                                 </MenuItem>)}
                         </Select>
