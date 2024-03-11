@@ -90,8 +90,8 @@ const setNewRound = async (route, quizID, questionNumber, q1, q2, q3) => {
   return await fetchData(route, { quizID, questionNumber, q1, q2, q3 });
 };
 
-const postComment = async (route, questionID, text, categoryID, userID) => {
-  return await fetchData(route, { questionID, text, categoryID, userID });
+const postComment = async (route, questionID, text, categoryID) => {
+  return await fetchData(route, { questionID, text, categoryID});
 };
 
 export {
