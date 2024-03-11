@@ -6,17 +6,14 @@ const domain = "http://localhost:5000";
 const route = domain + "/categories";
 
 
+// TODO: rename to data[correctAnswer]
+// TODO: add selectedCategory to data
+// TODO: handler "if undefined"
+
 function AddQuestion() {
     let [categories, setCategories] = useState(null);
     const [selectedCategory, setSelectedCategory] = useState("Betriebssysteme");
-    const [data, setData] = useState({
-        question: "",
-        answerA: "",
-        answerB: "",
-        answerC: "",
-        answerD: "",
-        category: ""
-    });
+    const [data, setData] = useState();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -56,26 +53,25 @@ function AddQuestion() {
         })
     }
 
-    function handleSubmit() {
-            const fetchData = async () => {
-                try {
-                    const response = await fetch(domain + "/question", {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                    });
+    async function handleSubmit() {
+        try {
+            const request = await fetch(domain + "/question", {
+                method: "POST",
+                body: JSON.stringify({
+                    data
+                }),
+                headers: {"Content-Type": "application/json"},
+            });
 
-                    if (!response.ok) {
-                        throw new Error('Failed to fetch categories');
-                    }
+            if (!request.ok) {
+                throw new Error('Failed to fetch categories');
+            }
 
-                    return response.json();
-                } catch (error) {
-                    console.error('Error fetching categories:', error);
-                    throw error; // Propagate the error to handle it outside this function
-                }
-            };
-
-            fetchData().then(r => console.log("done"))
+            return request.json();
+        } catch (error) {
+            console.error('Error fetching categories:', error);
+            throw error; // Propagate the error to handle it outside this function
+        }
     }
 
     return (

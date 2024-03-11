@@ -12,7 +12,7 @@ function FormAddQuestion( { onClick, categories, selectedCategory, onDropDownCha
         <QuizTextField name={"answerA"} label={"Antwort A"} onChange={onTextChange} rows={3} />
         <QuizTextField name={"answerB"} label={"Antwort B"} onChange={onTextChange} rows={3} />
         <QuizTextField name={"answerC"} label={"Antwort C"} onChange={onTextChange} rows={3} />
-        <QuizTextField name={"answerD"} label={"Antwort D"} onChange={onTextChange} rows={3} />
+        <QuizTextField name={"correctAnswer"} label={"Korrekte Antwort"} onChange={onTextChange} rows={3} />
       </div>
       <SelectCategory
           categories={categories}
