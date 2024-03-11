@@ -105,7 +105,7 @@ export default function Navbar({isLoggedIn, setIsLoggedIn, user}) {
                 open={Boolean(anchorEl)}
                 onClose={handleCloseMenu}
               >
-                <MenuItem onClick={handleCloseMenu}>NutzerID: {user}</MenuItem>
+                <MenuItem onClick={handleCloseMenu}>Benutzerprofil: {user}</MenuItem>
                 <MenuItem onClick={handleCloseMenu}>Benutzername ändern</MenuItem>
                 <MenuItem onClick={handleCloseMenu}>Passwort ändern</MenuItem>
               </Menu>
