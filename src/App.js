@@ -13,13 +13,13 @@ import Game from "./Pages/Game/Game";
 import Navbar from "./components/Navbar";
 
 function App() {
+
+
   return (
     <div className="App">
-      <Navbar>
-      </Navbar>
-        <div style={style}>
-        </div>
-      <div style={style}></div>
+      <Navbar/>
+        <div style={style}/>
+      <div style={style}/>
       <Routes>
         <Route path="/EditQuestion" element={<EditQuestion />} />
         <Route path="/AddQuestion" element={<AddQuestion/>} />

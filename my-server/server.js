@@ -31,14 +31,24 @@ connection.connect((err) => {
 
 // Routes
 app.get("/categories", getCategories);
-app.post("/addQuestion", addQuestion);
+app.post("/question", addQuestion);
+app.get("/data", getData);
 
 
 function getCategories(req, res) {
+    console.log("oui")
     connection.query('SELECT * FROM QuestionCategory', handleQueryResponse(res));
 }
 
-function addQuestion(){
+function getData(req, res) {
+    let query = "SELECT * FROM Question"
+    connection.query(query, handleQueryResponse(res));
+}
+
+function addQuestion(req, res){
+    console.log("hun")
+    let query = "INSERT INTO Question(QuestionText,Answer1,Answer2,Answer3,CorrectAnswer,CategoryID) VALUES ('value_17','value_1','value_2','value_3','value',1);"
+    connection.query(query, handleQueryResponse(res));
 }
 
 

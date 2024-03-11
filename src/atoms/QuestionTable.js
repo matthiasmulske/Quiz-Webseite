@@ -1,55 +1,77 @@
 import * as React from 'react';
-import data from "../data/questions.json"
 import {DataGrid} from "@mui/x-data-grid";
-
-//TODO: Make me Editable
-const tabledata = []
-function fillRows() {
-    for (let i = 0; i < data.questions.length; i++) {
-        tabledata.push({
-                id: i,
-                question: data.questions[i].question_text,
-                answerA: data.questions[i].answers["1"],
-                answerB: data.questions[i].answers["2"],
-                answerC: data.questions[i].answers["3"],
-                answerD: data.questions[i].answers["4"],
-                category: ""
-        })
-    }
-}
-
-fillRows();
+import {useEffect, useState} from "react";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogContent from "@mui/material/DialogContent";
+import Dialog from "@mui/material/Dialog";
+import FormAddQuestion from "../components/FormAddQuestion";
 
 const columns = [
-    { field: 'id', headerName: 'ID', width: 5, },
-    { field: 'question', headerName: 'Frage', editable: true, flex: "1" },
-    { field: 'answerA', headerName: 'Antwort A', editable: true, },
-    { field: 'answerB', headerName: 'Antwort B', editable: true, },
-    { field: 'answerC', headerName: 'Antwort C', editable: true },
-    { field: 'answerD', headerName: 'Antwort D', editable: true },
+    { field: 'QuestionText', headerName: 'Frage', editable: true, flex: "1" },
+    { field: 'Answer1', headerName: 'Antwort A', editable: true, },
+    { field: 'Answer2', headerName: 'Antwort B', editable: true, },
+    { field: 'Answer3', headerName: 'Antwort C', editable: true },
+    { field: 'CorrectAnswer', headerName: 'Antwort D', editable: true },
     { field: 'category', headerName: 'Kategorie', editable: true },
-
 ];
 
+const domain = "http://localhost:5000";
+const route = domain + "/data";
 
 function QuestionTable() {
-    function handleClick() {
-        //alert("Make me editable")
+    let [tableData, setTableData] = useState(null);
+    const [open, setOpen] = React.useState(false);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            tableData = await fetch(route, {method: "GET", headers: {"Content-Type": "application/json"}})
+                .then(r => r.json())
+                .catch(error => { console.error('Error fetching categories:', error) });
+        }
+        fetchData().then(r =>
+            setTableData(tableData),
+        );
+
+    })
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+    function getRowId(row) {
+        return row.QuestionID;
     }
 
     return (
         <>
-            <DataGrid style={style.table}
-                rows={tabledata}
-                columns={columns}
-                initialState={{
-                    pagination: {
-                        paginationModel: { page: 0, pageSize: 30 },
-                    },
-                }}
-                pageSizeOptions={[30, 30]}
-                onCellClick={handleClick}>
-            </DataGrid>
+            <div>
+                {tableData != null ? (
+                    <DataGrid style={style.table}
+                              getRowId={getRowId}
+                              rows={tableData}
+                              columns={columns}
+                              initialState={{
+                                  pagination: {
+                                      paginationModel: {page: 0, pageSize: 30},
+                                  },
+                              }}
+                              pageSizeOptions={[30, 30]}
+                              onCellClick={handleClickOpen}>
+                    </DataGrid>
+                ) : (console.log("Loading"))}
+            </div>
+            <Dialog
+                open={open}
+                onClose={handleClose}>
+                <DialogTitle>Frage bearbeiten</DialogTitle>
+                <DialogContent>
+                    <FormAddQuestion onClick={handleClose}/>
+                </DialogContent>
+            </Dialog>
 
         </>
     );
