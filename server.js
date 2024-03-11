@@ -241,12 +241,12 @@ function createNewRound(req, res) {
 }
 
 function postComment(req, res) {
-  const { questionID, text, categoryID, userID } = req.body;
+  const { questionID, text, categoryID } = req.body;
   const query =
-    "INSERT INTO Comment (UserID, QuestionID, Text, CategoryID) VALUES (?, ?, ?, ?)";
+    "INSERT INTO Comment (QuestionID, Text, CategoryID) VALUES ( ?, ?, ?)";
   connection.query(
     query,
-    [userID, questionID, text, categoryID],
+    [questionID, text, categoryID],
     handleQueryResponse(res),
   );
 }
