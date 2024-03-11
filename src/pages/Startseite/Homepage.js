@@ -31,6 +31,7 @@ function Login({isLoggedIn}) {
           ""
       }
       </div>
+      <Footer />
     </div>
   );
 }

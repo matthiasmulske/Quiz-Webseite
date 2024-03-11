@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom'; 
-import GoogleButton from 'react-google-button';
-import AppleLogin from 'react-apple-login';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faApple } from '@fortawesome/free-brands-svg-icons';
+import GoogleButton from 'react-google-button';
+import AppleLogin from 'react-apple-login';
 
-function LoginMaske({setUser}) {
+function LoginMaske({ setUser }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
@@ -17,7 +16,7 @@ function LoginMaske({setUser}) {
     if (username === 'test' && password === 'test123') {
       console.log('Anmeldung erfolgreich');
       setUser(3);
-      window.location.href = '/'; 
+      window.location.href = '/';
     } else {
       console.log('Anmeldung fehlgeschlagen');
       setErrorMessage('Benutzername oder Passwort ungültig');
@@ -57,20 +56,20 @@ function LoginMaske({setUser}) {
               <button type="submit" style={styles.button}>Anmelden</button>
               <button type="button" onClick={handleRegister} style={styles.button}>Registrieren</button>
             </div>
-            <div style={googleButtonContainerStyle}>
+            <div style={buttonContainerStyle}>
               <GoogleButton
                 onClick={() => { console.log('Google-Schaltfläche angeklickt') }}
                 style={googleButtonStyle}
               />
+              <AppleLogin
+                render={({  }) => (
+                  <button type="button" onClick={handleRegister} style={appleButtonStyle}>
+                    <FontAwesomeIcon icon={faApple} style={logoStyle} />
+                    <span style={textSpanStyle}>Sign in with Apple</span>
+                  </button>
+                )}
+              />
             </div>
-            <AppleLogin
-              render={({  }) => (
-                <button type="button" onClick={handleRegister} style={appleButtonStyle}>
-                  <FontAwesomeIcon icon={faApple} style={logoStyle} />
-                  <span style={textSpanStyle}>Sign in with Apple</span>
-                </button>
-              )}
-            />
           </form>
         </div>
         {errorMessage && (
@@ -86,11 +85,6 @@ function LoginMaske({setUser}) {
   );
 }
 
-const googleButtonContainerStyle = {
-  display: 'flex',
-  justifyContent: 'center',
-  marginTop: '20px',
-};
 
 const googleButtonStyle = {
   backgroundColor: 'transparent',
@@ -132,22 +126,31 @@ const textSpanStyle = {
   marginLeft: '5px',
 };
 
+const buttonContainerStyle = {
+  display: 'flex',
+  flexDirection: 'column', 
+  alignItems: 'center', 
+  marginTop: '20px',
+};
 const styles = {
   pageContainer: {
-    position: 'relative', 
+    position: 'relative',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    height: '75vh',
+    minHeight: '75vh', 
+    padding: '20px',
   },
   loginContainer: {
     textAlign: 'center',
-    width: '21%',
+    width: '90%', 
+    maxWidth: '400px', 
     border: '1px solid #ccc',
     padding: '20px',
     borderRadius: '5px',
     boxShadow: '0 2px 5px rgba(0, 0, 0, 0.1)',
-    position: 'relative', 
+    position: 'relative',
+    marginTop: '5px',
   },
   formGroup: {
     marginBottom: '20px',
@@ -164,6 +167,7 @@ const styles = {
   buttonContainer: {
     display: 'flex',
     justifyContent: 'center',
+    flexWrap: 'wrap', 
   },
   button: {
     padding: '10px 20px',
@@ -174,6 +178,7 @@ const styles = {
     borderRadius: '5px',
     cursor: 'pointer',
     marginLeft: '10px',
+    marginBottom: '10px', 
     boxShadow: '0 2px 5px rgba(0, 0, 0, 0.1)',
   },
   errorMessage: {
