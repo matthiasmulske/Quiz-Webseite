@@ -47,6 +47,7 @@ function AddQuestion() {
 
     function handleDropdownChange(event) {
         setSelectedCategory(event.target.value)
+        console.log(selectedCategory)
     };
 
     function handleTextChange(e) {

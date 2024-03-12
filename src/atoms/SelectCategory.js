@@ -7,6 +7,7 @@ import InputLabel from "@mui/material/InputLabel";
 
 
 function SelectCategory({categories, selectedCategory, onDropDownChange}) {
+    console.log(selectedCategory)
     return (
         <Box sx={{ minWidth: 120 }}>
             <FormControl fullWidth>
@@ -19,7 +20,7 @@ function SelectCategory({categories, selectedCategory, onDropDownChange}) {
                             {categories.map((category) =>
                                 <MenuItem
                                     key={category.QuestionCategoryID}
-                                    value={category.QuestionCategoryID}>
+                                    value={category}>
                                     {category.Name}
                                 </MenuItem>)}
                         </Select>
