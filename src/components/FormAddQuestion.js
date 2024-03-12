@@ -6,7 +6,8 @@ import SelectCategory from "../atoms/SelectCategory";
 
 function FormAddQuestion( { onClick, categories, selectedCategory, onDropDownChange, onTextChange }) {
   return (
-    <div style={style.container}>
+  <div style={style.container}>
+
       <QuizTextField name={'question'} value={"test"} label={"Frage"} onChange={onTextChange} rows={5} />
       <div style={style.gridContainer}>
         <QuizTextField name={"answerA"} label={"Antwort A"} onChange={onTextChange} rows={3} />
@@ -20,16 +21,16 @@ function FormAddQuestion( { onClick, categories, selectedCategory, onDropDownCha
           selectedCategory={selectedCategory}
       />
       <ButtonQuiz onButtonClick={onClick} buttonLabel={"Speichern"}/>
-    </div>
+  </div>
   );
 }
 
 export default FormAddQuestion;
 
 const style = {
-  container: {
-    margin: "10%",
-  },
+    container: {
+        margin: "10%"
+    },
 
   gridContainer: {
     display: "grid",

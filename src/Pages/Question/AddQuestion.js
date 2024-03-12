@@ -5,13 +5,12 @@ import {useEffect, useState} from "react";
 const domain = "http://localhost:5000";
 
 // TODO: add selectedCategory to data
-// TODO: handler "if undefined"
 // TODO: handleDropDownChange should return the categoryID
 
 function AddQuestion() {
     let [categories, setCategories] = useState(null);
     let [selectedCategory, setSelectedCategory] = useState('');
-
+    const [validated, setValidated] = useState(null);
     const [data, setData] = useState();
 
     useEffect(() => {
@@ -57,8 +56,25 @@ function AddQuestion() {
         })
     }
 
+    function validateSubmit(){
+        const requiredKeys = ['answerA', 'question', 'answerB', 'answerC', 'correctAnswer'];
+
+        for (const key of requiredKeys) {
+            if (!data.hasOwnProperty(key) || typeof data[key] !== 'string' || data[key].trim() === '') {
+                setValidated(false)
+            }
+        }
+        setValidated(true)
+    }
 
     async function handleSubmit() {
+        validateSubmit()
+        if (validated) {
+            await postToDatabase()
+        }
+    }
+
+    async function postToDatabase() {
         try {
             const request = await fetch(domain + "/question", {
                 method: "POST",
@@ -75,9 +91,10 @@ function AddQuestion() {
             return request.json();
         } catch (error) {
             console.error('Error fetching categories:', error);
-            throw error; // Propagate the error to handle it outside this function
+            throw error;
         }
     }
+
 
     return (
         <>
