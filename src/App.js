@@ -9,7 +9,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <h1>Quizapp ISEF01</h1>
-        <StartseiteLogin />
+        <Login />
       </header>
       <Routes>
         <Route path="/Datenschutzseite" element={<Datenschutzseite />} />
