@@ -4,17 +4,14 @@ import {useEffect, useState} from "react";
 
 const domain = "http://localhost:5000";
 
-// TODO: add selectedCategory to data
-// TODO: handleDropDownChange should return the categoryID
-
 function AddQuestion() {
-    let [categories, setCategories] = useState(null);
-    let [selectedCategory, setSelectedCategory] = useState('');
+    const [categories, setCategories] = useState(null);
+    const [selectedCategory, setSelectedCategory] = useState('');
     const [validated, setValidated] = useState(null);
     const [data, setData] = useState();
 
     useEffect(() => {
-        const fetchData = async () => {
+        const fetchCategories = async () => {
             try {
                 const response = await fetch(domain + "/categories", {
                     method: "GET",
@@ -28,11 +25,11 @@ function AddQuestion() {
                 return response.json();
             } catch (error) {
                 console.error('Error fetching categories:', error);
-                throw error; // Propagate the error to handle it outside this function
+                throw error;
             }
         };
 
-        fetchData()
+        fetchCategories()
             .then((categories) => {
                 setCategories(categories);
                 return categories;
@@ -45,10 +42,9 @@ function AddQuestion() {
             });
     }, []);
 
-    function handleDropdownChange(event) {
-        setSelectedCategory(event.target.value)
-        console.log(selectedCategory)
-    };
+    function handleDropdownChange(e) {
+        setSelectedCategory(e.target.value)
+    }
 
     function handleTextChange(e) {
         setData({
@@ -57,19 +53,43 @@ function AddQuestion() {
         })
     }
 
-    function validateSubmit(){
+    function validateData() {
         const requiredKeys = ['answerA', 'question', 'answerB', 'answerC', 'correctAnswer'];
+        const seenValues = [];
+
+        if (!data) {
+            setValidated(false);
+            console.log("NO DATA")
+            return;
+        }
 
         for (const key of requiredKeys) {
             if (!data.hasOwnProperty(key) || typeof data[key] !== 'string' || data[key].trim() === '') {
-                setValidated(false)
+                setValidated(false);
+                console.log("DATA INVALID")
+                return;
             }
+            const value = data[key].trim();
+
+            if (seenValues.includes(value)) {
+                setValidated(false);
+                console.log("DUPLICATE VALUE FOUND: ", value);
+                return;
+            }
+
+            seenValues.push(value);
         }
-        setValidated(true)
+
+        setValidated(true);
     }
 
     async function handleSubmit() {
-        validateSubmit()
+        validateData()
+        setData({
+            ...data,
+            selectedCategory: selectedCategory.QuestionCategoryID
+        })
+        console.log(data)
         if (validated) {
             await postToDatabase()
         }
@@ -91,7 +111,7 @@ function AddQuestion() {
 
             return request.json();
         } catch (error) {
-            console.error('Error fetching categories:', error);
+            console.error('Error posting to Database:', error);
             throw error;
         }
     }
@@ -125,8 +145,5 @@ const style = {
     componentContainer: {
         width: "100%",
     },
-
-
-
 
 }

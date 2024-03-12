@@ -7,7 +7,6 @@ import InputLabel from "@mui/material/InputLabel";
 
 
 function SelectCategory({categories, selectedCategory, onDropDownChange}) {
-    console.log(selectedCategory)
     return (
         <Box sx={{ minWidth: 120 }}>
             <FormControl fullWidth>
