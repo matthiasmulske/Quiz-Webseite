@@ -6,17 +6,8 @@ import InputLabel from "@mui/material/InputLabel";
 
 const domain = "http://localhost:5000";
 
-const testCategories = [
-    {QuestionCategoryID: 1, Name: 'A'},
-    {QuestionCategoryID: 2, Name: 'B'},
-    {QuestionCategoryID: 3, Name: 'C'},
-    {QuestionCategoryID: 4, Name: 'D'},
-    {QuestionCategoryID: 5, Name: 'E'},
-]
-
-
-function SelectCategory({ onDropDownChange, selectedCategory }) {
-    const [categories, setCategories] = useState(null);
+function SelectCategory({ selectedCategory, onDropDownChange }) {
+    const [categories, setCategories] = useState([{Name: ''}]);
 
     useEffect(() => {
         const fetchCategories = async () => {
@@ -40,39 +31,30 @@ function SelectCategory({ onDropDownChange, selectedCategory }) {
         fetchCategories()
             .then((categories) => {
                 setCategories(categories);
-                return categories
-            })
-            .then((categories) => {
-                console.log(categories)
             })
             .catch((error) => {
                 alert(error)
             });
     }, []);
 
-    function findCategoryByID(id) {
-        let ct = testCategories.find(category => category.QuestionCategoryID === id)
-        console.log(ct.QuestionCategoryID)
-        return ct
-    }
-
 
     return (
         <FormControl style={style.dropDownField} fullWidth>
                 <InputLabel>Kategorie</InputLabel>
-                {testCategories != null ? (
+
                     <Select
-                        value={findCategoryByID(selectedCategory)}
+                        value={selectedCategory}
                         label="Kategorie"
                         onChange={onDropDownChange}>
-                        {testCategories.map((testCategory) =>
+                        {categories.map((categoryItem) =>
                             <MenuItem
-                                key={findCategoryByID(testCategory.QuestionCategoryID).QuestionCategoryID}
-                                value={findCategoryByID(testCategory.QuestionCategoryID)}>
-                                {findCategoryByID(testCategory.QuestionCategoryID).Name}
+                                key={categoryItem.Name}
+                                value={categoryItem.Name}
+                            >
+                                {categoryItem.Name}
                             </MenuItem>)}
                     </Select>
-                ) : (console.log(''))}
+
         </FormControl>
     );
 }

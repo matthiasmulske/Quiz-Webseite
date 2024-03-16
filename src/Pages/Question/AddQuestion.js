@@ -15,12 +15,15 @@ function AddQuestion() {
             AnswerB: '',
             AnswerC: '',
             CorrectAnswer: '',
-            CategoryID: 2
+            CategoryID: 2,
+            Category: ''
         }
     );
 
-    function handleDropdownChange(e) {
-        setSelectedCategory(e.target.value)
+
+    function handleDropDownChange(event) {
+        const {target: { value }, } = event;
+        setSelectedCategory(value)
     }
 
     function handleTextChange(e) {
@@ -62,14 +65,17 @@ function AddQuestion() {
 
     async function handleSubmit() {
         validateData()
-        setData({
-            ...data,
-            QuestionCategoryID: selectedCategory.QuestionCategoryID
-        })
-        console.log(data)
+        resolveData()
         if (validated) {
             await postToDatabase()
         }
+    }
+
+    function resolveData(){
+        setData({
+            ...data,
+            Category: selectedCategory
+        })
     }
 
     async function postToDatabase() {
@@ -81,6 +87,7 @@ function AddQuestion() {
                 }),
                 headers: {"Content-Type": "application/json"},
             });
+            console.log(data)
 
             if (!request.ok) {
                 throw new Error('Failed to post question');
@@ -101,8 +108,9 @@ function AddQuestion() {
                 <FormAddQuestion
                     onTextChange={handleTextChange}
                     onClick={handleSubmit}
-                    onDropDownChange={handleDropdownChange}
+                    onDropDownChange={handleDropDownChange}
                     buttonLabel={"Frage einreichen"}
+                    selectedCategory={selectedCategory}
                     defaultValues={data}
                 />
             </div >

@@ -4,7 +4,7 @@ import ButtonQuiz from "../atoms/ButtonQuiz";
 import SelectCategory from "../atoms/SelectCategory";
 
 
-function FormAddQuestion( { onClick, onDropDownChange, onTextChange, defaultValues }) {
+function FormAddQuestion( { onClick, onDropDownChange, onTextChange, defaultValues, selectedCategory }) {
   return (
   <div style={style.container}>
       <QuizTextField defaultValue={defaultValues.QuestionText} label={"Frage"} onChange={onTextChange} rows={5} />
@@ -16,7 +16,7 @@ function FormAddQuestion( { onClick, onDropDownChange, onTextChange, defaultValu
       </div>
     <SelectCategory
         onDropDownChange={onDropDownChange}
-        selectedCategory={defaultValues.CategoryID}
+        selectedCategory={selectedCategory}
     />
       <ButtonQuiz onButtonClick={onClick} buttonLabel={"Speichern"}/>
   </div>
