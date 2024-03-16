@@ -12,8 +12,11 @@ const columns = [
     { field: 'Answer2', headerName: 'Antwort B', editable: true, },
     { field: 'Answer3', headerName: 'Antwort C', editable: true },
     { field: 'CorrectAnswer', headerName: 'Antwort D', editable: true },
-    { field: 'category', headerName: 'Kategorie', editable: true },
+    { field: 'CategoryID', headerName: 'Kategorie', editable: true },
+    { field: 'comment', headerName: 'Kommmentare', editable: true },
 ];
+
+
 
 const domain = "http://localhost:5000";
 const route = domain + "/data";
@@ -21,6 +24,14 @@ const route = domain + "/data";
 function QuestionTable() {
     let [tableData, setTableData] = useState(null);
     const [open, setOpen] = React.useState(false);
+    let [defaultValues, setDefaultValues] = useState({
+        QuestionText: '',
+        Answer1: '',
+        Answer2: '',
+        Answer3: '',
+        CorrectAnswer: '',
+        CategoryID: 1
+    })
 
     useEffect(() => {
         const fetchData = async () => {
@@ -28,19 +39,30 @@ function QuestionTable() {
                 .then(r => r.json())
                 .catch(error => { console.error('Error fetching categories:', error) });
         }
-        fetchData().then(r =>
-            setTableData(tableData),
-        );
 
-    })
+        fetchData()
+            .then(r => {
+                setTableData(tableData);
+                return tableData
+            })
+        .then(() => console.log(tableData))
+    }, [])
 
-    const handleClickOpen = () => {
+    const handleRowClick = (params) => {
+        setDefaultValues({
+            QuestionText: params.row.QuestionText,
+            Answer1: params.row.Answer1,
+            Answer2: params.row.Answer2,
+            Answer3: params.row.Answer3,
+            CorrectAnswer: params.row.CorrectAnswer,
+            CategoryID: params.row.CategoryID
+        })
         setOpen(true);
     };
 
-    const handleClose = () => {
+    function handleClose() {
         setOpen(false);
-    };
+    }
 
     function getRowId(row) {
         return row.QuestionID;
@@ -59,17 +81,20 @@ function QuestionTable() {
                                       paginationModel: {page: 0, pageSize: 30},
                                   },
                               }}
-                              pageSizeOptions={[30, 30]}
-                              onCellClick={handleClickOpen}>
+                              onRowClick={handleRowClick}
+                              pageSizeOptions={[30, 30]}>
                     </DataGrid>
-                ) : (console.log("Loading"))}
+                ) : (console.log(""))}
             </div>
             <Dialog
                 open={open}
                 onClose={handleClose}>
                 <DialogTitle>Frage bearbeiten</DialogTitle>
                 <DialogContent>
-                    <FormAddQuestion onClick={handleClose}/>
+                    <FormAddQuestion
+                        onClick={handleClose}
+                        defaultValues={defaultValues}
+                    />
                 </DialogContent>
             </Dialog>
 

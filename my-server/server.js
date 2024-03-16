@@ -40,7 +40,7 @@ function getCategories(req, res) {
 }
 
 function getData(req, res) {
-    let query = "SELECT * FROM Question"
+    let query = "Select * From Question Where UserID = 3"
     connection.query(query, handleQueryResponse(res));
 }
 
@@ -50,7 +50,6 @@ function addQuestion(req, res) {
     console.log(query)
     //connection.query(query, handleQueryResponse(res));
 }
-
 
 // Utility Functions
 function handleQueryResponse(res) {

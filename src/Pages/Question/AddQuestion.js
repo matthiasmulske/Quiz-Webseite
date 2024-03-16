@@ -4,43 +4,20 @@ import {useEffect, useState} from "react";
 
 const domain = "http://localhost:5000";
 
+
 function AddQuestion() {
-    const [categories, setCategories] = useState(null);
     const [selectedCategory, setSelectedCategory] = useState('');
     const [validated, setValidated] = useState(null);
-    const [data, setData] = useState();
-
-    useEffect(() => {
-        const fetchCategories = async () => {
-            try {
-                const response = await fetch(domain + "/categories", {
-                    method: "GET",
-                    headers: { "Content-Type": "application/json" },
-                });
-
-                if (!response.ok) {
-                    throw new Error('Failed to fetch categories');
-                }
-
-                return response.json();
-            } catch (error) {
-                console.error('Error fetching categories:', error);
-                throw error;
-            }
-        };
-
-        fetchCategories()
-            .then((categories) => {
-                setCategories(categories);
-                return categories;
-            })
-            .then((categories) => {
-                setSelectedCategory(categories[0])
-            })
-            .catch((error) => {
-                alert(error)
-            });
-    }, []);
+    const [data, setData] = useState(
+        {
+            QuestionText: '',
+            AnswerA: '',
+            AnswerB: '',
+            AnswerC: '',
+            CorrectAnswer: '',
+            CategoryID: 2
+        }
+    );
 
     function handleDropdownChange(e) {
         setSelectedCategory(e.target.value)
@@ -54,7 +31,7 @@ function AddQuestion() {
     }
 
     function validateData() {
-        const requiredKeys = ['answerA', 'question', 'answerB', 'answerC', 'correctAnswer'];
+        const requiredKeys = ['AnswerA', 'QuestionText', 'AnswerB', 'AnswerC', 'CorrectAnswer'];
         const seenValues = [];
 
         if (!data) {
@@ -87,7 +64,7 @@ function AddQuestion() {
         validateData()
         setData({
             ...data,
-            selectedCategory: selectedCategory.QuestionCategoryID
+            QuestionCategoryID: selectedCategory.QuestionCategoryID
         })
         console.log(data)
         if (validated) {
@@ -123,11 +100,10 @@ function AddQuestion() {
             <div style={style.componentContainer}>
                 <FormAddQuestion
                     onTextChange={handleTextChange}
-                    buttonLabel={"Frage einreichen"}
                     onClick={handleSubmit}
-                    categories={categories}
-                    selectedCategory={selectedCategory}
                     onDropDownChange={handleDropdownChange}
+                    buttonLabel={"Frage einreichen"}
+                    defaultValues={data}
                 />
             </div >
         </>

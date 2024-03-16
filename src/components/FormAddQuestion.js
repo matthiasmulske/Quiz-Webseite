@@ -4,22 +4,20 @@ import ButtonQuiz from "../atoms/ButtonQuiz";
 import SelectCategory from "../atoms/SelectCategory";
 
 
-function FormAddQuestion( { onClick, categories, selectedCategory, onDropDownChange, onTextChange }) {
+function FormAddQuestion( { onClick, onDropDownChange, onTextChange, defaultValues }) {
   return (
   <div style={style.container}>
-
-      <QuizTextField name={'question'} label={"Frage"} onChange={onTextChange} rows={5} />
+      <QuizTextField defaultValue={defaultValues.QuestionText} label={"Frage"} onChange={onTextChange} rows={5} />
       <div style={style.gridContainer}>
-        <QuizTextField name={"answerA"} label={"Antwort A"} onChange={onTextChange} rows={3} />
-        <QuizTextField name={"answerB"} label={"Antwort B"} onChange={onTextChange} rows={3} />
-        <QuizTextField name={"answerC"} label={"Antwort C"} onChange={onTextChange} rows={3} />
-        <QuizTextField name={"correctAnswer"} label={"Korrekte Antwort"} onChange={onTextChange} rows={3} />
+        <QuizTextField defaultValue={defaultValues.Answer1} name={"AnswerA"} label={"Antwort A"} onChange={onTextChange} rows={3} />
+        <QuizTextField defaultValue={defaultValues.Answer2} name={"AnswerB"} label={"Antwort B"} onChange={onTextChange} rows={3} />
+        <QuizTextField defaultValue={defaultValues.Answer3} name={"AnswerC"} label={"Antwort C"} onChange={onTextChange} rows={3} />
+        <QuizTextField defaultValue={defaultValues.CorrectAnswer} name={"CorrectAnswer"} label={"Korrekte Antwort"} onChange={onTextChange} rows={3} />
       </div>
-      <SelectCategory
-          categories={categories}
-          onDropDownChange={onDropDownChange}
-          selectedCategory={selectedCategory}
-      />
+    <SelectCategory
+        onDropDownChange={onDropDownChange}
+        selectedCategory={defaultValues.CategoryID}
+    />
       <ButtonQuiz onButtonClick={onClick} buttonLabel={"Speichern"}/>
   </div>
   );
@@ -43,5 +41,7 @@ const style = {
     display: "flex",
     alignContent: "space-between",
   },
+
+
 
 };
