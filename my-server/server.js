@@ -33,6 +33,12 @@ connection.connect((err) => {
 app.get("/categories", getCategories);
 app.post("/question", addQuestion);
 app.get("/data", getData);
+app.put("/updateQuestion", updateQuestion)
+
+function updateQuestion(req, res) {
+    const query = 'UPDATE Question SET Answer1 = 0 WHERE QuestionID = 9;'
+    console.log(req.body)
+}
 
 
 function getCategories(req, res) {
@@ -46,7 +52,6 @@ function getData(req, res) {
          Where UserID = '${selected_userId}'`
     connection.query(query, handleQueryResponse(res));
 }
-
 
 
 function addQuestion(req, res) {

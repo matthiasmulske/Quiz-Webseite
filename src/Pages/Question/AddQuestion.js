@@ -36,7 +36,6 @@ function AddQuestion() {
     }
 
     function validateData() {
-        console.log(data)
         const requiredKeys = ['Answer1', 'QuestionText', 'Answer2', 'Answer3', 'CorrectAnswer'];
         const seenValues = [];
 
@@ -90,7 +89,6 @@ function AddQuestion() {
                 }),
                 headers: {"Content-Type": "application/json"},
             });
-            console.log(data)
 
             if (!request.ok) {
                 throw new Error('Failed to post question');
