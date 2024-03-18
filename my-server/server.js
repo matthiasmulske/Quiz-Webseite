@@ -40,9 +40,14 @@ function getCategories(req, res) {
 }
 
 function getData(req, res) {
-    let query = "Select * From Question Where UserID = 3"
+    let selected_userId = req.headers.userid
+    let query = `Select * From Question q
+         JOIN QuestionCategory c on q.CategoryID = c.QuestionCategoryID
+         Where UserID = '${selected_userId}'`
     connection.query(query, handleQueryResponse(res));
 }
+
+
 
 function addQuestion(req, res) {
     const { question, answerA, answerB, answerC, correctAnswer, selectedCategory } = req.body.data;

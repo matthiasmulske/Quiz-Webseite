@@ -1,6 +1,6 @@
 import * as React from "react";
 import FormAddQuestion from "../../components/FormAddQuestion";
-import {useEffect, useState} from "react";
+import { useState } from "react";
 
 const domain = "http://localhost:5000";
 

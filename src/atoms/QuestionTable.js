@@ -12,7 +12,7 @@ const columns = [
     { field: 'Answer2', headerName: 'Antwort B', editable: true, },
     { field: 'Answer3', headerName: 'Antwort C', editable: true },
     { field: 'CorrectAnswer', headerName: 'Antwort D', editable: true },
-    { field: 'CategoryID', headerName: 'Kategorie', editable: true },
+    { field: 'Name', headerName: 'Kategorie', editable: true },
     { field: 'comment', headerName: 'Kommmentare', editable: true },
 ];
 
@@ -35,7 +35,10 @@ function QuestionTable() {
 
     useEffect(() => {
         const fetchData = async () => {
-            tableData = await fetch(route, {method: "GET", headers: {"Content-Type": "application/json"}})
+            tableData = await fetch(route, {
+                method: "GET",
+                headers: {"Content-Type": "application/json", "userid": "3"}
+            })
                 .then(r => r.json())
                 .catch(error => { console.error('Error fetching categories:', error) });
         }
@@ -45,7 +48,8 @@ function QuestionTable() {
                 setTableData(tableData);
                 return tableData
             })
-        .then(() => console.log(tableData))
+
+            .then(() => console.log(tableData))
     }, [])
 
     const handleRowClick = (params) => {
