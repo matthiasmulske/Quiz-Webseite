@@ -6,7 +6,7 @@ import InputLabel from "@mui/material/InputLabel";
 
 const domain = "http://localhost:5000";
 
-function SelectCategory({ selectedCategory, onDropDownChange }) {
+function SelectCategory({ onDropDownChange, selectedCategory }) {
     const [categories, setCategories] = useState([{Name: ''}]);
 
     useEffect(() => {

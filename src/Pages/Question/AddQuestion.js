@@ -11,19 +11,21 @@ function AddQuestion() {
     const [data, setData] = useState(
         {
             QuestionText: '',
-            AnswerA: '',
-            AnswerB: '',
-            AnswerC: '',
+            Answer1: '',
+            Answer2: '',
+            Answer3: '',
             CorrectAnswer: '',
-            CategoryID: 2,
             Category: ''
         }
     );
 
+    function handleDropDownChange(e) {
+        setData({
+            ...data,
+            ['Category']: e.target.value,
+        })
+        setSelectedCategory(e.target.value)
 
-    function handleDropDownChange(event) {
-        const {target: { value }, } = event;
-        setSelectedCategory(value)
     }
 
     function handleTextChange(e) {
@@ -34,7 +36,8 @@ function AddQuestion() {
     }
 
     function validateData() {
-        const requiredKeys = ['AnswerA', 'QuestionText', 'AnswerB', 'AnswerC', 'CorrectAnswer'];
+        console.log(data)
+        const requiredKeys = ['Answer1', 'QuestionText', 'Answer2', 'Answer3', 'CorrectAnswer'];
         const seenValues = [];
 
         if (!data) {
