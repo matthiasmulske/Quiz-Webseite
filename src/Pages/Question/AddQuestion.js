@@ -1,23 +1,26 @@
 import * as React from "react";
 import FormAddQuestion from "../../components/FormAddQuestion";
 import { useState } from "react";
+import {Alert} from "@mui/material";
 
 const domain = "http://localhost:5000";
+
+let defaultState =         {
+    QuestionText: '',
+    Answer1: '',
+    Answer2: '',
+    Answer3: '',
+    CorrectAnswer: '',
+    Category: ''
+}
 
 
 function AddQuestion() {
     const [selectedCategory, setSelectedCategory] = useState('');
-    const [validated, setValidated] = useState(null);
-    const [data, setData] = useState(
-        {
-            QuestionText: '',
-            Answer1: '',
-            Answer2: '',
-            Answer3: '',
-            CorrectAnswer: '',
-            Category: ''
-        }
-    );
+    const [submitMessage, setSubmitMessage] = useState("")
+    const [severity, setSeverity] = useState("")
+    const [showMessage, setShowMessage] = useState(false)
+    const [data, setData] = useState(defaultState);
 
     function handleDropDownChange(e) {
         setData({
@@ -29,48 +32,51 @@ function AddQuestion() {
     }
 
     function handleTextChange(e) {
-        setData({
-            ...data,
-            [e.target.name]: e.target.value,
-        })
+        const { name, value } = e.target;
+        setData(prevData => ({
+            ...prevData,
+            [name]: value
+        }));
     }
 
     function validateData() {
         const requiredKeys = ['Answer1', 'QuestionText', 'Answer2', 'Answer3', 'CorrectAnswer'];
         const seenValues = [];
-
-        if (!data) {
-            setValidated(false);
-            console.log("NO DATA")
-            return;
-        }
+        console.log(data)
 
         for (const key of requiredKeys) {
+            console.log(key)
             if (!data.hasOwnProperty(key) || typeof data[key] !== 'string' || data[key].trim() === '') {
-                setValidated(false);
-                console.log("DATA INVALID")
+                setSeverity("error")
+                setSubmitMessage("Du musst alle Felder ausfüllen")
+                setShowMessage(true)
                 return;
             }
             const value = data[key].trim();
 
             if (seenValues.includes(value)) {
-                setValidated(false);
-                console.log("DUPLICATE VALUE FOUND: ", value);
+                setSubmitMessage("Eingegebene Daten dürfen nicht identisch sein: " + value);
+                setSeverity("error")
+                setShowMessage(true)
                 return;
             }
 
             seenValues.push(value);
         }
-
-        setValidated(true);
+        setSeverity("success")
     }
 
     async function handleSubmit() {
+        setShowMessage(false)
         validateData()
         resolveData()
-        if (validated) {
+        if (severity === "success") {
             await postToDatabase()
+            setSubmitMessage("Frage wurde erfolgreich dem Pool hinzugefügt")
+            setSeverity("success")
+            setShowMessage(true)
         }
+
     }
 
     function resolveData(){
@@ -114,6 +120,12 @@ function AddQuestion() {
                     selectedCategory={selectedCategory}
                     defaultValues={data}
                 />
+
+                {showMessage &&
+                    <Alert severity={severity}>
+                        {submitMessage}
+                    </Alert>}
+
             </div >
         </>
     )

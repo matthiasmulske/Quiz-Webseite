@@ -12,15 +12,15 @@ const columns = [
 ];
 
 const domain = "http://localhost:5000";
-const getData = domain + "/data";
-const updateQuestion = domain + "/updateQuestion"
+const routeGetData = domain + "/data";
+const routeUpdateQuestion = domain + "/updateQuestion"
 
 function QuestionTable() {
     let [tableData, setTableData] = useState(null);
 
     useEffect(() => {
         const fetchData = async () => {
-            tableData = await fetch(getData, {
+            tableData = await fetch(routeGetData, {
                 method: "GET",
                 headers: {"Content-Type": "application/json", "userid": "3"}
             })
@@ -46,7 +46,7 @@ function QuestionTable() {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ rowData: newRow })
         };
-        fetch(updateQuestion, requestOptions)
+        fetch(routeUpdateQuestion, requestOptions)
             .then(response => response.json());
     }
 
