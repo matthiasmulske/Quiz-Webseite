@@ -49,7 +49,7 @@ function SelectCategory({ onDropDownChange, selectedCategory }) {
                         {categories.map((categoryItem) =>
                             <MenuItem
                                 key={categoryItem.Name}
-                                value={categoryItem.Name}
+                                value={categoryItem.QuestionCategoryID}
                             >
                                 {categoryItem.Name}
                             </MenuItem>)}

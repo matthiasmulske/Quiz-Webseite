@@ -57,7 +57,7 @@ function getData(req, res) {
 function addQuestion(req, res) {
     const { question, answerA, answerB, answerC, correctAnswer, selectedCategory } = req.body.data;
     const query = `INSERT INTO Question(QuestionText, Answer1, Answer2, Answer3, CorrectAnswer, CategoryID) VALUES ('${question}', '${answerA}', '${answerB}', '${answerC}', '${correctAnswer}', ${selectedCategory});`;
-    console.log(req.body.data)
+    console.log(query)
     //connection.query(query, handleQueryResponse(res));
 }
 

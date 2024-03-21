@@ -9,6 +9,7 @@ const columns = [
     { field: 'Answer3', headerName: 'Antwort C', editable: true },
     { field: 'CorrectAnswer', headerName: 'Antwort D', editable: true },
     { field: 'Name', headerName: 'Kategorie', editable: true },
+    { field: 'Comments', headerName: 'Kommentare', editable: true },
 ];
 
 const domain = "http://localhost:5000";
