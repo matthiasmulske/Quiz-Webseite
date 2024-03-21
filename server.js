@@ -60,7 +60,11 @@ function addQuestion(req, res) {
 }
 
 function getCategories(req, res) {
-  const query = `SELECT * FROM QuestionCategory`;
+  const query = `SELECT qc.QuestionCategoryID, qc.Name
+  FROM QuestionCategory qc
+  JOIN Question q ON qc.QuestionCategoryID = q.CategoryID
+  GROUP BY qc.QuestionCategoryID, qc.Name
+  HAVING COUNT(q.QuestionID) >= 3;`;
   connection.query(query, handleQueryResponse(res));
 }
 
