@@ -1,15 +1,15 @@
-import EditQuestion from "./Pages/Question/EditQuestion";
-import AddQuestion from "./Pages/Question/AddQuestion";
+import EditQuestion from "./pages/Question/EditQuestion";
+import AddQuestion from "./pages/Question/AddQuestion";
 import { Routes, Route,} from "react-router-dom";
-import PrivacyPolicyPage from "./Pages/Startseite/PrivacyPolicyPage";
-import Agbs from "./Pages/Startseite/Agbs";
-import Legal from "./Pages/Startseite/Legal";
-import Login from "./Pages/Registration/Login";
+import PrivacyPolicyPage from "./pages/Startseite/PrivacyPolicyPage";
+import Agbs from "./pages/Startseite/Agbs";
+import Legal from "./pages/Startseite/Legal";
+import Login from "./pages/Registration/Login";
 import LoginMaske from "./components/LoginMaske";
-import Homepage from "./Pages/Startseite/Homepage";
-import HomepageLogin from "./Pages/Registration/HomepageLogin";
-import GameSetup from "./Pages/Game/GameSetup";
-import Game from "./Pages/Game/Game";
+import Homepage from "./pages/Startseite/Homepage";
+import HomepageLogin from "./pages/Registration/HomepageLogin";
+import GameSetup from "./pages/Game/GameSetup";
+import Game from "./pages/Game/Game";
 import Navbar from "./components/Navbar";
 
 function App() {

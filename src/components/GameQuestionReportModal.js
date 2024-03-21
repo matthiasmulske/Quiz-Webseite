@@ -23,7 +23,6 @@ const GameQuestionReportModal = ({
 
   const fetchCategories = async () => {
     try {
-      console.log(domain.domain);
       let options = await fetchCommentCategories(
         domain.domain + ":5000/Commentcategories",
         "",

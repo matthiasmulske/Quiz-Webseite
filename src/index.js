@@ -6,14 +6,17 @@ import "bootstrap/js/dist/collapse.js";
 import "material-icons/iconfont/material-icons.css";
 import { BrowserRouter } from "react-router-dom";
 import { GoogleOAuthProvider } from "@react-oauth/google";
+import ErrorBoundary from './components/ErrorBoundary';
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
+    <ErrorBoundary>
     <BrowserRouter>
       <GoogleOAuthProvider clientId="648375373409-cf3l9hjegsiigskluo7k343a8rrn32t1.apps.googleusercontent.com">
         <App />
       </GoogleOAuthProvider>
     </BrowserRouter>
+    </ErrorBoundary>
   </React.StrictMode>,
 );

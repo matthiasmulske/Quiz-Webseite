@@ -26,7 +26,6 @@ const GameScoreboardModal = ({
     setOpenReportModal(true);
   };
 
-  console.log(modalData);
   const [answers, setAnswers] = useState([]);
   const [playerAnswer, setPlayerAnswer] = useState();
   useEffect(() => {
@@ -42,7 +41,6 @@ const GameScoreboardModal = ({
     setOpenModal(false); // Update openModal in the parent component
   };
 
-  console.log(player);
   return (
     <Modal show={openModal} onHide={handleCloseModal}>
       <Modal.Header closeButton>

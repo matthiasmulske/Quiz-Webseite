@@ -29,7 +29,7 @@ function GameScoreboard({
     return chunkedArr;
   };
   const questionsChunks = chunkArray(quizdata, 3);
-  console.log(questionsChunks);
+  
   return (
     <div className="text-center m-3 p-3">
       {isSinglePlayer ? (

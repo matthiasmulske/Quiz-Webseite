@@ -26,7 +26,6 @@ function GameSetup() {
 
   const fetchCategories = async () => {
     try {
-      console.log(domain.domain);
       let options = await fetchQuestionCategories(
         domain.domain + ":5000/categories",
         "",
@@ -117,7 +116,6 @@ function GameSetup() {
       questionIds[1],
       questionIds[2],
     );
-    console.log(res);
     //generate Links for quiz
     setLinkOne(domain.domain + ":3000/Game?accesstoken=" + accessToken1);
     if (!isSinglePlayer) {
