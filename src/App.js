@@ -15,7 +15,7 @@ import React, { useState, useEffect } from 'react';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [user, setUser] = useState("3");
+  const [user, setUser] = useState();
 
   return (
     <div className="App">
