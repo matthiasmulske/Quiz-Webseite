@@ -11,6 +11,7 @@ function GameQuestion({
   setAnswerGiven,
   handleNextQuestion,
   answerGiven,
+  trustIndex,
 }) {
   const [timeLeft, setTimeLeft] = useState(timer);
   const [selectedAnswer, setSelectedAnswer] = useState();
@@ -59,6 +60,7 @@ function GameQuestion({
           setAnswerGiven={setAnswerGiven}
           selectedAnswer={selectedAnswer}
           setSelectedAnswer={setSelectedAnswer}
+          trustIndex={trustIndex}
         />
       </div>
       {timeLeft <= 0 && answerGiven ? (

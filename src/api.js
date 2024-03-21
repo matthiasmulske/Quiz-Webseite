@@ -29,6 +29,14 @@ const postAddQuestion = async (route,  questionText, answerA, answerB, answerC, 
   return await fetchData(route, {  questionText, answerA, answerB, answerC, answerD, category });
 };
 
+const resetTrustIndex = async (route,  questionID) => {
+  return await fetchData(route, {  questionID });
+};
+
+const incrementTrustIndex = async (route,  questionID) => {
+  return await fetchData(route, {  questionID });
+};
+
 const fetchCommentCategories = async (route, accessToken) => {
   return await fetchData(route, { accessToken });
 };
@@ -104,4 +112,6 @@ export {
   setNewRound,
   postComment,
   postAddQuestion,
+  resetTrustIndex,
+  incrementTrustIndex,
 };

@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import GameButton from "../atoms/GameButton";
 import ErrorIcon from "@mui/icons-material/Error";
 import GameQuestionReportModal from "./GameQuestionReportModal";
+import { incrementTrustIndex } from "../api.js";
+import domain from "../assets/domain.js";
 
 function GameQuestionView({
   question,
@@ -13,6 +15,7 @@ function GameQuestionView({
   answerGiven,
   selectedAnswer,
   setSelectedAnswer,
+  trustIndex,
 }) {
   const [openModal, setOpenModal] = useState(false); //decides if reportModal is opened
   const [shuffledAnswers, setShuffledAnswers] = useState([]); //shuffels answers in order to display the correct answer not always on the same position
@@ -36,6 +39,8 @@ function GameQuestionView({
   };
 
   const handleAnswerClick = (answer) => {
+    incrementTrustIndex( domain.domain + ":5000/incrementTrustIndex",
+    questionID);
     if (!answerGiven && timeLeft > 0) {
       setSelectedAnswer(answer);
       setTimeLeft(0);
@@ -51,7 +56,6 @@ function GameQuestionView({
         setAnswerGiven(5);
       }
     }
-    console.log("AG" + selectedAnswer);
   };
 
   return (
@@ -71,6 +75,7 @@ function GameQuestionView({
         questionID={questionID}
         openModal={openModal}
         setOpenModal={setOpenModal}
+        trustIndex={trustIndex}
       />
 
       <h3 style={style.question}>{question}</h3>

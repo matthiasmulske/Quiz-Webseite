@@ -41,6 +41,8 @@ app.post("/createQuizInDB2", createQuizInDB);
 app.post("/createNewRound", createNewRound);
 app.post("/postComment", postComment);
 app.post("/addQuestion", addQuestion);
+app.post("/resetTrustIndex", resetTrustIndex);
+app.post("/incrementTrustIndex", incrementTrustIndex);
 
 // Route Handlers
 function getGameData(req, res) {
@@ -57,6 +59,18 @@ function addQuestion(req, res) {
   const { questionText, answerA, answerB, answerC, answerD, category } = req.body;
   const query = `INSERT INTO Question (QuestionText, Answer1, Answer2, Answer3, CorrectAnswer, CategoryID) VALUES (?, ?, ?, ?, ?, ?)`;
   connection.query(query, [questionText, answerA, , answerB, answerC, answerD, category], handleQueryResponse(res));
+}
+
+function resetTrustIndex(req, res) {
+  const { questionID} = req.body;
+  const query = `UPDATE Question SET TrustIndex = 0 WHERE QuestionID = ?`;
+  connection.query(query, [questionID], handleQueryResponse(res));
+}
+
+function incrementTrustIndex(req, res) {
+  const { questionID} = req.body;
+  const query = `UPDATE Question SET TrustIndex = TrustIndex + 1 WHERE QuestionID = ?`;
+  connection.query(query, [questionID], handleQueryResponse(res));
 }
 
 function getCategories(req, res) {

@@ -103,6 +103,7 @@ function Game() {
     if (answerGiven !== null) {
       setAnswerPlayer(currentQuizID, currentQuestion, answerGiven, player);
     }
+    
     // eslint-disable-next-line
   }, [answerGiven]);
 
@@ -227,6 +228,7 @@ function Game() {
       return {
         questionText: question.QuestionText,
         questionID: question.QuestionID,
+        trustIndex: question.TrustIndex,
         answers: [
           question.Answer1,
           question.Answer2,
@@ -325,6 +327,7 @@ function Game() {
           question={currentQuestionData.questionText}
           answers={currentQuestionData.answers}
           questionID={currentQuestionData.questionID}
+          trustIndex={currentQuestionData.trustIndex}
           timer={timer}
           setTimer={setTimer}
           answerGiven={answerGiven}
