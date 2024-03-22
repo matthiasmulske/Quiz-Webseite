@@ -33,6 +33,12 @@ connection.connect((err) => {
 app.get("/categories", getCategories);
 app.post("/question", addQuestion);
 app.get("/data", getData);
+app.put("/updateQuestion", updateQuestion)
+
+function updateQuestion(req, res) {
+    const query = 'UPDATE Question SET Answer1 = 0 WHERE QuestionID = 9;'
+    console.log(req.body)
+}
 
 
 function getCategories(req, res) {
@@ -40,9 +46,13 @@ function getCategories(req, res) {
 }
 
 function getData(req, res) {
-    let query = "SELECT * FROM Question"
+    let selected_userId = req.headers.userid
+    let query = `Select * From Question q
+         JOIN QuestionCategory c on q.CategoryID = c.QuestionCategoryID
+         Where UserID = '${selected_userId}'`
     connection.query(query, handleQueryResponse(res));
 }
+
 
 function addQuestion(req, res) {
     const { question, answerA, answerB, answerC, correctAnswer, selectedCategory } = req.body.data;
@@ -50,7 +60,6 @@ function addQuestion(req, res) {
     console.log(query)
     //connection.query(query, handleQueryResponse(res));
 }
-
 
 // Utility Functions
 function handleQueryResponse(res) {

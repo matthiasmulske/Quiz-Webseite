@@ -1,98 +1,89 @@
 import * as React from "react";
 import FormAddQuestion from "../../components/FormAddQuestion";
-import {useEffect, useState} from "react";
+import { useState } from "react";
+import {Alert} from "@mui/material";
 
 const domain = "http://localhost:5000";
 
+let defaultState =         {
+    QuestionText: '',
+    Answer1: '',
+    Answer2: '',
+    Answer3: '',
+    CorrectAnswer: '',
+    Category: ''
+}
+
+
 function AddQuestion() {
-    const [categories, setCategories] = useState(null);
     const [selectedCategory, setSelectedCategory] = useState('');
-    const [validated, setValidated] = useState(null);
-    const [data, setData] = useState();
+    const [submitMessage, setSubmitMessage] = useState("")
+    const [severity, setSeverity] = useState("")
+    const [showMessage, setShowMessage] = useState(false)
+    const [data, setData] = useState(defaultState);
 
-    useEffect(() => {
-        const fetchCategories = async () => {
-            try {
-                const response = await fetch(domain + "/categories", {
-                    method: "GET",
-                    headers: { "Content-Type": "application/json" },
-                });
-
-                if (!response.ok) {
-                    throw new Error('Failed to fetch categories');
-                }
-
-                return response.json();
-            } catch (error) {
-                console.error('Error fetching categories:', error);
-                throw error;
-            }
-        };
-
-        fetchCategories()
-            .then((categories) => {
-                setCategories(categories);
-                return categories;
-            })
-            .then((categories) => {
-                setSelectedCategory(categories[0])
-            })
-            .catch((error) => {
-                alert(error)
-            });
-    }, []);
-
-    function handleDropdownChange(e) {
+    function handleDropDownChange(e) {
+        setData({
+            ...data,
+            ['Category']: e.target.value,
+        })
         setSelectedCategory(e.target.value)
+
     }
 
     function handleTextChange(e) {
-        setData({
-            ...data,
-            [e.target.name]: e.target.value,
-        })
+        const { name, value } = e.target;
+        setData(prevData => ({
+            ...prevData,
+            [name]: value
+        }));
     }
 
     function validateData() {
-        const requiredKeys = ['answerA', 'question', 'answerB', 'answerC', 'correctAnswer'];
+        const requiredKeys = ['Answer1', 'QuestionText', 'Answer2', 'Answer3', 'CorrectAnswer'];
         const seenValues = [];
-
-        if (!data) {
-            setValidated(false);
-            console.log("NO DATA")
-            return;
-        }
+        console.log(data)
 
         for (const key of requiredKeys) {
+            console.log(key)
             if (!data.hasOwnProperty(key) || typeof data[key] !== 'string' || data[key].trim() === '') {
-                setValidated(false);
-                console.log("DATA INVALID")
+                setSeverity("error")
+                setSubmitMessage("Du musst alle Felder ausfüllen")
+                setShowMessage(true)
                 return;
             }
             const value = data[key].trim();
 
             if (seenValues.includes(value)) {
-                setValidated(false);
-                console.log("DUPLICATE VALUE FOUND: ", value);
+                setSubmitMessage("Eingegebene Daten dürfen nicht identisch sein: " + value);
+                setSeverity("error")
+                setShowMessage(true)
                 return;
             }
 
             seenValues.push(value);
         }
-
-        setValidated(true);
+        setSeverity("success")
     }
 
     async function handleSubmit() {
+        setShowMessage(false)
         validateData()
+        resolveData()
+        if (severity === "success") {
+            await postToDatabase()
+            setSubmitMessage("Frage wurde erfolgreich dem Pool hinzugefügt")
+            setSeverity("success")
+            setShowMessage(true)
+        }
+
+    }
+
+    function resolveData(){
         setData({
             ...data,
-            selectedCategory: selectedCategory.QuestionCategoryID
+            Category: selectedCategory
         })
-        console.log(data)
-        if (validated) {
-            await postToDatabase()
-        }
     }
 
     async function postToDatabase() {
@@ -123,12 +114,18 @@ function AddQuestion() {
             <div style={style.componentContainer}>
                 <FormAddQuestion
                     onTextChange={handleTextChange}
-                    buttonLabel={"Frage einreichen"}
                     onClick={handleSubmit}
-                    categories={categories}
+                    onDropDownChange={handleDropDownChange}
+                    buttonLabel={"Frage einreichen"}
                     selectedCategory={selectedCategory}
-                    onDropDownChange={handleDropdownChange}
+                    defaultValues={data}
                 />
+
+                {showMessage &&
+                    <Alert severity={severity}>
+                        {submitMessage}
+                    </Alert>}
+
             </div >
         </>
     )

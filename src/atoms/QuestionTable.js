@@ -1,46 +1,59 @@
 import * as React from 'react';
 import {DataGrid} from "@mui/x-data-grid";
 import {useEffect, useState} from "react";
-import DialogTitle from "@mui/material/DialogTitle";
-import DialogContent from "@mui/material/DialogContent";
-import Dialog from "@mui/material/Dialog";
-import FormAddQuestion from "../components/FormAddQuestion";
 
 const columns = [
-    { field: 'QuestionText', headerName: 'Frage', editable: true, flex: "1" },
+    { field: 'QuestionText', headerName: 'Frage', editable: true, },
     { field: 'Answer1', headerName: 'Antwort A', editable: true, },
     { field: 'Answer2', headerName: 'Antwort B', editable: true, },
     { field: 'Answer3', headerName: 'Antwort C', editable: true },
     { field: 'CorrectAnswer', headerName: 'Antwort D', editable: true },
-    { field: 'category', headerName: 'Kategorie', editable: true },
+    { field: 'Name', headerName: 'Kategorie', editable: true },
+    { field: 'Comments', headerName: 'Kommentare', editable: true },
 ];
 
 const domain = "http://localhost:5000";
-const route = domain + "/data";
+const routeGetData = domain + "/data";
+const routeUpdateQuestion = domain + "/updateQuestion"
 
 function QuestionTable() {
     let [tableData, setTableData] = useState(null);
-    const [open, setOpen] = React.useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
-            tableData = await fetch(route, {method: "GET", headers: {"Content-Type": "application/json"}})
+            tableData = await fetch(routeGetData, {
+                method: "GET",
+                headers: {"Content-Type": "application/json", "userid": "3"}
+            })
                 .then(r => r.json())
                 .catch(error => { console.error('Error fetching categories:', error) });
         }
-        fetchData().then(r =>
-            setTableData(tableData),
-        );
 
-    })
+        fetchData()
+            .then(r => {
+                setTableData(tableData);
+                return tableData
+            })
+    }, [])
 
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
+    async function processRowUpdate(newRow) {
+        await updateQuestionDatabase(newRow)
+        return newRow
+    }
 
-    const handleClose = () => {
-        setOpen(false);
-    };
+    async function updateQuestionDatabase(newRow) {
+        const requestOptions = {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ rowData: newRow })
+        };
+        fetch(routeUpdateQuestion, requestOptions)
+            .then(response => response.json());
+    }
+
+    const handleProcessRowUpdateError = React.useCallback((error) => {
+        console.log("ERROR")
+    }, []);
 
     function getRowId(row) {
         return row.QuestionID;
@@ -51,6 +64,7 @@ function QuestionTable() {
             <div>
                 {tableData != null ? (
                     <DataGrid style={style.table}
+                              getRowHeight={() => 'auto'}
                               getRowId={getRowId}
                               rows={tableData}
                               columns={columns}
@@ -60,19 +74,12 @@ function QuestionTable() {
                                   },
                               }}
                               pageSizeOptions={[30, 30]}
-                              onCellClick={handleClickOpen}>
+                              processRowUpdate={processRowUpdate}
+                              onProcessRowUpdateError={handleProcessRowUpdateError}
+                    >
                     </DataGrid>
-                ) : (console.log("Loading"))}
+                ) : (console.log(""))}
             </div>
-            <Dialog
-                open={open}
-                onClose={handleClose}>
-                <DialogTitle>Frage bearbeiten</DialogTitle>
-                <DialogContent>
-                    <FormAddQuestion onClick={handleClose}/>
-                </DialogContent>
-            </Dialog>
-
         </>
     );
 }
