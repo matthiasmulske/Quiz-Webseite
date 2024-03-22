@@ -27,7 +27,7 @@ export default function Navbar({isLoggedIn, setIsLoggedIn, user, setUser}) {
   const [mailDialogOpen, setMailDialogOpen] = useState(false);
   const [logoutDialogOpen, setLogoutDialogOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState([{ UserCount: 0 }]);
 
   const handleMailDialogOpen = () => {
     setMailDialogOpen(true);

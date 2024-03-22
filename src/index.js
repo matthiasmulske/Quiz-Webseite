@@ -6,7 +6,7 @@ import "bootstrap/js/dist/collapse.js";
 import "material-icons/iconfont/material-icons.css";
 import { BrowserRouter } from "react-router-dom";
 import { GoogleOAuthProvider } from "@react-oauth/google";
-import favicon from './fa';
+import favicon from './favicon.ico';
 
 // Append favicon to document head
 const link = document.createElement('link');
