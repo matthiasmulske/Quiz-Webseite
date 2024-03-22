@@ -25,6 +25,11 @@ function Login({isLoggedIn}) {
           buttonLabel={"Quizfrage bearbeiten"} 
           style={styles.button} />
       </Link>
+      <Link to="/QuestionTakeOver" style={styles.link}>
+        <LoginButton 
+          buttonLabel={"Frage übernehmen"} 
+          style={styles.button} />
+      </Link>
         
         </>
       :

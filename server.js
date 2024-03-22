@@ -2,6 +2,7 @@ const express = require("express");
 const mysql = require("mysql");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const cron = require("node-cron");
 
 const app = express();
 const IP_ADDRESS = "localhost";
@@ -43,6 +44,8 @@ app.post("/postComment", postComment);
 app.post("/addQuestion", addQuestion);
 app.post("/resetTrustIndex", resetTrustIndex);
 app.post("/incrementTrustIndex", incrementTrustIndex);
+app.post("/getQuestionsWithoutUser", getQuestionsWithoutUser);
+app.post("/updateUserForQuestion", updateUserForQuestion);
 
 // Route Handlers
 function getGameData(req, res) {
@@ -61,14 +64,33 @@ function addQuestion(req, res) {
   connection.query(query, [questionText, answerA, , answerB, answerC, answerD, category], handleQueryResponse(res));
 }
 
+function getQuestionsWithoutUser(req, res) {
+  const query = `SELECT q.*, c.*
+  FROM Question q
+  LEFT JOIN (
+      SELECT Comment.*, 
+             ROW_NUMBER() OVER (PARTITION BY QuestionID ORDER BY CommentTimeStamp DESC) AS rn
+      FROM Comment
+  ) c ON q.QuestionID = c.QuestionID AND c.rn = 1
+  WHERE q.UserID IS NULL;   
+  `;
+  connection.query(query, [], handleQueryResponse(res));
+}
+
 function resetTrustIndex(req, res) {
-  const { questionID} = req.body;
+  const { questionID } = req.body;
   const query = `UPDATE Question SET TrustIndex = 0 WHERE QuestionID = ?`;
   connection.query(query, [questionID], handleQueryResponse(res));
 }
 
+function updateUserForQuestion(req, res) {
+  const { userID, questionID } = req.body;
+  const query = `UPDATE Question SET UserID = ? WHERE QuestionID = ?`;
+  connection.query(query, [userID, questionID], handleQueryResponse(res));
+}
+
 function incrementTrustIndex(req, res) {
-  const { questionID} = req.body;
+  const { questionID } = req.body;
   const query = `UPDATE Question SET TrustIndex = TrustIndex + 1 WHERE QuestionID = ?`;
   connection.query(query, [questionID], handleQueryResponse(res));
 }
@@ -80,6 +102,19 @@ function getCategories(req, res) {
 
 function getCommentCategories(req, res) {
   const query = `SELECT * FROM CommentCategory`;
+  connection.query(query, handleQueryResponse(res));
+}
+
+function getQuestionsWithoutReaction(req, res) {
+  const query = `UPDATE Question q
+  JOIN (
+      SELECT DISTINCT q.QuestionID
+      FROM Question q
+      JOIN Comment c ON q.QuestionID = c.QuestionID
+      WHERE c.CommentTimeStamp < DATE_SUB(NOW(), INTERVAL 2 WEEK)
+      AND c.CategoryID IN (1, 2)
+  ) AS subquery ON q.QuestionID = subquery.QuestionID
+  SET q.UserID = NULL;`;
   connection.query(query, handleQueryResponse(res));
 }
 
@@ -297,6 +332,11 @@ function handleRollbackAndError(res, connection, errorMessage, err) {
     res.status(500).json({ error: errorMessage });
   });
 }
+
+//clean up Code executed once a day by server at midnight
+cron.schedule("0 0 * * *", () => {
+  getQuestionsWithoutReaction();
+});
 
 // Start the server
 const PORT = process.env.PORT || port;

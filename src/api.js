@@ -33,6 +33,10 @@ const resetTrustIndex = async (route,  questionID) => {
   return await fetchData(route, {  questionID });
 };
 
+const updateUserForQuestion = async (route,  userID, questionID) => {
+  return await fetchData(route, {  userID, questionID });
+};
+
 const incrementTrustIndex = async (route,  questionID) => {
   return await fetchData(route, {  questionID });
 };
@@ -102,6 +106,10 @@ const postComment = async (route, questionID, text, categoryID) => {
   return await fetchData(route, { questionID, text, categoryID});
 };
 
+const getQuestionsWithoutUser = async (route) => {
+  return await fetchData(route);
+};
+
 export {
   fetchQuestionCategories,
   fetchCommentCategories,
@@ -114,4 +122,6 @@ export {
   postAddQuestion,
   resetTrustIndex,
   incrementTrustIndex,
+  getQuestionsWithoutUser,
+  updateUserForQuestion,
 };
