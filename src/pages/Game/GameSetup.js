@@ -27,7 +27,7 @@ function GameSetup() {
   const fetchCategories = async () => {
     try {
       let options = await fetchQuestionCategories(
-        domain.domain + ":5000/categoriesToPlay",
+        domain.domain + "/categoriesToPlay",
         "",
       );
       let optionsArray = options.map((category) => ({
@@ -88,7 +88,7 @@ function GameSetup() {
       }
       //check if accesstokens already exist in db
       IsUniqueAccesstoken = await checkAccessToken(
-        domain.domain + ":5000/accessToken",
+        domain.domain + "/accessToken",
         accessToken1,
         accessToken2,
       );
@@ -96,7 +96,7 @@ function GameSetup() {
 
     //generate the first three questions for new quiz
     const questions = await getThreeQuestionsByCat(
-      domain.domain + ":5000/getThreeQuestionsByCat",
+      domain.domain + "/getThreeQuestionsByCat",
       category,
     );
     const questionIds = [
@@ -107,7 +107,7 @@ function GameSetup() {
 
     //create a new quiz in DB by creating a quiz and saving space in QuizQuestions for rounds*3 questions
     let res = await createQuizInDB(
-      domain.domain + ":5000/createQuizInDB2",
+      domain.domain + "/createQuizInDB2",
       accessToken1,
       accessToken2,
       numberOfRounds,

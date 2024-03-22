@@ -64,7 +64,7 @@ export default function Navbar({isLoggedIn, setIsLoggedIn, user, setUser}) {
     }, [user]);
 
     async function getData() {
-      let datas = await getNumberofMessages( domain.domain + ":5000/getNumberofMessages", user);
+      let datas = await getNumberofMessages( domain.domain + "/getNumberofMessages", user);
       setMessages(datas);
     }
 

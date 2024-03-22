@@ -253,7 +253,7 @@ function Game() {
     const setPlayer1Answer = async (answerGiven, quizID, questionNumber) => {
       try {
         const response = await fetch(
-          domain.domain + ":5000/updatePlayer1Answer",
+          domain.domain + "/updatePlayer1Answer",
           {
             method: "POST",
             headers: {
@@ -277,7 +277,7 @@ function Game() {
     const setPlayer2Answer = async (answerGiven, quizID, questionNumber) => {
       try {
         const response = await fetch(
-          domain.domain + ":5000/updatePlayer2Answer",
+          domain.domain + "/updatePlayer2Answer",
           {
             method: "POST",
             headers: {

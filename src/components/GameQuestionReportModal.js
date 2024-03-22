@@ -25,7 +25,7 @@ const GameQuestionReportModal = ({
   const fetchCategories = async () => {
     try {
       let options = await fetchCommentCategories(
-        domain.domain + ":5000/Commentcategories",
+        domain.domain + "/Commentcategories",
         "",
       );
       let optionsArray = options.map((category) => ({
@@ -61,13 +61,13 @@ const GameQuestionReportModal = ({
   async function handleSendComment() {
     setLoading(true);
     await postComment(
-      domain.domain + ":5000/postComment",
+      domain.domain + "/postComment",
       questionID,
       commentText,
       category,
     );
     if (category === 1 || 2){
-      await resetTrustIndex(domain.domain + ":5000/resetTrustIndex", questionID);
+      await resetTrustIndex(domain.domain + "/resetTrustIndex", questionID);
     }
     setLoading(false);
     setSent(true);
