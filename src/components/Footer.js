@@ -24,6 +24,15 @@ function Footer() {
       <Link to="/Legal" style={{ marginRight: "10px" }}>
         Rechtliches
       </Link>
+      <Link to="/PrivacyPolicyPage" style={{ marginRight: "10px" }}>
+        Benutzerhandbuch
+      </Link>
+      <Link to="/Agbs" style={{ marginRight: "10px" }}>
+        Betriebshandbuch
+      </Link>
+      <Link to="/Legal" style={{ marginRight: "10px" }}>
+        Systemdokumentation
+      </Link>
     </div>
   );
 }

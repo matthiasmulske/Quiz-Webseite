@@ -22,7 +22,7 @@ function QuestionTakeOver({user}) {
 
   useEffect(() => {
    getData();
-  }, [loading]);
+  }, []);
 
   async function getData() {
     let datas = await getQuestionsWithoutUser( domain.domain + ":5000/getQuestionsWithoutUser");

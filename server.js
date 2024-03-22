@@ -32,7 +32,7 @@ connection.connect((err) => {
 
 // Routes
 app.post("/gameData", getGameData);
-app.post("/categories", getCategories);
+app.post("/categoriesToPlay", getCategoriesToPlay);
 app.post("/commentCategories", getCommentCategories);
 app.post("/updatePlayer1Answer", updatePlayer1Answer);
 app.post("/updatePlayer2Answer", updatePlayer2Answer);
@@ -42,12 +42,45 @@ app.post("/createQuizInDB2", createQuizInDB);
 app.post("/createNewRound", createNewRound);
 app.post("/postComment", postComment);
 app.post("/addQuestion", addQuestion);
+app.post("/getNumberofMessages", getNumberofMessages);
 app.post("/resetTrustIndex", resetTrustIndex);
 app.post("/incrementTrustIndex", incrementTrustIndex);
 app.post("/getQuestionsWithoutUser", getQuestionsWithoutUser);
 app.post("/updateUserForQuestion", updateUserForQuestion);
+app.get("/categories", getCategories);
+app.post("/question", addQuestion);
+app.get("/data", getData);
+app.put("/updateQuestion", updateQuestion)
+
 
 // Route Handlers
+
+function updateQuestion(req, res) {
+  const query = 'UPDATE Question SET Answer1 = 0 WHERE QuestionID = 9;'
+  console.log(req.body)
+}
+
+
+function getCategories(req, res) {
+  connection.query('SELECT * FROM QuestionCategory', handleQueryResponse(res));
+}
+
+function getData(req, res) {
+  let selected_userId = req.headers.userid
+  let query = `Select * From Question q
+       JOIN QuestionCategory c on q.CategoryID = c.QuestionCategoryID
+       Where UserID = '${selected_userId}'`
+  connection.query(query, handleQueryResponse(res));
+}
+
+
+function addQuestion(req, res) {
+  const { question, answerA, answerB, answerC, correctAnswer, selectedCategory } = req.body.data;
+  const query = `INSERT INTO Question(QuestionText, Answer1, Answer2, Answer3, CorrectAnswer, CategoryID) VALUES ('${question}', '${answerA}', '${answerB}', '${answerC}', '${correctAnswer}', ${selectedCategory});`;
+  console.log(query)
+  //connection.query(query, handleQueryResponse(res));
+}
+
 function getGameData(req, res) {
   const { accessToken } = req.body;
   const query = `SELECT * FROM Quiz 
@@ -83,6 +116,15 @@ function resetTrustIndex(req, res) {
   connection.query(query, [questionID], handleQueryResponse(res));
 }
 
+function getNumberofMessages(req, res) {
+  const { userID } = req.body;
+  const query = `SELECT COUNT(q.USERID) AS UserCount
+  FROM Comment c
+  LEFT JOIN Question q ON c.QuestionID = q.QuestionID
+  WHERE q.USERID = ?;`;
+  connection.query(query, [userID], handleQueryResponse(res));
+}
+
 function updateUserForQuestion(req, res) {
   const { userID, questionID } = req.body;
   const query = `UPDATE Question SET UserID = ? WHERE QuestionID = ?`;
@@ -95,7 +137,7 @@ function incrementTrustIndex(req, res) {
   connection.query(query, [questionID], handleQueryResponse(res));
 }
 
-function getCategories(req, res) {
+function getCategoriesToPlay(req, res) {
   const query = `SELECT qc.QuestionCategoryID, qc.Name
   FROM QuestionCategory qc
   JOIN Question q ON qc.QuestionCategoryID = q.CategoryID

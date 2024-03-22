@@ -33,6 +33,10 @@ const resetTrustIndex = async (route,  questionID) => {
   return await fetchData(route, {  questionID });
 };
 
+const getNumberofMessages = async (route,  userID) => {
+  return await fetchData(route, {  userID });
+};
+
 const updateUserForQuestion = async (route,  userID, questionID) => {
   return await fetchData(route, {  userID, questionID });
 };
@@ -124,4 +128,5 @@ export {
   incrementTrustIndex,
   getQuestionsWithoutUser,
   updateUserForQuestion,
+  getNumberofMessages,
 };

@@ -18,11 +18,16 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import {
+  getNumberofMessages
+} from "../api.js";
+import domain from "../assets/domain.js";
 
 export default function Navbar({isLoggedIn, setIsLoggedIn, user, setUser}) {
   const [mailDialogOpen, setMailDialogOpen] = useState(false);
   const [logoutDialogOpen, setLogoutDialogOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
+  const [messages, setMessages] = useState([]);
 
   const handleMailDialogOpen = () => {
     setMailDialogOpen(true);
@@ -53,6 +58,16 @@ export default function Navbar({isLoggedIn, setIsLoggedIn, user, setUser}) {
   const handleCloseMenu = () => {
     setAnchorEl(null);
   };
+
+   useEffect(() => {
+     getData();
+    }, [user]);
+
+    async function getData() {
+      let datas = await getNumberofMessages( domain.domain + ":5000/getNumberofMessages", user);
+      setMessages(datas);
+    }
+
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -129,7 +144,12 @@ export default function Navbar({isLoggedIn, setIsLoggedIn, user, setUser}) {
         <DialogTitle id="mail-dialog-title">{"Neue Nachrichten"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="mail-dialog-description">
-            Sie haben eine keine neuen Nachrichten
+            {isLoggedIn?
+             <>Sie haben {messages[0].UserCount} neue Nachrichten. Gehe zu <Link to="/EditQuestion" > Frage bearbeiten </Link>
+             </>
+          :
+          ""
+          }
           </DialogContentText>
         </DialogContent>
         <DialogActions>

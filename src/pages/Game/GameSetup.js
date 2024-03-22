@@ -28,7 +28,7 @@ function GameSetup() {
     try {
       console.log(domain.domain);
       let options = await fetchQuestionCategories(
-        domain.domain + ":5000/categories",
+        domain.domain + ":5000/categoriesToPlay",
         "",
       );
       let optionsArray = options.map((category) => ({
