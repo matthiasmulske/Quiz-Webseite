@@ -117,9 +117,9 @@ function GameSetup() {
       questionIds[2],
     );
     //generate Links for quiz
-    setLinkOne(domain.domain + ":3000/Game?accesstoken=" + accessToken1);
+    setLinkOne("http://localhost:3000/Game?accesstoken=" + accessToken1);
     if (!isSinglePlayer) {
-      setLinkTwo(domain.domain + ":3000/Game?accesstoken=" + accessToken2);
+      setLinkTwo("http://localhost:3000/Game?accesstoken=" + accessToken2);
     }
     //EndLoading Animation
     setLoading(false);

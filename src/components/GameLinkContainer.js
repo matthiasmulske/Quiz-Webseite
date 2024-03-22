@@ -26,19 +26,6 @@ const GameLinkContainer = ({ player, linkText, id }) => {
       <Link href={linkText} underline="hover">
         {linkText}
       </Link>
-      {/* <GameButton
-        label={
-          copied ? (
-            <span className="material-icons">done</span>
-          ) : (
-            <span className="material-icons">content_copy</span>
-          )
-        }
-        onClick={handleCopyLink}
-        color={copied ? "success" : "primary"}
-        size="small"
-        variante="text"
-      /> */}
     </div>
   );
 };

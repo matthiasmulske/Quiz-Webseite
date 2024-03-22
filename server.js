@@ -389,5 +389,5 @@ cron.schedule("0 0 * * *", () => {
 // Start the server
 const PORT = process.env.PORTS || port;
 app.listen(PORT, () => {
-  console.log(`Server listening on ${IP_ADDRESS}:${PORT}`);
+  console.log(`Server listening on ${PORT}`);
 });
