@@ -5,7 +5,6 @@ const cors = require("cors");
 const cron = require("node-cron");
 require('dotenv').config();
 
-
 const app = express();
 const IP_ADDRESS = process.env.IP_ADDRESS;
 const port = 5000;
@@ -43,7 +42,6 @@ app.post("/getThreeQuestionsByCat", getThreeQuestionsByCategory);
 app.post("/createQuizInDB2", createQuizInDB);
 app.post("/createNewRound", createNewRound);
 app.post("/postComment", postComment);
-app.post("/addQuestion", addQuestion);
 app.post("/getNumberofMessages", getNumberofMessages);
 app.post("/resetTrustIndex", resetTrustIndex);
 app.post("/incrementTrustIndex", incrementTrustIndex);
@@ -91,12 +89,6 @@ function getGameData(req, res) {
                  LEFT JOIN QuestionCategory ON Question.CategoryID = QuestionCategory.QuestionCategoryID
                  WHERE Quiz.AccessTokenOne = ? OR Quiz.AccessTokenTwo = ?`;
   connection.query(query, [accessToken, accessToken], handleQueryResponse(res));
-}
-
-function addQuestion(req, res) {
-  const { questionText, answerA, answerB, answerC, answerD, category } = req.body;
-  const query = `INSERT INTO Question (QuestionText, Answer1, Answer2, Answer3, CorrectAnswer, CategoryID) VALUES (?, ?, ?, ?, ?, ?)`;
-  connection.query(query, [questionText, answerA, , answerB, answerC, answerD, category], handleQueryResponse(res));
 }
 
 function getQuestionsWithoutUser(req, res) {

@@ -25,13 +25,13 @@ function QuestionTakeOver({user}) {
   }, []);
 
   async function getData() {
-    let datas = await getQuestionsWithoutUser( domain.domain + ":5000/getQuestionsWithoutUser");
+    let datas = await getQuestionsWithoutUser( domain.domain + "/getQuestionsWithoutUser");
     setData(datas);
   }
 
   async function handleTakeOver(userID, questionID) {
     setLoading(true);
-    updateUserForQuestion(domain.domain + ":5000/updateUserForQuestion", userID, questionID);
+    updateUserForQuestion(domain.domain + "/updateUserForQuestion", userID, questionID);
     setLoading(false);
   }
 
