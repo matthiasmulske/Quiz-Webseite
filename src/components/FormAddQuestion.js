@@ -4,56 +4,20 @@ import ButtonQuiz from "../atoms/ButtonQuiz";
 import SelectCategory from "../atoms/SelectCategory";
 
 
-function FormAddQuestion( { onClick, categories, selectedCategory, onDropDownChange, onTextChange }) {
-import {useState} from "react";
-import questions from "../data/questions.json"
-import {
-  postAddQuestion
-} from "../api.js";
-import domain from "../assets/domain.js";
-
-
-const categories = ["ISEF", "IBPMN", "ITIL"]
-
-// TODO: Select Category
-function FormAddQuestion({ buttonLabel, children }) {
-  const [data, setData] = useState({
-      question: "",
-      answerA: "",
-      answerB: "",
-      answerC: "",
-      answerD: "",
-      category: ""
-  });
-
-  function handleChange(e) {
-    setData({
-      ...data,
-      [e.target.name]: e.target.value,
-    })
-  }
-
-  function handleSubmit() {
-      postAddQuestion(domain.domain + ":5000/addQuestion", data.question, data.answerA, data.answerB, data.answerC, data.answerD, data.category);
-      console.log(data)
-  }
-
-
+function FormAddQuestion( { onClick, onDropDownChange, onTextChange, defaultValues, selectedCategory }) {
   return (
   <div style={style.container}>
-
-      <QuizTextField name={'question'} label={"Frage"} onChange={onTextChange} rows={5} />
+      <QuizTextField defaultValue={defaultValues.QuestionText} name={"QuestionText"} label={"Frage"} onChange={onTextChange} rows={5} />
       <div style={style.gridContainer}>
-        <QuizTextField name={"answerA"} label={"Antwort A"} onChange={onTextChange} rows={3} />
-        <QuizTextField name={"answerB"} label={"Antwort B"} onChange={onTextChange} rows={3} />
-        <QuizTextField name={"answerC"} label={"Antwort C"} onChange={onTextChange} rows={3} />
-        <QuizTextField name={"correctAnswer"} label={"Korrekte Antwort"} onChange={onTextChange} rows={3} />
+        <QuizTextField defaultValue={defaultValues.Answer1} name={"Answer1"} label={"Antwort A"} onChange={onTextChange} rows={3} />
+        <QuizTextField defaultValue={defaultValues.Answer2} name={"Answer2"} label={"Antwort B"} onChange={onTextChange} rows={3} />
+        <QuizTextField defaultValue={defaultValues.Answer3} name={"Answer3"} label={"Antwort C"} onChange={onTextChange} rows={3} />
+        <QuizTextField defaultValue={defaultValues.CorrectAnswer} name={"CorrectAnswer"} label={"Korrekte Antwort"} onChange={onTextChange} rows={3} />
       </div>
-      <SelectCategory
-          categories={categories}
-          onDropDownChange={onDropDownChange}
-          selectedCategory={selectedCategory}
-      />
+    <SelectCategory
+        onDropDownChange={onDropDownChange}
+        selectedCategory={selectedCategory}
+    />
       <ButtonQuiz onButtonClick={onClick} buttonLabel={"Speichern"}/>
   </div>
   );
@@ -77,5 +41,7 @@ const style = {
     display: "flex",
     alignContent: "space-between",
   },
+
+
 
 };
