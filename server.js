@@ -3,9 +3,11 @@ const mysql = require("mysql");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const cron = require("node-cron");
+require('dotenv').config();
+
 
 const app = express();
-const IP_ADDRESS = "localhost";
+const IP_ADDRESS = process.env.IP_ADDRESS;
 const port = 5000;
 
 // Middleware
@@ -14,11 +16,11 @@ app.use(cors());
 
 // Database configuration
 const connection = mysql.createConnection({
-  host: "isef01-quiz.cxcheuy8ztxa.eu-north-1.rds.amazonaws.com",
-  port: "3306",
-  user: "admin",
-  password: "#quizisef01",
-  database: "quizapp",
+  host: process.env.HOSTDB,
+  port: process.env.PORTDB,
+  user: process.env.USER,
+  password: process.env.PASSWORD,
+  database: process.env.DATABASE,
 });
 
 // Connect to the database
