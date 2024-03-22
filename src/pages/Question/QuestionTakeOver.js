@@ -7,6 +7,7 @@ import CheckIcon from '@mui/icons-material/Check';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import { CircularProgress } from "@mui/material";
 import Paper from '@mui/material/Paper';
 import {
   getQuestionsWithoutUser,
@@ -17,10 +18,11 @@ import GameButton from "../../atoms/GameButton.js";
 
 function QuestionTakeOver({user}) {
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false); //if true renders a loading animation while quiz is created in DB
 
   useEffect(() => {
    getData();
-  }, []);
+  }, [loading]);
 
   async function getData() {
     let datas = await getQuestionsWithoutUser( domain.domain + ":5000/getQuestionsWithoutUser");
@@ -28,13 +30,16 @@ function QuestionTakeOver({user}) {
   }
 
   async function handleTakeOver(userID, questionID) {
-    updateUserForQuestion(domain.domain + ":5000/getQuestionsWithoutUser", userID, questionID);
-    
+    setLoading(true);
+    updateUserForQuestion(domain.domain + ":5000/updateUserForQuestion", userID, questionID);
+    setLoading(false);
   }
+
 console.log(user);
   return (
     <div style={style.formContainer}>
       <p>Hier werden Fragen dargestellt, die ohne Besitzer sind. Fragen werden besitzerlos, falls der ursprüngliche Ersteller nicht innherhalb von drei Wochen auf Kommentare eingeht. Du kannst hier die Verantwortung für diese Fragen übernehemen!</p>
+      {loading ? <CircularProgress style={style.animation} /> : ""}
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>

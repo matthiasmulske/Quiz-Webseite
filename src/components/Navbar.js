@@ -19,17 +19,10 @@ import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 
-export default function Navbar({isLoggedIn, setIsLoggedIn, user}) {
+export default function Navbar({isLoggedIn, setIsLoggedIn, user, setUser}) {
   const [mailDialogOpen, setMailDialogOpen] = useState(false);
   const [logoutDialogOpen, setLogoutDialogOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
-
-  useEffect(() => {
-    const loggedInStatus = localStorage.getItem('isLoggedIn');
-    if (loggedInStatus === 'true') {
-      setIsLoggedIn(true);
-    }
-  }, []);
 
   const handleMailDialogOpen = () => {
     setMailDialogOpen(true);
@@ -49,6 +42,7 @@ export default function Navbar({isLoggedIn, setIsLoggedIn, user}) {
 
   const handleLogout = () => {
     setIsLoggedIn(false);
+    setUser(null);
     handleLogoutDialogClose();
   };
 
@@ -58,10 +52,6 @@ export default function Navbar({isLoggedIn, setIsLoggedIn, user}) {
 
   const handleCloseMenu = () => {
     setAnchorEl(null);
-  };
-
-  const handleLogin = () => {
-    setIsLoggedIn(true);
   };
 
   return (
