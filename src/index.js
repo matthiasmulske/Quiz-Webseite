@@ -6,6 +6,14 @@ import "bootstrap/js/dist/collapse.js";
 import "material-icons/iconfont/material-icons.css";
 import { BrowserRouter } from "react-router-dom";
 import { GoogleOAuthProvider } from "@react-oauth/google";
+import favicon from './fa';
+
+// Append favicon to document head
+const link = document.createElement('link');
+link.rel = 'icon';
+link.type = 'image/x-icon';
+link.href = favicon;
+document.head.appendChild(link);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
