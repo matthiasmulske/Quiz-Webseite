@@ -1,8 +1,10 @@
 import * as React from "react";
-import { FormControl, InputLabel } from "@mui/material";
 import QuizTextField from "../atoms/QuizTextField";
-import DropDown from "../atoms/DropDown";
 import ButtonQuiz from "../atoms/ButtonQuiz";
+import SelectCategory from "../atoms/SelectCategory";
+
+
+function FormAddQuestion( { onClick, categories, selectedCategory, onDropDownChange, onTextChange }) {
 import {useState} from "react";
 import questions from "../data/questions.json"
 import {
@@ -38,32 +40,31 @@ function FormAddQuestion({ buttonLabel, children }) {
 
 
   return (
-    <div style={style.container}>
-      <QuizTextField name={'question'} value={data.question} label={"Frage"} onChange={handleChange} rows={5} />
+  <div style={style.container}>
+
+      <QuizTextField name={'question'} label={"Frage"} onChange={onTextChange} rows={5} />
       <div style={style.gridContainer}>
-          <QuizTextField name={"answerA"} label={"Antwort A"} onChange={handleChange} rows={3}>{children}</QuizTextField>
-        <QuizTextField name={"answerB"} label={"Antwort B"} onChange={handleChange} rows={3} />
-        <QuizTextField name={"answerC"} label={"Antwort C"} onChange={handleChange} rows={3} />
-        <QuizTextField name={"answerD"} label={"Antwort D"} onChange={handleChange} rows={3} />
+        <QuizTextField name={"answerA"} label={"Antwort A"} onChange={onTextChange} rows={3} />
+        <QuizTextField name={"answerB"} label={"Antwort B"} onChange={onTextChange} rows={3} />
+        <QuizTextField name={"answerC"} label={"Antwort C"} onChange={onTextChange} rows={3} />
+        <QuizTextField name={"correctAnswer"} label={"Korrekte Antwort"} onChange={onTextChange} rows={3} />
       </div>
-      <FormControl style={style.gridContainer}>
-        <div>
-          <InputLabel id="demo-simple-select-label">Kategorie</InputLabel>
-          <DropDown categories={categories} />
-        </div>
-        <QuizTextField label={"neue Kategorie eingeben"} />
-      </FormControl>
-      <ButtonQuiz onButtonClick={handleSubmit} buttonLabel={buttonLabel}/>
-    </div>
+      <SelectCategory
+          categories={categories}
+          onDropDownChange={onDropDownChange}
+          selectedCategory={selectedCategory}
+      />
+      <ButtonQuiz onButtonClick={onClick} buttonLabel={"Speichern"}/>
+  </div>
   );
 }
 
 export default FormAddQuestion;
 
 const style = {
-  container: {
-    margin: "10%",
-  },
+    container: {
+        margin: "10%"
+    },
 
   gridContainer: {
     display: "grid",
@@ -76,6 +77,5 @@ const style = {
     display: "flex",
     alignContent: "space-between",
   },
-
 
 };

@@ -1,5 +1,5 @@
-import EditQuestion from "./pages/Question/EditQuestion";
-import AddQuestion from "./pages/Question/AddQuestion";
+import EditQuestion from "./Pages/Question/EditQuestion";
+import AddQuestion from "./Pages/Question/AddQuestion";
 import { Routes, Route,} from "react-router-dom";
 import PrivacyPolicyPage from "./pages/Startseite/PrivacyPolicyPage";
 import Agbs from "./pages/Startseite/Agbs";
