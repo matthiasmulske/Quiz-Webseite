@@ -99,7 +99,7 @@ const createQuizInDB = async (
 };
 
 const fetchGameInfo = async (accessToken) => {
-  return await fetchData(`${domain.domain}:5000/gameData`, { accessToken });
+  return await fetchData(`${domain.domain}/gameData`, { accessToken });
 };
 
 const setNewRound = async (route, quizID, questionNumber, q1, q2, q3) => {
