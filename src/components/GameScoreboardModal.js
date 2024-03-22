@@ -42,7 +42,7 @@ const GameScoreboardModal = ({
     setOpenModal(false); // Update openModal in the parent component
   };
 
-  console.log(player);
+  console.log(modalData);
   return (
     <Modal show={openModal} onHide={handleCloseModal}>
       <Modal.Header closeButton>
@@ -90,15 +90,10 @@ const GameScoreboardModal = ({
 
         <div className="row justify-content-end">
           <div className="col text-end">
-            <GameButton
-              label={<ErrorIcon />}
-              color="error"
-              variante="text"
-              onClick={handleOpenReportModal}
-            />
             <GameQuestionReportModal
               question={modalData?.QuestionText}
               questionID={modalData?.QuestionID}
+              trustIndex={modalData?.TrustIndex}
               openModal={openReportModal}
               setOpenModal={setOpenReportModal}
             />
@@ -106,7 +101,15 @@ const GameScoreboardModal = ({
         </div>
       </Modal.Body>
 
-      <Modal.Footer></Modal.Footer>
+      <Modal.Footer>
+            <GameButton
+              label={<ErrorIcon />}
+              color="error"
+              variante="text"
+              onClick={handleOpenReportModal}
+            />
+
+      </Modal.Footer>
     </Modal>
   );
 };

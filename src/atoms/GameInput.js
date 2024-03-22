@@ -18,6 +18,7 @@ function GameInput({
     <TextField
       variant="outlined"
       required={required}
+      error={!value}
       label={label}
       type={isNumeric ? "number" : type}
       inputProps={

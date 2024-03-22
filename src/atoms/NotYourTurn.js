@@ -14,11 +14,10 @@ function NotYourTurn({ timeLeft }) {
 
       <h1 className="text-warning" style={style.header}>
         {" "}
-        Dein Mitspieler ist am Zug!
+        Dein Mitspieler ist am Zug! 
       </h1>
       <p style={style.paragraph}>
-        Du gewinnst, falls dein Mitspieler seine Runde nicht innerhalb von{" "}
-        {timeLeft} abschließt!
+        Aktualisiere die Seite (F5), falls dein Mitspieler fertig ist!
       </p>
     </div>
   );

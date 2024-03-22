@@ -29,6 +29,18 @@ const postAddQuestion = async (route,  questionText, answerA, answerB, answerC, 
   return await fetchData(route, {  questionText, answerA, answerB, answerC, answerD, category });
 };
 
+const resetTrustIndex = async (route,  questionID) => {
+  return await fetchData(route, {  questionID });
+};
+
+const updateUserForQuestion = async (route,  userID, questionID) => {
+  return await fetchData(route, {  userID, questionID });
+};
+
+const incrementTrustIndex = async (route,  questionID) => {
+  return await fetchData(route, {  questionID });
+};
+
 const fetchCommentCategories = async (route, accessToken) => {
   return await fetchData(route, { accessToken });
 };
@@ -90,8 +102,12 @@ const setNewRound = async (route, quizID, questionNumber, q1, q2, q3) => {
   return await fetchData(route, { quizID, questionNumber, q1, q2, q3 });
 };
 
-const postComment = async (route, questionID, text, categoryID, userID) => {
-  return await fetchData(route, { questionID, text, categoryID, userID });
+const postComment = async (route, questionID, text, categoryID) => {
+  return await fetchData(route, { questionID, text, categoryID});
+};
+
+const getQuestionsWithoutUser = async (route) => {
+  return await fetchData(route);
 };
 
 export {
@@ -104,4 +120,8 @@ export {
   setNewRound,
   postComment,
   postAddQuestion,
+  resetTrustIndex,
+  incrementTrustIndex,
+  getQuestionsWithoutUser,
+  updateUserForQuestion,
 };

@@ -20,7 +20,7 @@ function GameSetup() {
   const [loading, setLoading] = useState(false); //if true renders a loading animation while quiz is created in DB
   const [time, setTime] = useState(20); // Timelimit to answer a question
   const [numberOfRounds, setNumberOfRounds] = useState(5); // Amount of rounds of a single game. One Round contains three questions
-  const [category, setCategory] = useState(categories[0]); //Category the player has choosen in the Dropdown
+  const [category, setCategory] = useState(); //Category the player has choosen in the Dropdown
   const [linkOne, setLinkOne] = useState(); //generated Link for player1 to join a quiz
   const [linkTwo, setLinkTwo] = useState(); //generated Link for player2 to join a quiz
 
@@ -148,10 +148,11 @@ function GameSetup() {
         />
 
         <GameCategoryDropdown
-          label="Kategorie*"
+          label="Kategorie"
           options={categories}
           selectedOption={category}
           onChange={handleCategoryChange}
+          isRequired={true}
         />
 
         <GameInput

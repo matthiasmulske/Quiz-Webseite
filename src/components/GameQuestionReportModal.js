@@ -7,15 +7,16 @@ import CommentIcon from "@mui/icons-material/Comment";
 import domain from "./../assets/domain.js";
 import { CircularProgress } from "@mui/material";
 import DoneAllIcon from "@mui/icons-material/DoneAll";
-import { fetchCommentCategories, postComment } from "../api.js";
+import { fetchCommentCategories, postComment, resetTrustIndex } from "../api.js";
 
 const GameQuestionReportModal = ({
   question,
   questionID,
   openModal,
   setOpenModal,
+  trustIndex
 }) => {
-  const [category, setCategory] = useState("Frage falsch"); //stores choosen CommentCategory
+  const [category, setCategory] = useState(); //stores choosen CommentCategory
   const [categories, setCategories] = useState([]); //Stores CommentCategories for Dropdown-Input
   const [commentText, setCommentText] = useState(""); //stores comment of the user
   const [sent, setSent] = useState(false);
@@ -49,6 +50,7 @@ const GameQuestionReportModal = ({
   }
 
   const handleCloseModal = () => {
+    setSent(false);
     setOpenModal(false); // Update openModal in the parent component so it closes correctly
   };
   const handleCategoryChange = (event) => {
@@ -64,8 +66,10 @@ const GameQuestionReportModal = ({
       questionID,
       commentText,
       category,
-      1,
     );
+    if (category === 1 || 2){
+      await resetTrustIndex(domain.domain + ":5000/resetTrustIndex", questionID);
+    }
     setLoading(false);
     setSent(true);
   }
@@ -81,13 +85,14 @@ const GameQuestionReportModal = ({
       </Modal.Header>
       <Modal.Body>
         <div className="text-center container justify-content-center align-items-center mb-3">
-          <div className="mb-3">Question ID: {questionID}</div>
+          <div className="mb-3">Vertrauensindex: {trustIndex}</div>
           <div className="mb-3">{question}</div>
           <GameCategoryDropdown
-            label="Kategorie*"
+            label="Kategorie"
             options={categories}
             selectedOption={category}
             onChange={handleCategoryChange}
+            isRequired={true}
           />
           <GameInput
             value={commentText}
