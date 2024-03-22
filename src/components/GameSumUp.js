@@ -51,10 +51,6 @@ export default function GameSumUp({
     decideWinner(isSinglePlayer, player, player1Score, player2Score);
   }, []);
 
-  useEffect(() => {
-    console.log(won, isDraw);
-  }, [won]);
-
   return (
     <div style={style.formContainer}>
       <Card sx={{ maxWidth: 600 }}>

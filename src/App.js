@@ -10,7 +10,6 @@ import GameSetup from "./pages/Game/GameSetup";
 import Game from "./pages/Game/Game";
 import Navbar from "./components/Navbar";
 import QuestionTakeOver from "./pages/Question/QuestionTakeOver";
-import GameButton from "./atoms/GameButton";
 import React, { useState, useEffect } from 'react';
 
 function App() {

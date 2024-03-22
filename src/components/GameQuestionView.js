@@ -46,12 +46,10 @@ function GameQuestionView({
       setTimeLeft(0);
       for (let i = 0; i < answers.length; i++) {
         if (answer === answers[i]) {
-          console.log("Clicked on Answer " + i);
           setAnswerGiven(i + 1);
         }
       }
     } else {
-      console.log("timer run out");
       if (!answerGiven) {
         setAnswerGiven(5);
       }
