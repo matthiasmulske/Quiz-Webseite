@@ -25,7 +25,7 @@ function GameChooseCategory({
   const fetchCategories = async () => {
     try {
       let options = await fetchQuestionCategories(
-        domain.domain + ":5000/categories",
+        domain.domain + "/categoriesToPlay",
         "",
       );
       let optionsArray = options.map((category) => ({
@@ -59,7 +59,7 @@ function GameChooseCategory({
   async function handleButtonNewRound(currentQuizID, currentQuestion) {
     setLoading(true);
     const questions = await getThreeQuestionsByCat(
-      domain.domain + ":5000/getThreeQuestionsByCat",
+      domain.domain + "/getThreeQuestionsByCat",
       category,
     );
     const questionIds = [
@@ -68,7 +68,7 @@ function GameChooseCategory({
       questions[2].QuestionID,
     ];
     await setNewRound(
-      domain.domain + ":5000/createNewRound",
+      domain.domain + "/createNewRound",
       currentQuizID,
       currentQuestion,
       questionIds[0],

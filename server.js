@@ -3,9 +3,10 @@ const mysql = require("mysql");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const cron = require("node-cron");
+require('dotenv').config();
 
 const app = express();
-const IP_ADDRESS = "localhost";
+const IP_ADDRESS = process.env.IP_ADDRESS;
 const port = 5000;
 
 // Middleware
@@ -14,11 +15,11 @@ app.use(cors());
 
 // Database configuration
 const connection = mysql.createConnection({
-  host: "isef01-quiz.cxcheuy8ztxa.eu-north-1.rds.amazonaws.com",
-  port: "3306",
-  user: "admin",
-  password: "#quizisef01",
-  database: "quizapp",
+  host: process.env.HOSTDB,
+  port: process.env.PORTDB,
+  user: process.env.USER,
+  password: process.env.PASSWORD,
+  database: process.env.DATABASE,
 });
 
 // Connect to the database
@@ -41,7 +42,6 @@ app.post("/getThreeQuestionsByCat", getThreeQuestionsByCategory);
 app.post("/createQuizInDB2", createQuizInDB);
 app.post("/createNewRound", createNewRound);
 app.post("/postComment", postComment);
-app.post("/addQuestion", addQuestion);
 app.post("/getNumberofMessages", getNumberofMessages);
 app.post("/resetTrustIndex", resetTrustIndex);
 app.post("/incrementTrustIndex", incrementTrustIndex);
@@ -89,12 +89,6 @@ function getGameData(req, res) {
                  LEFT JOIN QuestionCategory ON Question.CategoryID = QuestionCategory.QuestionCategoryID
                  WHERE Quiz.AccessTokenOne = ? OR Quiz.AccessTokenTwo = ?`;
   connection.query(query, [accessToken, accessToken], handleQueryResponse(res));
-}
-
-function addQuestion(req, res) {
-  const { questionText, answerA, answerB, answerC, answerD, category } = req.body;
-  const query = `INSERT INTO Question (QuestionText, Answer1, Answer2, Answer3, CorrectAnswer, CategoryID) VALUES (?, ?, ?, ?, ?, ?)`;
-  connection.query(query, [questionText, answerA, , answerB, answerC, answerD, category], handleQueryResponse(res));
 }
 
 function getQuestionsWithoutUser(req, res) {
@@ -385,7 +379,7 @@ cron.schedule("0 0 * * *", () => {
 });
 
 // Start the server
-const PORT = process.env.PORT || port;
-app.listen(PORT, IP_ADDRESS, () => {
-  console.log(`Server listening on ${IP_ADDRESS}:${PORT}`);
+const PORT = process.env.PORTS || port;
+app.listen(PORT, () => {
+  console.log(`Server listening on ${PORT}`);
 });

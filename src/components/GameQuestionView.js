@@ -39,7 +39,7 @@ function GameQuestionView({
   };
 
   const handleAnswerClick = (answer) => {
-    incrementTrustIndex( domain.domain + ":5000/incrementTrustIndex",
+    incrementTrustIndex( domain.domain + "/incrementTrustIndex",
     questionID);
     if (!answerGiven && timeLeft > 0) {
       setSelectedAnswer(answer);
