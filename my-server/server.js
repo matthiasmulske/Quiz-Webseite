@@ -47,17 +47,23 @@ function getCategories(req, res) {
 
 function getData(req, res) {
     let selected_userId = req.headers.userid
-    let query = `Select * From Question q
-         JOIN QuestionCategory c on q.CategoryID = c.QuestionCategoryID
-         Where UserID = '${selected_userId}'`
+    let query =
+        `SELECT * FROM Comment c 
+    INNER JOIN Question q ON c.QuestionID = q.QuestionID 
+         WHERE q.UserID = 3;`
     connection.query(query, handleQueryResponse(res));
 }
 
 
 function addQuestion(req, res) {
-    const { question, answerA, answerB, answerC, correctAnswer, selectedCategory } = req.body.data;
-    const query = `INSERT INTO Question(QuestionText, Answer1, Answer2, Answer3, CorrectAnswer, CategoryID) VALUES ('${question}', '${answerA}', '${answerB}', '${answerC}', '${correctAnswer}', ${selectedCategory});`;
-    console.log(query)
+    const answer1 = req.body.data["Answer1"]
+    const answer2 = req.body.data["Answer2"]
+    const answer3 = req.body.data["Answer3"]
+    const correctAnswer = req.body.data["CorrectAnswer"]
+    const questionText = req.body.data["QuestionText"]
+    const selectedCategory = req.body.data["Category"]
+
+    const query = `INSERT INTO Question(QuestionText, Answer1, Answer2, Answer3, CorrectAnswer, CategoryID) VALUES ('${questionText}', '${answer1}', '${answer2}', '${answer3}', '${correctAnswer}', ${selectedCategory});`;
     //connection.query(query, handleQueryResponse(res));
 }
 

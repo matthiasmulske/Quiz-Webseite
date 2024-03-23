@@ -1,15 +1,17 @@
 import * as React from "react";
 import QuestionTable from "../../atoms/QuestionTable"
 
-function EditQuestion() {
-
+function EditQuestion({ userID }) {
+    console.log("userid:" + userID);
     return (
         <>
             <div style={style.container}>
-                <QuestionTable/>
+                <QuestionTable
+                    userId={userID} // Corrected prop name from 'userId' to 'userID'
+                />
             </div>
         </>
-    )
+    );
 }
 
 export default EditQuestion;

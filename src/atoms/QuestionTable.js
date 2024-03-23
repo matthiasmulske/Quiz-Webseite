@@ -8,22 +8,22 @@ const columns = [
     { field: 'Answer2', headerName: 'Antwort B', editable: true, },
     { field: 'Answer3', headerName: 'Antwort C', editable: true },
     { field: 'CorrectAnswer', headerName: 'Antwort D', editable: true },
-    { field: 'Name', headerName: 'Kategorie', editable: true },
-    { field: 'Comments', headerName: 'Kommentare', editable: true },
+    { field: 'CategoryID', headerName: 'Kategorie', editable: true },
+    { field: 'Text', headerName: 'Kommentare', editable: true },
 ];
 
 const domain = "http://localhost:5000";
 const routeGetData = domain + "/data";
 const routeUpdateQuestion = domain + "/updateQuestion"
 
-function QuestionTable() {
+function QuestionTable({userId}) {
     let [tableData, setTableData] = useState(null);
 
     useEffect(() => {
         const fetchData = async () => {
             tableData = await fetch(routeGetData, {
                 method: "GET",
-                headers: {"Content-Type": "application/json", "userid": "3"}
+                headers: {"Content-Type": "application/json", "userid": 3}
             })
                 .then(r => r.json())
                 .catch(error => { console.error('Error fetching categories:', error) });
@@ -34,6 +34,7 @@ function QuestionTable() {
                 setTableData(tableData);
                 return tableData
             })
+            .then(() => console.log(tableData))
     }, [])
 
     async function processRowUpdate(newRow) {

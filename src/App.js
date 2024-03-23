@@ -23,7 +23,7 @@ function App() {
       <Routes>
         <Route path="/EditQuestion" element={<EditQuestion />} />
         <Route path="/AddQuestion" element={<AddQuestion/>} />
-        <Route path="/HomepageLogin" element={<HomepageLogin />} />
+        <Route path="/HomepageLogin" element={<HomepageLogin  />} />
         <Route path="/" element={<Homepage/> } />
         <Route path="/Login" element={<Login />} />
         <Route path="/LoginMaske" element={<LoginMaske />} />
@@ -33,7 +33,7 @@ function App() {
         <Route path="/Agbs" element={<Agbs />} />
         <Route path="/Legal" element={<Legal />} />
         <Route path="/Game" element={<Game />} />
-        <Route path="/EditQuestion" element={<EditQuestion />} />
+        <Route path="/EditQuestion" element={<EditQuestion userID={3}/>} />
       </Routes>
     </div>
   );
