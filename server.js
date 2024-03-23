@@ -3,6 +3,7 @@ const mysql = require("mysql");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const cron = require("node-cron");
+const path = require('path');
 require('dotenv').config();
 
 const app = express();
@@ -32,25 +33,25 @@ connection.connect((err) => {
 });
 
 // Routes
-app.get("/gameData", getGameData);
-app.get("/categoriesToPlay", getCategoriesToPlay);
-app.get("/commentCategories", getCommentCategories);
-app.get("/updatePlayer1Answer", updatePlayer1Answer);
-app.get("/updatePlayer2Answer", updatePlayer2Answer);
-app.get("/accessToken", getAccessTokens);
-app.get("/getThreeQuestionsByCat", getThreeQuestionsByCategory);
-app.get("/createQuizInDB2", createQuizInDB);
-app.get("/createNewRound", createNewRound);
-app.get("/postComment", postComment);
-app.get("/getNumberofMessages", getNumberofMessages);
-app.get("/resetTrustIndex", resetTrustIndex);
-app.get("/incrementTrustIndex", incrementTrustIndex);
-app.get("/getQuestionsWithoutUser", getQuestionsWithoutUser);
-app.get("/updateUserForQuestion", updateUserForQuestion);
+app.post("/gameData", getGameData);
+app.post("/categoriesToPlay", getCategoriesToPlay);
+app.post("/commentCategories", getCommentCategories);
+app.post("/updatePlayer1Answer", updatePlayer1Answer);
+app.post("/updatePlayer2Answer", updatePlayer2Answer);
+app.post("/accessToken", getAccessTokens);
+app.post("/getThreeQuestionsByCat", getThreeQuestionsByCategory);
+app.post("/createQuizInDB2", createQuizInDB);
+app.post("/createNewRound", createNewRound);
+app.post("/postComment", postComment);
+app.post("/getNumberofMessages", getNumberofMessages);
+app.post("/resetTrustIndex", resetTrustIndex);
+app.post("/incrementTrustIndex", incrementTrustIndex);
+app.post("/getQuestionsWithoutUser", getQuestionsWithoutUser);
+app.post("/updateUserForQuestion", updateUserForQuestion);
 app.get("/categories", getCategories);
-app.get("/question", addQuestion);
+app.post("/question", addQuestion);
 app.get("/data", getData);
-app.get("/updateQuestion", updateQuestion)
+app.put("/updateQuestion", updateQuestion)
 
 
 // Route Handlers
@@ -376,6 +377,14 @@ function handleRollbackAndError(res, connection, errorMessage, err) {
 //clean up Code executed once a day by server at midnight
 cron.schedule("0 0 * * *", () => {
   getQuestionsWithoutReaction();
+});
+
+// Serve static files from the 'build' directory
+app.use(express.static(path.join(__dirname, 'build')));
+
+// Always return the main index.html, so react-router render the route in the client
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
 // Start the server
