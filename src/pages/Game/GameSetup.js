@@ -117,9 +117,9 @@ function GameSetup() {
       questionIds[2],
     );
     //generate Links for quiz
-    setLinkOne("http://localhost:3000/Game?accesstoken=" + accessToken1);
+    setLinkOne("https://isef011.onrender.com/Game?accesstoken=" + accessToken1);
     if (!isSinglePlayer) {
-      setLinkTwo("http://localhost:3000/Game?accesstoken=" + accessToken2);
+      setLinkTwo("https://isef011.onrender.com/Game?accesstoken=" + accessToken2);
     }
     //EndLoading Animation
     setLoading(false);

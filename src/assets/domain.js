@@ -1,3 +1,3 @@
-const ip = "localhost";
-const domain = "http://" + ip +":5000";
+const ip = "isef01-api.onrender.com";
+const domain = "https://" + ip;
 export default { domain, ip };

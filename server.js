@@ -32,25 +32,25 @@ connection.connect((err) => {
 });
 
 // Routes
-app.post("/gameData", getGameData);
-app.post("/categoriesToPlay", getCategoriesToPlay);
-app.post("/commentCategories", getCommentCategories);
-app.post("/updatePlayer1Answer", updatePlayer1Answer);
-app.post("/updatePlayer2Answer", updatePlayer2Answer);
-app.post("/accessToken", getAccessTokens);
-app.post("/getThreeQuestionsByCat", getThreeQuestionsByCategory);
-app.post("/createQuizInDB2", createQuizInDB);
-app.post("/createNewRound", createNewRound);
-app.post("/postComment", postComment);
-app.post("/getNumberofMessages", getNumberofMessages);
-app.post("/resetTrustIndex", resetTrustIndex);
-app.post("/incrementTrustIndex", incrementTrustIndex);
-app.post("/getQuestionsWithoutUser", getQuestionsWithoutUser);
-app.post("/updateUserForQuestion", updateUserForQuestion);
+app.get("/gameData", getGameData);
+app.get("/categoriesToPlay", getCategoriesToPlay);
+app.get("/commentCategories", getCommentCategories);
+app.get("/updatePlayer1Answer", updatePlayer1Answer);
+app.get("/updatePlayer2Answer", updatePlayer2Answer);
+app.get("/accessToken", getAccessTokens);
+app.get("/getThreeQuestionsByCat", getThreeQuestionsByCategory);
+app.get("/createQuizInDB2", createQuizInDB);
+app.get("/createNewRound", createNewRound);
+app.get("/postComment", postComment);
+app.get("/getNumberofMessages", getNumberofMessages);
+app.get("/resetTrustIndex", resetTrustIndex);
+app.get("/incrementTrustIndex", incrementTrustIndex);
+app.get("/getQuestionsWithoutUser", getQuestionsWithoutUser);
+app.get("/updateUserForQuestion", updateUserForQuestion);
 app.get("/categories", getCategories);
-app.post("/question", addQuestion);
+app.get("/question", addQuestion);
 app.get("/data", getData);
-app.put("/updateQuestion", updateQuestion)
+app.get("/updateQuestion", updateQuestion)
 
 
 // Route Handlers
