@@ -25,7 +25,7 @@ function GameChooseCategory({
   const fetchCategories = async () => {
     try {
       let options = await fetchQuestionCategories(
-        domain.domain + "/categories",
+        domain.domain + "/categoriesToPlay",
         "",
       );
       let optionsArray = options.map((category) => ({
