@@ -33,6 +33,7 @@ connection.connect((err) => {
 app.get("/categories", getCategories);
 app.post("/question", addQuestion);
 app.get("/data", getData);
+app.get("/getComments", getComments);
 app.put("/updateQuestion", updateQuestion)
 
 function updateQuestion(req, res) {
@@ -50,7 +51,15 @@ function getData(req, res) {
     let query =
         `SELECT * FROM Comment c 
     INNER JOIN Question q ON c.QuestionID = q.QuestionID 
-         WHERE q.UserID = 3;`
+         WHERE q.UserID = 3 
+         GROUP BY q.QuestionID, q.QuestionText;`
+    connection.query(query, handleQueryResponse(res));
+}
+
+function getComments(req, res) {
+    let questionID = (req.headers.questionid)
+    let query =
+        `SELECT Text FROM Comment WHERE QuestionID = '${questionID}'`;
     connection.query(query, handleQueryResponse(res));
 }
 
