@@ -19,10 +19,11 @@ const columns = [
     { field: 'Text',
         headerName: 'Kommentare',
         editable: false,
+        valueGetter: (value) => {},
         renderCell: () => (
             <strong>
                 <Button
-                    onClick={() => console.log("implement me")}
+                    onClick={() => alert("implement me")}
                 >Zeige Kommentare</Button>
             </strong>
         ),
@@ -74,6 +75,12 @@ function QuestionTable({userId}) {
         return row.QuestionID;
     }
 
+    function showComments(commentsText) {
+        return (
+            alert(commentsText)
+        )
+    }
+
     function getComments(row) {
         let commentsText = ""
         let questionID = (row.row.QuestionID)
@@ -93,7 +100,7 @@ function QuestionTable({userId}) {
             })
             .then(() => console.log(comments))
             .then(() => comments.map(item => commentsText += " " + (item.Text)))
-            .then(() => alert(commentsText))
+            .then(() => showComments(commentsText))
     }
 
 
