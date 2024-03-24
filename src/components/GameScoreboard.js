@@ -31,7 +31,7 @@ function GameScoreboard({
   const questionsChunks = chunkArray(quizdata, 3);
   
   return (
-    <div className="text-center m-3 p-3">
+    <div className="text-center p-1 m-1 ">
       {isSinglePlayer ? (
         <h2>Score: {player1Score}</h2>
       ) : (
@@ -40,14 +40,12 @@ function GameScoreboard({
           {player1Score} : {player2Score}{" "}
         </h2>
       )}
-      <div>
+      <div className="d-flex flex-column overflow-x-scroll ">
         {questionsChunks.map((chunk, index) => (
           <div
             key={index}
             style={
-              isSinglePlayer
-                ? style.GridContainerSinglePlayer
-                : style.GridContainer
+              style.Container
             }
           >
             <div style={style.ChunkContainer}>
@@ -70,7 +68,7 @@ function GameScoreboard({
             </div>
             {!isSinglePlayer ? (
               <div>
-                <div style={style.ChunkContainer}>
+                <div style={style.ChunkContainer} >
                   {chunk.map((question) => (
                     <div key={question.question_number}>
                       <GameButton
@@ -110,24 +108,17 @@ function GameScoreboard({
 export default GameScoreboard;
 
 const style = {
-  GridContainer: {
-    display: "grid",
-    gridAutoFlow: "row",
-    gridTemplateColumns: "auto auto",
-    gridColumnGap: "10%",
-  },
-
-  GridContainerSinglePlayer: {
-    display: "grid",
-    gridAutoFlow: "row",
-    gridTemplateColumns: "auto",
-    gridColumnGap: "10%",
+  Container: {
+    display: "flex",
+    justifyContent: 'center',
+    gap: "1rem"
+    
   },
 
   ChunkContainer: {
-    display: "grid",
-    gridAutoFlow: "column",
-    gridTemplateColumns: "auto, auto, auto",
-    margin: "15px",
+    display: "flex",
+    alignItems: 'center',
+    gap: "0.2rem",
+    margin: "0.2rem"
   },
 };

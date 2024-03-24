@@ -18,12 +18,15 @@ function GameButton({ onClick, label, color, size, icon, variante, disabled }) {
       sx={{
         fontSize: "0.8rem",
         whiteSpace: 'normal',
-        overflowWrap: 'break-word',
-        wordWrap: 'break-word',
+        overflowWrap: 'anywhere',
+        wordWrap: 'anywhere',
         hyphens: 'auto',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
+        
       }}
     >
-       {label}
+        {label}
     </Button>
   );
 }
