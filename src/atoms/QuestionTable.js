@@ -1,12 +1,12 @@
 import * as React from 'react';
+import {useEffect, useState} from 'react';
 import {DataGrid} from "@mui/x-data-grid";
-import {useEffect, useState} from "react";
 import Button from "@mui/material/Button";
 
 const domain = "http://localhost:5000";
-const routeGetData = domain + "/data";
-const routeUpdateQuestion = domain + "/updateQuestion"
-const routeGetComments = domain + "/getComments"
+const getQuestionsRoute = domain + "/getQuestions";
+const updateQuestionRoute = domain + "/updateQuestion"
+const getCommentsRoute = domain + "/getComments"
 
 const columns = [
     { field: 'QuestionID', headerName: 'Frage', editable: true, },
@@ -30,41 +30,55 @@ const columns = [
     },
 ];
 
-
 function QuestionTable({userId}) {
     let [tableData, setTableData] = useState(null);
+    let [comments, setComments] = useState()
 
-    useEffect(() => {
-        const fetchData = async () => {
-            tableData = await fetch(routeGetData, {
+    async function fetchMyData(route, id) {
+        try {
+            const response = await fetch(route, {
                 method: "GET",
-                headers: {"Content-Type": "application/json", "userid": 3}
-            })
-                .then(r => r.json())
-                .catch(error => { console.error('Error fetching categories:', error) });
+                headers: { "Content-Type": "application/json", "id": id }
+            });
+
+            if (!response.ok) {
+                throw new Error(`Failed to fetch data: ${response.statusText}`);
+            }
+
+            return await response.json();
+        } catch (error) {
+            console.error('Error fetching data:', error);
+            return null;
         }
-
-        fetchData()
-            .then(r => {
-                setTableData(tableData);
-                return tableData
-            })
-            .then(() => console.log(tableData))
-    }, [])
-
-    async function processRowUpdate(newRow) {
-        await updateQuestionDatabase(newRow)
-        return newRow
     }
 
-    async function updateQuestionDatabase(newRow) {
+    useEffect(() => {
+        fetchMyData(getQuestionsRoute, 3)
+            .then(r => setTableData(r))
+    }, []);
+
+    function getComments(row) {
+        let questionID = row.row.QuestionID
+
+        fetchMyData(getCommentsRoute, questionID)
+            .then((r) => setComments(r))
+            .then(showComments)
+    }
+
+    function showComments() {
+        console.log(comments)
+    }
+
+
+    async function processRowUpdate(newRow) {
         const requestOptions = {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ rowData: newRow })
         };
-        fetch(routeUpdateQuestion, requestOptions)
+        fetch(updateQuestionRoute, requestOptions)
             .then(response => response.json());
+        return newRow
     }
 
     const handleProcessRowUpdateError = React.useCallback((error) => {
@@ -74,35 +88,6 @@ function QuestionTable({userId}) {
     function getRowId(row) {
         return row.QuestionID;
     }
-
-    function showComments(commentsText) {
-        return (
-            alert(commentsText)
-        )
-    }
-
-    function getComments(row) {
-        let commentsText = ""
-        let questionID = (row.row.QuestionID)
-        let comments;
-        const fetchData = async () => {
-            comments = await fetch(routeGetComments, {
-                method: "GET",
-                headers: {"Content-Type": "application/json", "questionid": questionID}
-            })
-                .then(r => r.json())
-                .catch(error => { console.error('Error fetching categories:', error) });
-        }
-
-        fetchData()
-            .then(r => {
-                return comments
-            })
-            .then(() => console.log(comments))
-            .then(() => comments.map(item => commentsText += " " + (item.Text)))
-            .then(() => showComments(commentsText))
-    }
-
 
     return (
         <>

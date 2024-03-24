@@ -32,7 +32,7 @@ connection.connect((err) => {
 // Routes
 app.get("/categories", getCategories);
 app.post("/question", addQuestion);
-app.get("/data", getData);
+app.get("/getQuestions", getQuestions);
 app.get("/getComments", getComments);
 app.put("/updateQuestion", updateQuestion)
 
@@ -46,8 +46,8 @@ function getCategories(req, res) {
     connection.query('SELECT * FROM QuestionCategory', handleQueryResponse(res));
 }
 
-function getData(req, res) {
-    let selected_userId = req.headers.userid
+function getQuestions(req, res) {
+    let selected_userId = req.headers.id
     let query =
         `SELECT * FROM Comment c 
     INNER JOIN Question q ON c.QuestionID = q.QuestionID 
@@ -57,9 +57,9 @@ function getData(req, res) {
 }
 
 function getComments(req, res) {
-    let questionID = (req.headers.questionid)
+    let questionID = (req.headers.id)
     let query =
-        `SELECT Text FROM Comment WHERE QuestionID = '${questionID}'`;
+        `SELECT * FROM Comment WHERE QuestionID = '${questionID}'`;
     connection.query(query, handleQueryResponse(res));
 }
 
