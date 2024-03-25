@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {useEffect, useState} from 'react';
 import {DataGrid} from "@mui/x-data-grid";
-import {Checkbox, FormControlLabel} from "@mui/material";
+import {Alert, Checkbox, FormControlLabel} from "@mui/material";
 
 const domain = "http://localhost:5000";
 const getQuestionsRoute = domain + "/getQuestions";
@@ -11,6 +11,9 @@ const getCommentsRoute = domain + "/getComments"
 function QuestionTable({userId}) {
     let [tableData, setTableData] = useState(null);
     let [comments, setComments] = useState()
+    const [showMessage, setShowMessage] = useState(true)
+    const [submitMessage, setSubmitMessage] = useState("Test")
+
 
     async function fetchMyData(route, id) {
         try {
@@ -32,13 +35,12 @@ function QuestionTable({userId}) {
 
     useEffect(() => {
         fetchMyData(getQuestionsRoute, 3)
-            .then(r => {
-                setTableData(r)
-                getComments()
-                return tableData
-            })
-            .then((tableData) => getComments(tableData))
+            .then(r => { setTableData(r) } )
+        fetchMyData(getCommentsRoute, 0)
+            .then((r) => setComments(r))
     }, []);
+
+    getComments();
 
     const columns = [
         { field: 'QuestionID', headerName: 'Frage', editable: true, },
@@ -48,16 +50,46 @@ function QuestionTable({userId}) {
         { field: 'Answer3', headerName: 'Antwort C', editable: true },
         { field: 'CorrectAnswer', headerName: 'Antwort D', editable: true },
         { field: 'CategoryID', headerName: 'Kategorie', editable: true },
-        { field: 'Text',
+        { field: 'Comments',
             headerName: 'Kommentare',
             editable: false,
-            renderCell: () => (
-                <FormControlLabel control={<Checkbox/>} label={"comments"}/>
+            renderCell: (params) => (
+                <div>
+                    {params.row.Comments && params.row.Comments.map((comment, index) => (
+                        <FormControlLabel
+                            key={index}
+                            control={<Checkbox/>}
+                            label={comment}
+                        />
+                    ))}
+                </div>
             ),
         },
     ];
 
+    function deleteComment({commentID}) {
+        setShowMessage(true)
+        setSubmitMessage("Kommentare wurde entfernt")
+    }
+
     function getComments() {
+        const questions = tableData
+
+        if (Array.isArray(comments) && questions) {
+            comments.forEach(comment => {
+                const question = questions.find(q => q["QuestionID"] === comment["QuestionID"]);
+                if (question) {
+                    if ('Comments' in question) {
+                        if (!question["Comments"].includes(comment["Text"])) {
+                            question["Comments"].push(comment["Text"]);
+                            console.log(question)
+                        }
+                    } else {
+                        question["Comments"] = [comment["Text"]];
+                    }
+                }
+            });
+        }
         console.log(tableData)
     }
 
@@ -82,6 +114,10 @@ function QuestionTable({userId}) {
 
     return (
         <>
+            {showMessage &&
+                <Alert severity={"error"}>
+                    {submitMessage}
+                </Alert>}
             <div>
                 {tableData != null ? (
                     <DataGrid style={style.table}
@@ -94,7 +130,6 @@ function QuestionTable({userId}) {
                                       paginationModel: {page: 0, pageSize: 30},
                                   },
                               }}
-                              onRowClick={getComments}
                               pageSizeOptions={[30, 30]}
                               processRowUpdate={processRowUpdate}
                               onProcessRowUpdateError={handleProcessRowUpdateError}

@@ -57,9 +57,7 @@ function getQuestions(req, res) {
 }
 
 function getComments(req, res) {
-    let questionID = (req.headers.id)
-    let query =
-        `SELECT * FROM Comment WHERE QuestionID = '${questionID}'`;
+    let query = `SELECT * FROM Comment`;
     connection.query(query, handleQueryResponse(res));
 }
 
