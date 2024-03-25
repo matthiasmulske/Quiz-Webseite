@@ -1,34 +1,12 @@
 import * as React from 'react';
 import {useEffect, useState} from 'react';
 import {DataGrid} from "@mui/x-data-grid";
-import Button from "@mui/material/Button";
+import {Checkbox, FormControlLabel} from "@mui/material";
 
 const domain = "http://localhost:5000";
 const getQuestionsRoute = domain + "/getQuestions";
 const updateQuestionRoute = domain + "/updateQuestion"
 const getCommentsRoute = domain + "/getComments"
-
-const columns = [
-    { field: 'QuestionID', headerName: 'Frage', editable: true, },
-    { field: 'QuestionText', headerName: 'Frage', editable: true, },
-    { field: 'Answer1', headerName: 'Antwort A', editable: true, },
-    { field: 'Answer2', headerName: 'Antwort B', editable: true, },
-    { field: 'Answer3', headerName: 'Antwort C', editable: true },
-    { field: 'CorrectAnswer', headerName: 'Antwort D', editable: true },
-    { field: 'CategoryID', headerName: 'Kategorie', editable: true },
-    { field: 'Text',
-        headerName: 'Kommentare',
-        editable: false,
-        valueGetter: (value) => {},
-        renderCell: () => (
-            <strong>
-                <Button
-                    onClick={() => alert("implement me")}
-                >Zeige Kommentare</Button>
-            </strong>
-        ),
-    },
-];
 
 function QuestionTable({userId}) {
     let [tableData, setTableData] = useState(null);
@@ -54,21 +32,34 @@ function QuestionTable({userId}) {
 
     useEffect(() => {
         fetchMyData(getQuestionsRoute, 3)
-            .then(r => setTableData(r))
+            .then(r => {
+                setTableData(r)
+                getComments()
+                return tableData
+            })
+            .then((tableData) => getComments(tableData))
     }, []);
 
-    function getComments(row) {
-        let questionID = row.row.QuestionID
+    const columns = [
+        { field: 'QuestionID', headerName: 'Frage', editable: true, },
+        { field: 'QuestionText', headerName: 'Frage', editable: true, },
+        { field: 'Answer1', headerName: 'Antwort A', editable: true, },
+        { field: 'Answer2', headerName: 'Antwort B', editable: true, },
+        { field: 'Answer3', headerName: 'Antwort C', editable: true },
+        { field: 'CorrectAnswer', headerName: 'Antwort D', editable: true },
+        { field: 'CategoryID', headerName: 'Kategorie', editable: true },
+        { field: 'Text',
+            headerName: 'Kommentare',
+            editable: false,
+            renderCell: () => (
+                <FormControlLabel control={<Checkbox/>} label={"comments"}/>
+            ),
+        },
+    ];
 
-        fetchMyData(getCommentsRoute, questionID)
-            .then((r) => setComments(r))
-            .then(showComments)
+    function getComments() {
+        console.log(tableData)
     }
-
-    function showComments() {
-        console.log(comments)
-    }
-
 
     async function processRowUpdate(newRow) {
         const requestOptions = {
