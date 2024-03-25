@@ -7,12 +7,16 @@ const domain = "http://localhost:5000";
 const getQuestionsRoute = domain + "/getQuestions";
 const updateQuestionRoute = domain + "/updateQuestion"
 const getCommentsRoute = domain + "/getComments"
+const deleteCommentRoute = domain + "/deleteComment"
+
 
 function QuestionTable({userId}) {
     let [tableData, setTableData] = useState(null);
     let [comments, setComments] = useState()
+
     const [showMessage, setShowMessage] = useState(true)
     const [submitMessage, setSubmitMessage] = useState("Test")
+    const [severity, setSeverity] = useState("Error")
 
 
     async function fetchMyData(route, id) {
@@ -58,7 +62,10 @@ function QuestionTable({userId}) {
                     {params.row.Comments && params.row.Comments.map((comment, index) => (
                         <FormControlLabel
                             key={index}
-                            control={<Checkbox/>}
+                            control={
+                            <Checkbox
+                                onChange={() => deleteComment(params.row, comment)}
+                            />}
                             label={comment}
                         />
                     ))}
@@ -67,9 +74,19 @@ function QuestionTable({userId}) {
         },
     ];
 
-    function deleteComment({commentID}) {
+    function deleteComment(row, commentToDelete) {
+        fetchMyData(deleteCommentRoute, commentToDelete).then((r) => {
+            return r
+        })
+
+
+
+
+        console.log(commentToDelete)
+        setSeverity("info")
         setShowMessage(true)
         setSubmitMessage("Kommentare wurde entfernt")
+
     }
 
     function getComments() {
@@ -90,7 +107,6 @@ function QuestionTable({userId}) {
                 }
             });
         }
-        console.log(tableData)
     }
 
     async function processRowUpdate(newRow) {
@@ -115,7 +131,7 @@ function QuestionTable({userId}) {
     return (
         <>
             {showMessage &&
-                <Alert severity={"error"}>
+                <Alert severity={"info"}>
                     {submitMessage}
                 </Alert>}
             <div>

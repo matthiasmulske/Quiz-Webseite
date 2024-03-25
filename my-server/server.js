@@ -35,6 +35,13 @@ app.post("/question", addQuestion);
 app.get("/getQuestions", getQuestions);
 app.get("/getComments", getComments);
 app.put("/updateQuestion", updateQuestion)
+app.get("/deleteComment", deleteComment)
+
+function deleteComment(req, res){
+    //let comment = req.body.data.comment
+    //const query = 'DELETE FROM Comment WHERE Text = ${comment}'
+    console.log(req.headers.id)
+}
 
 function updateQuestion(req, res) {
     const query = 'UPDATE Question SET Answer1 = 0 WHERE QuestionID = 9;'
