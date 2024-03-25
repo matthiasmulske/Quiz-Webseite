@@ -30,6 +30,10 @@ function App() {
       <Routes>
         <Route path="/EditQuestion" element={<EditQuestion />} />
         <Route path="/AddQuestion" element={<AddQuestion/>} />
+        <Route path="/HomepageLogin" element={<HomepageLogin  />} />
+        <Route path="/" element={<Homepage/> } />
+        <Route path="/Login" element={<Login />} />
+        <Route path="/LoginMaske" element={<LoginMaske />} />
         <Route path="/" element={<Homepage isLoggedIn={isLoggedIn}/> } />
         <Route path="/Login" element={<Login setIsLoggedIn={setIsLoggedIn} setUser={setUser} />} />
         <Route path="/GameSetup" element={<GameSetup />} />
@@ -38,6 +42,7 @@ function App() {
         <Route path="/Agbs" element={<Agbs />} />
         <Route path="/Legal" element={<Legal />} />
         <Route path="/Game" element={<Game />} />
+        <Route path="/EditQuestion" element={<EditQuestion userID={3}/>} />
         <Route path="/EditQuestion" element={<EditQuestion />} />
         <Route path="/QuestionTakeOver" element={<QuestionTakeOver user={user}/>} />
       </Routes>
