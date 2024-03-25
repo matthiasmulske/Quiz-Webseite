@@ -45,7 +45,7 @@ function QuestionTable({userId}) {
     }, []);
 
     getComments();
-
+//
     const columns = [
         { field: 'QuestionID', headerName: 'Frage', editable: true, },
         { field: 'QuestionText', headerName: 'Frage', editable: true, },
