@@ -4,7 +4,7 @@ import { Routes, Route,} from "react-router-dom";
 import PrivacyPolicyPage from "./pages/Startseite/PrivacyPolicyPage";
 import Agbs from "./pages/Startseite/Agbs";
 import Legal from "./pages/Startseite/Legal";
-import Login from "./pages/Registration/Login";
+import Login from "./pages/Startseite/Login";
 import Homepage from "./pages/Startseite/Homepage";
 import GameSetup from "./pages/Game/GameSetup";
 import Game from "./pages/Game/Game";
