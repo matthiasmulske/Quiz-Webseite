@@ -45,7 +45,6 @@ function Game() {
     setIsLoading(true); //start loading animation
     const data = await fetchGameInfo(accessToken); //get all relevant data from Database. Note: Needs to be async, because takes some time
     //use non UseState-Variables for better performance. If direct use of UseStates they wouldnt be set in time for further calculations
-    console.log(data);
     const timeToAnswer = data[1].TimeToAnswer; //get the Timelimit
     const quizIDC = data[1].QuizID; //get the QuizID
     const isSinglePlayerC = decideQuizType(data); //decide if game is Singleplayer or Multiplayer
