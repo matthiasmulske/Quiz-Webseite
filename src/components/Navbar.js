@@ -48,6 +48,8 @@ export default function Navbar({isLoggedIn, setIsLoggedIn, user, setUser}) {
   const handleLogout = () => {
     setIsLoggedIn(false);
     setUser(null);
+    localStorage.setItem('isLoggedIn', false);
+    localStorage.setItem('user', null);
     handleLogoutDialogClose();
   };
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faApple } from '@fortawesome/free-brands-svg-icons';
 import GoogleButton from 'react-google-button';
@@ -11,23 +11,22 @@ function Login({ setUser, setIsLoggedIn }) {
   const [errorMessage, setErrorMessage] = useState('');
   const [registrationMessage, setRegistrationMessage] = useState('');
   const [showMessage, setShowMessage] = useState(false);
-  const navigate = useNavigate();
+  const navigate = useNavigate();  
 
   function handleLogin(event) {
     event.preventDefault();
     if (username === 'test' && password === 'test123') {
-      console.log('Anmeldung erfolgreich');
+      localStorage.setItem('isLoggedIn', true);
+      localStorage.setItem('user', JSON.stringify(3));
       setUser(3);
       setIsLoggedIn(true);
       navigate('/');
     } else {
-      console.log('Anmeldung fehlgeschlagen');
       setErrorMessage('Benutzername oder Passwort ungültig');
     }
   }
 
   function handleRegister() {
-    console.log("Registrierung für:", username, password);
     alert('Dies ist nur ein Prototyp. Aus diesem Grund funktioniert der Button nicht');
   }
 

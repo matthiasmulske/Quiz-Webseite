@@ -7,7 +7,7 @@ function EditQuestion({ userID }) {
         <>
             <div style={style.container}>
                 <QuestionTable
-                    userId={userID} // Corrected prop name from 'userId' to 'userID'
+                    userID={userID} // Corrected prop name from 'userId' to 'userID'
                 />
             </div>
         </>

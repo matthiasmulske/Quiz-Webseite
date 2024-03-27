@@ -47,22 +47,62 @@ app.post("/resetTrustIndex", resetTrustIndex);
 app.post("/incrementTrustIndex", incrementTrustIndex);
 app.post("/getQuestionsWithoutUser", getQuestionsWithoutUser);
 app.post("/updateUserForQuestion", updateUserForQuestion);
+app.post("/data", getData);
 app.get("/categories", getCategories);
 app.post("/question", addQuestion);
-app.get("/data", getData);
-app.put("/updateQuestion", updateQuestion)
-
+app.post("/getQuestionsForEdit", getQuestionsForEdit);
+app.post("/getComments", getComments);
+app.post("/updateQuestion", updateQuestion)
+app.post("/deleteComment", deleteComment)
 
 // Route Handlers
+function deleteComment(req, res){
+  const { commentID } = req.body;
+  const query = `DELETE FROM Comment WHERE CommentID= ?`;
+  connection.query(query, [commentID ], handleQueryResponse(res));
+}
 
 function updateQuestion(req, res) {
-  const query = 'UPDATE Question SET Answer1 = 0 WHERE QuestionID = 9;'
-  console.log(req.body)
+  const { QuestionText, Answer1, Answer2, Answer3, CorrectAnswer, QuestionID } = req.body.question;
+  const query = `UPDATE Question 
+  SET QuestionText = ?, Answer1 = ?, Answer2 = ?, Answer3 = ?, CorrectAnswer = ?
+  WHERE QuestionID = ?`;
+  connection.query(query, [QuestionText, Answer1, Answer2, Answer3, CorrectAnswer, QuestionID ], handleQueryResponse(res));
 }
 
 
 function getCategories(req, res) {
   connection.query('SELECT * FROM QuestionCategory', handleQueryResponse(res));
+}
+
+function getQuestionsForEdit(req, res) {
+  const { userID } = req.body;
+  let query =
+      `SELECT q.QuestionID, q.QuestionText, q.Answer1, q.Answer2, q.Answer3, q.CorrectAnswer, q.CategoryID, c.CommentID, c.Text, c.CommentTimeStamp
+      FROM Question q
+      LEFT JOIN Comment c ON c.QuestionID = q.QuestionID 
+      WHERE q.UserID = ?
+      GROUP BY q.QuestionID, q.QuestionText, c.CommentID`
+  connection.query(query, [userID], handleQueryResponse(res));
+}
+
+function getComments(req, res) {
+  let query = `SELECT * FROM Comment`;
+  connection.query(query, handleQueryResponse(res));
+}
+
+
+function addQuestion(req, res) {
+  const answer1 = req.body.data["Answer1"]
+  const answer2 = req.body.data["Answer2"]
+  const answer3 = req.body.data["Answer3"]
+  const correctAnswer = req.body.data["CorrectAnswer"]
+  const questionText = req.body.data["QuestionText"]
+  const selectedCategory = req.body.data["Category"]
+  const userID = req.body.data["UserID"]
+
+  const query = `INSERT INTO Question(QuestionText, Answer1, Answer2, Answer3, CorrectAnswer, CategoryID, UserID ) VALUES ('${questionText}', '${answer1}', '${answer2}', '${answer3}', '${correctAnswer}', ${selectedCategory}, ${userID});`;
+  connection.query(query, handleQueryResponse(res));
 }
 
 function getData(req, res) {
@@ -71,14 +111,6 @@ function getData(req, res) {
        JOIN QuestionCategory c on q.CategoryID = c.QuestionCategoryID
        Where UserID = '${selected_userId}'`
   connection.query(query, handleQueryResponse(res));
-}
-
-
-function addQuestion(req, res) {
-  const { question, answerA, answerB, answerC, correctAnswer, selectedCategory } = req.body.data;
-  const query = `INSERT INTO Question(QuestionText, Answer1, Answer2, Answer3, CorrectAnswer, CategoryID) VALUES ('${question}', '${answerA}', '${answerB}', '${answerC}', '${correctAnswer}', ${selectedCategory});`;
-  console.log(query)
-  //connection.query(query, handleQueryResponse(res));
 }
 
 function getGameData(req, res) {

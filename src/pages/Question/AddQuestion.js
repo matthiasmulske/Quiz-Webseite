@@ -2,8 +2,7 @@ import * as React from "react";
 import FormAddQuestion from "../../components/FormAddQuestion";
 import { useState } from "react";
 import {Alert} from "@mui/material";
-
-const domain = "http://localhost:5000";
+import domain from "../../assets/domain.js";
 
 let defaultState =         {
     QuestionText: '',
@@ -15,7 +14,7 @@ let defaultState =         {
 }
 
 
-function AddQuestion() {
+function AddQuestion({userID}) {
     const [selectedCategory, setSelectedCategory] = useState('');
     const [submitMessage, setSubmitMessage] = useState("")
     const [severity, setSeverity] = useState("")
@@ -80,15 +79,17 @@ function AddQuestion() {
     }
 
     function resolveData(){
+        console.log("User"+userID)
         setData({
             ...data,
-            Category: selectedCategory
+            Category: selectedCategory,
+            UserID: userID
         })
     }
 
     async function postToDatabase() {
         try {
-            const request = await fetch(domain + "/question", {
+            const request = await fetch(domain.domain + "/question", {
                 method: "POST",
                 body: JSON.stringify({
                     data

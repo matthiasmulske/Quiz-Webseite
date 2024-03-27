@@ -16,7 +16,7 @@ import {
 import domain from "../../assets/domain.js";
 import GameButton from "../../atoms/GameButton.js";
 
-function QuestionTakeOver({user}) {
+function QuestionTakeOver({userID}) {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false); //if true renders a loading animation while quiz is created in DB
 
@@ -25,7 +25,7 @@ function QuestionTakeOver({user}) {
   }, []);
 
   async function getData() {
-    let datas = await getQuestionsWithoutUser( domain.domain + "/getQuestionsWithoutUser");
+    let datas = await getQuestionsWithoutUser( domain.domain + "/getQuestionsWithoutUser", userID);
     setData(datas);
   }
 
@@ -35,7 +35,7 @@ function QuestionTakeOver({user}) {
     setLoading(false);
   }
 
-console.log(user);
+  console.log(data);
   return (
     <div style={style.formContainer}>
       <p>Hier werden Fragen dargestellt, die ohne Besitzer sind. Fragen werden besitzerlos, falls der ursprüngliche Ersteller nicht innherhalb von drei Wochen auf Kommentare eingeht. Du kannst hier die Verantwortung für diese Fragen übernehemen!</p>
@@ -54,9 +54,9 @@ console.log(user);
           </TableRow>
         </TableHead>
         <TableBody>
-          {data.map((question) => (
+          {data.map((question, index) => (
             <TableRow
-              key={question.QuestionID}
+              key={index}
             >
               <TableCell component="th" scope="row">
                 {question.QuestionText}
@@ -66,7 +66,7 @@ console.log(user);
               <TableCell>{question.Answer3}</TableCell>
               <TableCell>{question.CorrectAnswer}</TableCell>
               <TableCell>{question.Text}</TableCell>
-              <TableCell><GameButton onClick={() => handleTakeOver(user, question.QuestionID)} label={<CheckIcon></CheckIcon>} /></TableCell>
+              <TableCell><GameButton onClick={() => handleTakeOver(userID, question.QuestionID)} label={<CheckIcon></CheckIcon>} /></TableCell>
             </TableRow>
           ))}
         </TableBody>

@@ -10,7 +10,7 @@ const getCommentsRoute = domain + "/getComments"
 const deleteCommentRoute = domain + "/deleteComment"
 
 
-function QuestionTable({userId}) {
+function QuestionTable({userID}) {
     let [tableData, setTableData] = useState(null);
     let [comments, setComments] = useState()
 
@@ -38,14 +38,17 @@ function QuestionTable({userId}) {
     }
 
     useEffect(() => {
-        fetchMyData(getQuestionsRoute, 3)
+        console.log(userID)
+        fetchMyData(getQuestionsRoute, userID)
             .then(r => { setTableData(r) } )
-        fetchMyData(getCommentsRoute, 0)
-            .then((r) => setComments(r))
+        // fetchMyData(getCommentsRoute, 0)
+        //     .then((r) => setComments(r))
     }, []);
 
-    getComments();
-//
+    // getComments();
+    
+    console.log(tableData);
+     
     const columns = [
         { field: 'QuestionID', headerName: 'Frage', editable: true, },
         { field: 'QuestionText', headerName: 'Frage', editable: true, },
@@ -53,25 +56,8 @@ function QuestionTable({userId}) {
         { field: 'Answer2', headerName: 'Antwort B', editable: true, },
         { field: 'Answer3', headerName: 'Antwort C', editable: true },
         { field: 'CorrectAnswer', headerName: 'Antwort D', editable: true },
-        { field: 'CategoryID', headerName: 'Kategorie', editable: true },
-        { field: 'Comments',
-            headerName: 'Kommentare',
-            editable: false,
-            renderCell: (params) => (
-                <div>
-                    {params.row.Comments && params.row.Comments.map((comment, index) => (
-                        <FormControlLabel
-                            key={index}
-                            control={
-                            <Checkbox
-                                onChange={() => deleteComment(params.row, comment)}
-                            />}
-                            label={comment}
-                        />
-                    ))}
-                </div>
-            ),
-        },
+        { field: 'Text', headerName: 'Kommentar', editable: false },
+        { field: 'CommentID', headerName: 'KommentarID', editable: false },
     ];
 
     function deleteComment(row, commentToDelete) {
@@ -89,25 +75,25 @@ function QuestionTable({userId}) {
 
     }
 
-    function getComments() {
-        const questions = tableData
-
-        if (Array.isArray(comments) && questions) {
-            comments.forEach(comment => {
-                const question = questions.find(q => q["QuestionID"] === comment["QuestionID"]);
-                if (question) {
-                    if ('Comments' in question) {
-                        if (!question["Comments"].includes(comment["Text"])) {
-                            question["Comments"].push(comment["Text"]);
-                            console.log(question)
-                        }
-                    } else {
-                        question["Comments"] = [comment["Text"]];
-                    }
-                }
-            });
-        }
-    }
+    // function getComments() {
+    //     const questions = tableData
+    //     console.log(comments);
+    //     if (Array.isArray(comments) && questions) {
+    //         comments.forEach(comment => {
+    //             const question = questions.find(q => q["QuestionID"] === comment["QuestionID"]);
+    //             if (question) {
+    //                 if ('Comments' in question) {
+    //                     if (!question["Comments"].includes(comment["Text"])) {
+    //                         question["Comments"].push(comment["Text"]);
+    //                         console.log(question)
+    //                     }
+    //                 } else {
+    //                     question["Comments"] = [comment["Text"]];
+    //                 }
+    //             }
+    //         });
+    //     }
+    // }
 
     async function processRowUpdate(newRow) {
         const requestOptions = {
