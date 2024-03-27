@@ -24,10 +24,12 @@ function QuestionEdit({ userID }) {
 
   useEffect(() => {
     getData();
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
     getData();
+    // eslint-disable-next-line
   }, [userID]);
 
   async function getData() {
@@ -63,7 +65,7 @@ function QuestionEdit({ userID }) {
     <div style={style.formContainer}>
       <p>Hier werden alle Fragen dargestellt, für welche du die Verantwortung trägst! Reagierst du nicht innerhalb von 3 Wochen auf einen Kommentar, wird die Frage anderen Spielern zur Verwaltung angeboten!</p>
       {loading ? <CircularProgress style={style.animation} /> : ""}
-      <TableContainer component={Paper}>
+      <TableContainer component={Paper} style={style.tableContainer}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
@@ -81,13 +83,13 @@ function QuestionEdit({ userID }) {
           <TableBody>
             {data.map((question, index) => (
               <TableRow key={index}>
-                <TableCell><TextField defaultValue={question.QuestionText} multiline rows={4} onChange={(e) => question.QuestionText = e.target.value} /></TableCell>
-                <TableCell><TextField defaultValue={question.Answer1} multiline rows={4} onChange={(e) => question.Answer1 = e.target.value} /></TableCell>
-                <TableCell><TextField defaultValue={question.Answer2} multiline rows={4} onChange={(e) => question.Answer2 = e.target.value} /></TableCell>
-                <TableCell><TextField defaultValue={question.Answer3} multiline rows={4} onChange={(e) => question.Answer3 = e.target.value} /></TableCell>
-                <TableCell><TextField defaultValue={question.CorrectAnswer} multiline rows={4} onChange={(e) => question.CorrectAnswer = e.target.value} /></TableCell>
-                <TableCell>{question.Text} </TableCell>
-                <TableCell>{question.CommentTimeStamp} </TableCell>
+                <TableCell style={style.cell}><TextField size="small" variant="outlined" defaultValue={question.QuestionText} multiline rows={8} onChange={(e) => question.QuestionText = e.target.value} /></TableCell>
+                <TableCell style={style.cell}><TextField size="small" variant="outlined" defaultValue={question.Answer1} multiline rows={8} onChange={(e) => question.Answer1 = e.target.value} /></TableCell>
+                <TableCell style={style.cell}><TextField size="small" variant="outlined" defaultValue={question.Answer2} multiline rows={8} onChange={(e) => question.Answer2 = e.target.value} /></TableCell>
+                <TableCell style={style.cell}><TextField size="small" variant="outlined" defaultValue={question.Answer3} multiline rows={8} onChange={(e) => question.Answer3 = e.target.value} /></TableCell>
+                <TableCell style={style.cell}><TextField size="small" variant="outlined" defaultValue={question.CorrectAnswer} multiline rows={8} onChange={(e) => question.CorrectAnswer = e.target.value} /></TableCell>
+                <TableCell style={style.cell}>{question.Text} </TableCell>
+                <TableCell style={style.cell}>{question.CommentTimeStamp} </TableCell>
                 <TableCell><GameButton onClick={() => handleDeleteComment(question.CommentID)} label={<DeleteForeverIcon></DeleteForeverIcon>} color="error" /></TableCell>
                 <TableCell><GameButton onClick={() => handleEditQuestion(question)} label={<CheckIcon></CheckIcon>} /></TableCell>
               </TableRow>
@@ -147,14 +149,14 @@ const style = {
     margin: "1rem",
   },
 
-  buttonContainer: {
-    display: "grid",
-    height: 50,
-    gridTemplateColumns: "repeat(2, 1fr)", // 2 columns, each with equal width
-    gridColumnGap: "20px",
+  tableContainer: {
+    overflowX: "scroll",
+    WebkitOverflowScrolling: "touch", 
+    scrollbarWidth: "thin", 
+    scrollbarColor: "rgba(0, 0, 0, 0.5) rgba(255, 255, 255, 0.5)", 
   },
 
-  animation: {
-    margin: "2rem",
+  cell: {
+    minWidth: "8rem", // Set the minimum width as per your requirement
   },
 };

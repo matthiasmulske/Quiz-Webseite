@@ -183,7 +183,7 @@ function getQuestionsWithoutReaction(req, res) {
       SELECT DISTINCT q.QuestionID
       FROM Question q
       JOIN Comment c ON q.QuestionID = c.QuestionID
-      WHERE c.CommentTimeStamp < DATE_SUB(NOW(), INTERVAL 2 WEEK)
+      WHERE c.CommentTimeStamp < DATE_SUB(NOW(), INTERVAL 3 WEEK)
       AND c.CategoryID IN (1, 2)
   ) AS subquery ON q.QuestionID = subquery.QuestionID
   SET q.UserID = NULL;`;
@@ -405,10 +405,10 @@ function handleRollbackAndError(res, connection, errorMessage, err) {
   });
 }
 
-//clean up Code executed once a day by server at midnight
-cron.schedule("0 0 * * *", () => {
-  getQuestionsWithoutReaction();
-});
+//takes away questions of an user if he doesnt react to a comment after 3 weeks //deactivated for prototyp usage
+// cron.schedule("0 0 * * *", () => {
+//   getQuestionsWithoutReaction();
+// });
 
 // Start the server
 const PORT = process.env.PORTS || port;

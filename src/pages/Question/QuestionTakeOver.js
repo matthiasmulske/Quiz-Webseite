@@ -22,6 +22,7 @@ function QuestionTakeOver({userID}) {
 
   useEffect(() => {
    getData();
+   // eslint-disable-next-line
   }, []);
 
   async function getData() {

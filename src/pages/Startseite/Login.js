@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faApple } from '@fortawesome/free-brands-svg-icons';
 import GoogleButton from 'react-google-button';
@@ -9,7 +9,9 @@ function Login({ setUser, setIsLoggedIn }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  // eslint-disable-next-line
   const [registrationMessage, setRegistrationMessage] = useState('');
+  // eslint-disable-next-line
   const [showMessage, setShowMessage] = useState(false);
   const navigate = useNavigate();  
 
@@ -60,11 +62,11 @@ function Login({ setUser, setIsLoggedIn }) {
             </div>
             <div style={buttonContainerStyle}>
               <GoogleButton
-                onClick={() => { console.log('Google-Schaltfläche angeklickt') }}
+                onClick={handleRegister}
                 style={googleButtonStyle}
               />
               <AppleLogin
-                render={({  }) => (
+                render={() => (
                   <button type="button" onClick={handleRegister} style={appleButtonStyle}>
                     <FontAwesomeIcon icon={faApple} style={logoStyle} />
                     <span style={textSpanStyle}>Sign in with Apple</span>

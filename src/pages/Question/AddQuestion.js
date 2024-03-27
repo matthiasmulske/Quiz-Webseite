@@ -24,6 +24,7 @@ function AddQuestion({userID}) {
     function handleDropDownChange(e) {
         setData({
             ...data,
+            // eslint-disable-next-line
             ['Category']: e.target.value,
         })
         setSelectedCategory(e.target.value)

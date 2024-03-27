@@ -1,4 +1,3 @@
-import EditQuestion from "./pages/Question/EditQuestion";
 import AddQuestion from "./pages/Question/AddQuestion";
 import { Routes, Route,} from "react-router-dom";
 import PrivacyPolicyPage from "./pages/Startseite/PrivacyPolicyPage";
@@ -62,4 +61,4 @@ const style = {
     margin: 8,
   },
 };
-
+ 
