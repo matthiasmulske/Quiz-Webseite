@@ -3,8 +3,8 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import {Select} from "@mui/material";
 import InputLabel from "@mui/material/InputLabel";
+import domain from "./../assets/domain.js";
 
-const domain = "http://localhost:5000";
 
 function SelectCategory({ onDropDownChange, selectedCategory }) {
     const [categories, setCategories] = useState([{Name: ''}]);
@@ -12,7 +12,7 @@ function SelectCategory({ onDropDownChange, selectedCategory }) {
     useEffect(() => {
         const fetchCategories = async () => {
             try {
-                const response = await fetch(domain + "/categories", {
+                const response = await fetch(domain.domain + "/categories", {
                     method: "GET",
                     headers: { "Content-Type": "application/json" },
                 });
