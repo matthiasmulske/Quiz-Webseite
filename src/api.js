@@ -25,8 +25,17 @@ const fetchQuestionCategories = async (route, accessToken) => {
   return await fetchData(route, { accessToken });
 };
 
+
 const postAddQuestion = async (route,  questionText, answerA, answerB, answerC, answerD, category) => {
   return await fetchData(route, {  questionText, answerA, answerB, answerC, answerD, category });
+};
+
+const updateQuestion = async (route,  question) => {
+  return await fetchData(route, {question});
+};
+
+const deleteComment = async (route,  commentID) => {
+  return await fetchData(route, {commentID});
 };
 
 const resetTrustIndex = async (route,  questionID) => {
@@ -34,6 +43,10 @@ const resetTrustIndex = async (route,  questionID) => {
 };
 
 const getNumberofMessages = async (route,  userID) => {
+  return await fetchData(route, {  userID });
+};
+
+const getQuestionsForEdit = async (route,  userID) => {
   return await fetchData(route, {  userID });
 };
 
@@ -129,4 +142,8 @@ export {
   getQuestionsWithoutUser,
   updateUserForQuestion,
   getNumberofMessages,
+  getQuestionsForEdit,
+  updateQuestion,
+  deleteComment,
+  
 };

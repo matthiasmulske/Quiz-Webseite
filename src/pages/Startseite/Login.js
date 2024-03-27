@@ -9,25 +9,26 @@ function Login({ setUser, setIsLoggedIn }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  // eslint-disable-next-line
   const [registrationMessage, setRegistrationMessage] = useState('');
+  // eslint-disable-next-line
   const [showMessage, setShowMessage] = useState(false);
-  const navigate = useNavigate();
+  const navigate = useNavigate();  
 
   function handleLogin(event) {
     event.preventDefault();
     if (username === 'test' && password === 'test123') {
-      console.log('Anmeldung erfolgreich');
+      localStorage.setItem('isLoggedIn', true);
+      localStorage.setItem('user', JSON.stringify(3));
       setUser(3);
       setIsLoggedIn(true);
       navigate('/');
     } else {
-      console.log('Anmeldung fehlgeschlagen');
       setErrorMessage('Benutzername oder Passwort ungültig');
     }
   }
 
   function handleRegister() {
-    console.log("Registrierung für:", username, password);
     alert('Dies ist nur ein Prototyp. Aus diesem Grund funktioniert der Button nicht');
   }
 
@@ -61,11 +62,11 @@ function Login({ setUser, setIsLoggedIn }) {
             </div>
             <div style={buttonContainerStyle}>
               <GoogleButton
-                onClick={() => { console.log('Google-Schaltfläche angeklickt') }}
+                onClick={handleRegister}
                 style={googleButtonStyle}
               />
               <AppleLogin
-                render={({  }) => (
+                render={() => (
                   <button type="button" onClick={handleRegister} style={appleButtonStyle}>
                     <FontAwesomeIcon icon={faApple} style={logoStyle} />
                     <span style={textSpanStyle}>Sign in with Apple</span>

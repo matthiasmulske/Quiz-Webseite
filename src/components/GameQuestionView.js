@@ -82,7 +82,7 @@ function GameQuestionView({
           <div style={style.answer} key={index}>
             <GameButton
               label={answer}
-              size={"la"}
+              size={"medium"}
               color={
                 selectedAnswer
                   ? answer === selectedAnswer
