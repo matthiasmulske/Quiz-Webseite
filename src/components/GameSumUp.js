@@ -1,22 +1,139 @@
-import React from "react";
-import GameButton from "../atoms/GameButton";
+import * as React from "react";
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import SiegSVG from "./../assets/Sieg.svg";
+import NiederlageSVG from "./../assets/Niederlage.svg";
+import UnentschiedenSVG from "./../assets/Unentschieden.svg";
 
-function GameSumUp() {
+export default function GameSumUp({
+  player,
+  rounds,
+  player1Score,
+  player2Score,
+  isSinglePlayer,
+}) {
+  const [won, setWon] = useState(false);
+  const [isDraw, setIsDraw] = useState();
+  function decideWinner(isSinglePlayer, player, player1Score, player2Score) {
+    //Singleplayer Logic
+    if (isSinglePlayer) {
+      if (player1Score / (rounds * 3) >= 0.5) {
+        setWon(true);
+      } else {
+        setWon(false);
+      }
+    }
+
+    if (!isSinglePlayer) {
+      if (
+        (player === 1 && player1Score > player2Score) ||
+        (player === 2 && player2Score > player1Score)
+      ) {
+        setWon(true);
+        console.log("You won");
+      } else {
+        setWon(false);
+      }
+      if (player2Score === player1Score) {
+        setIsDraw(true);
+      }
+    }
+  }
+
+  //decide Winner when site loads
+  useEffect(() => {
+    decideWinner(isSinglePlayer, player, player1Score, player2Score);
+     // eslint-disable-next-line 
+  }, []);
+
   return (
-    <div className="container d-flex flex-column justify-content-center align-items-center bg-light">
-      <div className="container d-flex flex-column justify-content-center align-items-center">
-        <h1>Glückwunsch!</h1>
-        <h2>Du hast das Quiz gewonnen!</h2>
-        <span className="material-icons fs-1 text-warning mb-3">emoji_events</span>
-      </div>
-      <div className="container d-flex flex-column justify-content-center align-items-center">
-        <h1>Schade!</h1>
-        <h2>Beim nächsten Versuch gewinnst bestimmt du!</h2>
-        <span className="material-icons fs-1 text-danger mb-3">local_library</span>
-      </div>
-      <GameButton label="Neues Quiz" addClass={"btn-primary"}></GameButton>
+    <div style={style.formContainer}>
+      <Card sx={{ maxWidth: 600 }}>
+        {isDraw ? (
+          <CardMedia sx={{ height: 300 }} image={UnentschiedenSVG} />
+        ) : won ? (
+          <CardMedia sx={{ height: 300 }} image={SiegSVG} />
+        ) : (
+          <CardMedia sx={{ height: 300 }} image={NiederlageSVG} />
+        )}
+
+        <CardContent>
+          {isDraw ? (
+            <Typography gutterBottom variant="h5" component="div">
+              Unentschieden!
+            </Typography>
+          ) : won ? (
+            <Typography gutterBottom variant="h5" component="div">
+              Glückwunsch!
+            </Typography>
+          ) : (
+            <Typography gutterBottom variant="h5" component="div">
+              Schade!
+            </Typography>
+          )}
+          {isDraw ? (
+            <Typography gutterBottom variant="h5" component="div">
+              {player1Score} : {player2Score}
+            </Typography>
+          ) : isSinglePlayer ? (
+            <Typography gutterBottom variant="h5" component="div">
+              Du hast {" " + ((player1Score / (rounds * 3)) * 100).toFixed(2)}%
+              der Fragen richtig beantwortet
+            </Typography>
+          ) : (
+            <Typography gutterBottom variant="h5" component="div">
+              {player1Score} : {player2Score}
+            </Typography>
+          )}
+          {isDraw ? (
+            <Typography variant="body2" color="text.secondary">
+              Spiele erneut um einen Gewinner festzulegen!
+            </Typography>
+          ) : won ? (
+            isSinglePlayer ? (
+              <Typography variant="body2" color="text.secondary">
+                Wäre das eine Prüfung gewesen hättest du bestanden!
+              </Typography>
+            ) : (
+              <Typography variant="body2" color="text.secondary">
+                Du hast das Quiz gewonnen
+              </Typography>
+            )
+          ) : isSinglePlayer ? (
+            <Typography variant="body2" color="text.secondary">
+              Wäre das eine Prüfung gewesen hättest du leider nicht bestanden.
+              Versuche es gerne erneut!
+            </Typography>
+          ) : (
+            <Typography variant="body2" color="text.secondary">
+              Du hast das Quiz leider verloren. Beim nächsten Spiel gewinnst
+              bestimmt du!
+            </Typography>
+          )}
+        </CardContent>
+        <CardActions sx={{ justifyContent: "center" }}>
+          <Link to="/GameSetup">
+            <Button size="small">Neues Quiz</Button>
+          </Link>
+        </CardActions>
+      </Card>
     </div>
   );
 }
 
-export default GameSumUp;
+const style = {
+  formContainer: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    textAlign: "center",
+    margin: "2rem",
+  },
+};
