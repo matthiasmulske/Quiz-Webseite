@@ -53,37 +53,40 @@ app.get("/categories", getCategories);
 app.post("/question", addQuestion);
 app.post("/getQuestionsForEdit", getQuestionsForEdit);
 app.post("/getComments", getComments);
-app.post("/updateQuestion", updateQuestion)
-app.post("/deleteComment", deleteComment)
+app.post("/updateQuestion", updateQuestion);
+app.post("/deleteComment", deleteComment);
 
 // Route Handlers
-function deleteComment(req, res){
+function deleteComment(req, res) {
   const { commentID } = req.body;
   const query = `DELETE FROM Comment WHERE CommentID= ?`;
-  connection.query(query, [commentID ], handleQueryResponse(res));
+  connection.query(query, [commentID], handleQueryResponse(res));
 }
 
 function updateQuestion(req, res) {
-  const { QuestionText, Answer1, Answer2, Answer3, CorrectAnswer, QuestionID } = req.body.question;
+  const { QuestionText, Answer1, Answer2, Answer3, CorrectAnswer, QuestionID } =
+    req.body.question;
   const query = `UPDATE Question 
   SET QuestionText = ?, Answer1 = ?, Answer2 = ?, Answer3 = ?, CorrectAnswer = ?
   WHERE QuestionID = ?`;
-  connection.query(query, [QuestionText, Answer1, Answer2, Answer3, CorrectAnswer, QuestionID ], handleQueryResponse(res));
+  connection.query(
+    query,
+    [QuestionText, Answer1, Answer2, Answer3, CorrectAnswer, QuestionID],
+    handleQueryResponse(res),
+  );
 }
 
-
 function getCategories(req, res) {
-  connection.query('SELECT * FROM QuestionCategory', handleQueryResponse(res));
+  connection.query("SELECT * FROM QuestionCategory", handleQueryResponse(res));
 }
 
 function getQuestionsForEdit(req, res) {
   const { userID } = req.body;
-  let query =
-      `SELECT q.QuestionID, q.QuestionText, q.Answer1, q.Answer2, q.Answer3, q.CorrectAnswer, q.CategoryID, c.CommentID, c.Text, c.CommentTimeStamp
+  let query = `SELECT q.QuestionID, q.QuestionText, q.Answer1, q.Answer2, q.Answer3, q.CorrectAnswer, q.CategoryID, c.CommentID, c.Text, c.CommentTimeStamp
       FROM Question q
       LEFT JOIN Comment c ON c.QuestionID = q.QuestionID 
       WHERE q.UserID = ?
-      GROUP BY q.QuestionID, q.QuestionText, c.CommentID`
+      GROUP BY q.QuestionID, q.QuestionText, c.CommentID`;
   connection.query(query, [userID], handleQueryResponse(res));
 }
 
@@ -92,25 +95,24 @@ function getComments(req, res) {
   connection.query(query, handleQueryResponse(res));
 }
 
-
 function addQuestion(req, res) {
-  const answer1 = req.body.data["Answer1"]
-  const answer2 = req.body.data["Answer2"]
-  const answer3 = req.body.data["Answer3"]
-  const correctAnswer = req.body.data["CorrectAnswer"]
-  const questionText = req.body.data["QuestionText"]
-  const selectedCategory = req.body.data["Category"]
-  const userID = req.body.data["UserID"]
+  const answer1 = req.body.data["Answer1"];
+  const answer2 = req.body.data["Answer2"];
+  const answer3 = req.body.data["Answer3"];
+  const correctAnswer = req.body.data["CorrectAnswer"];
+  const questionText = req.body.data["QuestionText"];
+  const selectedCategory = req.body.data["Category"];
+  const userID = req.body.data["UserID"];
 
   const query = `INSERT INTO Question(QuestionText, Answer1, Answer2, Answer3, CorrectAnswer, CategoryID, UserID ) VALUES ('${questionText}', '${answer1}', '${answer2}', '${answer3}', '${correctAnswer}', ${selectedCategory}, ${userID});`;
   connection.query(query, handleQueryResponse(res));
 }
 
 function getData(req, res) {
-  let selected_userId = req.headers.userid
+  let selected_userId = req.headers.userid;
   let query = `Select * From Question q
        JOIN QuestionCategory c on q.CategoryID = c.QuestionCategoryID
-       Where UserID = '${selected_userId}'`
+       Where UserID = '${selected_userId}'`;
   connection.query(query, handleQueryResponse(res));
 }
 

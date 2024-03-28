@@ -45,7 +45,6 @@ function Game() {
     setIsLoading(true); //start loading animation
     const data = await fetchGameInfo(accessToken); //get all relevant data from Database. Note: Needs to be async, because takes some time
     //use non UseState-Variables for better performance. If direct use of UseStates they wouldnt be set in time for further calculations
-    console.log(data);
     const timeToAnswer = data[1].TimeToAnswer; //get the Timelimit
     const quizIDC = data[1].QuizID; //get the QuizID
     const isSinglePlayerC = decideQuizType(data); //decide if game is Singleplayer or Multiplayer
@@ -104,7 +103,7 @@ function Game() {
     if (answerGiven !== null) {
       setAnswerPlayer(currentQuizID, currentQuestion, answerGiven, player);
     }
-    
+
     // eslint-disable-next-line
   }, [answerGiven]);
 
@@ -253,20 +252,17 @@ function Game() {
     //UPDATE QuizQuestions SET AnswerPlayer1 = 5 WHERE QuizID = 2 AND QuestionNumber = 4;
     const setPlayer1Answer = async (answerGiven, quizID, questionNumber) => {
       try {
-        const response = await fetch(
-          domain.domain + "/updatePlayer1Answer",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              answerGiven: answerGiven,
-              quizID: quizID,
-              questionNumber: questionNumber,
-            }),
+        const response = await fetch(domain.domain + "/updatePlayer1Answer", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
           },
-        );
+          body: JSON.stringify({
+            answerGiven: answerGiven,
+            quizID: quizID,
+            questionNumber: questionNumber,
+          }),
+        });
 
         if (!response.ok) {
           throw new Error("Failed to fetch data");
@@ -277,20 +273,17 @@ function Game() {
     };
     const setPlayer2Answer = async (answerGiven, quizID, questionNumber) => {
       try {
-        const response = await fetch(
-          domain.domain + "/updatePlayer2Answer",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              answerGiven: answerGiven,
-              quizID: quizID,
-              questionNumber: questionNumber,
-            }),
+        const response = await fetch(domain.domain + "/updatePlayer2Answer", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
           },
-        );
+          body: JSON.stringify({
+            answerGiven: answerGiven,
+            quizID: quizID,
+            questionNumber: questionNumber,
+          }),
+        });
 
         if (!response.ok) {
           throw new Error("Failed to fetch data");

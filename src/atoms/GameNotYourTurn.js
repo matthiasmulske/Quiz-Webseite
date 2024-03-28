@@ -1,7 +1,7 @@
 import { ClockLoader } from "react-spinners";
 import React from "react";
 
-function NotYourTurn({ timeLeft }) {
+function NotYourTurn() {
   return (
     <div style={style.clockContainer}>
       <ClockLoader
@@ -14,7 +14,7 @@ function NotYourTurn({ timeLeft }) {
 
       <h1 className="text-warning" style={style.header}>
         {" "}
-        Dein Mitspieler ist am Zug! 
+        Dein Mitspieler ist am Zug!
       </h1>
       <p style={style.paragraph}>
         Aktualisiere die Seite (F5), falls dein Mitspieler fertig ist!

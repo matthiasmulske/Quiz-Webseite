@@ -49,6 +49,7 @@ export default function GameSumUp({
   //decide Winner when site loads
   useEffect(() => {
     decideWinner(isSinglePlayer, player, player1Score, player2Score);
+     // eslint-disable-next-line 
   }, []);
 
   return (

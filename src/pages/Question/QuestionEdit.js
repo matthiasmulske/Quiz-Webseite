@@ -1,17 +1,28 @@
 import React, { useState, useEffect } from "react";
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import CheckIcon from '@mui/icons-material/Check';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import { CircularProgress, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material";
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import Paper from '@mui/material/Paper';
-import TextField from '@mui/material/TextField';
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import CheckIcon from "@mui/icons-material/Check";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import {
+  CircularProgress,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+} from "@mui/material";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import Paper from "@mui/material/Paper";
+import TextField from "@mui/material/TextField";
 import GameButton from "../../atoms/GameButton.js";
-import { getQuestionsForEdit, updateQuestion, deleteComment } from "../../api.js";
+import {
+  getQuestionsForEdit,
+  updateQuestion,
+  deleteComment,
+} from "../../api.js";
 import domain from "../../assets/domain.js";
 
 function QuestionEdit({ userID }) {
@@ -34,7 +45,10 @@ function QuestionEdit({ userID }) {
 
   async function getData() {
     setLoading(true);
-    let datas = await getQuestionsForEdit(domain.domain + "/getQuestionsForEdit", userID);
+    let datas = await getQuestionsForEdit(
+      domain.domain + "/getQuestionsForEdit",
+      userID,
+    );
     setData(datas);
     setLoading(false);
   }
@@ -63,7 +77,11 @@ function QuestionEdit({ userID }) {
 
   return (
     <div style={style.formContainer}>
-      <p>Hier werden alle Fragen dargestellt, für welche du die Verantwortung trägst! Reagierst du nicht innerhalb von 3 Wochen auf einen Kommentar, wird die Frage anderen Spielern zur Verwaltung angeboten!</p>
+      <p>
+        Hier werden alle Fragen dargestellt, für welche du die Verantwortung
+        trägst! Reagierst du nicht innerhalb von 3 Wochen auf einen Kommentar,
+        wird die Frage anderen Spielern zur Verwaltung angeboten!
+      </p>
       {loading ? <CircularProgress style={style.animation} /> : ""}
       <TableContainer component={Paper} style={style.tableContainer}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -83,15 +101,73 @@ function QuestionEdit({ userID }) {
           <TableBody>
             {data.map((question, index) => (
               <TableRow key={index}>
-                <TableCell style={style.cell}><TextField size="small" variant="outlined" defaultValue={question.QuestionText} multiline rows={8} onChange={(e) => question.QuestionText = e.target.value} /></TableCell>
-                <TableCell style={style.cell}><TextField size="small" variant="outlined" defaultValue={question.Answer1} multiline rows={8} onChange={(e) => question.Answer1 = e.target.value} /></TableCell>
-                <TableCell style={style.cell}><TextField size="small" variant="outlined" defaultValue={question.Answer2} multiline rows={8} onChange={(e) => question.Answer2 = e.target.value} /></TableCell>
-                <TableCell style={style.cell}><TextField size="small" variant="outlined" defaultValue={question.Answer3} multiline rows={8} onChange={(e) => question.Answer3 = e.target.value} /></TableCell>
-                <TableCell style={style.cell}><TextField size="small" variant="outlined" defaultValue={question.CorrectAnswer} multiline rows={8} onChange={(e) => question.CorrectAnswer = e.target.value} /></TableCell>
+                <TableCell style={style.cell}>
+                  <TextField
+                    size="small"
+                    variant="outlined"
+                    defaultValue={question.QuestionText}
+                    multiline
+                    rows={8}
+                    onChange={(e) => (question.QuestionText = e.target.value)}
+                  />
+                </TableCell>
+                <TableCell style={style.cell}>
+                  <TextField
+                    size="small"
+                    variant="outlined"
+                    defaultValue={question.Answer1}
+                    multiline
+                    rows={8}
+                    onChange={(e) => (question.Answer1 = e.target.value)}
+                  />
+                </TableCell>
+                <TableCell style={style.cell}>
+                  <TextField
+                    size="small"
+                    variant="outlined"
+                    defaultValue={question.Answer2}
+                    multiline
+                    rows={8}
+                    onChange={(e) => (question.Answer2 = e.target.value)}
+                  />
+                </TableCell>
+                <TableCell style={style.cell}>
+                  <TextField
+                    size="small"
+                    variant="outlined"
+                    defaultValue={question.Answer3}
+                    multiline
+                    rows={8}
+                    onChange={(e) => (question.Answer3 = e.target.value)}
+                  />
+                </TableCell>
+                <TableCell style={style.cell}>
+                  <TextField
+                    size="small"
+                    variant="outlined"
+                    defaultValue={question.CorrectAnswer}
+                    multiline
+                    rows={8}
+                    onChange={(e) => (question.CorrectAnswer = e.target.value)}
+                  />
+                </TableCell>
                 <TableCell style={style.cell}>{question.Text} </TableCell>
-                <TableCell style={style.cell}>{question.CommentTimeStamp} </TableCell>
-                <TableCell><GameButton onClick={() => handleDeleteComment(question.CommentID)} label={<DeleteForeverIcon></DeleteForeverIcon>} color="error" /></TableCell>
-                <TableCell><GameButton onClick={() => handleEditQuestion(question)} label={<CheckIcon></CheckIcon>} /></TableCell>
+                <TableCell style={style.cell}>
+                  {question.CommentTimeStamp}{" "}
+                </TableCell>
+                <TableCell>
+                  <GameButton
+                    onClick={() => handleDeleteComment(question.CommentID)}
+                    label={<DeleteForeverIcon></DeleteForeverIcon>}
+                    color="error"
+                  />
+                </TableCell>
+                <TableCell>
+                  <GameButton
+                    onClick={() => handleEditQuestion(question)}
+                    label={<CheckIcon></CheckIcon>}
+                  />
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
@@ -104,15 +180,25 @@ function QuestionEdit({ userID }) {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">{"Kommentar löschen?"}</DialogTitle>
+        <DialogTitle id="alert-dialog-title">
+          {"Kommentar löschen?"}
+        </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
             Bist du sicher, dass du diesen Kommentar löschen möchtest?
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <GameButton onClick={() => setDeleteConfirmationOpen(false)} label="Abbrechen" />
-          <GameButton onClick={confirmDeleteComment} label="Löschen" color="error" autoFocus />
+          <GameButton
+            onClick={() => setDeleteConfirmationOpen(false)}
+            label="Abbrechen"
+          />
+          <GameButton
+            onClick={confirmDeleteComment}
+            label="Löschen"
+            color="error"
+            autoFocus
+          />
         </DialogActions>
       </Dialog>
 
@@ -122,15 +208,25 @@ function QuestionEdit({ userID }) {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">{"Anderung übernehmen?"}</DialogTitle>
+        <DialogTitle id="alert-dialog-title">
+          {"Anderung übernehmen?"}
+        </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
             Bist du sicher, dass du diese Frage ändern möchtest?
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <GameButton onClick={() => setChangeConfirmationOpen(false)} label="Abbrechen" />
-          <GameButton onClick={confirmChangeQuestion} label="Ändern" color="warning" autoFocus />
+          <GameButton
+            onClick={() => setChangeConfirmationOpen(false)}
+            label="Abbrechen"
+          />
+          <GameButton
+            onClick={confirmChangeQuestion}
+            label="Ändern"
+            color="warning"
+            autoFocus
+          />
         </DialogActions>
       </Dialog>
     </div>
@@ -151,9 +247,9 @@ const style = {
 
   tableContainer: {
     overflowX: "scroll",
-    WebkitOverflowScrolling: "touch", 
-    scrollbarWidth: "thin", 
-    scrollbarColor: "rgba(0, 0, 0, 0.5) rgba(255, 255, 255, 0.5)", 
+    WebkitOverflowScrolling: "touch",
+    scrollbarWidth: "thin",
+    scrollbarColor: "rgba(0, 0, 0, 0.5) rgba(255, 255, 255, 0.5)",
   },
 
   cell: {

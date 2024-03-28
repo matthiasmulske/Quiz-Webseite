@@ -7,7 +7,6 @@ import {
   List,
   ListItemText,
   ListItemIcon,
-  ListItemButton,
   ListItem,
   Typography,
 } from "@mui/material";
@@ -20,14 +19,13 @@ const GameScoreboardModal = ({
   player,
 }) => {
   const [openReportModal, setOpenReportModal] = useState(false);
+   // eslint-disable-next-line 
   const [reportData, setReportData] = useState();
   const handleOpenReportModal = () => {
     setReportData(modalData);
     setOpenReportModal(true);
   };
-
   const [answers, setAnswers] = useState([]);
-  const [playerAnswer, setPlayerAnswer] = useState();
   useEffect(() => {
     setAnswers([
       modalData?.Answer1,
@@ -100,13 +98,12 @@ const GameScoreboardModal = ({
       </Modal.Body>
 
       <Modal.Footer>
-            <GameButton
-              label={<ErrorIcon />}
-              color="error"
-              variante="text"
-              onClick={handleOpenReportModal}
-            />
-
+        <GameButton
+          label={<ErrorIcon />}
+          color="error"
+          variante="text"
+          onClick={handleOpenReportModal}
+        />
       </Modal.Footer>
     </Modal>
   );

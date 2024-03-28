@@ -1,11 +1,13 @@
 import React from "react";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 function PrivacyPolicyPage() {
   return (
     <div style={styles.container}>
       <h1 style={styles.heading1}>Datenschutzerklärung</h1>
-      <h2 id="m716" style={styles.heading2}>Präambel</h2>
+      <h2 id="m716" style={styles.heading2}>
+        Präambel
+      </h2>
       <p style={styles.paragraph}>
         Mit der folgenden Datenschutzerklärung möchten wir Sie darüber
         aufklären, welche Arten Ihrer personenbezogenen Daten (nachfolgend auch
@@ -17,7 +19,9 @@ function PrivacyPolicyPage() {
         Onlinepräsenzen, wie z. B. unserer Social-Media-Profile (nachfolgend
         zusammenfassend bezeichnet als "Onlineangebot").
       </p>
-      <p style={styles.paragraph}>Die verwendeten Begriffe sind nicht geschlechtsspezifisch.</p>
+      <p style={styles.paragraph}>
+        Die verwendeten Begriffe sind nicht geschlechtsspezifisch.
+      </p>
       <p style={styles.paragraph}>Stand: 7. Dezember 2023</p>
       <h2 style={styles.heading2}>Inhaltsübersicht</h2>
       <ul class="index">
@@ -102,13 +106,17 @@ function PrivacyPolicyPage() {
           </a>
         </li>
       </ul>
-      <h2 id="m3" style={styles.heading2}>Verantwortlicher</h2>
+      <h2 id="m3" style={styles.heading2}>
+        Verantwortlicher
+      </h2>
       <p style={styles.paragraph}>Matthias Mulske</p>
       E-Mail-Adresse:
       <p style={styles.paragraph}>
         <a href="mailto:matthias.mulske@web.de">matthias.mulske@web.de</a>
       </p>
-      <h2 id="mOverview" style={styles.heading2}>Übersicht der Verarbeitungen</h2>
+      <h2 id="mOverview" style={styles.heading2}>
+        Übersicht der Verarbeitungen
+      </h2>
       <p style={styles.paragraph}>
         Die nachfolgende Übersicht fasst die Arten der verarbeiteten Daten und
         die Zwecke ihrer Verarbeitung zusammen und verweist auf die betroffenen
@@ -143,7 +151,9 @@ function PrivacyPolicyPage() {
         </li>
         <li>Informationstechnische Infrastruktur.</li>
       </ul>
-      <h2 id="m2427" style={styles.heading2}>Maßgebliche Rechtsgrundlagen</h2>
+      <h2 id="m2427" style={styles.heading2}>
+        Maßgebliche Rechtsgrundlagen
+      </h2>
       <p style={styles.paragraph}>
         <strong>Maßgebliche Rechtsgrundlagen nach der DSGVO: </strong>Im
         Folgenden erhalten Sie eine Übersicht der Rechtsgrundlagen der DSGVO,
@@ -193,7 +203,9 @@ function PrivacyPolicyPage() {
         einschließlich Profiling. Ferner können Landesdatenschutzgesetze der
         einzelnen Bundesländer zur Anwendung gelangen.
       </p>
-      <h2 id="m27" style={styles.heading2}>Sicherheitsmaßnahmen</h2>
+      <h2 id="m27" style={styles.heading2}>
+        Sicherheitsmaßnahmen
+      </h2>
       <p style={styles.paragraph}>
         Wir treffen nach Maßgabe der gesetzlichen Vorgaben unter
         Berücksichtigung des Stands der Technik, der Implementierungskosten und
@@ -227,7 +239,9 @@ function PrivacyPolicyPage() {
         Hyper Text Transfer Protocol Secure (HTTPS) wird in der URL angezeigt,
         wenn eine Website durch ein SSL/TLS-Zertifikat gesichert ist.
       </p>
-      <h2 id="m25" style={styles.heading2}>Übermittlung von personenbezogenen Daten</h2>
+      <h2 id="m25" style={styles.heading2}>
+        Übermittlung von personenbezogenen Daten
+      </h2>
       <p style={styles.paragraph}>
         Im Rahmen unserer Verarbeitung von personenbezogenen Daten kommt es vor,
         dass die Daten an andere Stellen, Unternehmen, rechtlich selbstständige
@@ -239,7 +253,9 @@ function PrivacyPolicyPage() {
         insbesondere entsprechende Verträge bzw. Vereinbarungen, die dem Schutz
         Ihrer Daten dienen, mit den Empfängern Ihrer Daten ab.
       </p>
-      <h2 id="m24" style={styles.heading2}>Internationale Datentransfers</h2>
+      <h2 id="m24" style={styles.heading2}>
+        Internationale Datentransfers
+      </h2>
       <p style={styles.paragraph}>
         Datenverarbeitung in Drittländern: Sofern wir Daten in einem Drittland
         (d. h., außerhalb der Europäischen Union (EU), des Europäischen
@@ -261,7 +277,7 @@ function PrivacyPolicyPage() {
         der EU-Kommission entnommen werden:{" "}
         <a
           href="https://ec.europa.eu/info/law/law-topic/data-protection/international-dimension-data-protection_de"
-          target="_blank"
+          target="_blank" rel="noreferrer"
         >
           https://ec.europa.eu/info/law/law-topic/data-protection/international-dimension-data-protection_de.
         </a>
@@ -274,14 +290,16 @@ function PrivacyPolicyPage() {
         anerkannt. Die Liste der zertifizierten Unternehmen als auch weitere
         Informationen zu dem DPF können Sie der Webseite des Handelsministeriums
         der USA unter{" "}
-        <a href="https://www.dataprivacyframework.gov/" target="_blank">
+        <a href="https://www.dataprivacyframework.gov/" target="_blank" rel="noreferrer" >
           https://www.dataprivacyframework.gov/
         </a>{" "}
         (in Englisch) entnehmen. Wir informieren Sie im Rahmen der
         Datenschutzhinweise, welche von uns eingesetzten Diensteanbieter unter
         dem Data Privacy Framework zertifiziert sind.
       </p>
-      <h2 id="m12" style={styles.heading2}>Löschung von Daten</h2>
+      <h2 id="m12" style={styles.heading2}>
+        Löschung von Daten
+      </h2>
       <p style={styles.paragraph}>
         Die von uns verarbeiteten Daten werden nach Maßgabe der gesetzlichen
         Vorgaben gelöscht, sobald deren zur Verarbeitung erlaubten
@@ -299,7 +317,9 @@ function PrivacyPolicyPage() {
         Aufbewahrung und Löschung von Daten beinhalten, die für die jeweiligen
         Verarbeitungen vorrangig gelten.
       </p>
-      <h2 id="m10" style={styles.heading2}>Rechte der betroffenen Personen</h2>
+      <h2 id="m10" style={styles.heading2}>
+        Rechte der betroffenen Personen
+      </h2>
       <p style={styles.paragraph}>
         Rechte der betroffenen Personen aus der DSGVO: Ihnen stehen als
         Betroffene nach der DSGVO verschiedene Rechte zu, die sich insbesondere
@@ -362,7 +382,9 @@ function PrivacyPolicyPage() {
           verstößt.
         </li>
       </ul>
-      <h2 id="m134" style={styles.heading2}>Einsatz von Cookies</h2>
+      <h2 id="m134" style={styles.heading2}>
+        Einsatz von Cookies
+      </h2>
       <p style={styles.paragraph}>
         Cookies sind kleine Textdateien bzw. sonstige Speichervermerke, die
         Informationen auf Endgeräten speichern und Informationen aus den
@@ -495,7 +517,9 @@ function PrivacyPolicyPage() {
           </span>
         </li>
       </ul>
-      <h2 id="m225" style={styles.heading2}>Bereitstellung des Onlineangebotes und Webhosting</h2>
+      <h2 id="m225" style={styles.heading2}>
+        Bereitstellung des Onlineangebotes und Webhosting
+      </h2>
       <p style={styles.paragraph}>
         Wir verarbeiten die Daten der Nutzer, um ihnen unsere Online-Dienste zur
         Verfügung stellen zu können. Zu diesem Zweck verarbeiten wir die
@@ -569,7 +593,9 @@ function PrivacyPolicyPage() {
           Vorfalls von der Löschung ausgenommen.
         </li>
       </ul>
-      <h2 id="m432" style={styles.heading2}>Community Funktionen</h2>
+      <h2 id="m432" style={styles.heading2}>
+        Community Funktionen
+      </h2>
       <p style={styles.paragraph}>
         Die von uns bereitgestellten Community Funktionen erlauben es Nutzern
         miteinander in Konversationen oder sonst miteinander in einen Austausch
@@ -621,7 +647,9 @@ function PrivacyPolicyPage() {
           </span>
         </li>
       </ul>
-      <h2 id="m451" style={styles.heading2}>Single-Sign-On-Anmeldung</h2>
+      <h2 id="m451" style={styles.heading2}>
+        Single-Sign-On-Anmeldung
+      </h2>
       <p style={styles.paragraph}>
         Als "Single-Sign-On" oder "Single-Sign-On-Anmeldung bzw.
         "-Authentifizierung" werden Verfahren bezeichnet, die es Nutzern
@@ -708,11 +736,11 @@ function PrivacyPolicyPage() {
           CA 95014, USA; <strong>Rechtsgrundlagen:</strong> Berechtigte
           Interessen (Art. 6 Abs. 1 S. 1 lit. f) DSGVO);{" "}
           <strong>Website:</strong>{" "}
-          <a href="https://www.apple.com/de/" target="_blank">
+          <a href="https://www.apple.com/de/" target="_blank" rel="noreferrer">
             https://www.apple.com/de/
           </a>
           . <strong>Datenschutzerklärung:</strong>{" "}
-          <a href="https://www.apple.com/legal/privacy/de-ww/" target="_blank">
+          <a href="https://www.apple.com/legal/privacy/de-ww/" target="_blank" rel="noreferrer">
             https://www.apple.com/legal/privacy/de-ww/
           </a>
           .
@@ -723,11 +751,11 @@ function PrivacyPolicyPage() {
           Barrow Street, Dublin 4, Irland; <strong>Rechtsgrundlagen:</strong>{" "}
           Berechtigte Interessen (Art. 6 Abs. 1 S. 1 lit. f) DSGVO);{" "}
           <strong>Website:</strong>{" "}
-          <a href="https://www.google.de" target="_blank">
+          <a href="https://www.google.de" target="_blank" rel="noreferrer">
             https://www.google.de
           </a>
           ; <strong>Datenschutzerklärung:</strong>{" "}
-          <a href="https://policies.google.com/privacy" target="_blank">
+          <a href="https://policies.google.com/privacy" target="_blank" rel="noreferrer">
             https://policies.google.com/privacy
           </a>
           ; <strong>Grundlage Drittlandübermittlung:</strong> EU-US Data Privacy
@@ -735,14 +763,16 @@ function PrivacyPolicyPage() {
           Einstellungen für die Darstellung von Werbeeinblendungen:{" "}
           <a
             href="https://adssettings.google.com/authenticated"
-            target="_blank"
+            target="_blank" rel="noreferrer"
           >
             https://adssettings.google.com/authenticated
           </a>
           .
         </li>
       </ul>
-      <h2 id="m182" style={styles.heading2}>Kontakt- und Anfragenverwaltung</h2>
+      <h2 id="m182" style={styles.heading2}>
+        Kontakt- und Anfragenverwaltung
+      </h2>
       <p style={styles.paragraph}>
         Bei der Kontaktaufnahme mit uns (z. B. per Post, Kontaktformular,
         E-Mail, Telefon oder via soziale Medien) sowie im Rahmen bestehender
@@ -792,7 +822,9 @@ function PrivacyPolicyPage() {
           </span>
         </li>
       </ul>
-      <h2 id="m15" style={styles.heading2}>Änderung und Aktualisierung der Datenschutzerklärung</h2>
+      <h2 id="m15" style={styles.heading2}>
+        Änderung und Aktualisierung der Datenschutzerklärung
+      </h2>
       <p style={styles.paragraph}>
         Wir bitten Sie, sich regelmäßig über den Inhalt unserer
         Datenschutzerklärung zu informieren. Wir passen die Datenschutzerklärung
@@ -807,7 +839,9 @@ function PrivacyPolicyPage() {
         wir zu beachten, dass die Adressen sich über die Zeit ändern können und
         bitten die Angaben vor Kontaktaufnahme zu prüfen.
       </p>
-      <h2 id="m42" style={styles.heading2}>Begriffsdefinitionen</h2>
+      <h2 id="m42" style={styles.heading2}>
+        Begriffsdefinitionen
+      </h2>
       <p style={styles.paragraph}>
         In diesem Abschnitt erhalten Sie eine Übersicht über die in dieser
         Datenschutzerklärung verwendeten Begrifflichkeiten. Soweit die
@@ -846,51 +880,49 @@ function PrivacyPolicyPage() {
         </li>
       </ul>
       <div style={styles.topLinkContainer}>
-          <Link to="/">Zurück zur Startseite</Link> 
+        <Link to="/">Zurück zur Startseite</Link>
       </div>
       <div style={styles.bottomLinkContainer}>
-          <Link to="/">Zurück zur Startseite</Link> 
+        <Link to="/">Zurück zur Startseite</Link>
       </div>
     </div>
   );
 }
 const styles = {
   container: {
-    fontFamily: 'Arial, sans-serif',
-    lineHeight: '1.5',
-    margin: '20px auto',
-    padding: '20px',
-    maxWidth: '1200px' 
-    
+    fontFamily: "Arial, sans-serif",
+    lineHeight: "1.5",
+    margin: "20px auto",
+    padding: "20px",
+    maxWidth: "1200px",
   },
   heading1: {
-    fontSize: '70px',
-    marginTop: '30px'
+    fontSize: "70px",
+    marginTop: "30px",
   },
   heading2: {
-    fontSize: '20px',
-    marginTop: '30px'
+    fontSize: "20px",
+    marginTop: "30px",
   },
   paragraph: {
-    fontSize: '15px',
-    marginTop: '25px'
+    fontSize: "15px",
+    marginTop: "25px",
   },
   list: {
-    listStyleType: 'disc',
-    fontSize: '15px',
-    marginLeft: '20px'
+    listStyleType: "disc",
+    fontSize: "15px",
+    marginLeft: "20px",
   },
   topLinkContainer: {
-    position: 'absolute',
-    top: '100px',
-    right: '20px',
-},
-bottomLinkContainer: {
-    position: 'absolute',
-    bottom: '-7300px',
-    right: '20px',
-  }
-  
+    position: "absolute",
+    top: "100px",
+    right: "20px",
+  },
+  bottomLinkContainer: {
+    position: "absolute",
+    bottom: "-7300px",
+    right: "20px",
+  },
 };
 
 export default PrivacyPolicyPage;

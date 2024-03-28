@@ -32,6 +32,7 @@ function GameQuestionView({
   // Shuffle the answers and reset the selectedAnswer everytime a new question loads in
   useEffect(() => {
     setShuffledAnswers(shuffleAnswers([...answers]));
+     // eslint-disable-next-line 
   }, [question]);
 
   const handleOpenReportModal = () => {
@@ -39,8 +40,7 @@ function GameQuestionView({
   };
 
   const handleAnswerClick = (answer) => {
-    incrementTrustIndex( domain.domain + "/incrementTrustIndex",
-    questionID);
+    incrementTrustIndex(domain.domain + "/incrementTrustIndex", questionID);
     if (!answerGiven && timeLeft > 0) {
       setSelectedAnswer(answer);
       setTimeLeft(0);

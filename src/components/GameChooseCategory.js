@@ -43,6 +43,7 @@ function GameChooseCategory({
     setLoading(true);
     getData();
     setLoading(false);
+     // eslint-disable-next-line 
   }, []);
 
   async function getData() {

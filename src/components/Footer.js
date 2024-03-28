@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
+import Nutzerhandbuch from "./../assets/Nutzerhandbuch.pdf";
+import Betriebshandbuch from "./../assets/Betriebshandbuch.pdf";
+import Systemdokumentation from "./../assets/Systemdokumentation.pdf";
 
 function Footer() {
   return (
@@ -12,8 +14,7 @@ function Footer() {
         transform: "translateX(-50%)",
         display: "flex",
         justifyContent: "center",
-        flexWrap: "wrap"
-         
+        flexWrap: "wrap",
       }}
     >
       <Link to="/PrivacyPolicyPage" style={{ marginRight: "10px" }}>
@@ -25,16 +26,15 @@ function Footer() {
       <Link to="/Legal" style={{ marginRight: "10px" }}>
         Rechtliches
       </Link>
-      <a href={process.env.PUBLIC_URL + "/assets/pdf.pdf"} download style={{ marginRight: "10px" }}>
-  Benutzerhandbuch
-</a>
-<a href={process.env.PUBLIC_URL + "/assets/pdf.pdf"} download style={{ marginRight: "10px" }}>
-  Betriebshandbuch
-</a>
-<a href={process.env.PUBLIC_URL + "/assets/pdf.pdf"} download style={{ marginRight: "10px" }}>
-  Systemdokumentation
-</a>
-
+      <a href={Nutzerhandbuch} download style={{ marginRight: "10px" }}>
+        Nutzerhandbuch
+      </a>
+      <a href={Betriebshandbuch} download style={{ marginRight: "10px" }}>
+        Betriebshandbuch
+      </a>
+      <a href={Systemdokumentation} download style={{ marginRight: "10px" }}>
+        Systemdokumentation
+      </a>
     </div>
   );
 }

@@ -43,6 +43,7 @@ function GameSetup() {
   //get categories from Database when component mounts
   useEffect(() => {
     getData();
+     // eslint-disable-next-line 
   }, []);
 
   async function getData() {
@@ -106,7 +107,7 @@ function GameSetup() {
     ];
 
     //create a new quiz in DB by creating a quiz and saving space in QuizQuestions for rounds*3 questions
-    let res = await createQuizInDB(
+    await createQuizInDB(
       domain.domain + "/createQuizInDB2",
       accessToken1,
       accessToken2,
@@ -131,8 +132,10 @@ function GameSetup() {
         sx={{
           width: 700,
           maxWidth: "100%",
+          marginTop: "2rem",
         }}
       >
+        <h2>Quiz Setup</h2>
         <GameInput
           value={time}
           onChange={handleTimeChange}
