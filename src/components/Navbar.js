@@ -1,29 +1,27 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Badge from '@mui/material/Badge';
-import AccountCircle from '@mui/icons-material/AccountCircle';
-import MailIcon from '@mui/icons-material/Mail';
-import logo from './../assets/logo-removebg-preview.png';
-import LogoutIcon from '@mui/icons-material/Logout';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
-import Button from '@mui/material/Button';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import {
-  getNumberofMessages
-} from "../api.js";
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import Badge from "@mui/material/Badge";
+import AccountCircle from "@mui/icons-material/AccountCircle";
+import MailIcon from "@mui/icons-material/Mail";
+import logo from "./../assets/logo-removebg-preview.png";
+import LogoutIcon from "@mui/icons-material/Logout";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import Button from "@mui/material/Button";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import { getNumberofMessages } from "../api.js";
 import domain from "../assets/domain.js";
 
-export default function Navbar({isLoggedIn, setIsLoggedIn, user, setUser}) {
+export default function Navbar({ isLoggedIn, setIsLoggedIn, user, setUser }) {
   const [mailDialogOpen, setMailDialogOpen] = useState(false);
   const [logoutDialogOpen, setLogoutDialogOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
@@ -48,8 +46,8 @@ export default function Navbar({isLoggedIn, setIsLoggedIn, user, setUser}) {
   const handleLogout = () => {
     setIsLoggedIn(false);
     setUser(null);
-    localStorage.setItem('isLoggedIn', false);
-    localStorage.setItem('user', null);
+    localStorage.setItem("isLoggedIn", false);
+    localStorage.setItem("user", null);
     handleLogoutDialogClose();
   };
 
@@ -61,38 +59,50 @@ export default function Navbar({isLoggedIn, setIsLoggedIn, user, setUser}) {
     setAnchorEl(null);
   };
 
-   useEffect(() => {
-     getData();
-    }, [user]);
+  useEffect(() => {
+    getData();
+  }, [user]);
 
-    async function getData() {
-      let datas = await getNumberofMessages( domain.domain + "/getNumberofMessages", user);
-      setMessages(datas);
-    }
-
+  async function getData() {
+    let datas = await getNumberofMessages(
+      domain.domain + "/getNumberofMessages",
+      user,
+    );
+    setMessages(datas);
+  }
 
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-          <Link to={"/"} style={{ textDecoration: 'none', color: 'inherit' }}>
-            <IconButton size="large" edge="start" color="inherit" aria-label="home">
+          <Link to={"/"} style={{ textDecoration: "none", color: "inherit" }}>
+            <IconButton
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="home"
+            >
               <img src={logo} alt="logo" height="50px" />
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ display: { xs: "none", sm: "block" } }}
-          >
-            ISEF QUIZ
-          </Typography>
+              <Typography
+                variant="h6"
+                noWrap
+                component="div"
+                sx={{ display: { xs: "none", sm: "block" } }}
+              >
+                ISEF QUIZ
+              </Typography>
             </IconButton>
           </Link>
-          
+
           <Box sx={{ flexGrow: 1 }} />
           {isLoggedIn && (
             <>
-              <IconButton size="large" aria-label="show 3 new mails" color="inherit" onClick={handleMailDialogOpen}>
+              <IconButton
+                size="large"
+                aria-label="show 3 new mails"
+                color="inherit"
+                onClick={handleMailDialogOpen}
+              >
                 <Badge badgeContent={0} color="error">
                   <MailIcon />
                 </Badge>
@@ -112,11 +122,15 @@ export default function Navbar({isLoggedIn, setIsLoggedIn, user, setUser}) {
                 open={Boolean(anchorEl)}
                 onClose={handleCloseMenu}
               >
-                <MenuItem onClick={handleCloseMenu}>Benutzerprofil: {user}</MenuItem>
-                <MenuItem onClick={handleCloseMenu}>Benutzername ändern</MenuItem>
+                <MenuItem onClick={handleCloseMenu}>
+                  Benutzerprofil: {user}
+                </MenuItem>
+                <MenuItem onClick={handleCloseMenu}>
+                  Benutzername ändern
+                </MenuItem>
                 <MenuItem onClick={handleCloseMenu}>Passwort ändern</MenuItem>
               </Menu>
-              <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
+              <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
                 <IconButton
                   size="large"
                   edge="end"
@@ -129,10 +143,11 @@ export default function Navbar({isLoggedIn, setIsLoggedIn, user, setUser}) {
             </>
           )}
           {!isLoggedIn && (
-            <Link to="/Login" style={{ textDecoration: 'none', color: 'inherit' }}>
-              <Button color="inherit" >
-                Login
-              </Button>
+            <Link
+              to="/Login"
+              style={{ textDecoration: "none", color: "inherit" }}
+            >
+              <Button color="inherit">Login</Button>
             </Link>
           )}
         </Toolbar>
@@ -146,12 +161,14 @@ export default function Navbar({isLoggedIn, setIsLoggedIn, user, setUser}) {
         <DialogTitle id="mail-dialog-title">{"Neue Nachrichten"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="mail-dialog-description">
-            {isLoggedIn?
-             <>Sie haben {messages[0].UserCount} neue Nachrichten. Gehe zu <Link to="/EditQuestion" > Frage bearbeiten </Link>
-             </>
-          :
-          ""
-          }
+            {isLoggedIn ? (
+              <>
+                Sie haben {messages[0].UserCount} neue Nachrichten. Gehe zu{" "}
+                <Link to="/EditQuestion"> Frage bearbeiten </Link>
+              </>
+            ) : (
+              ""
+            )}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
@@ -166,7 +183,9 @@ export default function Navbar({isLoggedIn, setIsLoggedIn, user, setUser}) {
         aria-labelledby="logout-dialog-title"
         aria-describedby="logout-dialog-description"
       >
-        <DialogTitle id="logout-dialog-title">{"Logout bestätigen"}</DialogTitle>
+        <DialogTitle id="logout-dialog-title">
+          {"Logout bestätigen"}
+        </DialogTitle>
         <DialogContent>
           <DialogContentText id="logout-dialog-description">
             Möchten Sie sich wirklich ausloggen?

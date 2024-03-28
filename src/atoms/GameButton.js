@@ -1,7 +1,6 @@
 import * as React from "react";
 import Button from "@mui/material/Button";
 
-
 function GameButton({ onClick, label, color, size, icon, variante, disabled }) {
   const onButtonClick = () => {
     alert("Congratulations! You successfully hit an unarmed button -.-");
@@ -17,16 +16,15 @@ function GameButton({ onClick, label, color, size, icon, variante, disabled }) {
       disabled={disabled}
       sx={{
         fontSize: "0.8rem",
-        whiteSpace: 'normal',
-        overflowWrap: 'anywhere',
-        wordWrap: 'anywhere',
-        hyphens: 'auto',
-        overflow: 'hidden',
-        textOverflow: 'ellipsis',
-        
+        whiteSpace: "normal",
+        overflowWrap: "anywhere",
+        wordWrap: "anywhere",
+        hyphens: "auto",
+        overflow: "hidden",
+        textOverflow: "ellipsis",
       }}
     >
-        {label}
+      {label}
     </Button>
   );
 }

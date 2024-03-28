@@ -7,14 +7,18 @@ import CommentIcon from "@mui/icons-material/Comment";
 import domain from "./../assets/domain.js";
 import { CircularProgress } from "@mui/material";
 import DoneAllIcon from "@mui/icons-material/DoneAll";
-import { fetchCommentCategories, postComment, resetTrustIndex } from "../api.js";
+import {
+  fetchCommentCategories,
+  postComment,
+  resetTrustIndex,
+} from "../api.js";
 
 const GameQuestionReportModal = ({
   question,
   questionID,
   openModal,
   setOpenModal,
-  trustIndex
+  trustIndex,
 }) => {
   const [category, setCategory] = useState(); //stores choosen CommentCategory
   const [categories, setCategories] = useState([]); //Stores CommentCategories for Dropdown-Input
@@ -66,7 +70,7 @@ const GameQuestionReportModal = ({
       commentText,
       category,
     );
-    if (category === 1 || 2){
+    if (category === 1 || 2) {
       await resetTrustIndex(domain.domain + "/resetTrustIndex", questionID);
     }
     setLoading(false);

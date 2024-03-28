@@ -4,7 +4,6 @@ import Nutzerhandbuch from "./../assets/Nutzerhandbuch.pdf";
 import Betriebshandbuch from "./../assets/Betriebshandbuch.pdf";
 import Systemdokumentation from "./../assets/Systemdokumentation.pdf";
 
-
 function Footer() {
   return (
     <div
@@ -15,8 +14,7 @@ function Footer() {
         transform: "translateX(-50%)",
         display: "flex",
         justifyContent: "center",
-        flexWrap: "wrap"
-         
+        flexWrap: "wrap",
       }}
     >
       <Link to="/PrivacyPolicyPage" style={{ marginRight: "10px" }}>
@@ -29,15 +27,14 @@ function Footer() {
         Rechtliches
       </Link>
       <a href={Nutzerhandbuch} download style={{ marginRight: "10px" }}>
- Nutzerhandbuch
-</a>
-<a href={Betriebshandbuch} download style={{ marginRight: "10px" }}>
-  Betriebshandbuch
-</a>
-<a href={Systemdokumentation} download style={{ marginRight: "10px" }}>
-  Systemdokumentation
-</a>
-
+        Nutzerhandbuch
+      </a>
+      <a href={Betriebshandbuch} download style={{ marginRight: "10px" }}>
+        Betriebshandbuch
+      </a>
+      <a href={Systemdokumentation} download style={{ marginRight: "10px" }}>
+        Systemdokumentation
+      </a>
     </div>
   );
 }

@@ -25,37 +25,51 @@ const fetchQuestionCategories = async (route, accessToken) => {
   return await fetchData(route, { accessToken });
 };
 
-
-const postAddQuestion = async (route,  questionText, answerA, answerB, answerC, answerD, category) => {
-  return await fetchData(route, {  questionText, answerA, answerB, answerC, answerD, category });
+const postAddQuestion = async (
+  route,
+  questionText,
+  answerA,
+  answerB,
+  answerC,
+  answerD,
+  category,
+) => {
+  return await fetchData(route, {
+    questionText,
+    answerA,
+    answerB,
+    answerC,
+    answerD,
+    category,
+  });
 };
 
-const updateQuestion = async (route,  question) => {
-  return await fetchData(route, {question});
+const updateQuestion = async (route, question) => {
+  return await fetchData(route, { question });
 };
 
-const deleteComment = async (route,  commentID) => {
-  return await fetchData(route, {commentID});
+const deleteComment = async (route, commentID) => {
+  return await fetchData(route, { commentID });
 };
 
-const resetTrustIndex = async (route,  questionID) => {
-  return await fetchData(route, {  questionID });
+const resetTrustIndex = async (route, questionID) => {
+  return await fetchData(route, { questionID });
 };
 
-const getNumberofMessages = async (route,  userID) => {
-  return await fetchData(route, {  userID });
+const getNumberofMessages = async (route, userID) => {
+  return await fetchData(route, { userID });
 };
 
-const getQuestionsForEdit = async (route,  userID) => {
-  return await fetchData(route, {  userID });
+const getQuestionsForEdit = async (route, userID) => {
+  return await fetchData(route, { userID });
 };
 
-const updateUserForQuestion = async (route,  userID, questionID) => {
-  return await fetchData(route, {  userID, questionID });
+const updateUserForQuestion = async (route, userID, questionID) => {
+  return await fetchData(route, { userID, questionID });
 };
 
-const incrementTrustIndex = async (route,  questionID) => {
-  return await fetchData(route, {  questionID });
+const incrementTrustIndex = async (route, questionID) => {
+  return await fetchData(route, { questionID });
 };
 
 const fetchCommentCategories = async (route, accessToken) => {
@@ -120,7 +134,7 @@ const setNewRound = async (route, quizID, questionNumber, q1, q2, q3) => {
 };
 
 const postComment = async (route, questionID, text, categoryID) => {
-  return await fetchData(route, { questionID, text, categoryID});
+  return await fetchData(route, { questionID, text, categoryID });
 };
 
 const getQuestionsWithoutUser = async (route) => {
@@ -145,5 +159,4 @@ export {
   getQuestionsForEdit,
   updateQuestion,
   deleteComment,
-  
 };

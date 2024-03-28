@@ -100,13 +100,12 @@ const GameScoreboardModal = ({
       </Modal.Body>
 
       <Modal.Footer>
-            <GameButton
-              label={<ErrorIcon />}
-              color="error"
-              variante="text"
-              onClick={handleOpenReportModal}
-            />
-
+        <GameButton
+          label={<ErrorIcon />}
+          color="error"
+          variante="text"
+          onClick={handleOpenReportModal}
+        />
       </Modal.Footer>
     </Modal>
   );

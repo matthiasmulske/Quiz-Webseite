@@ -29,7 +29,7 @@ function GameScoreboard({
     return chunkedArr;
   };
   const questionsChunks = chunkArray(quizdata, 3);
-  
+
   return (
     <div className="text-center p-1 m-1 ">
       {isSinglePlayer ? (
@@ -42,12 +42,7 @@ function GameScoreboard({
       )}
       <div className="d-flex flex-column overflow-x-scroll ">
         {questionsChunks.map((chunk, index) => (
-          <div
-            key={index}
-            style={
-              style.Container
-            }
-          >
+          <div key={index} style={style.Container}>
             <div style={style.ChunkContainer}>
               {chunk.map((question) => (
                 <div key={question.QuestionNumber}>
@@ -68,7 +63,7 @@ function GameScoreboard({
             </div>
             {!isSinglePlayer ? (
               <div>
-                <div style={style.ChunkContainer} >
+                <div style={style.ChunkContainer}>
                   {chunk.map((question) => (
                     <div key={question.question_number}>
                       <GameButton
@@ -110,15 +105,14 @@ export default GameScoreboard;
 const style = {
   Container: {
     display: "flex",
-    justifyContent: 'center',
-    gap: "1rem"
-    
+    justifyContent: "center",
+    gap: "1rem",
   },
 
   ChunkContainer: {
     display: "flex",
-    alignItems: 'center',
+    alignItems: "center",
     gap: "0.2rem",
-    margin: "0.2rem"
+    margin: "0.2rem",
   },
 };

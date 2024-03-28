@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import ErrorPage from './ErrorPage';
+import React, { Component } from "react";
+import ErrorPage from "./ErrorPage";
 
 class ErrorBoundary extends Component {
   constructor(props) {
@@ -13,7 +13,7 @@ class ErrorBoundary extends Component {
 
   componentDidCatch(error, errorInfo) {
     // You can log the error here, e.g., to a logging service
-    console.error('Error caught by ErrorBoundary:', error, errorInfo);
+    console.error("Error caught by ErrorBoundary:", error, errorInfo);
   }
 
   render() {

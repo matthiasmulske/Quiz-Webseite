@@ -103,7 +103,7 @@ function Game() {
     if (answerGiven !== null) {
       setAnswerPlayer(currentQuizID, currentQuestion, answerGiven, player);
     }
-    
+
     // eslint-disable-next-line
   }, [answerGiven]);
 
@@ -252,20 +252,17 @@ function Game() {
     //UPDATE QuizQuestions SET AnswerPlayer1 = 5 WHERE QuizID = 2 AND QuestionNumber = 4;
     const setPlayer1Answer = async (answerGiven, quizID, questionNumber) => {
       try {
-        const response = await fetch(
-          domain.domain + "/updatePlayer1Answer",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              answerGiven: answerGiven,
-              quizID: quizID,
-              questionNumber: questionNumber,
-            }),
+        const response = await fetch(domain.domain + "/updatePlayer1Answer", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
           },
-        );
+          body: JSON.stringify({
+            answerGiven: answerGiven,
+            quizID: quizID,
+            questionNumber: questionNumber,
+          }),
+        });
 
         if (!response.ok) {
           throw new Error("Failed to fetch data");
@@ -276,20 +273,17 @@ function Game() {
     };
     const setPlayer2Answer = async (answerGiven, quizID, questionNumber) => {
       try {
-        const response = await fetch(
-          domain.domain + "/updatePlayer2Answer",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              answerGiven: answerGiven,
-              quizID: quizID,
-              questionNumber: questionNumber,
-            }),
+        const response = await fetch(domain.domain + "/updatePlayer2Answer", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
           },
-        );
+          body: JSON.stringify({
+            answerGiven: answerGiven,
+            quizID: quizID,
+            questionNumber: questionNumber,
+          }),
+        });
 
         if (!response.ok) {
           throw new Error("Failed to fetch data");
