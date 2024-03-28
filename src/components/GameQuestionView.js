@@ -32,6 +32,7 @@ function GameQuestionView({
   // Shuffle the answers and reset the selectedAnswer everytime a new question loads in
   useEffect(() => {
     setShuffledAnswers(shuffleAnswers([...answers]));
+     // eslint-disable-next-line 
   }, [question]);
 
   const handleOpenReportModal = () => {

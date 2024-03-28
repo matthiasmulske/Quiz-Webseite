@@ -1,7 +1,7 @@
 import { ClockLoader } from "react-spinners";
 import React from "react";
 
-function NotYourTurn({ timeLeft }) {
+function NotYourTurn() {
   return (
     <div style={style.clockContainer}>
       <ClockLoader

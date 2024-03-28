@@ -61,6 +61,7 @@ export default function Navbar({ isLoggedIn, setIsLoggedIn, user, setUser }) {
 
   useEffect(() => {
     getData();
+     // eslint-disable-next-line 
   }, [user]);
 
   async function getData() {

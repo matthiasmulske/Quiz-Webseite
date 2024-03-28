@@ -45,6 +45,7 @@ const GameQuestionReportModal = ({
   //get categories from Database when component mounts
   useEffect(() => {
     getData();
+     // eslint-disable-next-line 
   }, []);
 
   async function getData() {

@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import ContainerYourTurn from "../atoms/GameContainerYourTurn";
 import NotYourTurn from "../atoms/GameNotYourTurn";
 
 function GameIntro({ currentRound, currentCategory, turn, startRound }) {
-  const [timeLeft, setTimeLeft] = useState("3d 12h 54min");
+ 
   return (
     <div style={style.introContainer}>
       {currentRound === 333 ? (
@@ -15,7 +15,7 @@ function GameIntro({ currentRound, currentCategory, turn, startRound }) {
       {turn === true ? (
         <ContainerYourTurn startRound={startRound} />
       ) : (
-        <NotYourTurn timeLeft={timeLeft} />
+        <NotYourTurn/>
       )}
     </div>
   );

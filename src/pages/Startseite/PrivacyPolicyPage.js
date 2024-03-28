@@ -277,7 +277,7 @@ function PrivacyPolicyPage() {
         der EU-Kommission entnommen werden:{" "}
         <a
           href="https://ec.europa.eu/info/law/law-topic/data-protection/international-dimension-data-protection_de"
-          target="_blank"
+          target="_blank" rel="noreferrer"
         >
           https://ec.europa.eu/info/law/law-topic/data-protection/international-dimension-data-protection_de.
         </a>
@@ -290,7 +290,7 @@ function PrivacyPolicyPage() {
         anerkannt. Die Liste der zertifizierten Unternehmen als auch weitere
         Informationen zu dem DPF können Sie der Webseite des Handelsministeriums
         der USA unter{" "}
-        <a href="https://www.dataprivacyframework.gov/" target="_blank">
+        <a href="https://www.dataprivacyframework.gov/" target="_blank" rel="noreferrer" >
           https://www.dataprivacyframework.gov/
         </a>{" "}
         (in Englisch) entnehmen. Wir informieren Sie im Rahmen der
@@ -736,11 +736,11 @@ function PrivacyPolicyPage() {
           CA 95014, USA; <strong>Rechtsgrundlagen:</strong> Berechtigte
           Interessen (Art. 6 Abs. 1 S. 1 lit. f) DSGVO);{" "}
           <strong>Website:</strong>{" "}
-          <a href="https://www.apple.com/de/" target="_blank">
+          <a href="https://www.apple.com/de/" target="_blank" rel="noreferrer">
             https://www.apple.com/de/
           </a>
           . <strong>Datenschutzerklärung:</strong>{" "}
-          <a href="https://www.apple.com/legal/privacy/de-ww/" target="_blank">
+          <a href="https://www.apple.com/legal/privacy/de-ww/" target="_blank" rel="noreferrer">
             https://www.apple.com/legal/privacy/de-ww/
           </a>
           .
@@ -751,11 +751,11 @@ function PrivacyPolicyPage() {
           Barrow Street, Dublin 4, Irland; <strong>Rechtsgrundlagen:</strong>{" "}
           Berechtigte Interessen (Art. 6 Abs. 1 S. 1 lit. f) DSGVO);{" "}
           <strong>Website:</strong>{" "}
-          <a href="https://www.google.de" target="_blank">
+          <a href="https://www.google.de" target="_blank" rel="noreferrer">
             https://www.google.de
           </a>
           ; <strong>Datenschutzerklärung:</strong>{" "}
-          <a href="https://policies.google.com/privacy" target="_blank">
+          <a href="https://policies.google.com/privacy" target="_blank" rel="noreferrer">
             https://policies.google.com/privacy
           </a>
           ; <strong>Grundlage Drittlandübermittlung:</strong> EU-US Data Privacy
@@ -763,7 +763,7 @@ function PrivacyPolicyPage() {
           Einstellungen für die Darstellung von Werbeeinblendungen:{" "}
           <a
             href="https://adssettings.google.com/authenticated"
-            target="_blank"
+            target="_blank" rel="noreferrer"
           >
             https://adssettings.google.com/authenticated
           </a>
