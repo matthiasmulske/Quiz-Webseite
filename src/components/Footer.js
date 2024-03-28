@@ -1,5 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Nutzerhandbuch from "./../assets/Nutzerhandbuch.pdf";
+import Betriebshandbuch from "./../assets/Betriebshandbuch.pdf";
+import Systemdokumentation from "./../assets/Systemdokumentation.pdf";
 
 
 function Footer() {
@@ -25,13 +28,13 @@ function Footer() {
       <Link to="/Legal" style={{ marginRight: "10px" }}>
         Rechtliches
       </Link>
-      <a href={process.env.PUBLIC_URL + "/assets/pdf.pdf"} download style={{ marginRight: "10px" }}>
-  Benutzerhandbuch
+      <a href={Nutzerhandbuch} download style={{ marginRight: "10px" }}>
+ Nutzerhandbuch
 </a>
-<a href={process.env.PUBLIC_URL + "/assets/pdf.pdf"} download style={{ marginRight: "10px" }}>
+<a href={Betriebshandbuch} download style={{ marginRight: "10px" }}>
   Betriebshandbuch
 </a>
-<a href={process.env.PUBLIC_URL + "/assets/pdf.pdf"} download style={{ marginRight: "10px" }}>
+<a href={Systemdokumentation} download style={{ marginRight: "10px" }}>
   Systemdokumentation
 </a>
 
