@@ -10,6 +10,10 @@ Im Zentrum steht dabei nicht nur das individuelle Lernen (Singleplayer), sondern
 Interessierte Entwickler können den Code gerne verwenden und weiterentwickeln. Hierzu gibt die Systemdokumentation im Footer der Anwendung Auskunft. Für Interessenten am Betrieb eignet sich die Betriebsdokumentation im Footer.
 
 ## Zusätzliche Informationen
+
+### Hinweis
+Die Fragen, die sich initial in der Datenbank befinden, dienen vor allen Dingen Testzwecken. Sie wurden mit der Hilfe von ChatGPT erstellt und sind daher nicht zwingend korrekt.
+
 ### Spezifikation - BPMN-Diagramme
 
 **Use Case Singleplayer-Spiel:**
