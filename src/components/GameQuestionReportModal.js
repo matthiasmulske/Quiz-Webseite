@@ -88,7 +88,7 @@ const GameQuestionReportModal = ({
       </Modal.Header>
       <Modal.Body>
         <div className="text-center container justify-content-center align-items-center mb-3">
-          <div className="mb-3">Vertrauensindex: {trustIndex}</div>
+          <div className="mb-3"><abbr style={{ textDecoration: 'underline' }}  title="Gibt an, wie oft eine Frage gespielt wurde, ohne gemeldet worden zu sein">Vertrauensindex: {trustIndex}</abbr > </div>
           <div className="mb-3">{question}</div>
           <GameCategoryDropdown
             label="Kategorie"

@@ -131,8 +131,10 @@ function GameSetup() {
         sx={{
           width: 700,
           maxWidth: "100%",
+          marginTop: "2rem",
         }}
       >
+        <h2>Quiz Setup</h2>
         <GameInput
           value={time}
           onChange={handleTimeChange}

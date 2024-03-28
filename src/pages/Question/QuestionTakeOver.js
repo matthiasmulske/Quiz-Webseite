@@ -38,8 +38,7 @@ function QuestionTakeOver({ userID }) {
     );
     setLoading(false);
   }
-
-  console.log(data);
+  
   return (
     <div style={style.formContainer}>
       <p>
