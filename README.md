@@ -1,7 +1,15 @@
 # ISEF-QUIZ
 
-##
+## Projektbeschreibung und Mitwirkende
+ISEF-Quiz ist ein nicht-kommerzielles Projekt von Studierenden im Rahmen eines Informatik-Moduls der IU Internationale Hochschule. 
 
+ISEF-Quiz ist ein Online-Quizsystem, das Studierende der IU bei der Klausurvorbereitung unterstützen kann, indem es spielerisch zur Vertiefung der Inhalte beiträgt.
+Im Zentrum steht dabei nicht nur das individuelle Lernen (Singleplayer), sondern vor allem das gemeinsame Spielen (Multiplayer) und das Erarbeiten von Antworten auf fachliche Fragen über eine Kommentarfunktion. Den Studierenden ist es möglich, selbst neue Fragen für den Fragenkatalog zu erstellen. Andere Studierende haben die Möglichkeit, auf Fehler aufmerksam zu machen und Fragen zu stellen, sodass sich im Laufe der Zeit der Fragenpool fortlaufend erweitern und verbessern kann.  
+
+## Nutzung und Weiterentwicklung
+Interessierte Entwickler können den Code gerne verwenden und weiterentwickeln. Hierzu gibt die Systemdokumentation im Footer der Anwendung Auskunft. Für Interessenten am Betrieb eignet sich die Betriebsdokumentation im Footer.
+
+## Zusätzliche Informationen
 ### Spezifikation - BPMN-Diagramme
 
 **Use Case Singleplayer-Spiel:**
