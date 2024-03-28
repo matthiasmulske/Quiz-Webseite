@@ -16,19 +16,19 @@ function Agbs() {
       </ul>
       <p style={styles.paragraph}>
         <strong>Herzlich willkommen bei </strong>{" "}
-        <strong>Name der Webseite</strong>
+        <strong>ISEF Quiz</strong>
       </p>
       <p style={styles.paragraph}>
         Bitte lesen sie sich die Nutzungsbedingungen gründlich durch bevor sie
-        die Webseite Name der Webseite benutzen. Durch die Nutzung der Webseite
-        Name der Webseite erklären sie sich mit den nachstehenden Bedingungen
+        die Webseite ISEF Quiz benutzen. Durch die Nutzung der Webseite
+        ISEF Quiz erklären sie sich mit den nachstehenden Bedingungen
         einverstanden. Die Allgemeinen Geschäftsbedingungen enthalten Regeln und
-        Bestimmungen für die Nutzung der Webseite Name der Webseite.
+        Bestimmungen für die Nutzung der Webseite ISEF Quiz
       </p>
       <p style={styles.paragraph}>
         Wir gehen davon aus, dass sie bei einem Zugriff auf die Webseite die
         Allgemeinen Geschäftsbedingungen in vollem Umfang gelesen und akzeptiert
-        haben. Bitte fahren Sie mit der Nutzung von Name der Webseite nicht
+        haben. Bitte fahren Sie mit der Nutzung von ISEF Quiz nicht
         fort, sofern sie nicht mit den auf der Seite aufgeführten Bedingungen
         einverstanden sind. Die AGBs sollen in Verbindung mit den
         DSGVO-konformen Datenschutzerklärung und den Fair Play und Community
@@ -44,9 +44,9 @@ function Agbs() {
         Zeit von Wartungsarbeiten betroffen sind, die wir durchführen müssen,
         oder auch in den Fällen einer Technischen Störung. Dabei haften wir
         nicht für Verluste oder Schäden, die Ihnen tatsächlich oder anderweitig
-        entstehen könnten, wenn die Webseite Name der Webseite zu irgendeinem
+        entstehen könnten, wenn die Webseite ISEF Quiz zu irgendeinem
         Zeitpunkt nicht erreicht werden kann. Wir sind auch nicht
-        verantwortlich, wenn einige Teile oder die Webseite Name der Webseite
+        verantwortlich, wenn einige Teile oder die Webseite ISEF Quiz
         mit Ihrer Hardware oder Software nicht funktioniert. Sie können auch
         sich entscheiden, ob sie sich auf der Webseite registrieren möchten oder
         nicht. Wir bitte sie folgendes zu beachten das einige Funktionen ohne
@@ -164,16 +164,16 @@ function Agbs() {
         <strong>Lizenz</strong>
       </p>
       <p style={styles.paragraph}>
-        Sofern nicht anderweitig angegeben haben Name der Webseite und/oder
+        Sofern nicht anderweitig angegeben haben ISEF Quiz und/oder
         seine Lizenzgeber ie geistigen Eigentumsrechte für alle Materialien auf
-        Name der Webseite. Alle Rechte am geistigen Eigentum sind vorbehalten.
-        Sie können Seiten von Name der Webseite für Ihren eigenen persönlichen
+        ISEF Quiz. Alle Rechte am geistigen Eigentum sind vorbehalten.
+        Sie können Seiten von ISEF Quiz für Ihren eigenen persönlichen
         Gebrauch ansehen und/oder ausdrucken, vorbehaltlich der in diesen
         Allgemeinen Geschäftsbedingungen festgelegten Einschränkungen.
       </p>
       <p style={styles.paragraph}>Folgendes ist untersagt:</p>
       <ul style={styles.list}>
-        <li>Veröffentlichung des Materials von Name der Webseite</li>
+        <li>Veröffentlichung des Materials von ISEF Quiz</li>
         <li>
           Verkauf, Vermietung oder Unterlizenzierung des Materials von Name der
           Webseite
@@ -182,19 +182,19 @@ function Agbs() {
           Reproduktion, Vervielfältigung oder Kopie des Materials von Name der
           Webseite
         </li>
-        <li>Weiterverbreitung der Inhalte von Name der Webseite</li>
+        <li>Weiterverbreitung der Inhalte von ISEF Quiz</li>
       </ul>
       <p></p>
       <p style={styles.paragraph}>
         In gewissen Bereichen dieser Website (nur für Registrierte Nutzer) haben
         Nutzer die Möglichkeit, Kommentare des Informationsaustausches zu
         hinterlassen. Entsprechende Nutzerkommentare werden vor ihrer
-        Veröffentlichung auf der Website von Name der Webseite nicht überprüft,
+        Veröffentlichung auf der Website von ISEF Quiz nicht überprüft,
         gefiltert, bearbeitet oder verbreitet. Nutzerkommentare spiegeln
         ausschließlich die persönliche Meinung des jeweiligen Verfassers wider
         und entsprechen nicht den Ansichten und überzeugungen von Name der
         Webseite, den rechtlichen Vertretern und/oder Vertriebspartnern. Sofern
-        rechtlich nicht anders geregelt, übernimmt Name der Webseite keinerlei
+        rechtlich nicht anders geregelt, übernimmt ISEF Quiz keinerlei
         Haftung für Nutzerkommentare oder sich eventuell infolge der Erscheinung
         entsprechender Nutzerkommentare auf der Website ergebende
         Schadensansprüche und/oder Kosten.
@@ -204,7 +204,7 @@ function Agbs() {
         <strong>Überprüfen, ob es ein Chatfenster gibt</strong>
       </p>
       <p style={styles.paragraph}>
-        Name der Webseite behält sich das Recht vor, alle Kommentare zu
+      ISEF Quiz behält sich das Recht vor, alle Kommentare zu
         überprüfen und eventuell zu entfernen, wenn jene, als unangemessen,
         anstößig oder als Verstoß gegen die Allgemeinen Geschäftsbedingungen
         betrachtet werden können.
@@ -235,7 +235,7 @@ function Agbs() {
         </li>
       </ul>
       <p style={styles.paragraph}>
-        Sie gewähren Name der Webseite hiermit eine nicht-exklusive Lizenz zur
+        Sie gewähren ISEF Quiz hiermit eine nicht-exklusive Lizenz zur
         Nutzung, Reproduktion, Bearbeitung und Autorisierung anderer zur
         Nutzung, Reproduktion und Bearbeitung Ihrer Kommentare in allen Formen,
         Formaten oder Medien.
