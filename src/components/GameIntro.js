@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import ContainerYourTurn from "../atoms/ContainerYourTurn";
-import NotYourTurn from "../atoms/NotYourTurn";
+import ContainerYourTurn from "../atoms/GameContainerYourTurn";
+import NotYourTurn from "../atoms/GameNotYourTurn";
 
 function GameIntro({ currentRound, currentCategory, turn, startRound }) {
   const [timeLeft, setTimeLeft] = useState("3d 12h 54min");

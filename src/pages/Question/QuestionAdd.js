@@ -1,6 +1,6 @@
 import * as React from "react";
-import FormAddQuestion from "../../components/FormAddQuestion";
-import { useState } from "react";
+import FormAddQuestion from "../../components/QuestionAddForm.js";
+import { useState, useEffect } from "react";
 import { Alert } from "@mui/material";
 import domain from "../../assets/domain.js";
 
@@ -80,13 +80,17 @@ function AddQuestion({ userID }) {
     setShowMessage(false);
     validateData();
     resolveData();
+  }
+
+  
+  useEffect(() => {
     if (severity === "success") {
-      await postToDatabase();
+      postToDatabase();
       setSubmitMessage("Frage wurde erfolgreich dem Pool hinzugefügt");
       setSeverity("success");
       setShowMessage(true);
     }
-  }
+  }, [severity]);
 
   function resolveData() {
     console.log("User" + userID);
@@ -143,6 +147,7 @@ const style = {
   header: {
     textAlign: "center",
     paddingTop: 10,
+    marginTop: "2rem"
   },
 
   componentContainer: {

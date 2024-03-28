@@ -1,4 +1,4 @@
-import AddQuestion from "./pages/Question/AddQuestion";
+import AddQuestion from "./pages/Question/QuestionAdd";
 import { Routes, Route } from "react-router-dom";
 import PrivacyPolicyPage from "./pages/Startseite/PrivacyPolicyPage";
 import Agbs from "./pages/Startseite/Agbs";

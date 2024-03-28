@@ -62,7 +62,7 @@ export default FormAddQuestion;
 
 const style = {
   container: {
-    margin: "10%",
+    margin: "3rem",
   },
 
   gridContainer: {
